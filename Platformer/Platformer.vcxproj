@@ -18,6 +18,29 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\gameElements\enemies.cpp" />
+    <ClCompile Include="..\src\gameElements\level.cpp" />
+    <ClCompile Include="..\src\gameElements\player.cpp" />
+    <ClCompile Include="..\src\gameElements\proyectiles.cpp" />
+    <ClCompile Include="..\src\gameStates\game.cpp" />
+    <ClCompile Include="..\src\gameStates\gameover.cpp" />
+    <ClCompile Include="..\src\gameStates\gameplay.cpp" />
+    <ClCompile Include="..\src\gameStates\menu.cpp" />
+    <ClCompile Include="..\src\general\console.cpp" />
+    <ClCompile Include="..\src\main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\src\gameElements\enemies.h" />
+    <ClInclude Include="..\src\gameElements\level.h" />
+    <ClInclude Include="..\src\gameElements\player.h" />
+    <ClInclude Include="..\src\gameElements\proyectiles.h" />
+    <ClInclude Include="..\src\gameStates\game.h" />
+    <ClInclude Include="..\src\gameStates\gameover.h" />
+    <ClInclude Include="..\src\gameStates\gameplay.h" />
+    <ClInclude Include="..\src\gameStates\menu.h" />
+    <ClInclude Include="..\src\general\console.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{AAB0F061-837C-4645-B696-16DFE0F84098}</ProjectGuid>
@@ -83,7 +106,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)/libs/SFML-2.5.1/include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)/libs/SFML-2.5.1/include;$(SolutionDir)/src;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(SolutionDir)/libs/SFML-2.5.1/lib</AdditionalLibraryDirectories>
@@ -109,7 +132,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)/libs/SFML-2.5.1/include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)/libs/SFML-2.5.1/include;$(SolutionDir)/src;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -135,29 +158,6 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="console.cpp" />
-    <ClCompile Include="enemies.cpp" />
-    <ClCompile Include="game.cpp" />
-    <ClCompile Include="gameover.cpp" />
-    <ClCompile Include="gameplay.cpp" />
-    <ClCompile Include="level.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="menu.cpp" />
-    <ClCompile Include="player.cpp" />
-    <ClCompile Include="proyectiles.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="console.h" />
-    <ClInclude Include="enemies.h" />
-    <ClInclude Include="game.h" />
-    <ClInclude Include="gameover.h" />
-    <ClInclude Include="gameplay.h" />
-    <ClInclude Include="level.h" />
-    <ClInclude Include="menu.h" />
-    <ClInclude Include="player.h" />
-    <ClInclude Include="proyectiles.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
