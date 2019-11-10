@@ -13,6 +13,7 @@ Player::Player()
 	rectangle.setSize({ 50, 50 });
 	rectangle.setFillColor(Color::Blue);
 	rectangle.setPosition(SCREEN_WIDTH / 2, SCREEN_HEIGHT - rectangle.getSize().y);
+	jumpstate = onGround;
 	jumping = false;
 }
 
@@ -51,6 +52,11 @@ RectangleShape Player::getRec()
 	return rectangle;
 }
 
+JumpState Player::getJumpstate()
+{
+	return jumpstate;
+}
+
 void Player::checkKeyPressedInput(Event event)
 {
 	if (event.key.code == Keyboard::Right)
@@ -87,12 +93,20 @@ void Player::setMoveLeft(bool state)
 
 void Player::setJump(bool state)
 {
-	jumping = state;
+	if (jumpstate == onGround)
+	{
+		jumpstate = start;
+	}
+}
+
+void Player::setJumpstate(JumpState state)
+{
+	jumpstate = state;
 }
 
 void Player::updateMovement()
 {
-	speed = { 0,0 };
+	speed.x = 0.0f;
 	
 	if (movement.right)
 	{
@@ -102,16 +116,30 @@ void Player::updateMovement()
 	{
 		speed.x -= movingSpeed;
 	}
-	if (jumping)
+	
+	switch (jumpstate)
 	{
+	case onGround:
+		speed.y = 0;
+		break;
+	case start:
 		speed.y -= jumpingSpeed;
+		jumpstate = midAir;
+	case midAir:
+		if (speed.y>0)
+		{
+			jumpstate=falling;
+		}
+	case falling:
 		speed.y += gravity;
-		gravity *= GRAVITY_MULTIPLIER;
+		break;
 	}
+
 	if (speed.y > MAXIMUM_SPEED)
 	{
 		speed.y = MAXIMUM_SPEED;
 	}
+	
 	rectangle.setPosition(rectangle.getPosition() + speed);
 
 	checkScreenLimits();
@@ -122,7 +150,7 @@ void Player::checkScreenLimits()
 	if (rectangle.getPosition().y + rectangle.getSize().y > SCREEN_HEIGHT)
 	{
 		setRecY(SCREEN_HEIGHT - rectangle.getSize().y);
-		jumping = false;
+		jumpstate = onGround;
 		gravity = GRAVITY_INITIAL_VALUE;
 	}
 
@@ -135,4 +163,24 @@ void Player::checkScreenLimits()
 	{
 		setRecX(SCREEN_WIDTH - rectangle.getSize().x);
 	}
+}
+
+int Player::bottomSide()
+{
+	return rectangle.getPosition().y + rectangle.getSize().y;
+}
+
+int Player::upperSide()
+{
+	return rectangle.getPosition().y;
+}
+
+int Player::rightSide()
+{
+	return rectangle.getPosition().x + rectangle.getSize().x;
+}
+
+int Player::leftSide()
+{
+	return rectangle.getPosition().x;
 }
