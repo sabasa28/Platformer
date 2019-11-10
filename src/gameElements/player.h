@@ -4,12 +4,14 @@
 
 using namespace sf;
 
-struct Move
+const float MAXIMUM_SPEED = 20;
+const float GRAVITY_INITIAL_VALUE = 1.001;
+const float GRAVITY_MULTIPLIER = 1.2;
+
+struct Movement
 {
 	bool right;
 	bool left;
-	bool up;
-	bool down;
 };
 
 class Player
@@ -17,9 +19,11 @@ class Player
 private:
 	RectangleShape rectangle;
 	Vector2f speed;
-	float jumpingSpeed=10;
-	float movingSpeed=10;
-	Move move;
+	bool jumping;
+	float jumpingSpeed = 20;
+	float movingSpeed = 10;
+	float gravity = GRAVITY_INITIAL_VALUE;
+	Movement movement;
 
 public:
 	Player();
@@ -30,16 +34,17 @@ public:
 	void addToRecX(int x);
 	void addToRecY(int y);
 	RectangleShape getRec();
+	void checkKeyPressedInput(Event event);
+	void checkKeyReleasedInput(Event event);
 	void setMoveRight(bool state);
 	void setMoveLeft(bool state);
-	void setMoveUp(bool state);
-	void setMoveDown(bool state);
+	void setJump(bool state);
 	void updateMovement();
+	void checkScreenLimits();
 	int bottomSide();
-	int upSide();
+	int upperSide();
 	int rightSide();
 	int leftSide();
-
 };
 
 #endif //PLAYER_H

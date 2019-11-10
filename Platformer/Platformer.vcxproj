@@ -23,11 +23,11 @@
     <ClCompile Include="..\src\gameElements\level.cpp" />
     <ClCompile Include="..\src\gameElements\player.cpp" />
     <ClCompile Include="..\src\gameElements\proyectiles.cpp" />
-    <ClCompile Include="..\src\gameStates\game.cpp" />
     <ClCompile Include="..\src\gameStates\gameover.cpp" />
     <ClCompile Include="..\src\gameStates\gameplay.cpp" />
     <ClCompile Include="..\src\gameStates\menu.cpp" />
     <ClCompile Include="..\src\general\console.cpp" />
+    <ClCompile Include="..\src\general\game.cpp" />
     <ClCompile Include="..\src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -35,11 +35,11 @@
     <ClInclude Include="..\src\gameElements\level.h" />
     <ClInclude Include="..\src\gameElements\player.h" />
     <ClInclude Include="..\src\gameElements\proyectiles.h" />
-    <ClInclude Include="..\src\gameStates\game.h" />
     <ClInclude Include="..\src\gameStates\gameover.h" />
     <ClInclude Include="..\src\gameStates\gameplay.h" />
     <ClInclude Include="..\src\gameStates\menu.h" />
     <ClInclude Include="..\src\general\console.h" />
+    <ClInclude Include="..\src\general\game.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
