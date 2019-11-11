@@ -14,10 +14,12 @@ public:
 	Platform(float x, float y, float width, float height, Color color);
 	~Platform();
 	RectangleShape getRec();
-	int bottomSide();
 	int upperSide();
-	int rightSide();
+	int bottomSide();
 	int leftSide();
+	int rightSide();
+	int centerX();
+	int centerY();
 };
 
 #endif // !LEVEL_H

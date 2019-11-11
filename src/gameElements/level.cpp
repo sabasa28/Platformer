@@ -23,22 +23,32 @@ RectangleShape Platform::getRec()
 	return rectangle;
 }
 
-int Platform::bottomSide()
-{
-	return rectangle.getPosition().y + rectangle.getSize().y;
-}
-
 int Platform::upperSide()
 {
 	return rectangle.getPosition().y;
 }
 
-int Platform::rightSide()
+int Platform::bottomSide()
 {
-	return rectangle.getPosition().x + rectangle.getSize().x;
+	return upperSide() + rectangle.getSize().y;
 }
 
 int Platform::leftSide()
 {
 	return rectangle.getPosition().x;
+}
+
+int Platform::rightSide()
+{
+	return leftSide() + rectangle.getSize().x;
+}
+
+int Platform::centerX()
+{
+	return upperSide() + rectangle.getSize().y / 2;
+}
+
+int Platform::centerY()
+{
+	return leftSide() + rectangle.getSize().x / 2;
 }

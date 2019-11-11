@@ -7,13 +7,13 @@
 
 using namespace sf;
 
-void checkGameplayColls(Player* &player, Platform* &platform);
+void checkGameplayColls(Player* &player, Platform* platform);
 
 void executeGame()
 {
 	Event event;
 	Player* player = new Player();
-	Platform* platform = new Platform(600, 500, 200, 30, Color::White);
+	Platform* platform = new Platform(SCREEN_WIDTH / 2 - 150, SCREEN_HEIGHT / 2 - 150, 300, 300, Color::White);
 	RenderWindow window(VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "Platformer Game");
 	window.setFramerateLimit(60);
 	while (window.isOpen())
@@ -24,25 +24,14 @@ void executeGame()
 				window.close();
 			if (event.type == Event::KeyPressed)
 			{
-				if (event.key.code == Keyboard::Escape)
-				{
-					window.close();
-				}
 				player->checkKeyPressedInput(event);
-
-				window.setKeyRepeatEnabled(false);
-				if (event.key.code == Keyboard::Space)
-				{
-					player->setJump(true);
-				}
-				window.setKeyRepeatEnabled(true);
+				player->checkKeyDownInput(event, window);
 			}
 			if (event.type == Event::KeyReleased)
 			{
 				player->checkKeyReleasedInput(event);
 			}
 		}
-
 
 		player->updateMovement();
 		checkGameplayColls(player, platform);
@@ -58,21 +47,27 @@ void executeGame()
 	}
 }
 
-void checkGameplayColls(Player* &player, Platform* &platform)
+void checkGameplayColls(Player* &player, Platform* platform)
 {
-	if (player->getJumpstate()==falling && player->bottomSide()>platform->upperSide()&& player->bottomSide() < platform->bottomSide())
+	if (player->onPlatform(platform))
 	{
-		if (player->leftSide()<platform->rightSide()&&player->rightSide()>platform->leftSide())
-		{
-			player->setJumpstate(onGround);
-			player->setRecY(platform->upperSide()-player->getRec().getSize().y);
-		}
+		player->setJumpState(onGround);
+		player->setRecY(platform->upperSide() - player->getRec().getSize().y);
 	}
-	if (player->getRec().getPosition().y == platform->upperSide() - player->getRec().getSize().y)
+	if (player->collidingWithPlatformFromBelow(platform))
 	{
-		if (player->leftSide() > platform->rightSide() || player->rightSide() < platform->leftSide())
-		{
-			player->setJumpstate(falling);
-		}
+		player->setRecY(platform->bottomSide());
+	}
+	if (player->collidingWithPlatformFromLeft(platform))
+	{
+		player->setRecX(platform->leftSide() - player->getRec().getSize().x);
+	}
+	if (player->collidingWithPlatformFromRight(platform))
+	{
+		player->setRecX(platform->rightSide());
+	}
+	if (player->fallingOffPlatform(platform))
+	{
+		player->setJumpState(falling);
 	}
 }

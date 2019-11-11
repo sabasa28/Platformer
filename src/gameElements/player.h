@@ -3,6 +3,8 @@
 
 #include <SFML/Graphics.hpp>
 
+#include "gameElements/level.h"
+
 using namespace sf;
 
 const float MAXIMUM_SPEED = 20.0f;
@@ -18,7 +20,7 @@ extern enum JumpState
 {
 	onGround,
 	start,
-	midAir,
+	ascending,
 	falling	
 };
 
@@ -28,7 +30,7 @@ private:
 	RectangleShape rectangle;
 	Vector2f speed;
 	bool jumping;
-	JumpState jumpstate;
+	JumpState jumpState;
 	float jumpingSpeed = 20;
 	float movingSpeed = 10;
 	float gravity = GRAVITY_INITIAL_VALUE;
@@ -43,19 +45,25 @@ public:
 	void addToRecX(int x);
 	void addToRecY(int y);
 	RectangleShape getRec();
-	JumpState getJumpstate();
+	JumpState getJumpState();
 	void checkKeyPressedInput(Event event);
+	void checkKeyDownInput(Event event, RenderWindow &window);
 	void checkKeyReleasedInput(Event event);
 	void setMoveRight(bool state);
 	void setMoveLeft(bool state);
-	void setJump(bool state);
-	void setJumpstate(JumpState state);
+	void jump();
+	void setJumpState(JumpState state);
 	void updateMovement();
 	void checkScreenLimits();
-	int bottomSide();
+	bool onPlatform(Platform* platform);
+	bool collidingWithPlatformFromBelow(Platform* platform);
+	bool collidingWithPlatformFromLeft(Platform* platform);
+	bool collidingWithPlatformFromRight(Platform* platform);
+	bool fallingOffPlatform(Platform* platform);
 	int upperSide();
-	int rightSide();
+	int bottomSide();
 	int leftSide();
+	int rightSide();
 };
 
 #endif //PLAYER_H
