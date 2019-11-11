@@ -3,12 +3,11 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "gameElements/level.h"
+#include "level.h"
 
 using namespace sf;
 
 const float MAXIMUM_SPEED = 20.0f;
-const float GRAVITY_INITIAL_VALUE = 0.75f;
 
 struct Movement
 {
@@ -21,7 +20,7 @@ extern enum JumpState
 	onGround,
 	start,
 	ascending,
-	falling	
+	falling
 };
 
 class Player
@@ -31,21 +30,28 @@ private:
 	Vector2f speed;
 	bool jumping;
 	JumpState jumpState;
-	float jumpingSpeed = 20;
+	float jumpingSpeed = 25;
 	float movingSpeed = 10;
-	float gravity = GRAVITY_INITIAL_VALUE;
+	float gravity = 0.75f;
 	Movement movement;
 
 public:
 	Player();
 	~Player();
 	void setRecPos(int x, int y);
+	void setRecPos(Vector2f pos);
 	void setRecX(int x);
 	void setRecY(int y);
 	void addToRecX(int x);
 	void addToRecY(int y);
+	void setSpeedX(int x);
+	void setSpeedY(int y);
+	float getSpeedX();
+	float getSpeedY();
+	Vector2f getSpeed();
 	RectangleShape getRec();
 	JumpState getJumpState();
+	float getJumpingSpeed();
 	void checkKeyPressedInput(Event event);
 	void checkKeyDownInput(Event event, RenderWindow &window);
 	void checkKeyReleasedInput(Event event);
@@ -54,11 +60,9 @@ public:
 	void jump();
 	void setJumpState(JumpState state);
 	void updateMovement();
+	void updatePosition();
+	bool collidingWithPlatform(Platform* platform);
 	void checkScreenLimits();
-	bool onPlatform(Platform* platform);
-	bool collidingWithPlatformFromBelow(Platform* platform);
-	bool collidingWithPlatformFromLeft(Platform* platform);
-	bool collidingWithPlatformFromRight(Platform* platform);
 	bool fallingOffPlatform(Platform* platform);
 	int upperSide();
 	int bottomSide();

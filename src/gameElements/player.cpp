@@ -18,12 +18,16 @@ Player::Player()
 
 Player::~Player()
 {
-
 }
 
 void Player::setRecPos(int x, int y)
 {
 	rectangle.setPosition(x, y);
+}
+
+void Player::setRecPos(Vector2f pos) 
+{
+	rectangle.setPosition(pos);
 }
 
 void Player::setRecX(int x)
@@ -46,6 +50,31 @@ void Player::addToRecY(int y)
 	rectangle.setPosition(rectangle.getPosition().x, rectangle.getPosition().y + y);
 }
 
+void Player::setSpeedY(int y) 
+{
+	speed.y = y;
+}
+
+void Player::setSpeedX(int x)
+{
+	speed.x = x;
+}
+
+float Player::getSpeedX()
+{
+	return speed.x;
+}
+
+Vector2f Player::getSpeed()
+{
+	return speed;
+}
+
+float Player::getSpeedY()
+{
+	return speed.y;
+}
+
 RectangleShape Player::getRec()
 {
 	return rectangle;
@@ -54,6 +83,11 @@ RectangleShape Player::getRec()
 JumpState Player::getJumpState()
 {
 	return jumpState;
+}
+
+float Player::getJumpingSpeed()
+{
+	return jumpingSpeed;
 }
 
 void Player::checkKeyPressedInput(Event event)
@@ -155,103 +189,50 @@ void Player::updateMovement()
 	{
 		speed.y = MAXIMUM_SPEED;
 	}
-	
-	rectangle.setPosition(rectangle.getPosition() + speed);
 
-	checkScreenLimits();
+}
+
+void Player::updatePosition() 
+{
+	rectangle.setPosition(rectangle.getPosition() + speed);
 }
 
 void Player::checkScreenLimits()
 {
-	if (rectangle.getPosition().y + rectangle.getSize().y > SCREEN_HEIGHT)
+	if (upperSide() < 0)
+	{
+		setSpeedY(0);
+		setRecY(0);
+		jumpState = falling;
+	}
+
+	if (bottomSide() > SCREEN_HEIGHT)
 	{
 		setRecY(SCREEN_HEIGHT - rectangle.getSize().y);
 		jumpState = onGround;
-		gravity = GRAVITY_INITIAL_VALUE;
 	}
 
-	if (rectangle.getPosition().x < 0)
+	if (leftSide() < 0)
 	{
 		setRecX(0);
 	}
 
-	if (rectangle.getPosition().x + rectangle.getSize().x > SCREEN_WIDTH)
+	if (rightSide() > SCREEN_WIDTH)
 	{
 		setRecX(SCREEN_WIDTH - rectangle.getSize().x);
 	}
 }
 
-bool Player::onPlatform(Platform* platform)
+bool Player::collidingWithPlatform(Platform* platform)
 {
-	if (getJumpState() == falling && bottomSide() < platform->centerY()
-		&&
-		((rightSide() > platform->leftSide() && rightSide() < platform->rightSide())
-		||
-		(leftSide() > platform->leftSide() && leftSide() < platform->rightSide()))
-		&&
-		bottomSide() > platform->upperSide() && bottomSide() < platform->bottomSide())
+	if (rightSide()>platform->leftSide()&&leftSide()<platform->rightSide())
 	{
-		return true;
+		if (bottomSide()>platform->upperSide()&& upperSide() < platform->bottomSide())
+		{
+			return true;
+		}
 	}
-	else
-	{
-		return false;
-	}
-}
-
-bool Player::collidingWithPlatformFromBelow(Platform* platform)
-{
-	if (getJumpState() == ascending
-		&&
-		((rightSide() > platform->leftSide() && rightSide() < platform->rightSide())
-		||
-		(leftSide() > platform->leftSide() && leftSide() < platform->rightSide()))
-		&&
-		upperSide() < platform->bottomSide())
-	{
-		cout << "Colliding from below" << endl;
-		return true;
-	}
-	else
-	{
-		return false;
-	}
-}
-
-bool Player::collidingWithPlatformFromLeft(Platform* platform)
-{
-	if (rightSide() < platform->centerX()
-		&&
-		(bottomSide() > platform->upperSide() && bottomSide() < platform->bottomSide()
-		||
-		upperSide() > platform->upperSide() && upperSide() < platform->bottomSide())
-		&&
-		(leftSide() < platform->leftSide() && rightSide() > platform->leftSide()))
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
-}
-
-bool Player::collidingWithPlatformFromRight(Platform* platform)
-{
-	if (leftSide() > platform->centerX()
-		&&
-		(bottomSide() > platform->upperSide() && bottomSide() < platform->bottomSide()
-		||
-		upperSide() > platform->upperSide() && upperSide() < platform->bottomSide())
-		&&
-		(leftSide() < platform->rightSide() && rightSide() > platform->rightSide()))
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+	return false;
 }
 
 bool Player::fallingOffPlatform(Platform* platform)
