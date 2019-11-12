@@ -53,7 +53,7 @@ public:
 	JumpState getJumpState();
 	float getJumpingSpeed();
 	void checkKeyPressedInput(Event event);
-	void checkKeyDownInput(Event event, RenderWindow &window);
+	void checkKeyDownInput(Event event, RenderWindow* &window);
 	void checkKeyReleasedInput(Event event);
 	void setMoveRight(bool state);
 	void setMoveLeft(bool state);
@@ -61,13 +61,13 @@ public:
 	void setJumpState(JumpState state);
 	void updateMovement();
 	void updatePosition();
-	bool collidingWithPlatform(Platform* platform);
 	void checkScreenLimits();
+	bool colliding(RectangleShape rectangle);
 	bool fallingOffPlatform(Platform* platform);
-	int upperSide();
-	int bottomSide();
-	int leftSide();
-	int rightSide();
+	int getUpperSide();
+	int getBottomSide();
+	int getLeftSide();
+	int getRightSide();
 };
 
 #endif //PLAYER_H

@@ -111,6 +111,7 @@
     <Link>
       <AdditionalLibraryDirectories>$(SolutionDir)/libs/SFML-2.5.1/lib</AdditionalLibraryDirectories>
       <AdditionalDependencies>sfml-graphics.lib;sfml-window.lib;sfml-system.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Console</SubSystem>
     </Link>
     <PostBuildEvent>
       <Command>copy "$(SolutionDir)/libs/SFML-2.5.1/bin/" "$(OutDir)"</Command>

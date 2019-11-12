@@ -2,6 +2,7 @@
 
 int main()
 {
-	executeGame();
+	Game* game = new Game();
+	game->execute();
 	return 0;
 }

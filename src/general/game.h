@@ -2,11 +2,45 @@
 #define GAME_H
 
 #include <iostream>
+#include "gameStates/menu.h"
+#include "gameStates/gameplay.h"
+#include "gameStates/gameover.h"
+
 using namespace std;
+using namespace sf;
 
 const int SCREEN_WIDTH = 1000;
 const int SCREEN_HEIGHT = 600;
 
-void executeGame();
+enum GameState
+{
+	menu_state,
+	gameplay_state,
+	gameOver_state
+};
+
+class Game
+{
+	GameState currentGameState;
+
+	RenderWindow* window;
+	
+	Menu* menu;
+	Gameplay* gameplay;
+	GameOver* gameover;
+	
+	Event event;
+	
+	void init();
+	void update();
+	void draw();
+	void close();
+
+public:
+	Game();
+	~Game();
+	void execute();
+};
+
 
 #endif //GAME_H

@@ -92,40 +92,40 @@ float Player::getJumpingSpeed()
 
 void Player::checkKeyPressedInput(Event event)
 {
-	if (event.key.code == Keyboard::Right)
+	if (Keyboard::isKeyPressed(Keyboard::Right))
 	{
 		setMoveRight(true);
 	}
-	if (event.key.code == Keyboard::Left)
+	if (Keyboard::isKeyPressed(Keyboard::Left))
 	{
 		setMoveLeft(true);
 	}
 }
 
-void Player::checkKeyDownInput(Event event, RenderWindow &window)
+void Player::checkKeyDownInput(Event event, RenderWindow* &window)
 {
-	window.setKeyRepeatEnabled(false);
+	window->setKeyRepeatEnabled(false);
 
-	if (event.key.code == Keyboard::Escape)
+	if (Keyboard::isKeyPressed (Keyboard::Escape))
 	{
-		window.close();
+		window->close();
 	}
 
-	if (event.key.code == Keyboard::Space)
+	if (Keyboard::isKeyPressed(Keyboard::Space))
 	{
 		jump();
 	}
 
-	window.setKeyRepeatEnabled(true);
+	window->setKeyRepeatEnabled(true);
 }
 
 void Player::checkKeyReleasedInput(Event event)
 {
-	if (event.key.code == Keyboard::Right)
+	if (!Keyboard::isKeyPressed (Keyboard::Right))
 	{
 		setMoveRight(false);
 	}
-	if (event.key.code == Keyboard::Left)
+	if (!Keyboard::isKeyPressed (Keyboard::Left))
 	{
 		setMoveLeft(false);
 	}
@@ -199,47 +199,33 @@ void Player::updatePosition()
 
 void Player::checkScreenLimits()
 {
-	if (upperSide() < 0)
+	if (getUpperSide() < 0)
 	{
 		setSpeedY(0);
 		setRecY(0);
 		jumpState = falling;
 	}
 
-	if (bottomSide() > SCREEN_HEIGHT)
+	if (getBottomSide() > SCREEN_HEIGHT)
 	{
 		setRecY(SCREEN_HEIGHT - rectangle.getSize().y);
 		jumpState = onGround;
 	}
 
-	if (leftSide() < 0)
+	if (getLeftSide() < 0)
 	{
 		setRecX(0);
 	}
 
-	if (rightSide() > SCREEN_WIDTH)
+	if (getRightSide() > SCREEN_WIDTH)
 	{
 		setRecX(SCREEN_WIDTH - rectangle.getSize().x);
 	}
 }
 
-bool Player::collidingWithPlatform(Platform* platform)
+bool Player::colliding(RectangleShape rectangle)
 {
-	if (rightSide()>platform->leftSide()&&leftSide()<platform->rightSide())
-	{
-		if (bottomSide()>platform->upperSide()&& upperSide() < platform->bottomSide())
-		{
-			return true;
-		}
-	}
-	return false;
-}
-
-bool Player::fallingOffPlatform(Platform* platform)
-{
-	if ((getRec().getPosition().y == platform->upperSide() - getRec().getSize().y)
-		&&
-		(leftSide() > platform->rightSide() || rightSide() < platform->leftSide()))
+	if (getRec().getGlobalBounds().intersects(rectangle.getGlobalBounds()))
 	{
 		return true;
 	}
@@ -249,22 +235,36 @@ bool Player::fallingOffPlatform(Platform* platform)
 	}
 }
 
-int Player::upperSide()
+bool Player::fallingOffPlatform(Platform* platform)
+{
+	if ((getRec().getPosition().y == platform->getUpperSide() - getRec().getSize().y)
+		&&
+		(getLeftSide() > platform->getRightSide() || getRightSide() < platform->getLeftSide()))
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+int Player::getUpperSide()
 {
 	return rectangle.getPosition().y;
 }
 
-int Player::bottomSide()
+int Player::getBottomSide()
 {
-	return upperSide() + rectangle.getSize().y;
+	return getUpperSide() + rectangle.getSize().y;
 }
 
-int Player::leftSide()
+int Player::getLeftSide()
 {
 	return rectangle.getPosition().x;
 }
 
-int Player::rightSide()
+int Player::getRightSide()
 {
-	return leftSide() + rectangle.getSize().x;
+	return getLeftSide() + rectangle.getSize().x;
 }

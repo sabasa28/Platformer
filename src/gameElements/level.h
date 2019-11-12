@@ -25,12 +25,12 @@ public:
 	~Platform();
 	RectangleShape getRec();
 	NearestSide checkProximity(RectangleShape rec, float collisionMargin);
-	int upperSide();
-	int bottomSide();
-	int leftSide();
-	int rightSide();
-	int centerX();
-	int centerY();
+	int getUpperSide();
+	int getBottomSide();
+	int getLeftSide();
+	int getRightSide();
+	int getCenterX();
+	int getCenterY();
 };
 
 #endif //LEVEL_H
