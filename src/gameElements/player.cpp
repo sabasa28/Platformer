@@ -20,7 +20,7 @@ Player::~Player()
 {
 }
 
-void Player::setRecPos(int x, int y)
+void Player::setRecPos(float x, float y)
 {
 	rectangle.setPosition(x, y);
 }
@@ -30,32 +30,32 @@ void Player::setRecPos(Vector2f pos)
 	rectangle.setPosition(pos);
 }
 
-void Player::setRecX(int x)
+void Player::setRecX(float x)
 {
 	rectangle.setPosition(x, rectangle.getPosition().y);
 }
 
-void Player::setRecY(int y)
+void Player::setRecY(float y)
 {
 	rectangle.setPosition(rectangle.getPosition().x, y);
 }
 
-void Player::addToRecX(int x)
+void Player::addToRecX(float x)
 {
 	rectangle.setPosition(rectangle.getPosition().x + x, rectangle.getPosition().y);
 }
 
-void Player::addToRecY(int y)
+void Player::addToRecY(float y)
 {
 	rectangle.setPosition(rectangle.getPosition().x, rectangle.getPosition().y + y);
 }
 
-void Player::setSpeedY(int y) 
+void Player::setSpeedY(float y) 
 {
 	speed.y = y;
 }
 
-void Player::setSpeedX(int x)
+void Player::setSpeedX(float x)
 {
 	speed.x = x;
 }
@@ -90,7 +90,7 @@ float Player::getJumpingSpeed()
 	return jumpingSpeed;
 }
 
-void Player::checkKeyPressedInput(Event event)
+void Player::checkKeyPressedInput()
 {
 	if (Keyboard::isKeyPressed(Keyboard::Right))
 	{
@@ -102,7 +102,7 @@ void Player::checkKeyPressedInput(Event event)
 	}
 }
 
-void Player::checkKeyDownInput(Event event, RenderWindow* &window)
+void Player::checkKeyDownInput(RenderWindow* &window)
 {
 	window->setKeyRepeatEnabled(false);
 
@@ -119,7 +119,7 @@ void Player::checkKeyDownInput(Event event, RenderWindow* &window)
 	window->setKeyRepeatEnabled(true);
 }
 
-void Player::checkKeyReleasedInput(Event event)
+void Player::checkKeyReleasedInput()
 {
 	if (!Keyboard::isKeyPressed (Keyboard::Right))
 	{
@@ -223,9 +223,9 @@ void Player::checkScreenLimits()
 	}
 }
 
-bool Player::colliding(RectangleShape rectangle)
+bool Player::colliding(RectangleShape rec)
 {
-	if (getRec().getGlobalBounds().intersects(rectangle.getGlobalBounds()))
+	if (getRec().getGlobalBounds().intersects(rec.getGlobalBounds()))
 	{
 		return true;
 	}
@@ -249,22 +249,22 @@ bool Player::fallingOffPlatform(Platform* platform)
 	}
 }
 
-int Player::getUpperSide()
+float Player::getUpperSide()
 {
 	return rectangle.getPosition().y;
 }
 
-int Player::getBottomSide()
+float Player::getBottomSide()
 {
 	return getUpperSide() + rectangle.getSize().y;
 }
 
-int Player::getLeftSide()
+float Player::getLeftSide()
 {
 	return rectangle.getPosition().x;
 }
 
-int Player::getRightSide()
+float Player::getRightSide()
 {
 	return getLeftSide() + rectangle.getSize().x;
 }

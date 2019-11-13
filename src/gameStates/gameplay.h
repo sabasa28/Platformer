@@ -13,11 +13,11 @@ public:
 	Gameplay();
 	~Gameplay();
 	void init();
-	void update(RenderWindow* &window, Event event);
+	void update(RenderWindow* &window);
 	void draw(RenderWindow* &window);
 	void close();
-	float getCollisionMargin(Player* player);
-	void checkGameplayColls(Platform* platform);
+	float getCollisionMargin(float jumpingSpeed);
+	void checkGameplayColls(Platform* plat);
 };
 
 #endif

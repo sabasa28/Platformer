@@ -53,7 +53,7 @@ void Game::update()
 	case menu_state:
 		break;
 	case gameplay_state:
-		gameplay->update(window, event);
+		gameplay->update(window);
 		break;
 	case gameOver_state:
 		break;

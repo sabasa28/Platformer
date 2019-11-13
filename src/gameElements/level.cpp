@@ -61,32 +61,32 @@ NearestSide Platform::checkProximity(RectangleShape rec, float collisionMargin)
 	return side;
 }
 
-int Platform::getUpperSide()
+float Platform::getUpperSide()
 {
 	return rectangle.getPosition().y;
 }
 
-int Platform::getBottomSide()
+float Platform::getBottomSide()
 {
 	return getUpperSide() + rectangle.getSize().y;
 }
 
-int Platform::getLeftSide()
+float Platform::getLeftSide()
 {
 	return rectangle.getPosition().x;
 }
 
-int Platform::getRightSide()
+float Platform::getRightSide()
 {
 	return getLeftSide() + rectangle.getSize().x;
 }
 
-int Platform::getCenterX()
+float Platform::getCenterX()
 {
 	return getUpperSide() + rectangle.getSize().y / 2;
 }
 
-int Platform::getCenterY()
+float Platform::getCenterY()
 {
 	return getLeftSide() + rectangle.getSize().x / 2;
 }

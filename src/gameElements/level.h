@@ -7,7 +7,7 @@
 
 using namespace sf;
 
-extern enum NearestSide
+enum NearestSide
 {
 	Top,
 	Bottom,
@@ -25,12 +25,12 @@ public:
 	~Platform();
 	RectangleShape getRec();
 	NearestSide checkProximity(RectangleShape rec, float collisionMargin);
-	int getUpperSide();
-	int getBottomSide();
-	int getLeftSide();
-	int getRightSide();
-	int getCenterX();
-	int getCenterY();
+	float getUpperSide();
+	float getBottomSide();
+	float getLeftSide();
+	float getRightSide();
+	float getCenterX();
+	float getCenterY();
 };
 
 #endif //LEVEL_H

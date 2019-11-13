@@ -20,12 +20,12 @@ void Gameplay::init()
 	platform = new Platform(SCREEN_WIDTH / 2 - 150, SCREEN_HEIGHT / 2, 300, 150, Color::White);
 }
 
-void Gameplay::update(RenderWindow* &window, Event event)
+void Gameplay::update(RenderWindow* &window)
 {
 
-	player->checkKeyPressedInput(event);
-	player->checkKeyDownInput(event, window);
-	player->checkKeyReleasedInput(event);
+	player->checkKeyPressedInput();
+	player->checkKeyDownInput(window);
+	player->checkKeyReleasedInput();
 
 	player->updateMovement();
 	player->updatePosition();
@@ -46,46 +46,46 @@ void Gameplay::close()
 
 }
 
-float Gameplay::getCollisionMargin(Player* player)
+float Gameplay::getCollisionMargin(float jumpingSpeed)
 {
-	return player->getJumpingSpeed() / 2;
+	return jumpingSpeed / 2;
 }
 
-void Gameplay::checkGameplayColls(Platform* platform)
+void Gameplay::checkGameplayColls(Platform* plat)
 {
-	switch (platform->checkProximity(player->getRec(), getCollisionMargin(player)))
+	switch (plat->checkProximity(player->getRec(), getCollisionMargin(player->getJumpingSpeed())))
 	{
 	case Top:
-		if (player->colliding(platform->getRec()))
+		if (player->colliding(plat->getRec()))
 		{
 			player->setJumpState(onGround);
-			player->setRecY(platform->getUpperSide() - player->getRec().getSize().y);
+			player->setRecY(plat->getUpperSide() - player->getRec().getSize().y);
 		}
 		break;
 	case Bottom:
-		if (player->colliding(platform->getRec()))
+		if (player->colliding(plat->getRec()))
 		{
 			player->setSpeedY(0);
-			player->setRecY(platform->getBottomSide());
+			player->setRecY(plat->getBottomSide());
 		}
 		break;
 	case Right:
-		if (player->colliding(platform->getRec()))
+		if (player->colliding(plat->getRec()))
 		{
 			player->setSpeedX(0);
-			player->setRecX(platform->getRightSide());
+			player->setRecX(plat->getRightSide());
 		}
 		break;
 	case Left:
-		if (player->colliding(platform->getRec()))
+		if (player->colliding(plat->getRec()))
 		{
 			player->setSpeedX(0);
-			player->setRecX(platform->getLeftSide() - player->getRec().getSize().x);
+			player->setRecX(plat->getLeftSide() - player->getRec().getSize().x);
 		}
 		break;
 	}
 
-	if (player->fallingOffPlatform(platform))
+	if (player->fallingOffPlatform(plat))
 	{
 		player->setJumpState(falling);
 	}

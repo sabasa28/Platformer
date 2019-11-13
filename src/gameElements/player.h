@@ -15,7 +15,7 @@ struct Movement
 	bool left;
 };
 
-extern enum JumpState
+enum JumpState
 {
 	onGround,
 	start,
@@ -38,23 +38,23 @@ private:
 public:
 	Player();
 	~Player();
-	void setRecPos(int x, int y);
+	void setRecPos(float x, float y);
 	void setRecPos(Vector2f pos);
-	void setRecX(int x);
-	void setRecY(int y);
-	void addToRecX(int x);
-	void addToRecY(int y);
-	void setSpeedX(int x);
-	void setSpeedY(int y);
+	void setRecX(float x);
+	void setRecY(float y);
+	void addToRecX(float x);
+	void addToRecY(float y);
+	void setSpeedX(float x);
+	void setSpeedY(float y);
 	float getSpeedX();
 	float getSpeedY();
 	Vector2f getSpeed();
 	RectangleShape getRec();
 	JumpState getJumpState();
 	float getJumpingSpeed();
-	void checkKeyPressedInput(Event event);
-	void checkKeyDownInput(Event event, RenderWindow* &window);
-	void checkKeyReleasedInput(Event event);
+	void checkKeyPressedInput();
+	void checkKeyDownInput(RenderWindow* &window);
+	void checkKeyReleasedInput();
 	void setMoveRight(bool state);
 	void setMoveLeft(bool state);
 	void jump();
@@ -62,12 +62,12 @@ public:
 	void updateMovement();
 	void updatePosition();
 	void checkScreenLimits();
-	bool colliding(RectangleShape rectangle);
+	bool colliding(RectangleShape rec);
 	bool fallingOffPlatform(Platform* platform);
-	int getUpperSide();
-	int getBottomSide();
-	int getLeftSide();
-	int getRightSide();
+	float getUpperSide();
+	float getBottomSide();
+	float getLeftSide();
+	float getRightSide();
 };
 
 #endif //PLAYER_H
