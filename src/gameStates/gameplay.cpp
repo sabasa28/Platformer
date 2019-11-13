@@ -6,18 +6,21 @@ Gameplay::Gameplay()
 {
 	player = NULL;
 	platform = NULL;
+	meleeEnemy = NULL;
 }
 
 Gameplay::~Gameplay()
 {
 	if (player) delete player;
 	if (platform) delete platform;
+	if (meleeEnemy) delete meleeEnemy;
 }
 
 void Gameplay::init()
 {
 	player = new Player();
 	platform = new Platform(SCREEN_WIDTH / 2 - 150, SCREEN_HEIGHT / 2, 300, 150, Color::White);
+	meleeEnemy = new MeleeEnemy();
 }
 
 void Gameplay::update(RenderWindow* &window)
@@ -27,9 +30,11 @@ void Gameplay::update(RenderWindow* &window)
 	player->checkKeyDownInput(window);
 	player->checkKeyReleasedInput();
 
-	player->updateMovement();
 	player->updatePosition();
 	checkGameplayColls(platform);
+	player->updateMovement();
+
+	//meleeEnemy->updatePos(player->getRec(), platform->getRec());
 
 }
 
@@ -38,6 +43,7 @@ void Gameplay::draw(RenderWindow* &window)
 	window->clear();
 	window->draw(platform->getRec());
 	window->draw(player->getRec());
+	//window->draw(meleeEnemy->getRec());
 	window->display();
 }
 

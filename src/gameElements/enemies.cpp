@@ -7,7 +7,7 @@ Enemy::Enemy()
 	awake = false;
 	rectangle.setSize({ 50, 50 });
 	rectangle.setFillColor(Color::Red);
-	rectangle.setPosition(SCREEN_WIDTH / 1.3f, SCREEN_HEIGHT - rectangle.getSize().y);
+	rectangle.setPosition(SCREEN_WIDTH / 2.0f, SCREEN_HEIGHT - rectangle.getSize().y /*/ 3*/);
 	speed = { 0.0f, 0.0f };
 }
 
@@ -48,4 +48,27 @@ void Enemy::setAwake(bool newAwake)
 void Enemy::setSpeed(Vector2f newSpeed)
 {
 	speed = newSpeed;
+}
+
+void Enemy::updatePos(RectangleShape target, RectangleShape platform)
+{
+	//if (!onGround(platform))
+	//{
+	//	rectangle.setPosition(rectangle.getPosition().x,rectangle.getPosition().y+gravity);
+	//	rectangle.setPosition(rectangle.getPosition()+speed);
+	//}
+	updateAwakeState(target);
+	attack(target);
+}
+
+bool Enemy::onGround(RectangleShape platform)
+{
+	if (platform.getGlobalBounds().top < rectangle.getPosition().y+rectangle.getSize().y)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }

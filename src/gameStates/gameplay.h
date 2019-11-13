@@ -3,11 +3,13 @@
 
 #include "gameElements/level.h"
 #include "gameElements/player.h"
+#include "gameElements/meleeEnemy.h"
 
 class Gameplay
 {
 	Player* player;
 	Platform* platform;
+	MeleeEnemy* meleeEnemy;
 
 public:
 	Gameplay();
