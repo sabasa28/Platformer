@@ -7,7 +7,7 @@
 
 using namespace sf;
 
-const float MAXIMUM_SPEED = 20.0f;
+const  float MAXIMUM_SPEED = 20.0f;
 
 struct Movement
 {

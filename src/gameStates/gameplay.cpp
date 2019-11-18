@@ -25,16 +25,24 @@ void Gameplay::init()
 
 void Gameplay::update(RenderWindow* &window)
 {
+	if (player)
+	{
+		player->checkKeyPressedInput();
+		player->checkKeyDownInput(window);
+		player->checkKeyReleasedInput();
+		player->updatePosition();
+		checkGameplayColls(platform);
+		player->updateMovement();
+	}
 
-	player->checkKeyPressedInput();
-	player->checkKeyDownInput(window);
-	player->checkKeyReleasedInput();
-
-	player->updatePosition();
-	checkGameplayColls(platform);
-	player->updateMovement();
-
-	//meleeEnemy->updatePos(player->getRec(), platform->getRec());
+	if (meleeEnemy)
+	{
+		meleeEnemy->updatePos(player->getRec(), platform->getRec());
+		//if (meleeEnemy->getRec().getPosition().y>SCREEN_HEIGHT)
+		//{
+		//	delete meleeEnemy;
+		//}
+	}
 
 }
 
@@ -43,7 +51,7 @@ void Gameplay::draw(RenderWindow* &window)
 	window->clear();
 	window->draw(platform->getRec());
 	window->draw(player->getRec());
-	//window->draw(meleeEnemy->getRec());
+	if(meleeEnemy)window->draw(meleeEnemy->getRec());
 	window->display();
 }
 

@@ -14,7 +14,7 @@ class MeleeEnemy: public Enemy
 {
 private:
 	bool charging;
-	const float chargingSpeed = 8.0f;
+	const float chargingSpeed = 10.0f;
 	const float alertDistance = 200.0f;
 public:
 	MeleeEnemy();

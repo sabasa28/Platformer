@@ -27,6 +27,10 @@ public:
 	bool onGround(RectangleShape platform);
 	virtual void updateAwakeState(RectangleShape target) = 0;
 	virtual void attack(RectangleShape target) = 0;
+	float getUpperSide();
+	float getBottomSide();
+	float getLeftSide();
+	float getRightSide();
 };
 
 #endif // !ENEMIES_H
