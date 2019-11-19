@@ -21,7 +21,11 @@ enum GameState
 
 class Game
 {
-	GameState currentGameState;
+	static GameState currentGameState;
+
+	Text text;//TEST
+	RectangleShape rect;
+
 
 	RenderWindow* window;
 	
@@ -40,6 +44,7 @@ public:
 	Game();
 	~Game();
 	void execute();
+	static void changeGamestate(GameState newGamestate);
 };
 
 

@@ -113,6 +113,11 @@ void Gameplay::checkGameplayColls(Platform* plat)
 		break;
 	}
 
+	if (meleeEnemy&&player->getRightSide()>meleeEnemy->getLeftSide()&&player->getLeftSide()<meleeEnemy->getRightSide()&&player->getUpperSide()<meleeEnemy->getBottomSide()&&player->getBottomSide()>meleeEnemy->getUpperSide())
+	{
+		Game::changeGamestate(gameOver_state);
+	}
+
 	if (player->fallingOffPlatform(plat))
 	{
 		player->setJumpState(falling);

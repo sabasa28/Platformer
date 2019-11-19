@@ -6,9 +6,25 @@
 #include "gameElements/level.h"
 
 
+GameState Game::currentGameState = menu_state;
 
 Game::Game()
 {
+	/////TEST
+
+
+	//text.setFillColor(Color::Red);
+	//text.setCharacterSize(200);
+	//text.setStyle(Text::Bold);
+	//text.setString("GAME OVER");
+	//text.setPosition(200,200);
+	//text.setFont();
+	rect.setSize({ 200, 200 });
+	rect.setPosition(200, 200);
+	rect.setFillColor(Color::Red);
+
+	/////TEST
+
 	currentGameState = menu_state;
 	
 	gameplay = NULL;
@@ -56,6 +72,11 @@ void Game::update()
 		gameplay->update(window);
 		break;
 	case gameOver_state:
+		cout << "GAME OVER"<<endl;
+		if (Keyboard::isKeyPressed(Keyboard::Enter))
+		{
+			currentGameState = gameplay_state;
+		}
 		break;
 	default:
 		break;
@@ -74,6 +95,9 @@ void Game::draw()
 		gameplay->draw(window);
 		break;
 	case gameOver_state:
+		window->clear();
+		window->draw(rect);
+		window->display();
 		break;
 	default:
 		break;
@@ -94,4 +118,9 @@ void Game::execute()
 		draw();
 	}
 	close();
+}
+
+void Game::changeGamestate(GameState newGamestate)
+{
+	currentGameState = newGamestate;
 }
