@@ -1,6 +1,8 @@
 #include "level.h"
 
-NearestSide side;
+#include <cmath>
+
+NearestSide nearestSide;
 
 float disToTop;
 float disToBottom;
@@ -41,24 +43,24 @@ NearestSide Platform::checkSideProximity(RectangleShape rec, float collisionMarg
 	if (disToTop < disToBottom)
 	{
 		lowestDistance = disToTop;
-		side = Top;
+		nearestSide = Top;
 	}
 	else
 	{
 		lowestDistance = disToBottom;
-		side = Bottom;
+		nearestSide = Bottom;
 	}
 	if (disToRight - collisionMargin < lowestDistance)
 	{
 		lowestDistance = disToRight;
-		side = Right;
+		nearestSide = Right;
 	}
 	if (disToLeft - collisionMargin < lowestDistance)
 	{
-		side = Left;
+		nearestSide = Left;
 	}
 
-	return side;
+	return nearestSide;
 }
 
 float Platform::getUpperSide()

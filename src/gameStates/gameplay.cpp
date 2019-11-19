@@ -5,26 +5,46 @@
 Gameplay::Gameplay()
 {
 	player = NULL;
-	platform = NULL;
-	platform2 = NULL;
 	meleeEnemy = NULL;
+	for (int y = 0; y < PLATFORMS_HEIGHT; y++)
+	{
+		for (int x = 0; x < PLATFORMS_WIDTH; x++)
+		{
+			platforms[x][y] = NULL;
+			jumpstatePlatform[x][y] = falling;
+		}
+	}
 	camera = NULL;
 }
 
 Gameplay::~Gameplay()
 {
 	if (player) delete player;
-	if (platform) delete platform;
-	if (platform2) delete platform2;
 	if (meleeEnemy) delete meleeEnemy;
+	for (int y = 0; y < PLATFORMS_HEIGHT; y++)
+	{
+		for (int x = 0; x < PLATFORMS_WIDTH; x++)
+		{
+			if (platforms[x][y]) delete platforms[x][y];
+		}
+	}
 	if (camera) delete camera;
 }
 
 void Gameplay::init(RenderWindow* &window)
 {
+	for (int y = 0; y < PLATFORMS_HEIGHT; y++)
+	{
+		for (int x = 0; x < PLATFORMS_WIDTH; x++)
+		{
+			if ((x == 1 || x == 2) && y == 2)
+			{
+				platforms[x][y] = new Platform(static_cast<float>(PLATFORM_SIZE) * x, static_cast<float>(PLATFORM_SIZE) * y, static_cast<float>(PLATFORM_SIZE), static_cast<float>(PLATFORM_SIZE), Color::White);
+				jumpstatePlatform[x][y] = falling;
+			}
+		}
+	}
 	player = new Player();
-	platform = new Platform(SCREEN_WIDTH / 2 - 200, SCREEN_HEIGHT / 2, 300, 150, Color::White);
-	platform2 = new Platform(SCREEN_WIDTH / 2 + 150, SCREEN_HEIGHT / 2, 150, 100, Color::White);
 	meleeEnemy = new MeleeEnemy();
 	camera = new View({ player->getCenterX(), player->getCenterY() - SCREEN_HEIGHT / 4.0f }, { static_cast<float>(SCREEN_WIDTH), static_cast<float>(SCREEN_HEIGHT) });
 
@@ -39,14 +59,34 @@ void Gameplay::update(RenderWindow* &window)
 		player->checkKeyDownInput(window);
 		player->checkKeyReleasedInput();
 		player->updatePosition();
-		checkGameplayColls(platform);
-		checkGameplayColls(platform2);
+
+		for (int y = 0; y < PLATFORMS_HEIGHT; y++)
+		{
+			for (int x = 0; x < PLATFORMS_WIDTH; x++)
+			{
+				if (platforms[x][y])
+				{
+					jumpstatePlatform[x][y] = falling;
+					checkGameplayColls(platforms[x][y],x,y);
+				}
+			}
+		}
+
 		player->updateMovement();
 	}
 
 	if (meleeEnemy)
 	{
-		meleeEnemy->updatePos(player->getRec(), platform->getRec());
+		for (int y = 0; y < PLATFORMS_HEIGHT; y++)
+		{
+			for (int x = 0; x < PLATFORMS_WIDTH; x++)
+			{
+				if (platforms[x][y])
+				{
+					meleeEnemy->updatePos(player->getRec(), platforms[x][y]->getRec());
+				}
+			}
+		}
 
 		if (meleeEnemy->getRec().getPosition().y>SCREEN_HEIGHT)
 		{
@@ -62,8 +102,16 @@ void Gameplay::update(RenderWindow* &window)
 void Gameplay::draw(RenderWindow* &window)
 {
 	window->clear();
-	window->draw(platform->getRec());
-	window->draw(platform2->getRec());
+	for (int y = 0; y < PLATFORMS_HEIGHT; y++)
+	{
+		for (int x = 0; x < PLATFORMS_WIDTH; x++)
+		{
+			if (platforms[x][y])
+			{
+				window->draw(platforms[x][y]->getRec());
+			}
+		}
+	}
 	window->draw(player->getRec());
 	if(meleeEnemy)window->draw(meleeEnemy->getRec());
 	window->display();
@@ -79,13 +127,14 @@ float Gameplay::getCollisionMargin(float jumpingSpeed)
 	return jumpingSpeed / 2;
 }
 
-void Gameplay::checkGameplayColls(Platform* plat)
+void Gameplay::checkGameplayColls(Platform* plat, int x, int y)
 {
 	switch (plat->checkSideProximity(player->getRec(), getCollisionMargin(player->getJumpingSpeed())))
 	{
 	case Top:
 		if (player->colliding(plat->getRec()))
 		{
+			jumpstatePlatform[x][y] = onGround;
 			player->setJumpState(onGround);
 			player->setRecY(plat->getUpperSide() - player->getRec().getSize().y);
 		}
@@ -118,7 +167,7 @@ void Gameplay::checkGameplayColls(Platform* plat)
 		Game::changeGamestate(gameOver_state);
 	}
 
-	if (player->fallingOffPlatform(plat))
+	if (player->fallingOffPlatform(plat) && jumpstatePlatform[x][y] != onGround)
 	{
 		player->setJumpState(falling);
 	}
