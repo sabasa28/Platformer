@@ -7,6 +7,7 @@ Gameplay::Gameplay()
 	player = NULL;
 	platform = NULL;
 	meleeEnemy = NULL;
+	camera = NULL;
 }
 
 Gameplay::~Gameplay()
@@ -14,13 +15,17 @@ Gameplay::~Gameplay()
 	if (player) delete player;
 	if (platform) delete platform;
 	if (meleeEnemy) delete meleeEnemy;
+	if (camera) delete camera;
 }
 
-void Gameplay::init()
+void Gameplay::init(RenderWindow* &window)
 {
 	player = new Player();
 	platform = new Platform(SCREEN_WIDTH / 2 - 150, SCREEN_HEIGHT / 2, 300, 150, Color::White);
 	meleeEnemy = new MeleeEnemy();
+	camera = new View({ player->getCenterX(), player->getCenterY() }, { static_cast<float>(SCREEN_WIDTH), static_cast<float>(SCREEN_HEIGHT) });
+
+	window->setView(*camera);
 }
 
 void Gameplay::update(RenderWindow* &window)
@@ -31,7 +36,6 @@ void Gameplay::update(RenderWindow* &window)
 		player->checkKeyDownInput(window);
 		player->checkKeyReleasedInput();
 		player->updatePosition();
-		checkGameplayColls(platform);
 		player->updateMovement();
 	}
 
@@ -44,6 +48,7 @@ void Gameplay::update(RenderWindow* &window)
 		//}
 	}
 
+	checkGameplayColls(platform);
 }
 
 void Gameplay::draw(RenderWindow* &window)
@@ -52,6 +57,8 @@ void Gameplay::draw(RenderWindow* &window)
 	window->draw(platform->getRec());
 	window->draw(player->getRec());
 	if(meleeEnemy)window->draw(meleeEnemy->getRec());
+	camera->setCenter( player->getCenterX(), player->getCenterY() - SCREEN_HEIGHT / 4.0f);
+	window->setView(*camera);
 	window->display();
 }
 
@@ -105,4 +112,5 @@ void Gameplay::checkGameplayColls(Platform* plat)
 	}
 
 	player->checkScreenLimits();
+	meleeEnemy->checkScreenLimits();
 }

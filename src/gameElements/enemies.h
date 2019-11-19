@@ -19,11 +19,14 @@ public:
 	bool getAlive();
 	bool getAwake();
 	RectangleShape getRec();
+	void setRecX(float x);
+	void setRecY(float y);
 	Vector2f getSpeed();
 	void setAlive(bool newAlive);
 	void setAwake(bool newAwake);
 	void setSpeed(Vector2f newSpeed);
 	void updatePos(RectangleShape target, RectangleShape platform);
+	virtual void checkScreenLimits() = 0;
 	bool onGround(RectangleShape platform);
 	virtual void updateAwakeState(RectangleShape target) = 0;
 	virtual void attack(RectangleShape target) = 0;

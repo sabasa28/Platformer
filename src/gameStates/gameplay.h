@@ -10,11 +10,12 @@ class Gameplay
 	Player* player;
 	Platform* platform;
 	MeleeEnemy* meleeEnemy;
+	View* camera;
 
 public:
 	Gameplay();
 	~Gameplay();
-	void init();
+	void init(RenderWindow* &window);
 	void update(RenderWindow* &window);
 	void draw(RenderWindow* &window);
 	void close();

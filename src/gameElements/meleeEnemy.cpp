@@ -2,6 +2,8 @@
 
 #include <cmath>
 
+#include "general/game.h"
+
 MeleeEnemy::MeleeEnemy()
 {
 	charging = false;
@@ -23,15 +25,15 @@ void MeleeEnemy::setChargingState(bool chargeState)
 
 TargetPos MeleeEnemy::updateTargetPos(RectangleShape target)
 {
-	if (abs(Enemy::getRec().getPosition().x - target.getPosition().x) < alertDistance && Enemy::getUpperSide() < target.getPosition().y + target.getSize().y / 2 && Enemy::getBottomSide() > target.getPosition().y + target.getSize().y / 2)
+	if (abs(Enemy::getRec().getPosition().x - target.getPosition().x) < alertDistance && (Enemy::getUpperSide() < target.getPosition().y + target.getSize().y / 2 && Enemy::getBottomSide() > target.getPosition().y + target.getSize().y / 2))
 	{
 		if (Enemy::getRec().getPosition().x < target.getPosition().x)
 		{
-			return right;
+			return TargetPos::right;
 		}
 		else
 		{
-			return left;
+			return TargetPos::left;
 		}
 	}
 	else
@@ -54,16 +56,44 @@ void MeleeEnemy::attack(RectangleShape target)
 	{
 		switch (updateTargetPos(target))
 		{
-		case left:
+		case TargetPos::left:
 			Enemy::setSpeed({ -chargingSpeed,0 });
 			charging = true;
 			break;
-		case right:
+		case TargetPos::right:
 			Enemy::setSpeed({ chargingSpeed,0 });
 			charging = true;
 			break;
 		case away:
 			break;
 		}
+	}
+}
+
+void MeleeEnemy::checkScreenLimits()
+{/*
+	if (getUpperSide() < 0)
+	{
+		setSpeedY(0);
+		setRecY(0);
+		jumpState = falling;
+	}*/
+
+	if (getBottomSide() > SCREEN_HEIGHT)
+	{
+		setRecY(SCREEN_HEIGHT - getRec().getSize().y);
+		//jumpState = onGround;
+	}
+
+	if (getLeftSide() < 0)
+	{
+		setRecX(0);
+		charging = false;
+	}
+
+	if (getRightSide() > SCREEN_WIDTH)
+	{
+		setRecX(SCREEN_WIDTH - getRec().getSize().x);
+		charging = false;
 	}
 }

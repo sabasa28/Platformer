@@ -1,4 +1,5 @@
 #include "enemies.h"
+
 #include "general/game.h"
 
 Enemy::Enemy()
@@ -28,6 +29,16 @@ bool Enemy::getAwake()
 RectangleShape Enemy::getRec() 
 {
 	return rectangle;
+}
+
+void Enemy::setRecX(float x)
+{
+	rectangle.setPosition(x, rectangle.getPosition().y);
+}
+
+void Enemy::setRecY(float y)
+{
+	rectangle.setPosition(rectangle.getPosition().x, y);
 }
 
 Vector2f Enemy::getSpeed()

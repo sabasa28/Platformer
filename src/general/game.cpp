@@ -33,7 +33,7 @@ void Game::init()
 	menu = new Menu();
 	window = new RenderWindow(VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "Platformer Game");
 
-	gameplay->init();
+	gameplay->init(window);
 
 	window->setFramerateLimit(60);
 }

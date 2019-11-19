@@ -24,6 +24,7 @@ public:
 	TargetPos updateTargetPos(RectangleShape target);
 	void updateAwakeState(RectangleShape target);
 	void attack(RectangleShape target);
+	virtual void Enemy::checkScreenLimits();
 };
 
 #endif //MELEE_ENEMY

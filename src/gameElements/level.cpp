@@ -83,10 +83,10 @@ float Platform::getRightSide()
 
 float Platform::getCenterX()
 {
-	return getUpperSide() + rectangle.getSize().y / 2;
+	return getLeftSide() + rectangle.getSize().x / 2;
 }
 
 float Platform::getCenterY()
 {
-	return getLeftSide() + rectangle.getSize().x / 2;
+	return getUpperSide() + rectangle.getSize().y / 2;
 }

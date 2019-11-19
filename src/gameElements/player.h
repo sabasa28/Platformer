@@ -68,6 +68,8 @@ public:
 	float getBottomSide();
 	float getLeftSide();
 	float getRightSide();
+	float getCenterX();
+	float getCenterY();
 };
 
 #endif //PLAYER_H

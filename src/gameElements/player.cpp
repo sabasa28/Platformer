@@ -268,3 +268,13 @@ float Player::getRightSide()
 {
 	return getLeftSide() + rectangle.getSize().x;
 }
+
+float Player::getCenterX()
+{
+	return getLeftSide() + rectangle.getSize().x / 2;
+}
+
+float Player::getCenterY()
+{
+	return getUpperSide() + rectangle.getSize().y / 2;
+}
