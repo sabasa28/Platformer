@@ -24,7 +24,7 @@ public:
 	Platform(float x, float y, float width, float height, Color color);
 	~Platform();
 	RectangleShape getRec();
-	NearestSide checkProximity(RectangleShape rec, float collisionMargin);
+	NearestSide checkSideProximity(RectangleShape rec, float collisionMargin);
 	float getUpperSide();
 	float getBottomSide();
 	float getLeftSide();

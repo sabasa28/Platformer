@@ -6,6 +6,7 @@ Gameplay::Gameplay()
 {
 	player = NULL;
 	platform = NULL;
+	platform2 = NULL;
 	meleeEnemy = NULL;
 	camera = NULL;
 }
@@ -14,6 +15,7 @@ Gameplay::~Gameplay()
 {
 	if (player) delete player;
 	if (platform) delete platform;
+	if (platform2) delete platform2;
 	if (meleeEnemy) delete meleeEnemy;
 	if (camera) delete camera;
 }
@@ -21,9 +23,10 @@ Gameplay::~Gameplay()
 void Gameplay::init(RenderWindow* &window)
 {
 	player = new Player();
-	platform = new Platform(SCREEN_WIDTH / 2 - 150, SCREEN_HEIGHT / 2, 300, 150, Color::White);
+	platform = new Platform(SCREEN_WIDTH / 2 - 200, SCREEN_HEIGHT / 2, 300, 150, Color::White);
+	platform2 = new Platform(SCREEN_WIDTH / 2 + 150, SCREEN_HEIGHT / 2, 150, 100, Color::White);
 	meleeEnemy = new MeleeEnemy();
-	camera = new View({ player->getCenterX(), player->getCenterY() }, { static_cast<float>(SCREEN_WIDTH), static_cast<float>(SCREEN_HEIGHT) });
+	camera = new View({ player->getCenterX(), player->getCenterY() - SCREEN_HEIGHT / 4.0f }, { static_cast<float>(SCREEN_WIDTH), static_cast<float>(SCREEN_HEIGHT) });
 
 	window->setView(*camera);
 }
@@ -36,29 +39,33 @@ void Gameplay::update(RenderWindow* &window)
 		player->checkKeyDownInput(window);
 		player->checkKeyReleasedInput();
 		player->updatePosition();
+		checkGameplayColls(platform);
+		checkGameplayColls(platform2);
 		player->updateMovement();
 	}
 
 	if (meleeEnemy)
 	{
 		meleeEnemy->updatePos(player->getRec(), platform->getRec());
-		//if (meleeEnemy->getRec().getPosition().y>SCREEN_HEIGHT)
-		//{
-		//	delete meleeEnemy;
-		//}
+
+		if (meleeEnemy->getRec().getPosition().y>SCREEN_HEIGHT)
+		{
+			delete meleeEnemy;
+			meleeEnemy = NULL;
+		}
 	}
 
-	checkGameplayColls(platform);
+	camera->setCenter(player->getCenterX(), player->getCenterY() - SCREEN_HEIGHT / 4.0f);
+	window->setView(*camera);
 }
 
 void Gameplay::draw(RenderWindow* &window)
 {
 	window->clear();
 	window->draw(platform->getRec());
+	window->draw(platform2->getRec());
 	window->draw(player->getRec());
 	if(meleeEnemy)window->draw(meleeEnemy->getRec());
-	camera->setCenter( player->getCenterX(), player->getCenterY() - SCREEN_HEIGHT / 4.0f);
-	window->setView(*camera);
 	window->display();
 }
 
@@ -74,7 +81,7 @@ float Gameplay::getCollisionMargin(float jumpingSpeed)
 
 void Gameplay::checkGameplayColls(Platform* plat)
 {
-	switch (plat->checkProximity(player->getRec(), getCollisionMargin(player->getJumpingSpeed())))
+	switch (plat->checkSideProximity(player->getRec(), getCollisionMargin(player->getJumpingSpeed())))
 	{
 	case Top:
 		if (player->colliding(plat->getRec()))
@@ -112,5 +119,5 @@ void Gameplay::checkGameplayColls(Platform* plat)
 	}
 
 	player->checkScreenLimits();
-	meleeEnemy->checkScreenLimits();
+	//meleeEnemy->checkScreenLimits();
 }

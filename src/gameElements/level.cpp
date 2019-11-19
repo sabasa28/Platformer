@@ -31,7 +31,7 @@ RectangleShape Platform::getRec()
 	return rectangle;
 }
 
-NearestSide Platform::checkProximity(RectangleShape rec, float collisionMargin)
+NearestSide Platform::checkSideProximity(RectangleShape rec, float collisionMargin)
 {
 	disToTop = abs((rec.getPosition().y + rec.getSize().y) - rectangle.getPosition().y);
 	disToBottom = abs(rec.getPosition().y - (rectangle.getPosition().y + rectangle.getSize().y));

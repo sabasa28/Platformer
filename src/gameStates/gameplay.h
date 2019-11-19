@@ -9,6 +9,7 @@ class Gameplay
 {
 	Player* player;
 	Platform* platform;
+	Platform* platform2;
 	MeleeEnemy* meleeEnemy;
 	View* camera;
 
