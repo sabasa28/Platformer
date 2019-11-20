@@ -72,6 +72,17 @@ void Gameplay::update(RenderWindow* &window)
 			}
 		}
 
+		for (int y = 0; y < PLATFORMS_HEIGHT; y++)
+		{
+			for (int x = 0; x < PLATFORMS_WIDTH; x++)
+			{
+				if (platforms[x][y])
+				{
+					checkGameplayColls2(platforms[x][y]);
+				}
+			}
+		}
+
 		player->updateMovement();
 	}
 
@@ -129,37 +140,29 @@ float Gameplay::getCollisionMargin(float jumpingSpeed)
 
 void Gameplay::checkGameplayColls(Platform* plat, int x, int y)
 {
-	switch (plat->checkSideProximity(player->getRec(), getCollisionMargin(player->getJumpingSpeed())))
+	if (player->colliding(plat->getRec()))
 	{
-	case Top:
-		if (player->colliding(plat->getRec()))
+		switch (plat->checkSideProximity(player->getRec(), getCollisionMargin(player->getJumpingSpeed())))
 		{
+		case Top:
+			cout << "onground";
 			jumpstatePlatform[x][y] = onGround;
 			player->setJumpState(onGround);
 			player->setRecY(plat->getUpperSide() - player->getRec().getSize().y);
-		}
-		break;
-	case Bottom:
-		if (player->colliding(plat->getRec()))
-		{
+			break;
+		case Bottom:
 			player->setSpeedY(0);
 			player->setRecY(plat->getBottomSide());
-		}
-		break;
-	case Right:
-		if (player->colliding(plat->getRec()))
-		{
+			break;
+		case Right:
 			player->setSpeedX(0);
 			player->setRecX(plat->getRightSide());
-		}
-		break;
-	case Left:
-		if (player->colliding(plat->getRec()))
-		{
+			break;
+		case Left:
 			player->setSpeedX(0);
 			player->setRecX(plat->getLeftSide() - player->getRec().getSize().x);
+			break;
 		}
-		break;
 	}
 
 	if (meleeEnemy&&player->getRightSide()>meleeEnemy->getLeftSide()&&player->getLeftSide()<meleeEnemy->getRightSide()&&player->getUpperSide()<meleeEnemy->getBottomSide()&&player->getBottomSide()>meleeEnemy->getUpperSide())
@@ -167,11 +170,29 @@ void Gameplay::checkGameplayColls(Platform* plat, int x, int y)
 		Game::changeGamestate(gameOver_state);
 	}
 
-	if (player->fallingOffPlatform(plat) && jumpstatePlatform[x][y] != onGround)
-	{
-		player->setJumpState(falling);
-	}
 
 	player->checkScreenLimits();
 	//meleeEnemy->checkScreenLimits();
+}
+
+void Gameplay::checkGameplayColls2(Platform* plat)
+{
+	bool OnAnyPlatform = false;
+	for (int i = 0; i < PLATFORMS_HEIGHT; i++)
+	{
+		for (int j = 0; j < PLATFORMS_WIDTH; j++)
+		{
+			if (platforms[i][j])
+			{
+				if (jumpstatePlatform[i][j] == onGround)
+				{
+					OnAnyPlatform = true;
+				}
+			}
+		}
+	}
+	if (player->fallingOffPlatform(plat) && OnAnyPlatform==false && player->getJumpState() != start)
+	{
+		player->setJumpState(falling);
+	}
 }

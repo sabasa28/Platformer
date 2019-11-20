@@ -26,6 +26,7 @@ public:
 	void close();
 	float getCollisionMargin(float jumpingSpeed);
 	void checkGameplayColls(Platform* plat, int x, int y);
+	void checkGameplayColls2(Platform* plat);
 };
 
 #endif
