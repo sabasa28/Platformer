@@ -31,6 +31,9 @@ Game::Game()
 	gameover = NULL;
 	menu = NULL;
 	window = NULL;
+
+	font = NULL;
+	text = NULL;
 }
 
 Game::~Game()
@@ -42,12 +45,14 @@ Game::~Game()
 
 void Game::init()
 {
-	currentGameState = gameplay_state;
-
 	gameplay = new Gameplay();
 	gameover = new GameOver();
 	menu = new Menu();
 	window = new RenderWindow(VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "Platformer Game");
+
+	font = new Font();
+	font->loadFromFile("assets/fonts/freaktur.ttf");
+	text = new Text();
 
 	gameplay->init(window);
 

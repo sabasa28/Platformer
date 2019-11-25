@@ -10,6 +10,9 @@
     <Filter Include="general">
       <UniqueIdentifier>{d88c1a6a-35b9-41fc-90ae-c72857ea6331}</UniqueIdentifier>
     </Filter>
+    <Filter Include="uiElements">
+      <UniqueIdentifier>{9887154c-dcf7-489c-8892-b037c95c34e1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\gameElements\enemies.cpp">
@@ -43,6 +46,9 @@
     <ClCompile Include="..\src\gameElements\meleeEnemy.cpp">
       <Filter>gameElements</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\uiElements\button.cpp">
+      <Filter>uiElements</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\gameElements\enemies.h">
@@ -74,6 +80,9 @@
     </ClInclude>
     <ClInclude Include="..\src\gameElements\meleeEnemy.h">
       <Filter>gameElements</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\uiElements\button.h">
+      <Filter>uiElements</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -26,7 +26,6 @@ class Game
 	Text text;//TEST
 	RectangleShape rect;
 
-
 	RenderWindow* window;
 	
 	Menu* menu;
@@ -34,6 +33,9 @@ class Game
 	GameOver* gameover;
 	
 	Event event;
+
+	Font* font;
+	Text* text;
 	
 	void init();
 	void update();
