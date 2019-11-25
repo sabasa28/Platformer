@@ -8,8 +8,9 @@ Enemy::Enemy()
 	awake = false;
 	rectangle.setSize({ 50, 50 });
 	rectangle.setFillColor(Color::Red);
-	rectangle.setPosition(SCREEN_WIDTH / 2.0f, SCREEN_HEIGHT - rectangle.getSize().y *10 /*/ 3*/);
+	rectangle.setPosition(SCREEN_WIDTH / 2.0f, SCREEN_HEIGHT - rectangle.getSize().y *10);
 	speed = { 0.0f, 0.0f };
+	onGround = false;
 }
 
 Enemy::~Enemy()
@@ -61,36 +62,36 @@ void Enemy::setSpeed(Vector2f newSpeed)
 	speed = newSpeed;
 }
 
-void Enemy::updatePos(RectangleShape target, RectangleShape platform)
+void Enemy::updatePos(RectangleShape target)
 {
-	rectangle.setPosition(rectangle.getPosition()+speed);
+	rectangle.setPosition(rectangle.getPosition() + speed);
 	updateAwakeState(target);
 	attack(target);
-	if (!onGround(platform))
+
+
+	if (onGround == false)
 	{
 		speed.y += gravity;
 	}
-	if (onGround(platform))
+	else
 	{
 		speed.y = 0;
-		rectangle.setPosition(rectangle.getPosition().x,platform.getPosition().y-rectangle.getSize().y);
 	}
+
 	if (speed.y > MAXIMUM_SPEED)
 	{
 		speed.y = MAXIMUM_SPEED;
 	}
 }
 
-bool Enemy::onGround(RectangleShape platform)
+bool Enemy::getOnGround()
 {
-	if (platform.getGlobalBounds().top <= rectangle.getPosition().y+rectangle.getSize().y&&rectangle.getPosition().x<platform.getPosition().x+platform.getSize().x&& rectangle.getPosition().x + rectangle.getSize().x > platform.getPosition().x)
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+	return onGround;
+}
+
+void Enemy::setOnGround(bool state)
+{
+	onGround= state;
 }
 
 float Enemy::getUpperSide()

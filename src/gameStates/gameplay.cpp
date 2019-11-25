@@ -37,13 +37,14 @@ void Gameplay::init(RenderWindow* &window)
 	{
 		for (int x = 0; x < PLATFORMS_WIDTH; x++)
 		{
-			if ((x == 1 || x == 2) && y == 2)
+			if ((x == 3 || x == 5) && (y == 2 || y==3))
 			{
 				platforms[x][y] = new Platform(static_cast<float>(PLATFORM_SIZE) * x, static_cast<float>(PLATFORM_SIZE) * y, static_cast<float>(PLATFORM_SIZE), static_cast<float>(PLATFORM_SIZE), Color::White);
 				jumpstatePlatform[x][y] = falling;
 			}
 		}
 	}
+
 	player = new Player();
 	meleeEnemy = new MeleeEnemy();
 	camera = new View({ player->getCenterX(), player->getCenterY() - SCREEN_HEIGHT / 4.0f }, { static_cast<float>(SCREEN_WIDTH), static_cast<float>(SCREEN_HEIGHT) });
@@ -86,28 +87,62 @@ void Gameplay::update(RenderWindow* &window)
 		player->updateMovement();
 	}
 
+
 	if (meleeEnemy)
 	{
+		
+		meleeEnemy->updatePos(player->getRec());
+		
+		bool aux=false;
 		for (int y = 0; y < PLATFORMS_HEIGHT; y++)
 		{
 			for (int x = 0; x < PLATFORMS_WIDTH; x++)
 			{
 				if (platforms[x][y])
 				{
-					meleeEnemy->updatePos(player->getRec(), platforms[x][y]->getRec());
+					if (meleeEnemy->getRec().getGlobalBounds().intersects(platforms[x][y]->getRec().getGlobalBounds()))
+					{
+						switch (platforms[x][y]->checkSideProximity(meleeEnemy->getRec(), 5))
+						{
+						case Top:
+							aux = true;
+							meleeEnemy->setRecY(platforms[x][y]->getRec().getPosition().y - meleeEnemy->getRec().getSize().y);
+							break;
+						case Right:
+							meleeEnemy->setSpeed({ 0.0f, meleeEnemy->getSpeed().y });
+							meleeEnemy->setRecX(platforms[x][y]->getRec().getPosition().x + platforms[x][y]->getRec().getSize().x);
+							cout << "right"<<endl;
+							break;
+						case Left:
+							meleeEnemy->setSpeed({ 0.0f, meleeEnemy->getSpeed().y });
+							meleeEnemy->setRecX(platforms[x][y]->getRec().getPosition().x - meleeEnemy->getRec().getSize().x);
+							cout << "left" << endl;
+							break;
+						case Bottom:
+							meleeEnemy->setSpeed({ meleeEnemy->getSpeed().x, 0.0f });
+							meleeEnemy->setRecY(platforms[x][y]->getRec().getPosition().y + platforms[x][y]->getRec().getSize().y);
+						default:
+							break;
+						}
+					}
 				}
 			}
 		}
 
-		if (meleeEnemy->getRec().getPosition().y>SCREEN_HEIGHT)
+		meleeEnemy->setOnGround(aux);
+
+		if (meleeEnemy->getRec().getPosition().y > SCREEN_HEIGHT)
 		{
 			delete meleeEnemy;
 			meleeEnemy = NULL;
 		}
 	}
 
+
+
 	camera->setCenter(player->getCenterX(), player->getCenterY() - SCREEN_HEIGHT / 4.0f);
 	window->setView(*camera);
+
 }
 
 void Gameplay::draw(RenderWindow* &window)
@@ -172,7 +207,6 @@ void Gameplay::checkGameplayColls(Platform* plat, int x, int y)
 
 
 	player->checkScreenLimits();
-	//meleeEnemy->checkScreenLimits();
 }
 
 void Gameplay::checkGameplayColls2(Platform* plat)

@@ -70,7 +70,7 @@ void MeleeEnemy::attack(RectangleShape target)
 	}
 }
 
-void MeleeEnemy::checkScreenLimits()
+void MeleeEnemy::checkScreenLimits() //SACAR EN CASO DE NO USARLO
 {/*
 	if (getUpperSide() < 0)
 	{

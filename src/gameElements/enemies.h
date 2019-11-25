@@ -3,6 +3,8 @@
 
 #include <SFML/Graphics.hpp>
 
+#include "gameElements/level.h"
+
 using namespace sf;
 
 class Enemy
@@ -13,6 +15,7 @@ private:
 	const float gravity = 0.75f;
 	RectangleShape rectangle;
 	Vector2f speed;
+	bool onGround;
 public:
 	Enemy();
 	~Enemy();
@@ -25,9 +28,10 @@ public:
 	void setAlive(bool newAlive);
 	void setAwake(bool newAwake);
 	void setSpeed(Vector2f newSpeed);
-	void updatePos(RectangleShape target, RectangleShape platform);
+	void updatePos(RectangleShape target);
 	virtual void checkScreenLimits() = 0;
-	bool onGround(RectangleShape platform);
+	bool getOnGround();
+	void setOnGround(bool state);
 	virtual void updateAwakeState(RectangleShape target) = 0;
 	virtual void attack(RectangleShape target) = 0;
 	float getUpperSide();

@@ -62,7 +62,6 @@ public:
 	void updateMovement();
 	void updatePosition();
 	void checkScreenLimits();
-	//Platform* checkPlatformProximity(Platform* plat, Platform* plat2);
 	bool colliding(RectangleShape rec);
 	bool fallingOffPlatform(Platform* platform);
 	float getUpperSide();

@@ -227,22 +227,7 @@ void Player::checkScreenLimits()
 		setRecX(SCREEN_WIDTH - rectangle.getSize().x);
 	}
 }
-/*
-Platform* Player::checkPlatformProximity(Platform* plat, Platform* plat2)
-{
-	disToPlat1 = sqrt(pow(abs(plat->getCenterX() - getCenterX()), 2) + pow(abs(plat->getCenterY() - getCenterY()), 2));
-	disToPlat2 = sqrt(pow(abs(plat2->getCenterX() - getCenterX()), 2) + pow(abs(plat2->getCenterY() - getCenterY()), 2));
 
-	if (disToPlat1 < disToPlat2)
-	{
-		return plat;
-	}
-	else
-	{
-		return plat2;
-	}
-}
-*/
 bool Player::colliding(RectangleShape rec)
 {
 	if (getRec().getGlobalBounds().intersects(rec.getGlobalBounds()))
