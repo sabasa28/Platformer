@@ -2,7 +2,7 @@
 
 #include "general/game.h"
 
-Button::Button(String text, bool isTextCentered, float y)
+Button::Button(String text, Vector2f size, bool isTextCentered, float y)
 {
 	displayText.setString(text);
 	centered = isTextCentered;
@@ -11,7 +11,7 @@ Button::Button(String text, bool isTextCentered, float y)
 	float x;
 	if (centered)
 	{
-		x = SCREEN_WIDTH / 2 - displayText.getGlobalBounds().width / 2;
+		x = SCREEN_WIDTH / 2.5 /*- displayText.getGlobalBounds().width / 2*/;
 	}
 	else
 	{
@@ -19,8 +19,11 @@ Button::Button(String text, bool isTextCentered, float y)
 	}
 	displayText.setPosition(x, y);
 
-	frame->setSize({ displayText.getGlobalBounds().width, displayText.getGlobalBounds().height });
-	frame->setFillColor(Color::White);
+	generalFont.loadFromFile("assets/fonts/aescrawl.ttf");
+	displayText.setFont(generalFont);
+	frame.setSize(size);
+	frame.setFillColor(Color::Blue);
+	frame.setPosition(displayText.getPosition());
 }
 
 Button::~Button()
@@ -36,7 +39,7 @@ bool Button::getCursorOverButton()
 {
 	if ((Mouse::getPosition().x > getLeftSide() && Mouse::getPosition().x < getRightSide())
 		&&
-		(Mouse::getPosition().y < getUpperSide() && Mouse::getPosition().x > getBottomSide()))
+		(Mouse::getPosition().y > getUpperSide() && Mouse::getPosition().x < getBottomSide()))
 	{
 		return true;
 	}
@@ -48,22 +51,22 @@ bool Button::getCursorOverButton()
 
 float Button::getUpperSide()
 {
-	return displayText.getPosition().y;
+	return frame.getPosition().y;
 }
 
 float Button::getBottomSide()
 {
-	return getUpperSide() + displayText.getGlobalBounds().height;
+	return getUpperSide() + frame.getSize().y;
 }
 
 float Button::getLeftSide()
 {
-	return displayText.getPosition().x;
+	return frame.getPosition().x;
 }
 
 float Button::getRightSide()
 {
-	return getLeftSide() + displayText.getGlobalBounds().width;
+	return getLeftSide() + frame.getSize().x;
 }
 
 void Button::update()
@@ -88,5 +91,6 @@ void Button::update()
 
 void Button::draw(RenderWindow*& window, RenderStates states)
 {
+	window->draw(frame);
 	window->draw(displayText, states);
 }

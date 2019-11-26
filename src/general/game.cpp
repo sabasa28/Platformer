@@ -54,10 +54,10 @@ void Game::init()
 	font->loadFromFile("assets/fonts/freaktur.ttf");
 	text = new Text();
 
-	menu->init();
-	gameplay->init(window);
-
-	window->setFramerateLimit(60);
+	if(menu)menu->init();
+	if(gameplay)gameplay->init(window);
+	
+	if(window)window->setFramerateLimit(60);
 }
 
 void Game::update()
@@ -73,10 +73,10 @@ void Game::update()
 	switch (currentGameState)
 	{
 	case menu_state:
-		menu->update();
+		if(menu)menu->update();
 		break;
 	case gameplay_state:
-		gameplay->update(window);
+		if(gameplay)gameplay->update(window);
 		break;
 	case gameOver_state:
 		cout << "GAME OVER"<<endl;
@@ -96,10 +96,10 @@ void Game::draw()
 	switch (currentGameState)
 	{
 	case menu_state:
-		menu->draw(window);
+		if(menu)menu->draw(window);
 		break;
 	case gameplay_state:
-		gameplay->draw(window);
+		if(gameplay)gameplay->draw(window);
 		break;
 	case gameOver_state:
 		window->clear();

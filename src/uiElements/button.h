@@ -10,11 +10,12 @@ const int LEFT_POSITION_X = 50;
 class Button
 {
 	Text displayText;
+	Font generalFont;
 	bool centered;
 	bool cursorOverButton;
-	RectangleShape* frame;
+	RectangleShape frame;
 public:
-	Button(String text, bool isTextCentered, float y);
+	Button(String text, Vector2f size, bool isTextCentered, float y);
 	~Button();
 	Text getDisplayText();
 	bool getCursorOverButton();
@@ -23,7 +24,7 @@ public:
 	float getLeftSide();
 	float getRightSide();
 	void update();
-	void draw(sf::RenderWindow*& window, sf::RenderStates states);
+	void draw(RenderWindow*& window, RenderStates states);
 };
 
 #endif //BUTTON_H
