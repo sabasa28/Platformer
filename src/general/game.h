@@ -32,14 +32,10 @@ class Game
 	GameOver* gameover;
 	
 	Event event;
-
-	Font* font;
-	Text* text;
 	
 	void init();
 	void update();
 	void draw();
-	void close();
 
 public:
 	Game();

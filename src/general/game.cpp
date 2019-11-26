@@ -25,15 +25,12 @@ Game::Game()
 
 	/////TEST
 
-	currentGameState = gameplay_state;
+	currentGameState = menu_state;
 	
 	gameplay = NULL;
 	gameover = NULL;
 	menu = NULL;
 	window = NULL;
-
-	font = NULL;
-	text = NULL;
 }
 
 Game::~Game()
@@ -49,10 +46,6 @@ void Game::init()
 	gameplay = new Gameplay();
 	gameover = new GameOver();
 	window = new RenderWindow(VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "Platformer Game");
-
-	font = new Font();
-	font->loadFromFile("assets/fonts/freaktur.ttf");
-	text = new Text();
 
 	if(menu)menu->init();
 	if(gameplay)gameplay->init(window);
@@ -73,7 +66,7 @@ void Game::update()
 	switch (currentGameState)
 	{
 	case menu_state:
-		if(menu)menu->update();
+		if(menu) menu->update(window);
 		break;
 	case gameplay_state:
 		if(gameplay)gameplay->update(window);
@@ -84,8 +77,11 @@ void Game::update()
 		{
 			currentGameState = gameplay_state;
 		}*/
+		if (gameplay) delete gameplay;
+		gameplay = NULL;
+		gameplay = new Gameplay();
 		gameplay->init(window);
-		currentGameState = gameplay_state;
+		Game::changeGamestate(gameplay_state);
 		break;
 	default:
 		break;
@@ -113,11 +109,6 @@ void Game::draw()
 	}
 }
 
-void Game::close()
-{
-
-}
-
 void Game::execute()
 {
 	init();
@@ -126,7 +117,6 @@ void Game::execute()
 		update();
 		draw();
 	}
-	close();
 }
 
 void Game::changeGamestate(GameState newGamestate)
