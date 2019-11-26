@@ -25,7 +25,7 @@ Game::Game()
 
 	/////TEST
 
-	currentGameState = menu_state;
+	currentGameState = gameplay_state;
 	
 	gameplay = NULL;
 	gameover = NULL;

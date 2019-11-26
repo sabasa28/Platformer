@@ -204,12 +204,12 @@ void Player::updatePosition()
 
 void Player::checkScreenLimits()
 {
-	if (getUpperSide() < 0)
-	{
-		setSpeedY(0);
-		setRecY(0);
-		jumpState = falling;
-	}
+	//if (getUpperSide() < 0)
+	//{
+	//	setSpeedY(0);
+	//	setRecY(0);
+	//	jumpState = falling;
+	//}
 
 	if (getBottomSide() > SCREEN_HEIGHT)
 	{
@@ -217,15 +217,15 @@ void Player::checkScreenLimits()
 		jumpState = onGround;
 	}
 
-	if (getLeftSide() < 0)
-	{
-		setRecX(0);
-	}
-
-	if (getRightSide() > SCREEN_WIDTH)
-	{
-		setRecX(SCREEN_WIDTH - rectangle.getSize().x);
-	}
+	//if (getLeftSide() < 0)
+	//{
+	//	setRecX(0);
+	//}
+	//
+	//if (getRightSide() > SCREEN_WIDTH)
+	//{
+	//	setRecX(SCREEN_WIDTH - rectangle.getSize().x);
+	//}
 }
 
 bool Player::colliding(RectangleShape rec)

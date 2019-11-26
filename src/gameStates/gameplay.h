@@ -8,13 +8,15 @@
 const int PLATFORMS_WIDTH = 10;
 const int PLATFORMS_HEIGHT = 6;
 const int PLATFORM_SIZE = 100;
+const int ENEMY_AMMOUNT = 3;
 
 class Gameplay
 {
 	Player* player;
 	JumpState jumpstatePlatform[PLATFORMS_WIDTH][PLATFORMS_HEIGHT];
 	Platform* platforms[PLATFORMS_WIDTH][PLATFORMS_HEIGHT];
-	MeleeEnemy* meleeEnemy;
+	MeleeEnemy* meleeEnemy[ENEMY_AMMOUNT];
+
 	View* camera;
 
 public:
