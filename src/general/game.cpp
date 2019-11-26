@@ -45,15 +45,16 @@ Game::~Game()
 
 void Game::init()
 {
+	menu = new Menu();
 	gameplay = new Gameplay();
 	gameover = new GameOver();
-	menu = new Menu();
 	window = new RenderWindow(VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "Platformer Game");
 
 	font = new Font();
 	font->loadFromFile("assets/fonts/freaktur.ttf");
 	text = new Text();
 
+	menu->init();
 	gameplay->init(window);
 
 	window->setFramerateLimit(60);
@@ -72,6 +73,7 @@ void Game::update()
 	switch (currentGameState)
 	{
 	case menu_state:
+		menu->update();
 		break;
 	case gameplay_state:
 		gameplay->update(window);
@@ -91,10 +93,10 @@ void Game::update()
 
 void Game::draw()
 {
-
 	switch (currentGameState)
 	{
 	case menu_state:
+		menu->draw(window);
 		break;
 	case gameplay_state:
 		gameplay->draw(window);

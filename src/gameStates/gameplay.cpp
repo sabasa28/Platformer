@@ -148,6 +148,7 @@ void Gameplay::update(RenderWindow* &window)
 void Gameplay::draw(RenderWindow* &window)
 {
 	window->clear();
+
 	for (int y = 0; y < PLATFORMS_HEIGHT; y++)
 	{
 		for (int x = 0; x < PLATFORMS_WIDTH; x++)
@@ -160,6 +161,7 @@ void Gameplay::draw(RenderWindow* &window)
 	}
 	window->draw(player->getRec());
 	if(meleeEnemy)window->draw(meleeEnemy->getRec());
+
 	window->display();
 }
 

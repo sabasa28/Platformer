@@ -23,7 +23,6 @@ class Game
 {
 	static GameState currentGameState;
 
-	Text text;//TEST
 	RectangleShape rect;
 
 	RenderWindow* window;
