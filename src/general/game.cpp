@@ -78,12 +78,14 @@ void Game::update()
 	case gameplay_state:
 		if(gameplay)gameplay->update(window);
 		break;
-	case gameOver_state:
+	case gameOver_state:/*
 		cout << "GAME OVER"<<endl;
 		if (Keyboard::isKeyPressed(Keyboard::Enter))
 		{
 			currentGameState = gameplay_state;
-		}
+		}*/
+		gameplay->init(window);
+		currentGameState = gameplay_state;
 		break;
 	default:
 		break;
@@ -101,10 +103,10 @@ void Game::draw()
 	case gameplay_state:
 		if(gameplay)gameplay->draw(window);
 		break;
-	case gameOver_state:
+	case gameOver_state:/*
 		window->clear();
 		window->draw(rect);
-		window->display();
+		window->display();*/
 		break;
 	default:
 		break;
