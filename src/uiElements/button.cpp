@@ -11,7 +11,7 @@ Button::Button(String text, Vector2f size, bool isTextCentered, float y)
 	float x;
 	if (centered)
 	{
-		x = SCREEN_WIDTH / 2.5 /*- displayText.getGlobalBounds().width / 2*/;
+		x = SCREEN_WIDTH / 2.5;
 	}
 	else
 	{
@@ -23,7 +23,7 @@ Button::Button(String text, Vector2f size, bool isTextCentered, float y)
 	displayText.setFont(generalFont);
 	frame.setSize(size);
 	frame.setFillColor(Color::Blue);
-	frame.setPosition(displayText.getPosition());
+	frame.setPosition(displayText.getPosition().x-25.0f, displayText.getPosition().y);
 }
 
 Button::~Button()

@@ -65,6 +65,8 @@ void Gameplay::init(RenderWindow* &window)
 	platforms[1][0] = new Platform(static_cast<float>(PLATFORM_SIZE) * 1, static_cast<float>(PLATFORM_SIZE) * 0, static_cast<float>(PLATFORM_SIZE), static_cast<float>(PLATFORM_SIZE), Color::White);
 	jumpstatePlatform[1][0] = falling;
 
+	platforms[7][3] = new Platform(static_cast<float>(PLATFORM_SIZE) * 7, static_cast<float>(PLATFORM_SIZE) * 3, static_cast<float>(PLATFORM_SIZE), static_cast<float>(PLATFORM_SIZE), Color::White);
+	jumpstatePlatform[7][3] = falling;
 
 
 	player = new Player();
@@ -249,13 +251,13 @@ void Gameplay::checkGameplayColls(Platform* plat, int x, int y)
 void Gameplay::checkGameplayColls2(Platform* plat)
 {
 	bool OnAnyPlatform = false;
-	for (int i = 0; i < PLATFORMS_HEIGHT; i++)
+	for (int y = 0; y < PLATFORMS_HEIGHT; y++)
 	{
-		for (int j = 0; j < PLATFORMS_WIDTH; j++)
+		for (int x = 0; x < PLATFORMS_WIDTH; x++)
 		{
-			if (platforms[i][j])
+			if (platforms[x][y])
 			{
-				if (jumpstatePlatform[i][j] == onGround)
+				if (jumpstatePlatform[x][y] == onGround)
 				{
 					OnAnyPlatform = true;
 				}
