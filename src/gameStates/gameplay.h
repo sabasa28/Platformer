@@ -25,4 +25,4 @@ public:
 	void checkGameplayColls2(Platform* plat);
 };
 
-#endif
+#endif //GAMEPLAY_H

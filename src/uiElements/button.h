@@ -10,9 +10,9 @@ const int LEFT_POSITION = 50;
 class Button
 {
 	Text displayText;
-	Font generalFont;
 	bool centered;
 	RectangleShape frame;
+
 public:
 	Button(String text, bool isTextCentered, float y);
 	~Button();

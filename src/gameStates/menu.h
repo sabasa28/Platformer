@@ -13,6 +13,7 @@ const int TEXT_SPACING = 70;
 class Menu
 {
 	Button* buttons[BUTTON_AMOUNT];
+
 public:
 	Menu();
 	~Menu();
@@ -21,4 +22,4 @@ public:
 	void draw();
 };
 
-#endif
+#endif //MENU_H

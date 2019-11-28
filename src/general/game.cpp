@@ -6,6 +6,7 @@
 
 GameState Game::currentGameState = menu_state;
 RenderWindow* Game::window = NULL;
+Font generalFont;
 
 Game::Game()
 {
@@ -16,6 +17,7 @@ Game::Game()
 	gameplay = NULL;
 	gameover = NULL;
 
+	generalFont.loadFromFile("assets/fonts/aescrawl.ttf");
 }
 
 Game::~Game()

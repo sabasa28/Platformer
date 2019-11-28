@@ -6,8 +6,7 @@ Button::Button(String text, bool isTextCentered, float y)
 {
 	displayText.setString(text);
 	centered = isTextCentered;
-	generalFont.loadFromFile("assets/fonts/aescrawl.ttf");
-	displayText.setFont(generalFont);
+	displayText.setFont(Game::generalFont);
 
 	float x;
 	if (centered)

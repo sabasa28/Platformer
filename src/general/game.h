@@ -35,6 +35,7 @@ class Game
 
 public:
 	static RenderWindow* window;
+	static Font generalFont;
 
 	Game();
 	~Game();
