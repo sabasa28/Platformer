@@ -52,6 +52,12 @@
     <ClCompile Include="..\src\uiElements\displaytext.cpp">
       <Filter>uiElements</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\gameStates\victory.cpp">
+      <Filter>gameStates</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\gameStates\credits.cpp">
+      <Filter>gameStates</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\gameElements\enemies.h">
@@ -89,6 +95,12 @@
     </ClInclude>
     <ClInclude Include="..\src\uiElements\displaytext.h">
       <Filter>uiElements</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\gameStates\victory.h">
+      <Filter>gameStates</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\gameStates\credits.h">
+      <Filter>gameStates</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

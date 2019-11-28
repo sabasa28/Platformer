@@ -24,9 +24,11 @@
     <ClCompile Include="..\src\gameElements\meleeEnemy.cpp" />
     <ClCompile Include="..\src\gameElements\player.cpp" />
     <ClCompile Include="..\src\gameElements\proyectiles.cpp" />
+    <ClCompile Include="..\src\gameStates\credits.cpp" />
     <ClCompile Include="..\src\gameStates\gameover.cpp" />
     <ClCompile Include="..\src\gameStates\gameplay.cpp" />
     <ClCompile Include="..\src\gameStates\menu.cpp" />
+    <ClCompile Include="..\src\gameStates\victory.cpp" />
     <ClCompile Include="..\src\general\console.cpp" />
     <ClCompile Include="..\src\general\game.cpp" />
     <ClCompile Include="..\src\main.cpp" />
@@ -39,9 +41,11 @@
     <ClInclude Include="..\src\gameElements\meleeEnemy.h" />
     <ClInclude Include="..\src\gameElements\player.h" />
     <ClInclude Include="..\src\gameElements\proyectiles.h" />
+    <ClInclude Include="..\src\gameStates\credits.h" />
     <ClInclude Include="..\src\gameStates\gameover.h" />
     <ClInclude Include="..\src\gameStates\gameplay.h" />
     <ClInclude Include="..\src\gameStates\menu.h" />
+    <ClInclude Include="..\src\gameStates\victory.h" />
     <ClInclude Include="..\src\general\console.h" />
     <ClInclude Include="..\src\general\game.h" />
     <ClInclude Include="..\src\uiElements\button.h" />

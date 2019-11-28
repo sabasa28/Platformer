@@ -7,7 +7,7 @@
 
 using namespace sf;
 
-const int MENU_BUTTON_AMOUNT = 2;
+const int MENU_BUTTON_AMOUNT = 3;
 const int MENU_TEXT_SPACING = 70;
 
 class Menu

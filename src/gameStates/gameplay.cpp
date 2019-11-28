@@ -236,7 +236,7 @@ void Gameplay::checkGameplayColls()
 		{
 			if (player->colliding(*goal))
 			{
-				Game::changeGamestate(gameOver_state);
+				Game::changeGamestate(victory_state);
 			}
 		}
 

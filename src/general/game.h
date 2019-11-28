@@ -4,8 +4,10 @@
 #include <iostream>
 
 #include "gameStates/menu.h"
+#include "gameStates/credits.h"
 #include "gameStates/gameplay.h"
 #include "gameStates/gameover.h"
+#include "gameStates/victory.h"
 
 using namespace std;
 using namespace sf;
@@ -16,8 +18,10 @@ const int SCREEN_HEIGHT = 600;
 enum GameState
 {
 	menu_state,
+	credits_state,
 	gameplay_state,
-	gameOver_state
+	gameOver_state,
+	victory_state
 };
 
 class Game
@@ -25,8 +29,10 @@ class Game
 	static GameState currentGameState;
 
 	Menu* menu;
+	Credits* credits;
 	Gameplay* gameplay;
 	GameOver* gameover;
+	Victory* victory;
 	static bool gameStateInputActive;
 	
 	Event event;
@@ -45,6 +51,5 @@ public:
 	static void setGameStateInputActive(bool state);
 	static bool getGameStateInputActive();
 };
-
 
 #endif //GAME_H

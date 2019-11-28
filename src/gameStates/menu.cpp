@@ -10,7 +10,8 @@ Menu::Menu()
 	}
 
 	buttons[0] = new Button("Press 'Enter' to play", true, SCREEN_HEIGHT / 2 - MENU_TEXT_SPACING / 2);
-	buttons[1] = new Button("Press 'Escape' to exit", true, buttons[0]->getUpperSide() + MENU_TEXT_SPACING);
+	buttons[1] = new Button("Press 'C' to see the credits", true, buttons[0]->getUpperSide() + MENU_TEXT_SPACING);
+	buttons[2] = new Button("Press 'Escape' to exit", true, buttons[1]->getUpperSide() + MENU_TEXT_SPACING);
 }
 
 Menu::~Menu()
@@ -42,6 +43,10 @@ void Menu::checkKeyDownInput()
 		{
 			Game::setGameStateInputActive(false);
 		}
+	}
+	if (Keyboard::isKeyPressed(Keyboard::C))
+	{
+		Game::changeGamestate(credits_state);
 	}
 	if (Keyboard::isKeyPressed(Keyboard::Escape))
 	{
