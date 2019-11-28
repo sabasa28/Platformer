@@ -6,6 +6,8 @@
 
 #include <cmath>
 
+const int PLAYER_SIZE = 50;
+
 float disToPlat1;
 float disToPlat2;
 
@@ -14,9 +16,9 @@ Player::Player()
 	speed = { 0,0 };
 	movement.right = false;
 	movement.left = false;
-	rectangle.setSize({ 50, 50 });
+	rectangle.setSize({ static_cast<float>(PLAYER_SIZE), static_cast<float>(PLAYER_SIZE) });
 	rectangle.setFillColor(Color::Blue);
-	rectangle.setPosition(SCREEN_WIDTH / 2, SCREEN_HEIGHT - rectangle.getSize().y);
+	rectangle.setPosition(PLATFORM_SIZE + PLAYER_SIZE, static_cast<float>(SCREEN_HEIGHT - PLATFORM_SIZE - rectangle.getSize().y));
 	jumpState = onGround;
 	jumping = false;
 }
@@ -107,13 +109,13 @@ void Player::checkKeyPressedInput()
 	}
 }
 
-void Player::checkKeyDownInput(RenderWindow* &window)
+void Player::checkKeyDownInput()
 {
-	window->setKeyRepeatEnabled(false);
+	Game::window->setKeyRepeatEnabled(false);
 
 	if (Keyboard::isKeyPressed (Keyboard::Escape))
 	{
-		window->close();
+		Game::window->close();
 	}
 
 	if (Keyboard::isKeyPressed(Keyboard::Space))
@@ -121,7 +123,7 @@ void Player::checkKeyDownInput(RenderWindow* &window)
 		jump();
 	}
 
-	window->setKeyRepeatEnabled(true);
+	Game::window->setKeyRepeatEnabled(true);
 }
 
 void Player::checkKeyReleasedInput()

@@ -16,11 +16,9 @@ class Menu
 public:
 	Menu();
 	~Menu();
-	void init();
-	void checkKeyPressedInput(RenderWindow* &window);
-	void update(RenderWindow* &window);
-	void draw(RenderWindow* &window);
-	void close();
+	void checkKeyPressedInput();
+	void update();
+	void draw();
 };
 
 #endif

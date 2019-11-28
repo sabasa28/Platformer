@@ -2,6 +2,7 @@
 #define GAME_H
 
 #include <iostream>
+
 #include "gameStates/menu.h"
 #include "gameStates/gameplay.h"
 #include "gameStates/gameover.h"
@@ -23,21 +24,18 @@ class Game
 {
 	static GameState currentGameState;
 
-	RectangleShape rect;
-
-	RenderWindow* window;
-	
 	Menu* menu;
 	Gameplay* gameplay;
 	GameOver* gameover;
 	
 	Event event;
-	
-	void init();
+
 	void update();
 	void draw();
 
 public:
+	static RenderWindow* window;
+
 	Game();
 	~Game();
 	void execute();

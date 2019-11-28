@@ -10,18 +10,12 @@ float disToLeft;
 float disToRight;
 float lowestDistance;
 
-Platform::Platform()
+Platform::Platform(int x, int y)
 {
-	rectangle.setSize({ 200, 30 });
-	rectangle.setPosition({ 100, 100 });
+	rectangle.setSize({ static_cast<float>(PLATFORM_SIZE), static_cast<float>(PLATFORM_SIZE) });
+	rectangle.setPosition({ static_cast<float>(PLATFORM_SIZE) * x, static_cast<float>(PLATFORM_SIZE) * y });
 	rectangle.setFillColor(Color::White);
-}
-
-Platform::Platform(float x, float y, float width, float height, Color color)
-{
-	rectangle.setSize({ width,height });
-	rectangle.setPosition({ x, y });
-	rectangle.setFillColor(color);
+	relativePlayerJumpsState = falling_relative;
 }
 
 Platform::~Platform()
@@ -61,6 +55,16 @@ NearestSide Platform::checkSideProximity(RectangleShape rec, float collisionMarg
 	}
 
 	return nearestSide;
+}
+
+void Platform::setRelativePlayerJumpState(RelativePlayerJumpState jumpState)
+{
+	relativePlayerJumpsState = jumpState;
+}
+
+RelativePlayerJumpState Platform::getRelativePlayerJumpState()
+{
+	return relativePlayerJumpsState;
 }
 
 float Platform::getUpperSide()

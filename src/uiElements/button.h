@@ -5,26 +5,24 @@
 
 using namespace sf;
 
-const int LEFT_POSITION_X = 50;
+const int LEFT_POSITION = 50;
 
 class Button
 {
 	Text displayText;
 	Font generalFont;
 	bool centered;
-	bool cursorOverButton;
 	RectangleShape frame;
 public:
-	Button(String text, Vector2f size, bool isTextCentered, float y);
+	Button(String text, bool isTextCentered, float y);
 	~Button();
 	Text getDisplayText();
-	bool getCursorOverButton();
 	float getUpperSide();
 	float getBottomSide();
 	float getLeftSide();
 	float getRightSide();
 	void update();
-	void draw(RenderWindow*& window, RenderStates states);
+	void draw();
 };
 
 #endif //BUTTON_H

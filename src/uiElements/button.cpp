@@ -2,28 +2,27 @@
 
 #include "general/game.h"
 
-Button::Button(String text, Vector2f size, bool isTextCentered, float y)
+Button::Button(String text, bool isTextCentered, float y)
 {
 	displayText.setString(text);
 	centered = isTextCentered;
-	cursorOverButton = false;
+	generalFont.loadFromFile("assets/fonts/aescrawl.ttf");
+	displayText.setFont(generalFont);
 
 	float x;
 	if (centered)
 	{
-		x = SCREEN_WIDTH / 2.5;
+		x = SCREEN_WIDTH / 2 - displayText.getGlobalBounds().width / 2;
 	}
 	else
 	{
-		x = LEFT_POSITION_X;
+		x = LEFT_POSITION;
 	}
 	displayText.setPosition(x, y);
 
-	generalFont.loadFromFile("assets/fonts/aescrawl.ttf");
-	displayText.setFont(generalFont);
-	frame.setSize(size);
-	frame.setFillColor(Color::Blue);
-	frame.setPosition(displayText.getPosition().x-25.0f, displayText.getPosition().y);
+	frame.setSize({ displayText.getGlobalBounds().width, displayText.getGlobalBounds().height });
+	frame.setPosition(displayText.getPosition().x, displayText.getPosition().y);
+	frame.setFillColor(Color::White);
 }
 
 Button::~Button()
@@ -33,20 +32,6 @@ Button::~Button()
 Text Button::getDisplayText()
 {
 	return displayText;
-}
-
-bool Button::getCursorOverButton()
-{
-	if ((Mouse::getPosition().x > getLeftSide() && Mouse::getPosition().x < getRightSide())
-		&&
-		(Mouse::getPosition().y > getUpperSide() && Mouse::getPosition().x < getBottomSide()))
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
 }
 
 float Button::getUpperSide()
@@ -71,26 +56,10 @@ float Button::getRightSide()
 
 void Button::update()
 {
-	cursorOverButton = getCursorOverButton();
-
-	if (getCursorOverButton())
-	{
-		if (displayText.getFillColor() != Color::White)
-		{
-			displayText.setFillColor(Color::White);
-		}
-	}
-	else
-	{
-		if (displayText.getFillColor() != Color::White)
-		{
-			displayText.setFillColor(Color::White);
-		}
-	}
+	
 }
 
-void Button::draw(RenderWindow*& window, RenderStates states)
+void Button::draw()
 {
-	window->draw(frame);
-	window->draw(displayText, states);
+	Game::window->draw(displayText);
 }

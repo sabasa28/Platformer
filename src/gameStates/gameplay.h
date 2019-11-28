@@ -5,29 +5,23 @@
 #include "gameElements/player.h"
 #include "gameElements/meleeEnemy.h"
 
-const int PLATFORMS_WIDTH = 10;
-const int PLATFORMS_HEIGHT = 6;
-const int PLATFORM_SIZE = 100;
 const int ENEMY_AMMOUNT = 3;
 
 class Gameplay
 {
+	Platform* platformGrid[PLATFORM_GRID_HEIGHT][PLATFORM_GRID_WIDTH];
 	Player* player;
-	JumpState jumpstatePlatform[PLATFORMS_WIDTH][PLATFORMS_HEIGHT];
-	Platform* platforms[PLATFORMS_WIDTH][PLATFORMS_HEIGHT];
 	MeleeEnemy* meleeEnemy[ENEMY_AMMOUNT];
-
+	RectangleShape* goal;
 	View* camera;
 
 public:
 	Gameplay();
 	~Gameplay();
-	void init(RenderWindow* &window);
-	void update(RenderWindow* &window);
-	void draw(RenderWindow* &window);
-	void close();
+	void update();
+	void draw();
 	float getCollisionMargin(float jumpingSpeed);
-	void checkGameplayColls(Platform* plat, int x, int y);
+	void checkGameplayColls();
 	void checkGameplayColls2(Platform* plat);
 };
 

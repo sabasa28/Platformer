@@ -8,6 +8,9 @@ Menu::Menu()
 	{
 		buttons[i] = NULL;
 	}
+
+	buttons[0] = new Button("Press 'Enter' to play", true, SCREEN_HEIGHT / 2 - TEXT_SPACING / 2);
+	buttons[1] = new Button("Press 'Escape' to exit", true, buttons[0]->getUpperSide() + TEXT_SPACING);
 }
 
 Menu::~Menu()
@@ -21,13 +24,7 @@ Menu::~Menu()
 	}
 }
 
-void Menu::init()
-{
-	buttons[0] = new Button("Enter to play", {250, 50}, true, SCREEN_HEIGHT / 2);
-	buttons[1] = new Button("Escape to exit", { 250, 50 }, true, buttons[0]->getUpperSide() + TEXT_SPACING);
-}
-
-void Menu::checkKeyPressedInput(RenderWindow* &window)
+void Menu::checkKeyPressedInput()
 {
 	if (Keyboard::isKeyPressed(Keyboard::Enter))
 	{
@@ -35,29 +32,24 @@ void Menu::checkKeyPressedInput(RenderWindow* &window)
 	}
 	if (Keyboard::isKeyPressed(Keyboard::Escape))
 	{
-		window->close();
+		Game::window->close();
 	}
 }
 
-void Menu::update(RenderWindow* &window)
+void Menu::update()
 {
-	if (buttons[0])buttons[0]->update();
-	if (buttons[1])buttons[1]->update();
+	if (buttons[0]) buttons[0]->update();
+	if (buttons[1]) buttons[1]->update();
 
-	checkKeyPressedInput(window);
+	checkKeyPressedInput();
 }
 
-void Menu::draw(RenderWindow* &window)
+void Menu::draw()
 {
-	window->clear();
+	Game::window->clear();
 
-	if (buttons[0])buttons[0]->draw(window, RenderStates::Default);
-	if (buttons[1])buttons[1]->draw(window, RenderStates::Default);
+	if (buttons[0])buttons[0]->draw();
+	if (buttons[1])buttons[1]->draw();
 
-	window->display();
-}
-
-void Menu::close()
-{
-
+	Game::window->display();
 }

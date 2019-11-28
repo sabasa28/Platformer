@@ -53,7 +53,7 @@ public:
 	JumpState getJumpState();
 	float getJumpingSpeed();
 	void checkKeyPressedInput();
-	void checkKeyDownInput(RenderWindow* &window);
+	void checkKeyDownInput();
 	void checkKeyReleasedInput();
 	void setMoveRight(bool state);
 	void setMoveLeft(bool state);

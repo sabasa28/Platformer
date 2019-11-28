@@ -5,6 +5,10 @@
 
 using namespace sf;
 
+const int PLATFORM_GRID_WIDTH = 50;
+const int PLATFORM_GRID_HEIGHT = 6;
+const int PLATFORM_SIZE = 100;
+
 enum NearestSide
 {
 	Top,
@@ -13,16 +17,24 @@ enum NearestSide
 	Left
 };
 
+enum RelativePlayerJumpState
+{
+	onGround_relative,
+	falling_relative
+};
+
 class Platform
 {
 private:
 	RectangleShape rectangle;
+	RelativePlayerJumpState relativePlayerJumpsState;
 public:
-	Platform();
-	Platform(float x, float y, float width, float height, Color color);
+	Platform(int x, int y);
 	~Platform();
 	RectangleShape getRec();
 	NearestSide checkSideProximity(RectangleShape rec, float collisionMargin);
+	void setRelativePlayerJumpState(RelativePlayerJumpState jumpState);
+	RelativePlayerJumpState getRelativePlayerJumpState();
 	float getUpperSide();
 	float getBottomSide();
 	float getLeftSide();
