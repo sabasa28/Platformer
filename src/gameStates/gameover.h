@@ -17,7 +17,7 @@ class GameOver
 public:
 	GameOver();
 	~GameOver();
-	void checkKeyPressedInput();
+	void checkKeyDownInput();
 	void update();
 	void draw();
 };

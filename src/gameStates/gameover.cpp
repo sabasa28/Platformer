@@ -17,17 +17,32 @@ GameOver::~GameOver()
 {
 }
 
-void GameOver::checkKeyPressedInput()
+void GameOver::checkKeyDownInput()
 {
+	Game::window->setKeyRepeatEnabled(false);
+
 	if (Keyboard::isKeyPressed(Keyboard::Enter))
 	{
-		Game::changeGamestate(menu_state);
+		if (!Game::getGameStateInputActive())
+		{
+			Game::setGameStateInputActive(true);
+			Game::changeGamestate(menu_state);
+		}
 	}
+	else
+	{
+		if (Game::getGameStateInputActive())
+		{
+			Game::setGameStateInputActive(false);
+		}
+	}
+
+	Game::window->setKeyRepeatEnabled(true);
 }
 
 void GameOver::update()
 {
-	checkKeyPressedInput();
+	checkKeyDownInput();
 }
 
 void GameOver::draw()

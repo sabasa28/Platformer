@@ -27,6 +27,7 @@ class Game
 	Menu* menu;
 	Gameplay* gameplay;
 	GameOver* gameover;
+	static bool gameStateInputActive;
 	
 	Event event;
 
@@ -41,6 +42,8 @@ public:
 	~Game();
 	void execute();
 	static void changeGamestate(GameState newGamestate);
+	static void setGameStateInputActive(bool state);
+	static bool getGameStateInputActive();
 };
 
 

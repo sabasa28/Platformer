@@ -66,6 +66,7 @@ Gameplay::~Gameplay()
 	if (goal) delete goal;
 
 	if (camera) delete camera;
+	Game::window->setView(Game::window->getDefaultView());
 }
 
 void Gameplay::update()

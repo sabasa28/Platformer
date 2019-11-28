@@ -117,7 +117,6 @@ void Player::checkKeyDownInput()
 	{
 		Game::window->close();
 	}
-
 	if (Keyboard::isKeyPressed(Keyboard::Space))
 	{
 		jump();

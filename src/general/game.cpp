@@ -5,6 +5,7 @@
 #include "gameElements/player.h"
 
 GameState Game::currentGameState = menu_state;
+bool Game::gameStateInputActive = false;
 RenderWindow* Game::window = NULL;
 Font Game::generalFont;
 
@@ -16,6 +17,7 @@ Game::Game()
 	menu = NULL;
 	gameplay = NULL;
 	gameover = NULL;
+	gameStateInputActive = false;
 
 	generalFont.loadFromFile("assets/fonts/aescrawl.ttf");
 }
@@ -41,22 +43,31 @@ void Game::update()
 	switch (currentGameState)
 	{
 	case menu_state:
-		if (gameover) delete gameover;
-		gameover = NULL;
+		if (gameover)
+		{
+			delete gameover;
+			gameover = NULL;
+		}
 
 		if (!menu) menu = new Menu();
 		if (menu) menu->update();
 		break;
 	case gameplay_state:
-		if (menu) delete menu;
-		menu = NULL;
+		if (menu)
+		{
+			delete menu;
+			menu = NULL;
+		}
 
 		if (!gameplay) gameplay = new Gameplay();
 		if (gameplay) gameplay->update();
 		break;
 	case gameOver_state:
-		if (gameplay) delete gameplay;
-		gameplay = NULL;
+		if (gameplay)
+		{
+			delete gameplay;
+			gameplay = NULL;
+		}
 
 		if (!gameover) gameover = new GameOver();
 		if (gameover) gameover->update();
@@ -100,4 +111,14 @@ void Game::execute()
 void Game::changeGamestate(GameState newGamestate)
 {
 	currentGameState = newGamestate;
+}
+
+void Game::setGameStateInputActive(bool state)
+{
+	gameStateInputActive = state;
+}
+
+bool Game::getGameStateInputActive()
+{
+	return gameStateInputActive;
 }

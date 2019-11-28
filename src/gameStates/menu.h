@@ -17,7 +17,7 @@ class Menu
 public:
 	Menu();
 	~Menu();
-	void checkKeyPressedInput();
+	void checkKeyDownInput();
 	void update();
 	void draw();
 };

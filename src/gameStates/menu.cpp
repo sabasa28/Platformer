@@ -24,21 +24,36 @@ Menu::~Menu()
 	}
 }
 
-void Menu::checkKeyPressedInput()
+void Menu::checkKeyDownInput()
 {
+	Game::window->setKeyRepeatEnabled(false);
+
 	if (Keyboard::isKeyPressed(Keyboard::Enter))
 	{
-		Game::changeGamestate(gameplay_state);
+		if (!Game::getGameStateInputActive())
+		{
+			Game::setGameStateInputActive(true);
+			Game::changeGamestate(gameplay_state);
+		}
+	}
+	else
+	{
+		if (Game::getGameStateInputActive())
+		{
+			Game::setGameStateInputActive(false);
+		}
 	}
 	if (Keyboard::isKeyPressed(Keyboard::Escape))
 	{
 		Game::window->close();
 	}
+
+	Game::window->setKeyRepeatEnabled(true);
 }
 
 void Menu::update()
 {
-	checkKeyPressedInput();
+	checkKeyDownInput();
 }
 
 void Menu::draw()
