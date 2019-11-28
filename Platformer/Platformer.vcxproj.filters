@@ -49,6 +49,9 @@
     <ClCompile Include="..\src\uiElements\button.cpp">
       <Filter>uiElements</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\uiElements\displaytext.cpp">
+      <Filter>uiElements</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\gameElements\enemies.h">
@@ -82,6 +85,9 @@
       <Filter>gameElements</Filter>
     </ClInclude>
     <ClInclude Include="..\src\uiElements\button.h">
+      <Filter>uiElements</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\uiElements\displaytext.h">
       <Filter>uiElements</Filter>
     </ClInclude>
   </ItemGroup>

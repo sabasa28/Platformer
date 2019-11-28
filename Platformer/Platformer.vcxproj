@@ -31,6 +31,7 @@
     <ClCompile Include="..\src\general\game.cpp" />
     <ClCompile Include="..\src\main.cpp" />
     <ClCompile Include="..\src\uiElements\button.cpp" />
+    <ClCompile Include="..\src\uiElements\displaytext.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\gameElements\enemies.h" />
@@ -44,6 +45,7 @@
     <ClInclude Include="..\src\general\console.h" />
     <ClInclude Include="..\src\general\game.h" />
     <ClInclude Include="..\src\uiElements\button.h" />
+    <ClInclude Include="..\src\uiElements\displaytext.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

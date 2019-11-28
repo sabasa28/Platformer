@@ -6,7 +6,7 @@
 
 GameState Game::currentGameState = menu_state;
 RenderWindow* Game::window = NULL;
-Font generalFont;
+Font Game::generalFont;
 
 Game::Game()
 {
@@ -41,48 +41,55 @@ void Game::update()
 	switch (currentGameState)
 	{
 	case menu_state:
-		if (menu == NULL) menu = new Menu();
+		if (gameover) delete gameover;
+		gameover = NULL;
+
+		if (!menu) menu = new Menu();
 		if (menu) menu->update();
 		break;
 	case gameplay_state:
-		if (gameplay == NULL) gameplay = new Gameplay();
+		if (menu) delete menu;
+		menu = NULL;
+
+		if (!gameplay) gameplay = new Gameplay();
 		if (gameplay) gameplay->update();
 		break;
 	case gameOver_state:
 		if (gameplay) delete gameplay;
 		gameplay = NULL;
-		gameplay = new Gameplay();
-		Game::changeGamestate(gameplay_state);
+
+		if (!gameover) gameover = new GameOver();
+		if (gameover) gameover->update();
 		break;
 	default:
 		break;
 	}
-
 }
 
 void Game::draw()
 {
+	window->clear();
+
 	switch (currentGameState)
 	{
 	case menu_state:
-		if(menu)menu->draw();
+		if (menu) menu->draw();
 		break;
 	case gameplay_state:
-		if(gameplay)gameplay->draw();
+		if (gameplay) gameplay->draw();
 		break;
-	case gameOver_state:/*
-		window->clear();
-		window->draw(rect);
-		window->display();*/
+	case gameOver_state:
+		if (gameover) gameover->draw();
 		break;
 	default:
 		break;
 	}
+
+	window->display();
 }
 
 void Game::execute()
 {
-	//init();
 	while (window->isOpen())
 	{
 		update();

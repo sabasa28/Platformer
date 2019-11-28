@@ -159,8 +159,6 @@ void Gameplay::update()
 
 void Gameplay::draw()
 {
-	Game::window->clear();
-
 	for (int y = 0; y < PLATFORM_GRID_HEIGHT; y++)
 	{
 		for (int x = 0; x < PLATFORM_GRID_WIDTH; x++)
@@ -178,8 +176,6 @@ void Gameplay::draw()
 	}
 
 	Game::window->draw(*goal);
-
-	Game::window->display();
 }
 
 float Gameplay::getCollisionMargin(float jumpingSpeed)

@@ -2,25 +2,25 @@
 
 #include "general/game.h"
 
-Button::Button(String text, bool isTextCentered, float y)
+Button::Button(String displayText, bool isTextCentered, float y)
 {
-	displayText.setString(text);
-	centered = isTextCentered;
-	displayText.setFont(Game::generalFont);
+	text.setString(displayText);
+	text.setFont(Game::generalFont);
 
+	centered = isTextCentered;
 	float x;
 	if (centered)
 	{
-		x = SCREEN_WIDTH / 2 - displayText.getGlobalBounds().width / 2;
+		x = SCREEN_WIDTH / 2 - text.getGlobalBounds().width / 2;
 	}
 	else
 	{
-		x = LEFT_POSITION;
+		x = BUTTON_LEFT_POSITION;
 	}
-	displayText.setPosition(x, y);
+	text.setPosition(x, y);
 
-	frame.setSize({ displayText.getGlobalBounds().width, displayText.getGlobalBounds().height });
-	frame.setPosition(displayText.getPosition().x, displayText.getPosition().y);
+	frame.setSize({ text.getGlobalBounds().width, text.getGlobalBounds().height });
+	frame.setPosition(text.getPosition().x, text.getPosition().y);
 	frame.setFillColor(Color::White);
 }
 
@@ -28,9 +28,9 @@ Button::~Button()
 {
 }
 
-Text Button::getDisplayText()
+Text Button::getText()
 {
-	return displayText;
+	return text;
 }
 
 float Button::getUpperSide()
@@ -53,12 +53,7 @@ float Button::getRightSide()
 	return getLeftSide() + frame.getSize().x;
 }
 
-void Button::update()
-{
-	
-}
-
 void Button::draw()
 {
-	Game::window->draw(displayText);
+	Game::window->draw(text);
 }

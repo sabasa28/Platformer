@@ -5,23 +5,22 @@
 
 using namespace sf;
 
-const int LEFT_POSITION = 50;
+const int BUTTON_LEFT_POSITION = 50;
 
 class Button
 {
-	Text displayText;
+	Text text;
 	bool centered;
 	RectangleShape frame;
 
 public:
-	Button(String text, bool isTextCentered, float y);
+	Button(String displayText, bool isTextCentered, float y);
 	~Button();
-	Text getDisplayText();
+	Text getText();
 	float getUpperSide();
 	float getBottomSide();
 	float getLeftSide();
 	float getRightSide();
-	void update();
 	void draw();
 };
 

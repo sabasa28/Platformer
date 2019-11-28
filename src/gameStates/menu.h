@@ -7,12 +7,12 @@
 
 using namespace sf;
 
-const int BUTTON_AMOUNT = 2;
-const int TEXT_SPACING = 70;
+const int MENU_BUTTON_AMOUNT = 2;
+const int MENU_TEXT_SPACING = 70;
 
 class Menu
 {
-	Button* buttons[BUTTON_AMOUNT];
+	Button* buttons[MENU_BUTTON_AMOUNT];
 
 public:
 	Menu();
