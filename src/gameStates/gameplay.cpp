@@ -9,12 +9,7 @@ Gameplay::Gameplay()
 		for (int x = 0; x < PLATFORM_GRID_WIDTH; x++)
 		{
 			platformGrid[y][x] = NULL;
-		}
-	}
-	for (int y = 0; y < PLATFORM_GRID_HEIGHT; y++)
-	{
-		for (int x = 0; x < PLATFORM_GRID_WIDTH; x++)
-		{
+
 			switch (y)
 			{
 			case 0: if (x == 3)
@@ -38,9 +33,6 @@ Gameplay::Gameplay()
 	for (int i = 0; i < ENEMY_AMMOUNT; i++)
 	{
 		meleeEnemy[i] = NULL;
-	}
-	for (int i = 0; i < ENEMY_AMMOUNT; i++)
-	{
 		meleeEnemy[i] = new MeleeEnemy();
 	}
 	meleeEnemy[0]->setRecX(100);
@@ -71,9 +63,9 @@ Gameplay::~Gameplay()
 		if (meleeEnemy[i]) delete meleeEnemy[i];
 	}
 
-	if (camera) delete camera;
-
 	if (goal) delete goal;
+
+	if (camera) delete camera;
 }
 
 void Gameplay::update()
@@ -120,21 +112,21 @@ void Gameplay::update()
 							{
 							case Top:
 								aux = true;
-								meleeEnemy[i]->setRecY(platformGrid[y][x]->getRec().getPosition().y - meleeEnemy[i]->getRec().getSize().y);
+								meleeEnemy[i]->setRecY(platformGrid[y][x]->getUpperSide() - meleeEnemy[i]->getRec().getSize().y);
 								break;
 							case Right:
 								meleeEnemy[i]->setSpeed({ 0.0f, meleeEnemy[i]->getSpeed().y });
-								meleeEnemy[i]->setRecX(platformGrid[y][x]->getRec().getPosition().x + platformGrid[y][x]->getRec().getSize().x);
+								meleeEnemy[i]->setRecX(platformGrid[y][x]->getRightSide());
 								cout << "right" << endl;
 								break;
 							case Left:
 								meleeEnemy[i]->setSpeed({ 0.0f, meleeEnemy[i]->getSpeed().y });
-								meleeEnemy[i]->setRecX(platformGrid[y][x]->getRec().getPosition().x - meleeEnemy[i]->getRec().getSize().x);
+								meleeEnemy[i]->setRecX(platformGrid[y][x]->getLeftSide() - meleeEnemy[i]->getRec().getSize().x);
 								cout << "left" << endl;
 								break;
 							case Bottom:
 								meleeEnemy[i]->setSpeed({ meleeEnemy[i]->getSpeed().x, 0.0f });
-								meleeEnemy[i]->setRecY(platformGrid[y][x]->getRec().getPosition().y + platformGrid[y][x]->getRec().getSize().y);
+								meleeEnemy[i]->setRecY(platformGrid[y][x]->getBottomSide());
 							default:
 								break;
 							}
@@ -145,7 +137,7 @@ void Gameplay::update()
 
 			meleeEnemy[i]->setOnGround(aux);
 
-			if (meleeEnemy[i]->getRec().getPosition().y > SCREEN_HEIGHT)
+			if (meleeEnemy[i]->getUpperSide() > SCREEN_HEIGHT)
 			{
 				delete meleeEnemy[i];
 				meleeEnemy[i] = NULL;
@@ -153,8 +145,11 @@ void Gameplay::update()
 		}
 	}
 
-	camera->setCenter(player->getCenterX(), player->getCenterY() - SCREEN_HEIGHT / 4.0f);
-	Game::window->setView(*camera);
+	if (camera)
+	{
+		camera->setCenter(player->getCenterX(), player->getCenterY() - SCREEN_HEIGHT / 4.0f);
+		Game::window->setView(*camera);
+	}
 }
 
 void Gameplay::draw()
@@ -169,13 +164,15 @@ void Gameplay::draw()
 			}
 		}
 	}
-	Game::window->draw(player->getRec());
+
+	if (player) Game::window->draw(player->getRec());
+
 	for (int i = 0; i < ENEMY_AMMOUNT; i++)
 	{
-		if(meleeEnemy[i])Game::window->draw(meleeEnemy[i]->getRec());
+		if(meleeEnemy[i]) Game::window->draw(meleeEnemy[i]->getRec());
 	}
 
-	Game::window->draw(*goal);
+	if (goal) Game::window->draw(*goal);
 }
 
 float Gameplay::getCollisionMargin(float jumpingSpeed)
@@ -185,57 +182,65 @@ float Gameplay::getCollisionMargin(float jumpingSpeed)
 
 void Gameplay::checkGameplayColls()
 {
-	for (int y = 0; y < PLATFORM_GRID_HEIGHT; y++)
+	if (player)
 	{
-		for (int x = 0; x < PLATFORM_GRID_WIDTH; x++)
+		for (int y = 0; y < PLATFORM_GRID_HEIGHT; y++)
 		{
-			if (platformGrid[y][x])
+			for (int x = 0; x < PLATFORM_GRID_WIDTH; x++)
 			{
-				platformGrid[y][x]->setRelativePlayerJumpState(falling_relative);
-
-				if (player->colliding(platformGrid[y][x]->getRec()))
+				if (platformGrid[y][x])
 				{
-					switch (platformGrid[y][x]->checkSideProximity(player->getRec(), getCollisionMargin(player->getJumpingSpeed())))
+					platformGrid[y][x]->setRelativePlayerJumpState(falling_relative);
+
+					if (player->colliding(platformGrid[y][x]->getRec()))
 					{
-					case Top:
-						cout << "onground";
-						platformGrid[y][x]->setRelativePlayerJumpState(onGround_relative);
-						player->setJumpState(onGround);
-						player->setRecY(platformGrid[y][x]->getUpperSide() - player->getRec().getSize().y);
-						break;
-					case Bottom:
-						player->setSpeedY(0);
-						player->setRecY(platformGrid[y][x]->getBottomSide());
-						break;
-					case Right:
-						player->setSpeedX(0);
-						player->setRecX(platformGrid[y][x]->getRightSide());
-						break;
-					case Left:
-						player->setSpeedX(0);
-						player->setRecX(platformGrid[y][x]->getLeftSide() - player->getRec().getSize().x);
-						break;
+						switch (platformGrid[y][x]->checkSideProximity(player->getRec(), getCollisionMargin(player->getJumpingSpeed())))
+						{
+						case Top:
+							cout << "onground";
+							platformGrid[y][x]->setRelativePlayerJumpState(onGround_relative);
+							player->setJumpState(onGround);
+							player->setRecY(platformGrid[y][x]->getUpperSide() - player->getRec().getSize().y);
+							break;
+						case Bottom:
+							player->setSpeedY(0);
+							player->setRecY(platformGrid[y][x]->getBottomSide());
+							break;
+						case Right:
+							player->setSpeedX(0);
+							player->setRecX(platformGrid[y][x]->getRightSide());
+							break;
+						case Left:
+							player->setSpeedX(0);
+							player->setRecX(platformGrid[y][x]->getLeftSide() - player->getRec().getSize().x);
+							break;
+						}
 					}
 				}
 			}
 		}
-	}
-	
 
-	for (int i = 0; i < ENEMY_AMMOUNT; i++)
-	{
-		if (player->colliding(meleeEnemy[i]->getRec()))
+		for (int i = 0; i < ENEMY_AMMOUNT; i++)
 		{
-			Game::changeGamestate(gameOver_state);
+			if (meleeEnemy[i])
+			{
+				if (player->colliding(meleeEnemy[i]->getRec()))
+				{
+					Game::changeGamestate(gameOver_state);
+				}
+			}
 		}
-	}
 
-	if (player->colliding(*goal))
-	{
-		Game::changeGamestate(gameOver_state);
-	}
+		if (goal)
+		{
+			if (player->colliding(*goal))
+			{
+				Game::changeGamestate(gameOver_state);
+			}
+		}
 
-	player->checkScreenLimits();
+		player->checkScreenLimits();
+	}
 }
 
 void Gameplay::checkGameplayColls2(Platform* plat)
@@ -255,8 +260,11 @@ void Gameplay::checkGameplayColls2(Platform* plat)
 		}
 	}
 
-	if (player->fallingOffPlatform(plat) && OnAnyPlatform==false && player->getJumpState() != start)
+	if (player)
 	{
-		player->setJumpState(falling);
+		if (player->fallingOffPlatform(plat) && OnAnyPlatform == false && player->getJumpState() != start)
+		{
+			player->setJumpState(falling);
+		}
 	}
 }
