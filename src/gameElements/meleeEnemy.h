@@ -21,6 +21,7 @@ public:
 	~MeleeEnemy();
 	bool getChargingState();
 	void setChargingState(bool chargeState);
+	void updateCharginState();
 	TargetPos updateTargetPos(RectangleShape target);
 	void updateAwakeState(RectangleShape target);
 	void attack(RectangleShape target);

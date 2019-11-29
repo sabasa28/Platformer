@@ -99,6 +99,7 @@ void Gameplay::update()
 		if (meleeEnemy[i])
 		{
 			meleeEnemy[i]->updatePos(player->getRec());
+			meleeEnemy[i]->updateCharginState();
 
 			bool aux = false;
 			for (int y = 0; y < PLATFORM_GRID_HEIGHT; y++)

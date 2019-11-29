@@ -23,6 +23,14 @@ void MeleeEnemy::setChargingState(bool chargeState)
 	charging = chargeState;
 }
 
+void MeleeEnemy::updateCharginState() 
+{
+	if (Enemy::getSpeed().x == 0.0f && Enemy::getSpeed().y == 0.0f)
+	{
+		charging = false;
+	}
+}
+
 TargetPos MeleeEnemy::updateTargetPos(RectangleShape target)
 {
 	if (abs(Enemy::getRec().getPosition().x - target.getPosition().x) < alertDistance && (Enemy::getUpperSide() < target.getPosition().y + target.getSize().y / 2 && Enemy::getBottomSide() > target.getPosition().y + target.getSize().y / 2))
