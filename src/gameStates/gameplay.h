@@ -21,8 +21,7 @@ public:
 	void update();
 	void draw();
 	float getCollisionMargin(float jumpingSpeed);
-	void checkGameplayColls();
-	void checkGameplayColls2(Platform* plat);
+	void checkGameplayColls(Platform* plat[][PLATFORM_GRID_WIDTH]);
 };
 
 #endif //GAMEPLAY_H

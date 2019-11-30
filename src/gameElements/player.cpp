@@ -18,8 +18,8 @@ Player::Player()
 	movement.left = false;
 	rectangle.setSize({ static_cast<float>(PLAYER_SIZE), static_cast<float>(PLAYER_SIZE) });
 	rectangle.setFillColor(Color::Blue);
-	rectangle.setPosition(PLATFORM_SIZE + PLAYER_SIZE, static_cast<float>(SCREEN_HEIGHT - PLATFORM_SIZE - rectangle.getSize().y));
-	jumpState = onGround;
+	rectangle.setPosition(PLATFORM_SIZE + PLAYER_SIZE/2, static_cast<float>(SCREEN_HEIGHT - PLATFORM_SIZE - rectangle.getSize().y));
+	jumpState = falling;
 	jumping = false;
 }
 

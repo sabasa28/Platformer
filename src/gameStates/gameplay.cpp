@@ -12,17 +12,32 @@ Gameplay::Gameplay()
 
 			switch (y)
 			{
-			case 0: if (x == 3)
-				platformGrid[y][x] = new Platform(x, y); break;
-			case 1: if (x == 5)
-				platformGrid[y][x] = new Platform(x, y); break;
-			case 2: if (x == 2 || x == 7)
-				platformGrid[y][x] = new Platform(x, y); break;
-			case 3: if (x >= 0 && x < 6)
-				platformGrid[y][x] = new Platform(x, y); break;
-			case 4: break;
-			case 5: if (x >= 0 && x < PLATFORM_GRID_WIDTH)
-				platformGrid[y][x] = new Platform(x, y); break;
+			case 1: 
+				if (x == 5)
+				{
+					platformGrid[y][x] = new Platform(x, y);
+				}
+				break;
+			case 2: 
+				if (x == 1)
+				{
+					platformGrid[y][x] = new Platform(x, y);
+				}
+				break;
+			case 3:
+				if (x==4)
+				{
+					platformGrid[y][x] = new Platform(x, y);
+				}
+				break;
+
+			case 6:
+				if (x==1)
+				{
+					platformGrid[y][x] = new Platform(x, y);
+				}
+				break;
+			
 			default: break;
 			}
 		}
@@ -39,7 +54,7 @@ Gameplay::Gameplay()
 	meleeEnemy[1]->setRecX(400);
 
 	goal = new RectangleShape({ 50, 50 });
-	goal->setPosition({ PLATFORM_SIZE * 10, PLATFORM_SIZE * (PLATFORM_GRID_HEIGHT - 1) - goal->getGlobalBounds().height });
+	goal->setPosition({ PLATFORM_SIZE * 10, PLATFORM_SIZE * (6 - 1) - goal->getGlobalBounds().height });
 	goal->setFillColor(Color::Yellow);
 
 	camera = new View({ player->getCenterX(), player->getCenterY() - SCREEN_HEIGHT / 4.0f }, { static_cast<float>(SCREEN_WIDTH), static_cast<float>(SCREEN_HEIGHT) });
@@ -78,18 +93,7 @@ void Gameplay::update()
 		player->checkKeyReleasedInput();
 		player->updatePosition();
 
-		checkGameplayColls();
-
-		for (int y = 0; y < PLATFORM_GRID_HEIGHT; y++)
-		{
-			for (int x = 0; x < PLATFORM_GRID_WIDTH; x++)
-			{
-				if (platformGrid[y][x])
-				{
-					checkGameplayColls2(platformGrid[y][x]);
-				}
-			}
-		}
+		checkGameplayColls(platformGrid);
 
 		player->updateMovement();
 	}
@@ -119,12 +123,10 @@ void Gameplay::update()
 							case Right:
 								meleeEnemy[i]->setSpeed({ 0.0f, meleeEnemy[i]->getSpeed().y });
 								meleeEnemy[i]->setRecX(platformGrid[y][x]->getRightSide());
-								cout << "right" << endl;
 								break;
 							case Left:
 								meleeEnemy[i]->setSpeed({ 0.0f, meleeEnemy[i]->getSpeed().y });
 								meleeEnemy[i]->setRecX(platformGrid[y][x]->getLeftSide() - meleeEnemy[i]->getRec().getSize().x);
-								cout << "left" << endl;
 								break;
 							case Bottom:
 								meleeEnemy[i]->setSpeed({ meleeEnemy[i]->getSpeed().x, 0.0f });
@@ -171,7 +173,7 @@ void Gameplay::draw()
 
 	for (int i = 0; i < ENEMY_AMMOUNT; i++)
 	{
-		if(meleeEnemy[i]) Game::window->draw(meleeEnemy[i]->getRec());
+		if (meleeEnemy[i]) Game::window->draw(meleeEnemy[i]->getRec());
 	}
 
 	if (goal) Game::window->draw(*goal);
@@ -182,8 +184,9 @@ float Gameplay::getCollisionMargin(float jumpingSpeed)
 	return jumpingSpeed / 3;
 }
 
-void Gameplay::checkGameplayColls()
+void Gameplay::checkGameplayColls(Platform* plat[][PLATFORM_GRID_WIDTH])
 {
+
 	if (player)
 	{
 		for (int y = 0; y < PLATFORM_GRID_HEIGHT; y++)
@@ -199,7 +202,6 @@ void Gameplay::checkGameplayColls()
 						switch (platformGrid[y][x]->checkSideProximity(player->getRec(), getCollisionMargin(player->getJumpingSpeed())))
 						{
 						case Top:
-							cout << "onground";
 							platformGrid[y][x]->setRelativePlayerJumpState(onGround_relative);
 							player->setJumpState(onGround);
 							player->setRecY(platformGrid[y][x]->getUpperSide() - player->getRec().getSize().y);
@@ -240,13 +242,8 @@ void Gameplay::checkGameplayColls()
 				Game::changeGamestate(victory_state);
 			}
 		}
-
-		player->checkScreenLimits();
 	}
-}
 
-void Gameplay::checkGameplayColls2(Platform* plat)
-{
 	bool OnAnyPlatform = false;
 	for (int y = 0; y < PLATFORM_GRID_HEIGHT; y++)
 	{
@@ -262,11 +259,21 @@ void Gameplay::checkGameplayColls2(Platform* plat)
 		}
 	}
 
-	if (player)
+	for (int y = 0; y < PLATFORM_GRID_HEIGHT; y++)
 	{
-		if (player->fallingOffPlatform(plat) && OnAnyPlatform == false && player->getJumpState() != start)
+		for (int x = 0; x < PLATFORM_GRID_WIDTH; x++)
 		{
-			player->setJumpState(falling);
+			if (platformGrid[y][x])
+			{
+				if (player)
+				{
+					if (player->fallingOffPlatform(plat[y][x]) && OnAnyPlatform == false && player->getJumpState() != start)
+					{
+						player->setJumpState(falling);
+					}
+				}
+			}
 		}
 	}
+
 }

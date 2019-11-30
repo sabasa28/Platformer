@@ -6,7 +6,7 @@
 using namespace sf;
 
 const int PLATFORM_GRID_WIDTH = 50;
-const int PLATFORM_GRID_HEIGHT = 6;
+const int PLATFORM_GRID_HEIGHT = 50;
 const int PLATFORM_SIZE = 100;
 
 enum NearestSide
