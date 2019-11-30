@@ -13,6 +13,17 @@ Enemy::Enemy()
 	onGround = false;
 }
 
+Enemy::Enemy(Vector2f pos)
+{
+	alive = true;
+	awake = false;
+	rectangle.setSize({ 50, 50 });
+	rectangle.setFillColor(Color::Red);
+	rectangle.setPosition(pos.x, pos.y);
+	speed = { 0.0f, 0.0f };
+	onGround = false;
+}
+
 Enemy::~Enemy()
 {
 }

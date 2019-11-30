@@ -18,6 +18,7 @@ private:
 	bool onGround;
 public:
 	Enemy();
+	Enemy(Vector2f pos);
 	~Enemy();
 	bool getAlive();
 	bool getAwake();

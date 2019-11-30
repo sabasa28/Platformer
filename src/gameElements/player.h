@@ -30,8 +30,8 @@ private:
 	Vector2f speed;
 	bool jumping;
 	JumpState jumpState;
-	float jumpingSpeed = 25;
-	float movingSpeed = 10;
+	float jumpingSpeed = 20.0f;
+	float movingSpeed = 10.0f;
 	float gravity = 0.75f;
 	Movement movement;
 

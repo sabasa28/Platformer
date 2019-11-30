@@ -9,6 +9,11 @@ MeleeEnemy::MeleeEnemy()
 	charging = false;
 }
 
+MeleeEnemy::MeleeEnemy(Vector2f pos):Enemy(pos)
+{
+	charging = false;
+}
+
 MeleeEnemy::~MeleeEnemy()
 {
 }

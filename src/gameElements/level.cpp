@@ -13,7 +13,7 @@ float lowestDistance;
 Platform::Platform(int x, int y)
 {
 	rectangle.setSize({ static_cast<float>(PLATFORM_SIZE), static_cast<float>(PLATFORM_SIZE) });
-	rectangle.setPosition({ static_cast<float>(PLATFORM_SIZE) * x, static_cast<float>(PLATFORM_SIZE) * y });
+	rectangle.setPosition({ static_cast<float>(PLATFORM_SIZE) * x, PLATFORM_MIN_Y_POS - static_cast<float>(PLATFORM_SIZE) * y });
 	rectangle.setFillColor(Color::White);
 	relativePlayerJumpsState = falling_relative;
 }

@@ -12,32 +12,109 @@ Gameplay::Gameplay()
 
 			switch (y)
 			{
-			case 1: 
-				if (x == 5)
-				{
-					platformGrid[y][x] = new Platform(x, y);
-				}
-				break;
-			case 2: 
+			case 2:
 				if (x == 1)
 				{
 					platformGrid[y][x] = new Platform(x, y);
 				}
 				break;
-			case 3:
-				if (x==4)
+			case 4:
+				if (x == 4)
+				{
+					platformGrid[y][x] = new Platform(x, y);
+				}
+				break;
+			case 5:
+				if (x == 8)
+				{
+					platformGrid[y][x] = new Platform(x, y);
+				}
+				break;
+			case 6:
+				if (x == 2)
+				{
+					platformGrid[y][x] = new Platform(x, y);
+				}
+				break;
+			case 8:
+				if (x == 4)
+				{
+					platformGrid[y][x] = new Platform(x, y);
+				}
+				break;
+			case 9:
+				if (x == 9)
+				{
+					platformGrid[y][x] = new Platform(x, y);
+				}
+				break;
+			case 11:
+				if (x == 9)
+				{
+					platformGrid[y][x] = new Platform(x, y);
+				}
+				break;
+			case 12:
+				if (x == 6)
+				{
+					platformGrid[y][x] = new Platform(x, y);
+				}
+				break;
+			case 14:
+				if (x == 2)
+				{
+					platformGrid[y][x] = new Platform(x, y);
+				}
+				if (x == 9)
+				{
+					platformGrid[y][x] = new Platform(x, y);
+				}
+				break;
+			case 15:
+				if (x == 15)
+				{
+					platformGrid[y][x] = new Platform(x, y);
+				}
+				if (x == 16)
+				{
+					platformGrid[y][x] = new Platform(x, y);
+				}
+				if (x == 17)
+				{
+					platformGrid[y][x] = new Platform(x, y);
+				}
+				break;
+			case 16:
+				if (x == 4)
+				{
+					platformGrid[y][x] = new Platform(x, y);
+				}
+				if (x == 14)
+				{
+					platformGrid[y][x] = new Platform(x, y);
+				}
+				if (x == 18)
+				{
+					platformGrid[y][x] = new Platform(x, y);
+				}
+				break;
+			case 17:
+				if (x == 4)
+				{
+					platformGrid[y][x] = new Platform(x, y);
+				}
+				break;
+			case 19:
+				if (x == 15)
+				{
+					platformGrid[y][x] = new Platform(x, y);
+				}
+				if (x == 17)
 				{
 					platformGrid[y][x] = new Platform(x, y);
 				}
 				break;
 
-			case 6:
-				if (x==1)
-				{
-					platformGrid[y][x] = new Platform(x, y);
-				}
-				break;
-			
 			default: break;
 			}
 		}
@@ -48,16 +125,17 @@ Gameplay::Gameplay()
 	for (int i = 0; i < ENEMY_AMMOUNT; i++)
 	{
 		meleeEnemy[i] = NULL;
-		meleeEnemy[i] = new MeleeEnemy();
 	}
-	meleeEnemy[0]->setRecX(100);
-	meleeEnemy[1]->setRecX(400);
+
+	meleeEnemy[0] = new MeleeEnemy({ 400.0f, -200.0f });
+	meleeEnemy[1] = new MeleeEnemy({ 400.0f, 100.0f });
+	meleeEnemy[2] = new MeleeEnemy({ 900.0f, -800.0f });
 
 	goal = new RectangleShape({ 50, 50 });
-	goal->setPosition({ PLATFORM_SIZE * 10, PLATFORM_SIZE * (6 - 1) - goal->getGlobalBounds().height });
+	goal->setPosition({ 1600.0f + goal->getGlobalBounds().width/2 , -1000.0f });
 	goal->setFillColor(Color::Yellow);
 
-	camera = new View({ player->getCenterX(), player->getCenterY() - SCREEN_HEIGHT / 4.0f }, { static_cast<float>(SCREEN_WIDTH), static_cast<float>(SCREEN_HEIGHT) });
+	camera = new View({ player->getCenterX(), player->getCenterY() - SCREEN_HEIGHT / 6.0f }, { static_cast<float>(SCREEN_WIDTH), static_cast<float>(SCREEN_HEIGHT) });
 	Game::window->setView(*camera);
 }
 
@@ -151,7 +229,7 @@ void Gameplay::update()
 
 	if (camera)
 	{
-		camera->setCenter(player->getCenterX(), player->getCenterY() - SCREEN_HEIGHT / 4.0f);
+		camera->setCenter(player->getCenterX(), player->getCenterY() - SCREEN_HEIGHT / 8.0f);
 		Game::window->setView(*camera);
 	}
 }

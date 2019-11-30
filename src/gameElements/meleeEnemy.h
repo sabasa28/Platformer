@@ -18,6 +18,7 @@ private:
 	const float alertDistance = 200.0f;
 public:
 	MeleeEnemy();
+	MeleeEnemy(Vector2f pos);
 	~MeleeEnemy();
 	bool getChargingState();
 	void setChargingState(bool chargeState);
