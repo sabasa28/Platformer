@@ -11,10 +11,18 @@ GameOver::GameOver()
 
 	textRows[0] = new DisplayText("GAME OVER", true, SCREEN_HEIGHT / 2 - MENU_TEXT_SPACING / 2);
 	textRows[1] = new DisplayText("Press 'Enter' to return to menu", true, textRows[0]->getUpperSide() + GAME_OVER_TEXT_SPACING);
+
+	Game::interfaceMusic.play();
 }
 
 GameOver::~GameOver()
 {
+	for (int i = 0; i < GAME_OVER_TEXT_ROWS_AMOUNT; i++)
+	{
+		if (textRows[i]) delete textRows[i];
+	}
+
+	if(Game::currentGameState!=menu_state) Game::interfaceMusic.stop();
 }
 
 void GameOver::checkKeyDownInput()
@@ -26,7 +34,7 @@ void GameOver::checkKeyDownInput()
 		if (!Game::getGameStateInputActive())
 		{
 			Game::setGameStateInputActive(true);
-			Game::changeGamestate(menu_state);
+			Game::currentGameState = menu_state;
 		}
 	}
 	else

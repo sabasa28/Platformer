@@ -9,6 +9,8 @@ Menu::Menu()
 		buttons[i] = NULL;
 	}
 
+	if (Game::interfaceMusic.getStatus()!= Music::Playing) Game::interfaceMusic.play();
+
 	buttons[0] = new Button("Press 'Enter' to play", true, SCREEN_HEIGHT / 2 - MENU_TEXT_SPACING / 2);
 	buttons[1] = new Button("Press 'C' to see the credits", true, buttons[0]->getUpperSide() + MENU_TEXT_SPACING);
 	buttons[2] = new Button("Press 'Escape' to exit", true, buttons[1]->getUpperSide() + MENU_TEXT_SPACING);
@@ -16,6 +18,7 @@ Menu::Menu()
 
 Menu::~Menu()
 {
+	if (Game::currentGameState==gameplay_state)Game::interfaceMusic.stop();
 	for (int i = 0; i < MENU_BUTTON_AMOUNT; i++)
 	{
 		if (buttons[i])
@@ -34,7 +37,7 @@ void Menu::checkKeyDownInput()
 		if (!Game::getGameStateInputActive())
 		{
 			Game::setGameStateInputActive(true);
-			Game::changeGamestate(gameplay_state);
+			Game::currentGameState=gameplay_state;
 		}
 	}
 	else
@@ -47,7 +50,7 @@ void Menu::checkKeyDownInput()
 
 	if (Keyboard::isKeyPressed(Keyboard::C))
 	{
-		Game::changeGamestate(credits_state);
+		Game::currentGameState=credits_state;
 	}
 
 	if (Keyboard::isKeyPressed(Keyboard::Escape))

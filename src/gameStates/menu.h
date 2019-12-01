@@ -1,7 +1,7 @@
 #ifndef MENU_H
 #define MENU_H
 
-#include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 
 #include "uiElements/button.h"
 
@@ -13,6 +13,7 @@ const int MENU_TEXT_SPACING = 70;
 class Menu
 {
 	Button* buttons[MENU_BUTTON_AMOUNT];
+	RectangleShape rec;
 
 public:
 	Menu();

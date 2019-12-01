@@ -8,6 +8,8 @@ GameState Game::currentGameState = menu_state;
 bool Game::gameStateInputActive = false;
 RenderWindow* Game::window = NULL;
 Font Game::generalFont;
+Music Game::interfaceMusic;
+Music Game::gameplayMusic;
 
 Game::Game()
 {
@@ -22,6 +24,14 @@ Game::Game()
 	gameStateInputActive = false;
 
 	generalFont.loadFromFile("fonts/aescrawl.ttf");
+
+	interfaceMusic.openFromFile("music/santi_song.ogg");
+	interfaceMusic.setLoop(true);
+
+	gameplayMusic.openFromFile("music/Friendly_Fire.ogg");
+	gameplayMusic.setVolume(50);
+	gameplayMusic.setLoop(true);
+
 }
 
 Game::~Game()
@@ -52,6 +62,16 @@ void Game::update()
 		{
 			delete gameover;
 			gameover = NULL;
+		}
+		if (victory)
+		{
+			delete victory;
+			victory = NULL;
+		}
+		if (credits)
+		{
+			delete credits;
+			credits = NULL;
 		}
 
 		if (!menu) menu = new Menu();
@@ -137,11 +157,6 @@ void Game::execute()
 		update();
 		draw();
 	}
-}
-
-void Game::changeGamestate(GameState newGamestate)
-{
-	currentGameState = newGamestate;
 }
 
 void Game::setGameStateInputActive(bool state)

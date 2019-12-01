@@ -139,6 +139,8 @@ Gameplay::Gameplay()
 
 	camera = new View({ player->getCenterX(), player->getCenterY() - SCREEN_HEIGHT / 6.0f }, { static_cast<float>(SCREEN_WIDTH), static_cast<float>(SCREEN_HEIGHT) });
 	Game::window->setView(*camera);
+
+	Game::gameplayMusic.play();
 }
 
 Gameplay::~Gameplay()
@@ -162,6 +164,8 @@ Gameplay::~Gameplay()
 
 	if (camera) delete camera;
 	Game::window->setView(Game::window->getDefaultView());
+
+	Game::gameplayMusic.stop();
 }
 
 void Gameplay::update()
@@ -316,7 +320,7 @@ void Gameplay::checkGameplayColls(Platform* plat[][PLATFORM_GRID_WIDTH])
 			{
 				if (player->colliding(meleeEnemy[i]->getRec()))
 				{
-					Game::changeGamestate(gameOver_state);
+					Game::currentGameState=gameOver_state;
 				}
 			}
 		}
@@ -325,7 +329,7 @@ void Gameplay::checkGameplayColls(Platform* plat[][PLATFORM_GRID_WIDTH])
 		{
 			if (player->colliding(*goal))
 			{
-				Game::changeGamestate(victory_state);
+				Game::currentGameState=victory_state;
 			}
 		}
 	}

@@ -11,10 +11,13 @@ Victory::Victory()
 
 	textRows[0] = new DisplayText("YOU WON!", true, SCREEN_HEIGHT / 2 - VICTORY_TEXT_SPACING / 2);
 	textRows[1] = new DisplayText("Press 'Enter' to return to menu", true, textRows[0]->getUpperSide() + VICTORY_TEXT_SPACING);
+	
+	Game::interfaceMusic.play();
 }
 
 Victory::~Victory()
 {
+	if(Game::currentGameState!=menu_state)Game::interfaceMusic.stop();
 }
 
 void Victory::checkKeyDownInput()
@@ -26,7 +29,7 @@ void Victory::checkKeyDownInput()
 		if (!Game::getGameStateInputActive())
 		{
 			Game::setGameStateInputActive(true);
-			Game::changeGamestate(menu_state);
+			Game::currentGameState=menu_state;
 		}
 	}
 	else

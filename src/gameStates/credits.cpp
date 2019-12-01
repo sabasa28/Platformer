@@ -8,7 +8,6 @@ Credits::Credits()
 	{
 		textRows[i] = NULL;
 	}
-
 	textRows[0] = new DisplayText("aca van a estar los creditos xd", true, SCREEN_HEIGHT / 2 - CREDITS_TEXT_SPACING / 2);
 	textRows[1] = new DisplayText("Press 'Enter' to return to menu", true, textRows[0]->getUpperSide() + CREDITS_TEXT_SPACING);
 }
@@ -26,7 +25,7 @@ void Credits::checkKeyDownInput()
 		if (!Game::getGameStateInputActive())
 		{
 			Game::setGameStateInputActive(true);
-			Game::changeGamestate(menu_state);
+			Game::currentGameState=menu_state;
 		}
 	}
 	else

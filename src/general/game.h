@@ -2,6 +2,7 @@
 #define GAME_H
 
 #include <iostream>
+#include <SFML/Audio.hpp>
 
 #include "gameStates/menu.h"
 #include "gameStates/credits.h"
@@ -26,7 +27,6 @@ enum GameState
 
 class Game
 {
-	static GameState currentGameState;
 
 	Menu* menu;
 	Credits* credits;
@@ -41,13 +41,15 @@ class Game
 	void draw();
 
 public:
+	static GameState currentGameState;
 	static RenderWindow* window;
 	static Font generalFont;
+	static Music interfaceMusic;
+	static Music gameplayMusic;
 
 	Game();
 	~Game();
 	void execute();
-	static void changeGamestate(GameState newGamestate);
 	static void setGameStateInputActive(bool state);
 	static bool getGameStateInputActive();
 };
