@@ -21,7 +21,7 @@ Game::Game()
 	victory = NULL;
 	gameStateInputActive = false;
 
-	generalFont.loadFromFile("assets/fonts/aescrawl.ttf");
+	generalFont.loadFromFile("fonts/aescrawl.ttf");
 }
 
 Game::~Game()

@@ -6,21 +6,28 @@
 
 #include <cmath>
 
-const int PLAYER_SIZE = 50;
-
 float disToPlat1;
 float disToPlat2;
 
 Player::Player()
 {
-	speed = { 0,0 };
-	movement.right = false;
-	movement.left = false;
 	rectangle.setSize({ static_cast<float>(PLAYER_SIZE), static_cast<float>(PLAYER_SIZE) });
 	rectangle.setFillColor(Color::Blue);
 	rectangle.setPosition(PLATFORM_SIZE + PLAYER_SIZE/2, static_cast<float>(SCREEN_HEIGHT - PLATFORM_SIZE - rectangle.getSize().y));
-	jumpState = falling;
+	texture.loadFromFile("images/adventurer_spritesheet.png");
+	textureRect = new IntRect(0, 0, PLAYER_SPRITE_SIZE, PLAYER_SPRITE_SIZE);
+	sprite.setTexture(texture);
+	sprite.setTextureRect(*textureRect);
+	sprite.setPosition(rectangle.getPosition().x - (PLAYER_SPRITE_SIZE - PLAYER_SIZE) / 2, rectangle.getPosition().y - 60);
+	timer = timer.Zero;
+	currentAction = standing_action;
+	lastFrameAction = standing_action;
+	movement.right = false;
+	movement.left = false;
+	facingRight = true;
+	speed = { 0,0 };
 	jumping = false;
+	jumpState = falling;
 }
 
 Player::~Player()
@@ -77,14 +84,39 @@ Vector2f Player::getSpeed()
 	return speed;
 }
 
-float Player::getSpeedY()
-{
-	return speed.y;
-}
-
 RectangleShape Player::getRec()
 {
 	return rectangle;
+}
+
+Sprite Player::getSprite()
+{
+	return sprite;
+}
+
+void Player::setCurrentAction(Action action)
+{
+	currentAction = action;
+}
+
+Action Player::getCurrentAction()
+{
+	return currentAction;
+}
+
+void Player::setLastFrameAction(Action action)
+{
+	lastFrameAction = action;
+}
+
+Action Player::getLastFrameAction()
+{
+	return lastFrameAction;
+}
+
+float Player::getSpeedY()
+{
+	return speed.y;
 }
 
 JumpState Player::getJumpState()
@@ -102,10 +134,28 @@ void Player::checkKeyPressedInput()
 	if (Keyboard::isKeyPressed(Keyboard::Right))
 	{
 		setMoveRight(true);
+		setFacingRight(true);
+		if (getJumpState() == onGround)
+		{
+			setCurrentAction(walking_action);
+		}
 	}
+	else
+	{
+		if (getJumpState() == onGround)
+		{
+			setCurrentAction(standing_action);
+		}
+	}
+
 	if (Keyboard::isKeyPressed(Keyboard::Left))
 	{
 		setMoveLeft(true);
+		setFacingRight(false);
+		if (getJumpState() == onGround)
+		{
+			setCurrentAction(walking_action);
+		}
 	}
 }
 
@@ -117,9 +167,11 @@ void Player::checkKeyDownInput()
 	{
 		Game::window->close();
 	}
+
 	if (Keyboard::isKeyPressed(Keyboard::Space))
 	{
 		jump();
+		setCurrentAction(Action::jumping_action);
 	}
 
 	Game::window->setKeyRepeatEnabled(true);
@@ -127,11 +179,12 @@ void Player::checkKeyDownInput()
 
 void Player::checkKeyReleasedInput()
 {
-	if (!Keyboard::isKeyPressed (Keyboard::Right))
+	if (!Keyboard::isKeyPressed(Keyboard::Right))
 	{
 		setMoveRight(false);
 	}
-	if (!Keyboard::isKeyPressed (Keyboard::Left))
+
+	if (!Keyboard::isKeyPressed(Keyboard::Left))
 	{
 		setMoveLeft(false);
 	}
@@ -145,6 +198,16 @@ void Player::setMoveRight(bool state)
 void Player::setMoveLeft(bool state)
 {
 	movement.left = state;
+}
+
+void Player::setFacingRight(bool state)
+{
+	facingRight = state;
+}
+
+bool Player::getFacingRight()
+{
+	return facingRight;
 }
 
 void Player::jump()
@@ -283,4 +346,109 @@ float Player::getCenterX()
 float Player::getCenterY()
 {
 	return getUpperSide() + rectangle.getSize().y / 2;
+}
+
+void Player::updateSprite()
+{
+	//cout << timer.asMilliseconds() << endl;
+
+	switch (currentAction)
+	{
+	case standing_action:
+		if (facingRight)
+		{
+			if (lastFrameAction != standing_action)
+			{
+				textureRect = new IntRect(0, 0, PLAYER_SPRITE_SIZE, PLAYER_SPRITE_SIZE);
+				sprite.setTextureRect(*textureRect);
+				sprite.setScale(1, 1);
+			}
+
+			sprite.setPosition(rectangle.getPosition().x - (PLAYER_SPRITE_SIZE - PLAYER_SIZE) / 2, rectangle.getPosition().y - 60);
+		}
+		else
+		{
+			if (lastFrameAction != standing_action)
+			{
+				textureRect = new IntRect(0, 0, PLAYER_SPRITE_SIZE, PLAYER_SPRITE_SIZE);
+				sprite.setTextureRect(*textureRect);
+				sprite.setScale(-1, 1);
+			}
+
+			sprite.setPosition(rectangle.getPosition().x + (PLAYER_SPRITE_SIZE + PLAYER_SIZE) / 2, rectangle.getPosition().y - 60);
+		}
+		break;
+	case walking_action:
+		if (facingRight)
+		{
+			if (lastFrameAction != walking_action)
+			{
+				clock.restart().Zero;
+
+				textureRect = new IntRect(0, PLAYER_SPRITE_SIZE, PLAYER_SPRITE_SIZE, PLAYER_SPRITE_SIZE * 2);
+				sprite.setTextureRect(*textureRect);
+				sprite.setScale(1, 1);
+			}
+
+			timer = clock.getElapsedTime();
+			sprite.setPosition(rectangle.getPosition().x - (PLAYER_SPRITE_SIZE - PLAYER_SIZE) / 2, rectangle.getPosition().y - 60);
+		}
+		else
+		{
+			if (lastFrameAction != walking_action)
+			{
+				clock.restart().Zero;
+
+				textureRect = new IntRect(0, PLAYER_SPRITE_SIZE, PLAYER_SPRITE_SIZE, PLAYER_SPRITE_SIZE * 2);
+				sprite.setTextureRect(*textureRect);
+				sprite.setScale(-1, 1);
+			}
+
+			timer = clock.getElapsedTime();
+			sprite.setPosition(rectangle.getPosition().x + (PLAYER_SPRITE_SIZE + PLAYER_SIZE) / 2, rectangle.getPosition().y - 60);
+		}
+
+		if (timer >= milliseconds(125))
+		{
+			if (textureRect->left == 0)
+			{
+				textureRect = new IntRect(PLAYER_SPRITE_SIZE, PLAYER_SPRITE_SIZE, PLAYER_SPRITE_SIZE * 2, PLAYER_SPRITE_SIZE * 2);
+				sprite.setTextureRect(*textureRect);
+				clock.restart().Zero;
+				cout << "sprite 1" << endl;
+			}
+			else
+			{
+				textureRect = new IntRect(0, PLAYER_SPRITE_SIZE, PLAYER_SPRITE_SIZE, PLAYER_SPRITE_SIZE * 2);
+				sprite.setTextureRect(*textureRect);
+				clock.restart().Zero;
+				cout << "sprite 2" << endl;
+			}
+		}
+		break;
+	case jumping_action:
+		if (facingRight)
+		{
+			if (lastFrameAction != jumping_action)
+			{
+				textureRect = new IntRect(PLAYER_SPRITE_SIZE, 0, PLAYER_SPRITE_SIZE * 2, PLAYER_SPRITE_SIZE);
+				sprite.setTextureRect(*textureRect);
+			}
+
+			sprite.setScale(1, 1);
+			sprite.setPosition(rectangle.getPosition().x - (PLAYER_SPRITE_SIZE - PLAYER_SIZE) / 2, rectangle.getPosition().y - 60);
+		}
+		else
+		{
+			if (lastFrameAction != jumping_action)
+			{
+				textureRect = new IntRect(PLAYER_SPRITE_SIZE, 0, PLAYER_SPRITE_SIZE * 2, PLAYER_SPRITE_SIZE);
+				sprite.setTextureRect(*textureRect);
+			}
+
+			sprite.setScale(-1, 1);
+			sprite.setPosition(rectangle.getPosition().x + (PLAYER_SPRITE_SIZE + PLAYER_SIZE) / 2, rectangle.getPosition().y - 60);
+		}
+		break;
+	}
 }

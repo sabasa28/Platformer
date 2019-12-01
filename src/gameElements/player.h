@@ -7,12 +7,21 @@
 
 using namespace sf;
 
+const int PLAYER_SIZE = 50;
+const int PLAYER_SPRITE_SIZE = 128;
 const  float MAXIMUM_SPEED = 20.0f;
 
 struct Movement
 {
 	bool right;
 	bool left;
+};
+
+enum Action
+{
+	standing_action,
+	walking_action,
+	jumping_action
 };
 
 enum JumpState
@@ -25,15 +34,22 @@ enum JumpState
 
 class Player
 {
-private:
 	RectangleShape rectangle;
+	Texture texture;
+	IntRect* textureRect;
+	Sprite sprite;
+	Clock clock;
+	Time timer;
+	Action currentAction;
+	Action lastFrameAction;
+	Movement movement;
+	bool facingRight;
 	Vector2f speed;
+	float movingSpeed = 10.0f;
 	bool jumping;
 	JumpState jumpState;
 	float jumpingSpeed = 20.0f;
-	float movingSpeed = 10.0f;
 	float gravity = 0.75f;
-	Movement movement;
 
 public:
 	Player();
@@ -48,8 +64,13 @@ public:
 	void setSpeedY(float y);
 	float getSpeedX();
 	float getSpeedY();
-	Vector2f getSpeed();
 	RectangleShape getRec();
+	Sprite getSprite();
+	void setCurrentAction(Action action);
+	Action getCurrentAction();
+	void setLastFrameAction(Action action);
+	Action getLastFrameAction();
+	Vector2f getSpeed();
 	JumpState getJumpState();
 	float getJumpingSpeed();
 	void checkKeyPressedInput();
@@ -57,6 +78,8 @@ public:
 	void checkKeyReleasedInput();
 	void setMoveRight(bool state);
 	void setMoveLeft(bool state);
+	void setFacingRight(bool state);
+	bool getFacingRight();
 	void jump();
 	void setJumpState(JumpState state);
 	void updateMovement();
@@ -70,6 +93,7 @@ public:
 	float getRightSide();
 	float getCenterX();
 	float getCenterY();
+	void updateSprite();
 };
 
 #endif //PLAYER_H

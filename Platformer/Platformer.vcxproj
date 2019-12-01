@@ -126,7 +126,7 @@
       <SubSystem>Console</SubSystem>
     </Link>
     <PostBuildEvent>
-      <Command>"$(SolutionDir)tools\post compilation-d.bat" "$(OutDir)" "$(SolutionDir)libs\SFML-2.5.1\bin\openal32.dll" "$(SolutionDir)libs\SFML-2.5.1\bin\*-d*" "$(SolutionDir)res"</Command>
+      <Command>"$(SolutionDir)tools\post compilation-d.bat" "$(OutDir)" "$(SolutionDir)libs\SFML-2.5.1\bin\openal32.dll" "$(SolutionDir)libs\SFML-2.5.1\bin\*-d*" "$(SolutionDir)res\assets"</Command>
     </PostBuildEvent>
     <PreBuildEvent>
       <Command>
@@ -163,7 +163,7 @@
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
     <PostBuildEvent>
-      <Command>"$(SolutionDir)tools\post compilation.bat" "$(OutDir)" "$(SolutionDir)tools" "$(SolutionDir)libs\SFML-2.5.1\bin" "$(SolutionDir)res"</Command>
+      <Command>"$(SolutionDir)tools\post compilation.bat" "$(OutDir)" "$(SolutionDir)tools" "$(SolutionDir)libs\SFML-2.5.1\bin" "$(SolutionDir)res\assets"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

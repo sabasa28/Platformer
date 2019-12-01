@@ -44,10 +44,12 @@ void Menu::checkKeyDownInput()
 			Game::setGameStateInputActive(false);
 		}
 	}
+
 	if (Keyboard::isKeyPressed(Keyboard::C))
 	{
 		Game::changeGamestate(credits_state);
 	}
+
 	if (Keyboard::isKeyPressed(Keyboard::Escape))
 	{
 		Game::window->close();

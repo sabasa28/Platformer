@@ -9,11 +9,12 @@ Gameplay::Gameplay()
 		for (int x = 0; x < PLATFORM_GRID_WIDTH; x++)
 		{
 			platformGrid[y][x] = NULL;
-
+			
 			switch (y)
 			{
 			case 2:
-				if (x == 1)
+				if (x >= 1)
+				//if (x == 1)
 				{
 					platformGrid[y][x] = new Platform(x, y);
 				}
@@ -110,6 +111,7 @@ Gameplay::Gameplay()
 					platformGrid[y][x] = new Platform(x, y);
 				}
 				if (x == 17)
+				if (x > 14 && x < 20)
 				{
 					platformGrid[y][x] = new Platform(x, y);
 				}
@@ -166,6 +168,7 @@ void Gameplay::update()
 {
 	if (player)
 	{
+		player->setLastFrameAction(player->getCurrentAction());
 		player->checkKeyPressedInput();
 		player->checkKeyDownInput();
 		player->checkKeyReleasedInput();
@@ -174,6 +177,7 @@ void Gameplay::update()
 		checkGameplayColls(platformGrid);
 
 		player->updateMovement();
+		player->updateSprite();
 	}
 
 	for (int i = 0; i < ENEMY_AMMOUNT; i++)
@@ -247,7 +251,11 @@ void Gameplay::draw()
 		}
 	}
 
-	if (player) Game::window->draw(player->getRec());
+	if (player) 
+	{
+		Game::window->draw(player->getRec());
+		Game::window->draw(player->getSprite());
+	}
 
 	for (int i = 0; i < ENEMY_AMMOUNT; i++)
 	{
@@ -353,5 +361,4 @@ void Gameplay::checkGameplayColls(Platform* plat[][PLATFORM_GRID_WIDTH])
 			}
 		}
 	}
-
 }
