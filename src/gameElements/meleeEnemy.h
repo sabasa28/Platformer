@@ -3,6 +3,8 @@
 
 #include "enemies.h"
 
+const int ENEMY_SPRITE_SIZE = 64;
+
 enum TargetPos
 {
 	left,
@@ -16,6 +18,9 @@ private:
 	bool charging;
 	const float chargingSpeed = 10.0f;
 	const float alertDistance = 200.0f;
+	Texture texture;
+	IntRect* textureRect;
+	Sprite sprite;
 public:
 	MeleeEnemy();
 	MeleeEnemy(Vector2f pos);
@@ -27,6 +32,8 @@ public:
 	void updateAwakeState(RectangleShape target);
 	void attack(RectangleShape target);
 	virtual void Enemy::checkScreenLimits();
+	void updateSprite();
+	Sprite getSprite();
 };
 
 #endif //MELEE_ENEMY

@@ -13,8 +13,8 @@ Gameplay::Gameplay()
 			switch (y)
 			{
 			case 2:
-				if (x >= 1)
-				//if (x == 1)
+				//if (x >= 1)
+				if (x == 1)
 				{
 					platformGrid[y][x] = new Platform(x, y);
 				}
@@ -121,6 +121,10 @@ Gameplay::Gameplay()
 			}
 		}
 	}
+	backgroundTexture.loadFromFile("images/backgroundRock.png");
+	backgroundTextureRect = new IntRect(0, 0, PLATFORM_SPRITE_SIZE, PLATFORM_SPRITE_SIZE);
+	backgroundSprite.setTexture(backgroundTexture);
+	backgroundSprite.setTextureRect(*backgroundTextureRect);
 
 	player = new Player();
 
@@ -133,9 +137,14 @@ Gameplay::Gameplay()
 	meleeEnemy[1] = new MeleeEnemy({ 400.0f, 100.0f });
 	meleeEnemy[2] = new MeleeEnemy({ 900.0f, -800.0f });
 
-	goal = new RectangleShape({ 50, 50 });
+	goal = new RectangleShape({ static_cast<float>(GOAL_SIZE), static_cast<float>(GOAL_SIZE) });
 	goal->setPosition({ 1600.0f + goal->getGlobalBounds().width/2 , -1000.0f });
 	goal->setFillColor(Color::Yellow);
+	goalTexture.loadFromFile("images/coin.png");
+	goalTextureRect = new IntRect(0, 0, GOAL_SPRITE_SIZE, GOAL_SPRITE_SIZE);
+	goalSprite.setTexture(goalTexture);
+	goalSprite.setTextureRect(*goalTextureRect);
+	goalSprite.setPosition(goal->getPosition().x - (GOAL_SPRITE_SIZE - GOAL_SIZE) / 2, goal->getPosition().y);
 
 	camera = new View({ player->getCenterX(), player->getCenterY() - SCREEN_HEIGHT / 6.0f }, { static_cast<float>(SCREEN_WIDTH), static_cast<float>(SCREEN_HEIGHT) });
 	Game::window->setView(*camera);
@@ -232,6 +241,11 @@ void Gameplay::update()
 				delete meleeEnemy[i];
 				meleeEnemy[i] = NULL;
 			}
+
+			if (meleeEnemy[i])
+			{
+				meleeEnemy[i]->updateSprite();
+			}
 		}
 	}
 
@@ -248,25 +262,29 @@ void Gameplay::draw()
 	{
 		for (int x = 0; x < PLATFORM_GRID_WIDTH; x++)
 		{
+			//drawBackground(x, y);
+
 			if (platformGrid[y][x])
 			{
-				Game::window->draw(platformGrid[y][x]->getRec());
+				//Game::window->draw(platformGrid[y][x]->getRec());
+				Game::window->draw(platformGrid[y][x]->getSprite());
 			}
 		}
 	}
 
 	if (player) 
 	{
-		Game::window->draw(player->getRec());
+		//Game::window->draw(player->getRec());
 		Game::window->draw(player->getSprite());
 	}
 
 	for (int i = 0; i < ENEMY_AMMOUNT; i++)
 	{
-		if (meleeEnemy[i]) Game::window->draw(meleeEnemy[i]->getRec());
+		//if (meleeEnemy[i]) Game::window->draw(meleeEnemy[i]->getRec());
+		if (meleeEnemy[i]) Game::window->draw(meleeEnemy[i]->getSprite());
 	}
 
-	if (goal) Game::window->draw(*goal);
+	if (goal) Game::window->draw(goalSprite);
 }
 
 float Gameplay::getCollisionMargin(float jumpingSpeed)
@@ -365,4 +383,10 @@ void Gameplay::checkGameplayColls(Platform* plat[][PLATFORM_GRID_WIDTH])
 			}
 		}
 	}
+}
+
+void Gameplay::drawBackground(int x, int y)
+{
+	backgroundSprite.setPosition(static_cast<float>(PLATFORM_SIZE) * x, static_cast<float>(PLATFORM_SIZE) * y);
+	Game::window->draw(backgroundSprite);
 }

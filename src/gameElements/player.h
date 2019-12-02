@@ -7,8 +7,10 @@
 
 using namespace sf;
 
-const int PLAYER_SIZE = 50;
+const int PLAYER_WIDTH = 50;
+const int PLAYER_HEIGHT = 80;
 const int PLAYER_SPRITE_SIZE = 128;
+const int PLAYER_SPRITE_Y_SETOFF = 30;
 const  float MAXIMUM_SPEED = 20.0f;
 
 struct Movement
@@ -35,13 +37,6 @@ enum JumpState
 class Player
 {
 	RectangleShape rectangle;
-	Texture texture;
-	IntRect* textureRect;
-	Sprite sprite;
-	Clock clock;
-	Time timer;
-	Action currentAction;
-	Action lastFrameAction;
 	Movement movement;
 	bool facingRight;
 	Vector2f speed;
@@ -50,6 +45,13 @@ class Player
 	JumpState jumpState;
 	float jumpingSpeed = 20.0f;
 	float gravity = 0.75f;
+	Texture texture;
+	IntRect* textureRect;
+	Sprite sprite;
+	Clock clock;
+	Time timer;
+	Action currentAction;
+	Action lastFrameAction;
 
 public:
 	Player();

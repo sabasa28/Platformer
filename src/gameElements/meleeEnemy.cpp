@@ -7,11 +7,21 @@
 MeleeEnemy::MeleeEnemy()
 {
 	charging = false;
+	texture.loadFromFile("images/slimeBlock_spritesheet.png");
+	textureRect = new IntRect(0, 0, ENEMY_SPRITE_SIZE, ENEMY_SPRITE_SIZE);
+	sprite.setTexture(texture);
+	sprite.setTextureRect(*textureRect);
+	sprite.setPosition(getRec().getPosition().x - (ENEMY_SPRITE_SIZE - ENEMY_SIZE) / 2, getRec().getPosition().y - (ENEMY_SPRITE_SIZE - ENEMY_SIZE) / 2);
 }
 
 MeleeEnemy::MeleeEnemy(Vector2f pos):Enemy(pos)
 {
 	charging = false;
+	texture.loadFromFile("images/slimeBlock_spritesheet.png");
+	textureRect = new IntRect(0, 0, ENEMY_SPRITE_SIZE, ENEMY_SPRITE_SIZE);
+	sprite.setTexture(texture);
+	sprite.setTextureRect(*textureRect);
+	sprite.setPosition(getRec().getPosition().x - (ENEMY_SPRITE_SIZE - ENEMY_SIZE) / 2, getRec().getPosition().y - 60);
 }
 
 MeleeEnemy::~MeleeEnemy()
@@ -109,4 +119,25 @@ void MeleeEnemy::checkScreenLimits() //SACAR EN CASO DE NO USARLO
 		setRecX(SCREEN_WIDTH - getRec().getSize().x);
 		charging = false;
 	}
+}
+
+void MeleeEnemy::updateSprite()
+{
+	if (!charging)
+	{
+		textureRect = new IntRect(0, 0, ENEMY_SPRITE_SIZE, ENEMY_SPRITE_SIZE);
+		sprite.setTextureRect(*textureRect);
+	}
+	else
+	{
+		textureRect = new IntRect(ENEMY_SPRITE_SIZE, 0, ENEMY_SPRITE_SIZE, ENEMY_SPRITE_SIZE);
+		sprite.setTextureRect(*textureRect);
+	}
+
+	sprite.setPosition(getRec().getPosition().x - (ENEMY_SPRITE_SIZE - ENEMY_SIZE) / 2, getRec().getPosition().y - (ENEMY_SPRITE_SIZE - ENEMY_SIZE) / 2);
+}
+
+Sprite MeleeEnemy::getSprite()
+{
+	return sprite;
 }

@@ -7,6 +7,8 @@
 
 using namespace sf;
 
+const int ENEMY_SIZE = 50;
+
 class Enemy
 {
 private:

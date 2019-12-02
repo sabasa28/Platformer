@@ -11,23 +11,23 @@ float disToPlat2;
 
 Player::Player()
 {
-	rectangle.setSize({ static_cast<float>(PLAYER_SIZE), static_cast<float>(PLAYER_SIZE) });
+	rectangle.setSize({ static_cast<float>(PLAYER_WIDTH), static_cast<float>(PLAYER_HEIGHT) });
 	rectangle.setFillColor(Color::Blue);
-	rectangle.setPosition(PLATFORM_SIZE + PLAYER_SIZE/2, static_cast<float>(SCREEN_HEIGHT - PLATFORM_SIZE - rectangle.getSize().y));
-	texture.loadFromFile("images/adventurer_spritesheet.png");
-	textureRect = new IntRect(0, 0, PLAYER_SPRITE_SIZE, PLAYER_SPRITE_SIZE);
-	sprite.setTexture(texture);
-	sprite.setTextureRect(*textureRect);
-	sprite.setPosition(rectangle.getPosition().x - (PLAYER_SPRITE_SIZE - PLAYER_SIZE) / 2, rectangle.getPosition().y - 60);
-	timer = timer.Zero;
-	currentAction = standing_action;
-	lastFrameAction = standing_action;
+	rectangle.setPosition(PLATFORM_SIZE + PLAYER_WIDTH/2, static_cast<float>(SCREEN_HEIGHT - PLATFORM_SIZE - rectangle.getSize().y));
 	movement.right = false;
 	movement.left = false;
 	facingRight = true;
 	speed = { 0,0 };
 	jumping = false;
 	jumpState = falling;
+	texture.loadFromFile("images/adventurer_spritesheet.png");
+	textureRect = new IntRect(0, 0, PLAYER_SPRITE_SIZE, PLAYER_SPRITE_SIZE);
+	sprite.setTexture(texture);
+	sprite.setTextureRect(*textureRect);
+	sprite.setPosition(rectangle.getPosition().x - (PLAYER_SPRITE_SIZE - PLAYER_WIDTH) / 2, rectangle.getPosition().y - PLAYER_SPRITE_Y_SETOFF);
+	timer = timer.Zero;
+	currentAction = standing_action;
+	lastFrameAction = standing_action;
 }
 
 Player::~Player()
@@ -134,28 +134,35 @@ void Player::checkKeyPressedInput()
 	if (Keyboard::isKeyPressed(Keyboard::Right))
 	{
 		setMoveRight(true);
+		
 		setFacingRight(true);
 		if (getJumpState() == onGround)
 		{
 			setCurrentAction(walking_action);
 		}
 	}
-	else
-	{
-		if (getJumpState() == onGround)
-		{
-			setCurrentAction(standing_action);
-		}
-	}
-
+	
 	if (Keyboard::isKeyPressed(Keyboard::Left))
 	{
 		setMoveLeft(true);
-		setFacingRight(false);
+		
+		if (!Keyboard::isKeyPressed(Keyboard::Right))
+		{
+			setFacingRight(false);
+		}
 		if (getJumpState() == onGround)
 		{
 			setCurrentAction(walking_action);
 		}
+	}
+
+	if (((Keyboard::isKeyPressed(Keyboard::Left) && Keyboard::isKeyPressed(Keyboard::Right))
+		||
+		(!Keyboard::isKeyPressed(Keyboard::Left) && !Keyboard::isKeyPressed(Keyboard::Right)))
+		&&
+		getJumpState() == onGround)
+	{
+		setCurrentAction(standing_action);
 	}
 }
 
@@ -235,7 +242,7 @@ void Player::updateMovement()
 	{
 		speed.x -= movingSpeed;
 	}
-	
+
 	switch (jumpState)
 	{
 	case onGround:
@@ -350,105 +357,109 @@ float Player::getCenterY()
 
 void Player::updateSprite()
 {
-	//cout << timer.asMilliseconds() << endl;
-
 	switch (currentAction)
 	{
 	case standing_action:
-		if (facingRight)
+	{
+		cout << "standing" << endl;
+		if (lastFrameAction != jumping_action)
 		{
-			if (lastFrameAction != standing_action)
+			if (facingRight)
 			{
 				textureRect = new IntRect(0, 0, PLAYER_SPRITE_SIZE, PLAYER_SPRITE_SIZE);
 				sprite.setTextureRect(*textureRect);
-				sprite.setScale(1, 1);
-			}
-
-			sprite.setPosition(rectangle.getPosition().x - (PLAYER_SPRITE_SIZE - PLAYER_SIZE) / 2, rectangle.getPosition().y - 60);
-		}
-		else
-		{
-			if (lastFrameAction != standing_action)
-			{
-				textureRect = new IntRect(0, 0, PLAYER_SPRITE_SIZE, PLAYER_SPRITE_SIZE);
-				sprite.setTextureRect(*textureRect);
-				sprite.setScale(-1, 1);
-			}
-
-			sprite.setPosition(rectangle.getPosition().x + (PLAYER_SPRITE_SIZE + PLAYER_SIZE) / 2, rectangle.getPosition().y - 60);
-		}
-		break;
-	case walking_action:
-		if (facingRight)
-		{
-			if (lastFrameAction != walking_action)
-			{
-				clock.restart().Zero;
-
-				textureRect = new IntRect(0, PLAYER_SPRITE_SIZE, PLAYER_SPRITE_SIZE, PLAYER_SPRITE_SIZE * 2);
-				sprite.setTextureRect(*textureRect);
-				sprite.setScale(1, 1);
-			}
-
-			timer = clock.getElapsedTime();
-			sprite.setPosition(rectangle.getPosition().x - (PLAYER_SPRITE_SIZE - PLAYER_SIZE) / 2, rectangle.getPosition().y - 60);
-		}
-		else
-		{
-			if (lastFrameAction != walking_action)
-			{
-				clock.restart().Zero;
-
-				textureRect = new IntRect(0, PLAYER_SPRITE_SIZE, PLAYER_SPRITE_SIZE, PLAYER_SPRITE_SIZE * 2);
-				sprite.setTextureRect(*textureRect);
-				sprite.setScale(-1, 1);
-			}
-
-			timer = clock.getElapsedTime();
-			sprite.setPosition(rectangle.getPosition().x + (PLAYER_SPRITE_SIZE + PLAYER_SIZE) / 2, rectangle.getPosition().y - 60);
-		}
-
-		if (timer >= milliseconds(125))
-		{
-			if (textureRect->left == 0)
-			{
-				textureRect = new IntRect(PLAYER_SPRITE_SIZE, PLAYER_SPRITE_SIZE, PLAYER_SPRITE_SIZE * 2, PLAYER_SPRITE_SIZE * 2);
-				sprite.setTextureRect(*textureRect);
-				clock.restart().Zero;
-				cout << "sprite 1" << endl;
 			}
 			else
 			{
-				textureRect = new IntRect(0, PLAYER_SPRITE_SIZE, PLAYER_SPRITE_SIZE, PLAYER_SPRITE_SIZE * 2);
+				textureRect = new IntRect(PLAYER_SPRITE_SIZE, 0, PLAYER_SPRITE_SIZE, PLAYER_SPRITE_SIZE);
 				sprite.setTextureRect(*textureRect);
-				clock.restart().Zero;
-				cout << "sprite 2" << endl;
 			}
 		}
+
 		break;
+	}
 	case jumping_action:
-		if (facingRight)
-		{
-			if (lastFrameAction != jumping_action)
+	{
+		cout << "jumping" << endl;
+			if (facingRight)
 			{
-				textureRect = new IntRect(PLAYER_SPRITE_SIZE, 0, PLAYER_SPRITE_SIZE * 2, PLAYER_SPRITE_SIZE);
+				textureRect = new IntRect(PLAYER_SPRITE_SIZE * 2, 0, PLAYER_SPRITE_SIZE, PLAYER_SPRITE_SIZE);
+				sprite.setTextureRect(*textureRect);
+			}
+			else
+			{
+				textureRect = new IntRect(PLAYER_SPRITE_SIZE * 3, 0, PLAYER_SPRITE_SIZE, PLAYER_SPRITE_SIZE);
 				sprite.setTextureRect(*textureRect);
 			}
 
-			sprite.setScale(1, 1);
-			sprite.setPosition(rectangle.getPosition().x - (PLAYER_SPRITE_SIZE - PLAYER_SIZE) / 2, rectangle.getPosition().y - 60);
+		break;
+	}
+	case walking_action:
+	{
+		cout << "walking" << endl;
+		if (facingRight)
+		{
+			if (lastFrameAction != walking_action)
+			{
+				clock.restart().Zero;
+
+				textureRect = new IntRect(0, PLAYER_SPRITE_SIZE, PLAYER_SPRITE_SIZE, PLAYER_SPRITE_SIZE);
+				sprite.setTextureRect(*textureRect);
+			}
+
+			timer = clock.getElapsedTime();
+
+			if (timer >= milliseconds(125))
+			{
+				if (textureRect->left == 0)
+				{
+					textureRect = new IntRect(PLAYER_SPRITE_SIZE, PLAYER_SPRITE_SIZE, PLAYER_SPRITE_SIZE, PLAYER_SPRITE_SIZE);
+					sprite.setTextureRect(*textureRect);
+					clock.restart().Zero;
+					cout << "sprite 1" << endl;
+				}
+				else
+				{
+					textureRect = new IntRect(0, PLAYER_SPRITE_SIZE, PLAYER_SPRITE_SIZE, PLAYER_SPRITE_SIZE);
+					sprite.setTextureRect(*textureRect);
+					clock.restart().Zero;
+					cout << "sprite 2" << endl;
+				}
+			}
 		}
 		else
 		{
-			if (lastFrameAction != jumping_action)
+			if (lastFrameAction != walking_action)
 			{
-				textureRect = new IntRect(PLAYER_SPRITE_SIZE, 0, PLAYER_SPRITE_SIZE * 2, PLAYER_SPRITE_SIZE);
+				clock.restart().Zero;
+
+				textureRect = new IntRect(PLAYER_SPRITE_SIZE * 2, PLAYER_SPRITE_SIZE, PLAYER_SPRITE_SIZE, PLAYER_SPRITE_SIZE);
 				sprite.setTextureRect(*textureRect);
 			}
 
-			sprite.setScale(-1, 1);
-			sprite.setPosition(rectangle.getPosition().x + (PLAYER_SPRITE_SIZE + PLAYER_SIZE) / 2, rectangle.getPosition().y - 60);
+			timer = clock.getElapsedTime();
+
+			if (timer >= milliseconds(125))
+			{
+				if (textureRect->left == PLAYER_SPRITE_SIZE * 2)
+				{
+					textureRect = new IntRect(PLAYER_SPRITE_SIZE * 3, PLAYER_SPRITE_SIZE, PLAYER_SPRITE_SIZE, PLAYER_SPRITE_SIZE);
+					sprite.setTextureRect(*textureRect);
+					clock.restart().Zero;
+					cout << "sprite 1" << endl;
+				}
+				else
+				{
+					textureRect = new IntRect(PLAYER_SPRITE_SIZE * 2, PLAYER_SPRITE_SIZE, PLAYER_SPRITE_SIZE, PLAYER_SPRITE_SIZE);
+					sprite.setTextureRect(*textureRect);
+					clock.restart().Zero;
+					cout << "sprite 2" << endl;
+				}
+			}
 		}
 		break;
 	}
+	}
+
+	sprite.setPosition(rectangle.getPosition().x - (PLAYER_SPRITE_SIZE - PLAYER_WIDTH) / 2, rectangle.getPosition().y - PLAYER_SPRITE_Y_SETOFF);
 }

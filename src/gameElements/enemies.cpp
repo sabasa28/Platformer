@@ -6,9 +6,9 @@ Enemy::Enemy()
 {
 	alive = true;
 	awake = false;
-	rectangle.setSize({ 50, 50 });
+	rectangle.setSize({ static_cast<float>(ENEMY_SIZE), static_cast<float>(ENEMY_SIZE) });
 	rectangle.setFillColor(Color::Red);
-	rectangle.setPosition(SCREEN_WIDTH / 2.0f, SCREEN_HEIGHT - rectangle.getSize().y *10);
+	rectangle.setPosition(SCREEN_WIDTH / 2.0f, SCREEN_HEIGHT - rectangle.getSize().y * 10);
 	speed = { 0.0f, 0.0f };
 	onGround = false;
 }

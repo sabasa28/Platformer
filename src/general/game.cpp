@@ -31,7 +31,6 @@ Game::Game()
 	gameplayMusic.openFromFile("music/Friendly_Fire.ogg");
 	gameplayMusic.setVolume(50);
 	gameplayMusic.setLoop(true);
-
 }
 
 Game::~Game()

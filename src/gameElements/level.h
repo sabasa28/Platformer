@@ -9,6 +9,7 @@ const int PLATFORM_GRID_WIDTH = 50;
 const int PLATFORM_GRID_HEIGHT = 50;
 const int PLATFORM_SIZE = 100;
 const int PLATFORM_MIN_Y_POS = 700;
+const int PLATFORM_SPRITE_SIZE = 100;
 
 enum NearestSide
 {
@@ -26,9 +27,11 @@ enum RelativePlayerJumpState
 
 class Platform
 {
-private:
 	RectangleShape rectangle;
 	RelativePlayerJumpState relativePlayerJumpsState;
+	Texture texture;
+	IntRect* textureRect;
+	Sprite sprite;
 public:
 	Platform(int x, int y);
 	~Platform();
@@ -42,6 +45,7 @@ public:
 	float getRightSide();
 	float getCenterX();
 	float getCenterY();
+	Sprite getSprite();
 };
 
 #endif //LEVEL_H

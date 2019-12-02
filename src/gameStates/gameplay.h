@@ -6,6 +6,10 @@
 #include "gameElements/meleeEnemy.h"
 
 const int ENEMY_AMMOUNT = 3;
+const int BACKGROUND_SPRITE_SIZE = 100;
+const int GOAL_SIZE = 50;
+const int GOAL_SPRITE_SIZE = 128;
+
 
 class Gameplay
 {
@@ -14,6 +18,12 @@ class Gameplay
 	MeleeEnemy* meleeEnemy[ENEMY_AMMOUNT];
 	RectangleShape* goal;
 	View* camera;
+	Texture backgroundTexture;
+	IntRect* backgroundTextureRect;
+	Sprite backgroundSprite;
+	Texture goalTexture;
+	IntRect* goalTextureRect;
+	Sprite goalSprite;
 
 public:
 	Gameplay();
@@ -22,6 +32,7 @@ public:
 	void draw();
 	float getCollisionMargin(float jumpingSpeed);
 	void checkGameplayColls(Platform* plat[][PLATFORM_GRID_WIDTH]);
+	void drawBackground(int x, int y);
 };
 
 #endif //GAMEPLAY_H
