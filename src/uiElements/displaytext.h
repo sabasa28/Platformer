@@ -18,11 +18,13 @@ public:
 	DisplayText(String text, float x, float y, Color color, int fontSize);
 	~DisplayText();
 	void setPositionY(float y);
+	void setPosition(Vector2f newPos);
 	Vector2f getInitialPos();
 	bool getCentered();
 	Text getText();
 	float getUpperSide();
 	float getBottomSide();
+	float getTextWidth();
 	void draw();
 };
 

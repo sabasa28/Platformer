@@ -83,6 +83,11 @@ void Game::update()
 			delete credits;
 			credits = NULL;
 		}
+		if (gameplay)
+		{
+			delete gameplay;
+			gameplay = NULL;
+		}
 
 		if (!menu) menu = new Menu();
 		if (menu) menu->update();

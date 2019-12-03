@@ -48,6 +48,11 @@ void DisplayText::setPositionY(float y)
 	text.setPosition(text.getPosition().x, y);
 }
 
+void DisplayText::setPosition(Vector2f newPos)
+{
+	text.setPosition(newPos);
+}
+
 Vector2f DisplayText::getInitialPos()
 {
 	return initialPos;
@@ -71,6 +76,11 @@ float DisplayText::getUpperSide()
 float DisplayText::getBottomSide()
 {
 	return text.getPosition().y + text.getGlobalBounds().height;
+}
+
+float DisplayText::getTextWidth()
+{
+	return text.getGlobalBounds().width;
 }
 
 void DisplayText::draw()

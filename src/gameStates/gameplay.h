@@ -8,15 +8,24 @@
 #include "gameElements/meleeEnemy.h"
 #include "uiElements/displayText.h"
 
-const int PAUSE_TEXT_Y = 75;
 const int ENEMY_AMMOUNT = 3;
+
 const int BACKGROUND_SPRITE_SIZE = 100;
+
 const int GOAL_SIZE = 50;
 const int GOAL_SPRITE_SIZE = GOAL_SIZE;
 
+const int PAUSE_TEXT_AMMOUNT = 4;
+const int PAUSE_TEXT_Y = 100;
+const int PAUSE_FONT_SIZE = 30;
+const int PAUSE_SPACE_BETWEEN_TEXT = 20;
+const Vector2f PAUSE_POS = { 250.0f, 100.0f };
+const Vector2f PAUSE_SIZE = { 400.0f, 200.0f };
+
+
 class Gameplay
 {
-	bool pause;
+	bool paused;
 	bool pauseButtonPressed;
 	bool muteButtonPressed;
 	Platform* platformGrid[PLATFORM_GRID_HEIGHT][PLATFORM_GRID_WIDTH];
@@ -30,6 +39,9 @@ class Gameplay
 	Texture goalTexture;
 	IntRect* goalTextureRect;
 	Sprite goalSprite;
+
+	RectangleShape pauseRec;
+	DisplayText* pauseTexts[PAUSE_TEXT_AMMOUNT];
 
 public:
 	static SoundBuffer footstepSFXBuffer;
@@ -46,6 +58,7 @@ public:
 	bool getPause();
 	void update();
 	void draw();
+	void centerPause();
 	float getCollisionMargin(float jumpingSpeed);
 	void checkGameplayColls(Platform* plat[][PLATFORM_GRID_WIDTH]);
 	void drawBackground(int x, int y);

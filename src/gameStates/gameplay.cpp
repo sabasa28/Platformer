@@ -11,7 +11,7 @@ Sound Gameplay::coinsSFX;
 
 Gameplay::Gameplay()
 {
-	pause = false;
+	paused = false;
 	pauseButtonPressed = false;
 	muteButtonPressed = false;
 
@@ -20,11 +20,10 @@ Gameplay::Gameplay()
 		for (int x = 0; x < PLATFORM_GRID_WIDTH; x++)
 		{
 			platformGrid[y][x] = NULL;
-			
+
 			switch (y)
 			{
 			case 2:
-				//if (x >= 1)
 				if (x == 11)
 				{
 					platformGrid[y][x] = new Platform(x, y);
@@ -97,10 +96,6 @@ Gameplay::Gameplay()
 				}
 				break;
 			case 16:
-				if (x == 14)
-				{
-					platformGrid[y][x] = new Platform(x, y);
-				}
 				if (x == 24)
 				{
 					platformGrid[y][x] = new Platform(x, y);
@@ -111,6 +106,12 @@ Gameplay::Gameplay()
 				}
 				break;
 			case 17:
+				if (x == 14)
+				{
+					platformGrid[y][x] = new Platform(x, y);
+				}
+				break;
+			case 18:
 				if (x == 14)
 				{
 					platformGrid[y][x] = new Platform(x, y);
@@ -148,7 +149,7 @@ Gameplay::Gameplay()
 	meleeEnemy[2] = new MeleeEnemy({ 1900.0f, -800.0f });
 
 	goal = new RectangleShape({ static_cast<float>(GOAL_SIZE), static_cast<float>(GOAL_SIZE) });
-	goal->setPosition({ 1600.0f + goal->getGlobalBounds().width/2 , -1000.0f });
+	goal->setPosition({ 2600.0f + goal->getGlobalBounds().width/2 , -1000.0f });
 	goal->setFillColor(Color::Yellow);
 	goalTexture.loadFromFile("images/coin.png");
 	goalTextureRect = new IntRect(0, 0, GOAL_SPRITE_SIZE, GOAL_SPRITE_SIZE);
@@ -157,6 +158,21 @@ Gameplay::Gameplay()
 	goalSprite.setPosition(goal->getPosition().x - (GOAL_SPRITE_SIZE - GOAL_SIZE) / 2, goal->getPosition().y);
 
 	camera = new View({ player->getCenterX(), player->getCenterY() - SCREEN_HEIGHT / 6.0f }, { static_cast<float>(SCREEN_WIDTH), static_cast<float>(SCREEN_HEIGHT) });
+
+	for (int i = 0; i < PAUSE_TEXT_AMMOUNT; i++)
+	{
+		pauseTexts[i] = NULL;
+	}
+
+	pauseTexts[0] = new DisplayText("PAUSED", true, PAUSE_TEXT_Y, Color::Yellow, PAUSE_FONT_SIZE);
+	pauseTexts[1] = new DisplayText("\"Enter\" to go back to menu", true, pauseTexts[0]->getBottomSide() + PAUSE_SPACE_BETWEEN_TEXT, Color::White, PAUSE_FONT_SIZE);
+	pauseTexts[2] = new DisplayText("\"M\" to mute/unmute", true, pauseTexts[1]->getBottomSide() + PAUSE_SPACE_BETWEEN_TEXT, Color::White, PAUSE_FONT_SIZE);
+	pauseTexts[3] = new DisplayText("\"Escape\" to unpause", true, pauseTexts[2]->getBottomSide() + PAUSE_SPACE_BETWEEN_TEXT, Color::White, PAUSE_FONT_SIZE);
+
+	pauseRec.setSize(PAUSE_SIZE);
+	pauseRec.setPosition(PAUSE_POS);
+	pauseRec.setFillColor(Color::Black);
+
 
 	footstepSFXBuffer.loadFromFile("sounds/footstep.ogg");
 	footstepSFX.setBuffer(footstepSFXBuffer);
@@ -200,13 +216,13 @@ void Gameplay::checkKeyDownInput()
 	{
 		if (Keyboard::isKeyPressed(Keyboard::P) || Keyboard::isKeyPressed(Keyboard::Escape))
 		{
-			if (!pause)
+			if (!paused)
 			{
-				pause = true;
+				paused = true;
 			}
 			else
 			{
-				pause = false;
+				paused = false;
 			}
 
 			pauseButtonPressed = true;
@@ -219,23 +235,43 @@ void Gameplay::checkKeyDownInput()
 			pauseButtonPressed = false;
 		}
 	}
+
+	if (paused)
+	{
+		if (Keyboard::isKeyPressed(Keyboard::Enter))
+		{
+			if (!Game::getGameStateInputActive())
+			{
+				Game::buttonSFX.play();
+				Game::setGameStateInputActive(true);
+				Game::currentGameState = menu_state;
+			}
+		}
+		else
+		{
+			if (Game::getGameStateInputActive())
+			{
+				Game::setGameStateInputActive(false);
+			}
+		}
+	}
 }
 
 void Gameplay::setPause(bool state)
 {
-	pause = state;
+	paused = state;
 }
 
 bool Gameplay::getPause()
 {
-	return pause;
+	return paused;
 }
 
 void Gameplay::update()
 {
 	checkKeyDownInput();
 
-	if (!pause)
+	if (!paused)
 	{
 		if (player)
 		{
@@ -313,6 +349,10 @@ void Gameplay::update()
 			Game::window->setView(*camera);
 		}
 	}
+	else
+	{
+		centerPause();
+	}
 
 	if (!muteButtonPressed)
 	{
@@ -366,6 +406,25 @@ void Gameplay::draw()
 	}
 
 	if (goal) Game::window->draw(goalSprite);
+
+	if (paused)
+	{
+		Game::window->draw(pauseRec);
+		for (int i = 0; i < PAUSE_TEXT_AMMOUNT; i++)
+		{
+			if (pauseTexts[i]) pauseTexts[i]->draw();
+		}
+	}
+}
+
+void Gameplay::centerPause()
+{
+	if (pauseTexts[0]) pauseTexts[0]->setPosition({ camera->getCenter().x - pauseTexts[0]->getTextWidth() / 2.0f, camera->getCenter().y - PAUSE_TEXT_Y });
+	if (pauseTexts[1]) pauseTexts[1]->setPosition({ camera->getCenter().x - pauseTexts[1]->getTextWidth() / 2.0f, pauseTexts[0]->getBottomSide() + PAUSE_SPACE_BETWEEN_TEXT });
+	if (pauseTexts[2]) pauseTexts[2]->setPosition({ camera->getCenter().x - pauseTexts[2]->getTextWidth() / 2.0f, pauseTexts[1]->getBottomSide() + PAUSE_SPACE_BETWEEN_TEXT });
+	if (pauseTexts[3]) pauseTexts[3]->setPosition({ camera->getCenter().x - pauseTexts[3]->getTextWidth() / 2.0f, pauseTexts[2]->getBottomSide() + PAUSE_SPACE_BETWEEN_TEXT });
+
+	pauseRec.setPosition({ camera->getCenter().x - PAUSE_SIZE.x / 2.0f, camera->getCenter().y - PAUSE_SIZE.y / 2.0f });
 }
 
 float Gameplay::getCollisionMargin(float jumpingSpeed)
