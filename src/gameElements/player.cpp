@@ -273,32 +273,6 @@ void Player::updatePosition()
 	rectangle.setPosition(rectangle.getPosition() + speed);
 }
 
-void Player::checkScreenLimits()
-{
-	//if (getUpperSide() < 0)
-	//{
-	//	setSpeedY(0);
-	//	setRecY(0);
-	//	jumpState = falling;
-	//}
-
-	if (getBottomSide() > SCREEN_HEIGHT)
-	{
-		setRecY(SCREEN_HEIGHT - rectangle.getSize().y);
-		jumpState = onGround;
-	}
-
-	//if (getLeftSide() < 0)
-	//{
-	//	setRecX(0);
-	//}
-	//
-	//if (getRightSide() > SCREEN_WIDTH)
-	//{
-	//	setRecX(SCREEN_WIDTH - rectangle.getSize().x);
-	//}
-}
-
 bool Player::colliding(RectangleShape rec)
 {
 	if (getRec().getGlobalBounds().intersects(rec.getGlobalBounds()))

@@ -11,12 +11,18 @@ class DisplayText
 {
 	Text text;
 	bool centered;
+	Vector2f initialPos;
 
 public:
-	DisplayText(String text, bool isTextCentered, float y);
+	DisplayText(String text, bool isTextCentered, float y, Color color);
+	DisplayText(String text, float x, float y, Color color);
 	~DisplayText();
+	void setPositionY(float y);
+	Vector2f getInitialPos();
+	bool getCentered();
 	Text getText();
 	float getUpperSide();
+	float getBottomSide();
 	void draw();
 };
 

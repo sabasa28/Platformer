@@ -258,11 +258,19 @@ void Gameplay::update()
 
 void Gameplay::draw()
 {
+
 	for (int y = 0; y < PLATFORM_GRID_HEIGHT; y++)
 	{
 		for (int x = 0; x < PLATFORM_GRID_WIDTH; x++)
 		{
-			//drawBackground(x, y);
+			drawBackground(x, y);
+		}
+	}
+
+	for (int y = 0; y < PLATFORM_GRID_HEIGHT; y++)
+	{
+		for (int x = 0; x < PLATFORM_GRID_WIDTH; x++)
+		{
 
 			if (platformGrid[y][x])
 			{
@@ -387,6 +395,6 @@ void Gameplay::checkGameplayColls(Platform* plat[][PLATFORM_GRID_WIDTH])
 
 void Gameplay::drawBackground(int x, int y)
 {
-	backgroundSprite.setPosition(static_cast<float>(PLATFORM_SIZE) * x, static_cast<float>(PLATFORM_SIZE) * y);
+	backgroundSprite.setPosition(static_cast<float>(PLATFORM_SIZE) * x, PLATFORM_MIN_Y_POS - static_cast<float>(PLATFORM_SIZE) * y);
 	Game::window->draw(backgroundSprite);
 }

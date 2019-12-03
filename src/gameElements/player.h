@@ -86,7 +86,6 @@ public:
 	void setJumpState(JumpState state);
 	void updateMovement();
 	void updatePosition();
-	void checkScreenLimits();
 	bool colliding(RectangleShape rec);
 	bool fallingOffPlatform(Platform* platform);
 	float getUpperSide();
