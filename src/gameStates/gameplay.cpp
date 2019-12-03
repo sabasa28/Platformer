@@ -189,82 +189,114 @@ Gameplay::~Gameplay()
 	Game::gameplayMusic.stop();
 }
 
-void Gameplay::update()
+void Gameplay::checkKeyDownInput()
 {
-	if (player)
+	Game::window->setKeyRepeatEnabled(false);
+
+	if (Keyboard::isKeyPressed(Keyboard::Escape) || Keyboard::isKeyPressed(Keyboard::P))
 	{
-		player->setLastFrameAction(player->getCurrentAction());
-		player->checkKeyPressedInput();
-		player->checkKeyDownInput();
-		player->checkKeyReleasedInput();
-		player->updatePosition();
-
-		checkGameplayColls(platformGrid);
-
-		player->updateMovement();
-		player->updateSprite();
+		if (!getPause())
+		{
+			setPause(true);
+		}
+		else
+		{
+			setPause(false);
+		}
 	}
 
-	for (int i = 0; i < ENEMY_AMMOUNT; i++)
-	{
-		if (meleeEnemy[i])
-		{
-			meleeEnemy[i]->updatePos(player->getRec());
-			meleeEnemy[i]->updateCharginState();
+	Game::window->setKeyRepeatEnabled(true);
+}
 
-			bool aux = false;
-			for (int y = 0; y < PLATFORM_GRID_HEIGHT; y++)
+void Gameplay::setPause(bool state)
+{
+	pause = state;
+}
+
+bool Gameplay::getPause()
+{
+	return pause;
+}
+
+void Gameplay::update()
+{
+	if (!pause)
+	{
+		if (player)
+		{
+			player->setLastFrameAction(player->getCurrentAction());
+			player->checkKeyPressedInput();
+			player->checkKeyDownInput();
+			player->checkKeyReleasedInput();
+			player->updatePosition();
+
+			checkGameplayColls(platformGrid);
+
+			player->updateMovement();
+			player->updateSprite();
+		}
+
+		for (int i = 0; i < ENEMY_AMMOUNT; i++)
+		{
+			if (meleeEnemy[i])
 			{
-				for (int x = 0; x < PLATFORM_GRID_WIDTH; x++)
+				meleeEnemy[i]->updatePos(player->getRec());
+				meleeEnemy[i]->updateCharginState();
+
+				bool aux = false;
+				for (int y = 0; y < PLATFORM_GRID_HEIGHT; y++)
 				{
-					if (platformGrid[y][x])
+					for (int x = 0; x < PLATFORM_GRID_WIDTH; x++)
 					{
-						if (meleeEnemy[i]->getRec().getGlobalBounds().intersects(platformGrid[y][x]->getRec().getGlobalBounds()))
+						if (platformGrid[y][x])
 						{
-							switch (platformGrid[y][x]->checkSideProximity(meleeEnemy[i]->getRec(), 5))
+							if (meleeEnemy[i]->getRec().getGlobalBounds().intersects(platformGrid[y][x]->getRec().getGlobalBounds()))
 							{
-							case Top:
-								aux = true;
-								meleeEnemy[i]->setRecY(platformGrid[y][x]->getUpperSide() - meleeEnemy[i]->getRec().getSize().y);
-								break;
-							case Right:
-								meleeEnemy[i]->setSpeed({ 0.0f, meleeEnemy[i]->getSpeed().y });
-								meleeEnemy[i]->setRecX(platformGrid[y][x]->getRightSide());
-								break;
-							case Left:
-								meleeEnemy[i]->setSpeed({ 0.0f, meleeEnemy[i]->getSpeed().y });
-								meleeEnemy[i]->setRecX(platformGrid[y][x]->getLeftSide() - meleeEnemy[i]->getRec().getSize().x);
-								break;
-							case Bottom:
-								meleeEnemy[i]->setSpeed({ meleeEnemy[i]->getSpeed().x, 0.0f });
-								meleeEnemy[i]->setRecY(platformGrid[y][x]->getBottomSide());
-							default:
-								break;
+								switch (platformGrid[y][x]->checkSideProximity(meleeEnemy[i]->getRec(), 5))
+								{
+								case Top:
+									aux = true;
+									meleeEnemy[i]->setRecY(platformGrid[y][x]->getUpperSide() - meleeEnemy[i]->getRec().getSize().y);
+									break;
+								case Right:
+									meleeEnemy[i]->setSpeed({ 0.0f, meleeEnemy[i]->getSpeed().y });
+									meleeEnemy[i]->setRecX(platformGrid[y][x]->getRightSide());
+									break;
+								case Left:
+									meleeEnemy[i]->setSpeed({ 0.0f, meleeEnemy[i]->getSpeed().y });
+									meleeEnemy[i]->setRecX(platformGrid[y][x]->getLeftSide() - meleeEnemy[i]->getRec().getSize().x);
+									break;
+								case Bottom:
+									meleeEnemy[i]->setSpeed({ meleeEnemy[i]->getSpeed().x, 0.0f });
+									meleeEnemy[i]->setRecY(platformGrid[y][x]->getBottomSide());
+								default:
+									break;
+								}
 							}
 						}
 					}
 				}
-			}
 
-			meleeEnemy[i]->setOnGround(aux);
+				meleeEnemy[i]->setOnGround(aux);
 
-			if (meleeEnemy[i]->getUpperSide() > SCREEN_HEIGHT)
-			{
-				delete meleeEnemy[i];
-				meleeEnemy[i] = NULL;
-			}
+				if (meleeEnemy[i]->getUpperSide() > SCREEN_HEIGHT)
+				{
+					delete meleeEnemy[i];
+					meleeEnemy[i] = NULL;
+				}
 
-			if (meleeEnemy[i])
-			{
-				meleeEnemy[i]->updateSprite();
+				if (meleeEnemy[i])
+				{
+					meleeEnemy[i]->updateSprite();
+				}
 			}
 		}
-	}
 
-	if (camera)
-	{
-		camera->setCenter(player->getCenterX(), player->getCenterY() - SCREEN_HEIGHT / 8.0f);
-		Game::window->setView(*camera);
+		if (camera)
+		{
+			camera->setCenter(player->getCenterX(), player->getCenterY() - SCREEN_HEIGHT / 8.0f);
+			Game::window->setView(*camera);
+		}
 	}
 }
 

@@ -15,6 +15,7 @@ const int GOAL_SPRITE_SIZE = 128;
 
 class Gameplay
 {
+	bool pause;
 	Platform* platformGrid[PLATFORM_GRID_HEIGHT][PLATFORM_GRID_WIDTH];
 	Player* player;
 	MeleeEnemy* meleeEnemy[ENEMY_AMMOUNT];
@@ -37,6 +38,9 @@ public:
 
 	Gameplay();
 	~Gameplay();
+	void checkKeyDownInput();
+	void setPause(bool state);
+	bool getPause();
 	void update();
 	void draw();
 	float getCollisionMargin(float jumpingSpeed);
