@@ -11,7 +11,7 @@ enum TargetPos
 {
 	left,
 	right,
-	away //a evaluar si se descarta
+	away
 };
 
 class MeleeEnemy: public Enemy

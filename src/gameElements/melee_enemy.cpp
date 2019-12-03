@@ -48,7 +48,7 @@ void MeleeEnemy::updateCharginState()
 
 TargetPos MeleeEnemy::updateTargetPos(RectangleShape target)
 {
-	if (abs(Enemy::getRec().getPosition().x - target.getPosition().x) < alertDistance && (Enemy::getUpperSide() < target.getPosition().y + target.getSize().y / 2 && Enemy::getBottomSide() > target.getPosition().y + target.getSize().y / 2))
+	if (abs(Enemy::getRec().getPosition().x - target.getPosition().x) < alertDistance && (Enemy::getCenter().y > target.getPosition().y && Enemy::getCenter().y < target.getPosition().y + target.getSize().y))
 	{
 		if (Enemy::getRec().getPosition().x < target.getPosition().x)
 		{

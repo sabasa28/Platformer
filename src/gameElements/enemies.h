@@ -29,6 +29,7 @@ public:
 	float getBottomSide();
 	float getLeftSide();
 	float getRightSide();
+	Vector2f getCenter();
 	void setAlive(bool newAlive);
 	bool getAlive();
 	void setAwake(bool newAwake);

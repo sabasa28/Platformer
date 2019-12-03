@@ -65,6 +65,11 @@ float Enemy::getRightSide()
 	return getLeftSide() + rectangle.getSize().x;
 }
 
+Vector2f Enemy::getCenter()
+{
+	return { getLeftSide() + rectangle.getSize().x / 2, getUpperSide() + rectangle.getSize().y / 2};
+}
+
 void Enemy::setAlive(bool newAlive)
 {
 	alive = newAlive;

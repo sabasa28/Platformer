@@ -18,7 +18,7 @@ Sound Game::impactSFX;
 
 Game::Game()
 {
-	window = new RenderWindow(VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "Platformer Game");
+	window = new RenderWindow(VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "Cave Climber");
 	if (window) window->setFramerateLimit(60);
 
 	gameStateInputActive = false;
