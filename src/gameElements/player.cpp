@@ -141,7 +141,6 @@ void Player::jump()
 {
 	if (jumpState == onGround)
 	{
-		Gameplay::jumpSFX.play();
 		jumpState = start;
 	}
 }
@@ -224,6 +223,10 @@ void Player::checkKeyDownInput()
 
 	if (Keyboard::isKeyPressed(Keyboard::Space))
 	{
+		if (jumpState == onGround)
+		{
+			Gameplay::jumpSFX.play();
+		}
 		jump();
 		setCurrentAction(Action::jumping_action);
 	}
@@ -376,7 +379,6 @@ void Player::updateSprite()
 					textureRect = new IntRect(PLAYER_SPRITE_SIZE, PLAYER_SPRITE_SIZE, PLAYER_SPRITE_SIZE, PLAYER_SPRITE_SIZE);
 					sprite.setTextureRect(*textureRect);
 					clock.restart().Zero;
-					Gameplay::jumpSFX.play();
 				}
 				else
 				{
@@ -405,7 +407,6 @@ void Player::updateSprite()
 					textureRect = new IntRect(PLAYER_SPRITE_SIZE * 3, PLAYER_SPRITE_SIZE, PLAYER_SPRITE_SIZE, PLAYER_SPRITE_SIZE);
 					sprite.setTextureRect(*textureRect);
 					clock.restart().Zero;
-					Gameplay::jumpSFX.play();
 				}
 				else
 				{
