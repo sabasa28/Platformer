@@ -31,6 +31,7 @@ Game::Game()
 	generalFont.loadFromFile("fonts/aescrawl.ttf");
 
 	interfaceMusic.openFromFile("music/santi_song.ogg");
+	interfaceMusic.setVolume(INTERFACE_MUSIC_INIT_VOLUME);
 	interfaceMusic.setLoop(true);
 
 	gameplayMusic.openFromFile("music/Friendly_Fire.ogg");
@@ -176,4 +177,18 @@ void Game::setGameStateInputActive(bool state)
 bool Game::getGameStateInputActive()
 {
 	return gameStateInputActive;
+}
+
+void Game::switchMusicState()
+{
+	if (gameplayMusic.getVolume()==0 && interfaceMusic.getVolume()==0)
+	{
+		gameplayMusic.setVolume(GAMEPLAY_MUSIC_INIT_VOLUME);
+		interfaceMusic.setVolume(INTERFACE_MUSIC_INIT_VOLUME);
+	}
+	else
+	{
+		gameplayMusic.setVolume(0);
+		interfaceMusic.setVolume(0);
+	}
 }

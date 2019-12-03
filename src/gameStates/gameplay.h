@@ -18,6 +18,7 @@ class Gameplay
 {
 	bool pause;
 	bool pauseButtonPressed;
+	bool muteButtonPressed;
 	Platform* platformGrid[PLATFORM_GRID_HEIGHT][PLATFORM_GRID_WIDTH];
 	Player* player;
 	MeleeEnemy* meleeEnemy[ENEMY_AMMOUNT];

@@ -33,9 +33,6 @@
     <ClCompile Include="..\src\gameStates\menu.cpp">
       <Filter>gameStates</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\general\console.cpp">
-      <Filter>general</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\main.cpp" />
     <ClCompile Include="..\src\general\game.cpp">
       <Filter>general</Filter>
@@ -71,9 +68,6 @@
     </ClInclude>
     <ClInclude Include="..\src\gameStates\menu.h">
       <Filter>gameStates</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\general\console.h">
-      <Filter>general</Filter>
     </ClInclude>
     <ClInclude Include="..\src\general\game.h">
       <Filter>general</Filter>

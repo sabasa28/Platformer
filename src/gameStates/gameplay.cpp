@@ -13,6 +13,7 @@ Gameplay::Gameplay()
 {
 	pause = false;
 	pauseButtonPressed = false;
+	muteButtonPressed = false;
 
 	for (int y = 0; y < PLATFORM_GRID_HEIGHT; y++)
 	{
@@ -312,6 +313,24 @@ void Gameplay::update()
 			Game::window->setView(*camera);
 		}
 	}
+
+	if (!muteButtonPressed)
+	{
+		if (Keyboard::isKeyPressed(Keyboard::M))
+		{
+			Game::buttonSFX.play();
+			Game::switchMusicState();
+			muteButtonPressed = true;
+		}
+	}
+	else
+	{
+		if (!Keyboard::isKeyPressed(Keyboard::M))
+		{
+			muteButtonPressed = false;
+		}
+	}
+
 }
 
 void Gameplay::draw()

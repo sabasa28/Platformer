@@ -17,6 +17,8 @@ const int SCREEN_WIDTH = 1000;
 const int SCREEN_HEIGHT = 600;
 const int PARAGRAPH_FONT_SIZE = 30;
 const int TITLE_FONT_SIZE = 100;
+const int INTERFACE_MUSIC_INIT_VOLUME = 100;
+const int GAMEPLAY_MUSIC_INIT_VOLUME = 50;
 
 enum GameState
 {
@@ -56,6 +58,7 @@ public:
 	void execute();
 	static void setGameStateInputActive(bool state);
 	static bool getGameStateInputActive();
+	static void switchMusicState();
 };
 
 #endif //GAME_H

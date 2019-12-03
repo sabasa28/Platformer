@@ -7,14 +7,14 @@
 
 using namespace sf;
 
-const int MENU_TEXT_ROWS_AMOUNT = 4;
+const int MENU_TEXT_ROWS_AMOUNT = 5;
 const int MENU_TITLE_SPACING = 200;
 const int MENU_PARAGRAPH_SPACING = 70;
 
 class Menu
 {
 	DisplayText* text[MENU_TEXT_ROWS_AMOUNT];
-	RectangleShape rec;
+	bool muteButtonPressed;
 
 public:
 	Menu();
