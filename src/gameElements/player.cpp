@@ -331,7 +331,6 @@ void Player::updateSprite()
 	{
 	case standing_action:
 	{
-		cout << "standing" << endl;
 		if (lastFrameAction != jumping_action)
 		{
 			if (facingRight)
@@ -350,7 +349,6 @@ void Player::updateSprite()
 	}
 	case jumping_action:
 	{
-		cout << "jumping" << endl;
 			if (facingRight)
 			{
 				textureRect = new IntRect(PLAYER_SPRITE_SIZE * 2, 0, PLAYER_SPRITE_SIZE, PLAYER_SPRITE_SIZE);
@@ -366,7 +364,6 @@ void Player::updateSprite()
 	}
 	case walking_action:
 	{
-		cout << "walking" << endl;
 		if (facingRight)
 		{
 			if (lastFrameAction != walking_action)

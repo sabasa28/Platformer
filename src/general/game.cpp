@@ -4,16 +4,17 @@
 
 #include "gameElements/player.h"
 
+Event Game::event;
 GameState Game::currentGameState = menu_state;
 bool Game::gameStateInputActive = false;
 RenderWindow* Game::window = NULL;
 Font Game::generalFont;
 Music Game::interfaceMusic;
 Music Game::gameplayMusic;
-SoundBuffer buttonSFXBuffer;
-Sound buttonSFX;
-SoundBuffer impactSFXBuffer;
-Sound impactSFX;
+SoundBuffer Game::buttonSFXBuffer;
+Sound Game::buttonSFX;
+SoundBuffer Game::impactSFXBuffer;
+Sound Game::impactSFX;
 
 Game::Game()
 {

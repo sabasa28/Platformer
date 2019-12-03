@@ -8,18 +8,18 @@ Credits::Credits()
 	{
 		textRows[i] = NULL;
 	}
-	textRows[11] = new DisplayText("Press 'Enter' to return to menu", false, SCREEN_HEIGHT- CREDITS_TEXT_SPACING, Color::Yellow);
-	textRows[10] = new DisplayText("Kenney (kenney.nl)", true, CREDITS_INTIAL_POS, Color::White);
-	textRows[9] = new DisplayText("Visual Assets", true, textRows[10]->getUpperSide() - CREDITS_TEXT_SPACING, Color::White);
-	textRows[8] = new DisplayText("SFML (sfml-dev.org)", true, textRows[9]->getUpperSide() - CREDITS_TEXT_SPACING*2, Color::White);
-	textRows[7] = new DisplayText("Engine", true, textRows[8]->getUpperSide() - CREDITS_TEXT_SPACING, Color::White);
-	textRows[6] = new DisplayText("Sani (Instagram: @sani_draws)", true, textRows[7]->getUpperSide() - CREDITS_TEXT_SPACING * 2, Color::White);
-	textRows[5] = new DisplayText("Interface Music - resamebeleing", true, textRows[6]->getUpperSide() - CREDITS_TEXT_SPACING, Color::White);
-	textRows[4] = new DisplayText("Micael \"BlueEagle\" Lucuman (soundcloud.com/blueeagle98)", true ,textRows[5]->getUpperSide() - CREDITS_TEXT_SPACING * 2, Color::White);
-	textRows[3] = new DisplayText("Gameplay Music - Friendly Fire", true, textRows[4]->getUpperSide() - CREDITS_TEXT_SPACING, Color::White);
-	textRows[2] = new DisplayText("Lucio Ruixo & Iñaki Diez Galarza", true, textRows[3]->getUpperSide() - CREDITS_TEXT_SPACING * 2, Color::White);
-	textRows[1] = new DisplayText("Game Programing + Developing", true, textRows[2]->getUpperSide() - CREDITS_TEXT_SPACING, Color::White);
-	textRows[0] = new DisplayText("CREDITS", false, CREDITS_TEXT_SPACING/2, Color::Yellow);
+	textRows[11] = new DisplayText("Press 'Enter' to return to menu", false, SCREEN_HEIGHT- CREDITS_TEXT_SPACING, Color::Yellow, PARAGRAPH_FONT_SIZE);
+	textRows[10] = new DisplayText("Kenney (kenney.nl)", true, CREDITS_INTIAL_POS, Color::White, PARAGRAPH_FONT_SIZE);
+	textRows[9] = new DisplayText("Visual Assets", true, textRows[10]->getUpperSide() - CREDITS_TEXT_SPACING, Color::White, PARAGRAPH_FONT_SIZE);
+	textRows[8] = new DisplayText("SFML (sfml-dev.org)", true, textRows[9]->getUpperSide() - CREDITS_TEXT_SPACING*2, Color::White, PARAGRAPH_FONT_SIZE);
+	textRows[7] = new DisplayText("Engine", true, textRows[8]->getUpperSide() - CREDITS_TEXT_SPACING, Color::White, PARAGRAPH_FONT_SIZE);
+	textRows[6] = new DisplayText("Sani (Instagram: @sani_draws)", true, textRows[7]->getUpperSide() - CREDITS_TEXT_SPACING * 2, Color::White, PARAGRAPH_FONT_SIZE);
+	textRows[5] = new DisplayText("Interface Music - resamebeleing", true, textRows[6]->getUpperSide() - CREDITS_TEXT_SPACING, Color::White, PARAGRAPH_FONT_SIZE);
+	textRows[4] = new DisplayText("Micael \"BlueEagle\" Lucuman (soundcloud.com/blueeagle98)", true ,textRows[5]->getUpperSide() - CREDITS_TEXT_SPACING * 2, Color::White, PARAGRAPH_FONT_SIZE);
+	textRows[3] = new DisplayText("Gameplay Music - Friendly Fire", true, textRows[4]->getUpperSide() - CREDITS_TEXT_SPACING, Color::White, PARAGRAPH_FONT_SIZE);
+	textRows[2] = new DisplayText("Lucio Ruixo & Iñaki Diez Galarza", true, textRows[3]->getUpperSide() - CREDITS_TEXT_SPACING * 2, Color::White, PARAGRAPH_FONT_SIZE);
+	textRows[1] = new DisplayText("Game Programing + Developing", true, textRows[2]->getUpperSide() - CREDITS_TEXT_SPACING, Color::White, PARAGRAPH_FONT_SIZE);
+	textRows[0] = new DisplayText("CREDITS", false, CREDITS_TEXT_SPACING/2, Color::Yellow, PARAGRAPH_FONT_SIZE);
 }
 
 Credits::~Credits()
@@ -65,6 +65,7 @@ void Credits::checkKeyDownInput()
 	{
 		if (!Game::getGameStateInputActive())
 		{
+			Game::buttonSFX.play();
 			Game::setGameStateInputActive(true);
 			Game::currentGameState=menu_state;
 		}

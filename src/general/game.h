@@ -15,6 +15,8 @@ using namespace sf;
 
 const int SCREEN_WIDTH = 1000;
 const int SCREEN_HEIGHT = 600;
+const int PARAGRAPH_FONT_SIZE = 30;
+const int TITLE_FONT_SIZE = 100;
 
 enum GameState
 {
@@ -27,20 +29,18 @@ enum GameState
 
 class Game
 {
-
 	Menu* menu;
 	Credits* credits;
 	Gameplay* gameplay;
 	GameOver* gameover;
 	Victory* victory;
 	static bool gameStateInputActive;
-	
-	Event event;
 
 	void update();
 	void draw();
 
 public:
+	static Event event;
 	static GameState currentGameState;
 	static RenderWindow* window;
 	static Font generalFont;

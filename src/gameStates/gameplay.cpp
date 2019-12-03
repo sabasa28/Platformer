@@ -2,14 +2,18 @@
 
 #include "general/game.h"
 
-SoundBuffer footstepSFXBuffer;
-Sound footstepSFX;
-SoundBuffer jumpSFXBuffer;
-Sound jumpSFX;
-SoundBuffer coinsSFXBuffer;
-Sound coinsSFX;
+SoundBuffer Gameplay::footstepSFXBuffer;
+Sound Gameplay::footstepSFX;
+SoundBuffer Gameplay::jumpSFXBuffer;
+Sound Gameplay::jumpSFX;
+SoundBuffer Gameplay::coinsSFXBuffer;
+Sound Gameplay::coinsSFX;
+
 Gameplay::Gameplay()
 {
+	pause = false;
+	pauseButtonPressed = false;
+
 	for (int y = 0; y < PLATFORM_GRID_HEIGHT; y++)
 	{
 		for (int x = 0; x < PLATFORM_GRID_WIDTH; x++)
@@ -191,21 +195,29 @@ Gameplay::~Gameplay()
 
 void Gameplay::checkKeyDownInput()
 {
-	Game::window->setKeyRepeatEnabled(false);
-
-	if (Keyboard::isKeyPressed(Keyboard::Escape) || Keyboard::isKeyPressed(Keyboard::P))
+	if (!pauseButtonPressed)
 	{
-		if (!getPause())
+		if (Keyboard::isKeyPressed(Keyboard::P) || Keyboard::isKeyPressed(Keyboard::Escape))
 		{
-			setPause(true);
-		}
-		else
-		{
-			setPause(false);
+			if (!pause)
+			{
+				pause = true;
+			}
+			else
+			{
+				pause = false;
+			}
+
+			pauseButtonPressed = true;
 		}
 	}
-
-	Game::window->setKeyRepeatEnabled(true);
+	else
+	{
+		if (!Keyboard::isKeyPressed(Keyboard::P) && !Keyboard::isKeyPressed(Keyboard::Escape))
+		{
+			pauseButtonPressed = false;
+		}
+	}
 }
 
 void Gameplay::setPause(bool state)
@@ -220,6 +232,8 @@ bool Gameplay::getPause()
 
 void Gameplay::update()
 {
+	checkKeyDownInput();
+
 	if (!pause)
 	{
 		if (player)
@@ -302,7 +316,6 @@ void Gameplay::update()
 
 void Gameplay::draw()
 {
-
 	for (int y = 0; y < PLATFORM_GRID_HEIGHT; y++)
 	{
 		for (int x = 0; x < PLATFORM_GRID_WIDTH; x++)
@@ -318,7 +331,6 @@ void Gameplay::draw()
 
 			if (platformGrid[y][x])
 			{
-				//Game::window->draw(platformGrid[y][x]->getRec());
 				Game::window->draw(platformGrid[y][x]->getSprite());
 			}
 		}
@@ -326,13 +338,11 @@ void Gameplay::draw()
 
 	if (player) 
 	{
-		//Game::window->draw(player->getRec());
 		Game::window->draw(player->getSprite());
 	}
 
 	for (int i = 0; i < ENEMY_AMMOUNT; i++)
 	{
-		//if (meleeEnemy[i]) Game::window->draw(meleeEnemy[i]->getRec());
 		if (meleeEnemy[i]) Game::window->draw(meleeEnemy[i]->getSprite());
 	}
 

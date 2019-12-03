@@ -3,16 +3,17 @@
 
 #include <SFML/Audio.hpp>
 
-#include "uiElements/button.h"
+#include "uiElements/displayText.h"
 
 using namespace sf;
 
-const int MENU_BUTTON_AMOUNT = 3;
-const int MENU_TEXT_SPACING = 70;
+const int MENU_TEXT_ROWS_AMOUNT = 4;
+const int MENU_TITLE_SPACING = 200;
+const int MENU_PARAGRAPH_SPACING = 70;
 
 class Menu
 {
-	Button* buttons[MENU_BUTTON_AMOUNT];
+	DisplayText* text[MENU_TEXT_ROWS_AMOUNT];
 	RectangleShape rec;
 
 public:

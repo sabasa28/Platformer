@@ -6,16 +6,18 @@
 #include "gameElements/level.h"
 #include "gameElements/player.h"
 #include "gameElements/meleeEnemy.h"
+#include "uiElements/displayText.h"
 
+const int PAUSE_TEXT_Y = 75;
 const int ENEMY_AMMOUNT = 3;
 const int BACKGROUND_SPRITE_SIZE = 100;
 const int GOAL_SIZE = 50;
-const int GOAL_SPRITE_SIZE = 128;
-
+const int GOAL_SPRITE_SIZE = GOAL_SIZE;
 
 class Gameplay
 {
 	bool pause;
+	bool pauseButtonPressed;
 	Platform* platformGrid[PLATFORM_GRID_HEIGHT][PLATFORM_GRID_WIDTH];
 	Player* player;
 	MeleeEnemy* meleeEnemy[ENEMY_AMMOUNT];

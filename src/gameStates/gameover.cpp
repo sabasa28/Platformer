@@ -9,8 +9,8 @@ GameOver::GameOver()
 		textRows[i] = NULL;
 	}
 
-	textRows[0] = new DisplayText("GAME OVER", true, SCREEN_HEIGHT / 2 - MENU_TEXT_SPACING / 2, Color::White);
-	textRows[1] = new DisplayText("Press 'Enter' to return to menu", true, textRows[0]->getUpperSide() + GAME_OVER_TEXT_SPACING, Color::White);
+	textRows[0] = new DisplayText("GAME OVER", true, SCREEN_HEIGHT / 2 - GAME_OVER_TEXT_SPACING / 2, Color::White, PARAGRAPH_FONT_SIZE);
+	textRows[1] = new DisplayText("Press 'Enter' to return to menu", true, textRows[0]->getUpperSide() + GAME_OVER_TEXT_SPACING, Color::White, PARAGRAPH_FONT_SIZE);
 
 	Game::interfaceMusic.play();
 }
@@ -33,6 +33,7 @@ void GameOver::checkKeyDownInput()
 	{
 		if (!Game::getGameStateInputActive())
 		{
+			Game::buttonSFX.play();
 			Game::setGameStateInputActive(true);
 			Game::currentGameState = menu_state;
 		}

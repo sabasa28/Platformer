@@ -14,8 +14,8 @@ class DisplayText
 	Vector2f initialPos;
 
 public:
-	DisplayText(String text, bool isTextCentered, float y, Color color);
-	DisplayText(String text, float x, float y, Color color);
+	DisplayText(String text, bool isTextCentered, float y, Color color, int fontSize);
+	DisplayText(String text, float x, float y, Color color, int fontSize);
 	~DisplayText();
 	void setPositionY(float y);
 	Vector2f getInitialPos();

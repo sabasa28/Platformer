@@ -2,11 +2,12 @@
 
 #include "general/game.h"
 
-DisplayText::DisplayText(String displayText, bool isTextCentered, float y, Color color)
+DisplayText::DisplayText(String displayText, bool isTextCentered, float y, Color color, int fontSize)
 {
 	text.setString(displayText);
 	text.setFont(Game::generalFont);
 	text.setFillColor(color);
+	text.setCharacterSize(fontSize);
 	centered = isTextCentered;
 
 	float x;
@@ -23,11 +24,12 @@ DisplayText::DisplayText(String displayText, bool isTextCentered, float y, Color
 	initialPos = text.getPosition();
 }
 
-DisplayText::DisplayText(String displayText, float x, float y, Color color)
+DisplayText::DisplayText(String displayText, float x, float y, Color color, int fontSize)
 {
 	text.setString(displayText);
 	text.setFont(Game::generalFont);
 	text.setFillColor(color);
+	text.setCharacterSize(fontSize);
 
 	centered = false;
 	
