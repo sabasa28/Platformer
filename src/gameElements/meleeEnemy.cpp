@@ -93,34 +93,6 @@ void MeleeEnemy::attack(RectangleShape target)
 	}
 }
 
-void MeleeEnemy::checkScreenLimits() //SACAR EN CASO DE NO USARLO
-{/*
-	if (getUpperSide() < 0)
-	{
-		setSpeedY(0);
-		setRecY(0);
-		jumpState = falling;
-	}*/
-
-	if (getBottomSide() > SCREEN_HEIGHT)
-	{
-		setRecY(SCREEN_HEIGHT - getRec().getSize().y);
-		//jumpState = onGround;
-	}
-
-	if (getLeftSide() < 0)
-	{
-		setRecX(0);
-		charging = false;
-	}
-
-	if (getRightSide() > SCREEN_WIDTH)
-	{
-		setRecX(SCREEN_WIDTH - getRec().getSize().x);
-		charging = false;
-	}
-}
-
 void MeleeEnemy::updateSprite()
 {
 	if (!charging)

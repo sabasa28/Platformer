@@ -10,6 +10,10 @@ RenderWindow* Game::window = NULL;
 Font Game::generalFont;
 Music Game::interfaceMusic;
 Music Game::gameplayMusic;
+SoundBuffer buttonSFXBuffer;
+Sound buttonSFX;
+SoundBuffer impactSFXBuffer;
+Sound impactSFX;
 
 Game::Game()
 {
@@ -31,6 +35,11 @@ Game::Game()
 	gameplayMusic.openFromFile("music/Friendly_Fire.ogg");
 	gameplayMusic.setVolume(50);
 	gameplayMusic.setLoop(true);
+
+	buttonSFXBuffer.loadFromFile("sounds/button.ogg");
+	buttonSFX.setBuffer(buttonSFXBuffer);
+	impactSFXBuffer.loadFromFile("sounds/impact.ogg");;
+	impactSFX.setBuffer(impactSFXBuffer);
 }
 
 Game::~Game()

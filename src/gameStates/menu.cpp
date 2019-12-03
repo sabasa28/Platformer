@@ -36,6 +36,7 @@ void Menu::checkKeyDownInput()
 	{
 		if (!Game::getGameStateInputActive())
 		{
+			Game::buttonSFX.play();
 			Game::setGameStateInputActive(true);
 			Game::currentGameState=gameplay_state;
 		}
@@ -50,11 +51,13 @@ void Menu::checkKeyDownInput()
 
 	if (Keyboard::isKeyPressed(Keyboard::C))
 	{
+		Game::buttonSFX.play();
 		Game::currentGameState=credits_state;
 	}
 
 	if (Keyboard::isKeyPressed(Keyboard::Escape))
 	{
+		Game::buttonSFX.play();
 		Game::window->close();
 	}
 

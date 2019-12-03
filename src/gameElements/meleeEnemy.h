@@ -31,7 +31,6 @@ public:
 	TargetPos updateTargetPos(RectangleShape target);
 	void updateAwakeState(RectangleShape target);
 	void attack(RectangleShape target);
-	virtual void Enemy::checkScreenLimits();
 	void updateSprite();
 	Sprite getSprite();
 };

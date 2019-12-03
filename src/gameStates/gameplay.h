@@ -1,6 +1,8 @@
 #ifndef GAMEPLAY_H
 #define GAMEPLAY_H
 
+#include <SFML/Audio.hpp>
+
 #include "gameElements/level.h"
 #include "gameElements/player.h"
 #include "gameElements/meleeEnemy.h"
@@ -26,6 +28,13 @@ class Gameplay
 	Sprite goalSprite;
 
 public:
+	static SoundBuffer footstepSFXBuffer;
+	static Sound footstepSFX;
+	static SoundBuffer jumpSFXBuffer;
+	static Sound jumpSFX;
+	static SoundBuffer coinsSFXBuffer;
+	static Sound coinsSFX;
+
 	Gameplay();
 	~Gameplay();
 	void update();

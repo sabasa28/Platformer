@@ -46,6 +46,10 @@ public:
 	static Font generalFont;
 	static Music interfaceMusic;
 	static Music gameplayMusic;
+	static SoundBuffer buttonSFXBuffer;
+	static Sound buttonSFX;
+	static SoundBuffer impactSFXBuffer;
+	static Sound impactSFX;
 
 	Game();
 	~Game();

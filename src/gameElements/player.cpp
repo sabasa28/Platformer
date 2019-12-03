@@ -13,7 +13,7 @@ Player::Player()
 {
 	rectangle.setSize({ static_cast<float>(PLAYER_WIDTH), static_cast<float>(PLAYER_HEIGHT) });
 	rectangle.setFillColor(Color::Blue);
-	rectangle.setPosition(PLATFORM_SIZE + PLAYER_WIDTH/2, static_cast<float>(SCREEN_HEIGHT - PLATFORM_SIZE - rectangle.getSize().y));
+	rectangle.setPosition(PLATFORM_SIZE * 11 + PLAYER_WIDTH/2, static_cast<float>(SCREEN_HEIGHT - PLATFORM_SIZE - rectangle.getSize().y));
 	movement.right = false;
 	movement.left = false;
 	facingRight = true;
@@ -170,13 +170,9 @@ void Player::checkKeyDownInput()
 {
 	Game::window->setKeyRepeatEnabled(false);
 
-	if (Keyboard::isKeyPressed (Keyboard::Escape))
-	{
-		Game::window->close();
-	}
-
 	if (Keyboard::isKeyPressed(Keyboard::Space))
 	{
+		Gameplay::jumpSFX.play();
 		jump();
 		setCurrentAction(Action::jumping_action);
 	}
@@ -390,14 +386,13 @@ void Player::updateSprite()
 					textureRect = new IntRect(PLAYER_SPRITE_SIZE, PLAYER_SPRITE_SIZE, PLAYER_SPRITE_SIZE, PLAYER_SPRITE_SIZE);
 					sprite.setTextureRect(*textureRect);
 					clock.restart().Zero;
-					cout << "sprite 1" << endl;
+					Gameplay::jumpSFX.play();
 				}
 				else
 				{
 					textureRect = new IntRect(0, PLAYER_SPRITE_SIZE, PLAYER_SPRITE_SIZE, PLAYER_SPRITE_SIZE);
 					sprite.setTextureRect(*textureRect);
 					clock.restart().Zero;
-					cout << "sprite 2" << endl;
 				}
 			}
 		}
@@ -420,14 +415,13 @@ void Player::updateSprite()
 					textureRect = new IntRect(PLAYER_SPRITE_SIZE * 3, PLAYER_SPRITE_SIZE, PLAYER_SPRITE_SIZE, PLAYER_SPRITE_SIZE);
 					sprite.setTextureRect(*textureRect);
 					clock.restart().Zero;
-					cout << "sprite 1" << endl;
+					Gameplay::jumpSFX.play();
 				}
 				else
 				{
 					textureRect = new IntRect(PLAYER_SPRITE_SIZE * 2, PLAYER_SPRITE_SIZE, PLAYER_SPRITE_SIZE, PLAYER_SPRITE_SIZE);
 					sprite.setTextureRect(*textureRect);
 					clock.restart().Zero;
-					cout << "sprite 2" << endl;
 				}
 			}
 		}

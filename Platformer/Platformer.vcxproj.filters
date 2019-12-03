@@ -24,9 +24,6 @@
     <ClCompile Include="..\src\gameElements\player.cpp">
       <Filter>gameElements</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\gameElements\proyectiles.cpp">
-      <Filter>gameElements</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\gameStates\gameover.cpp">
       <Filter>gameStates</Filter>
     </ClCompile>
@@ -67,9 +64,6 @@
       <Filter>gameElements</Filter>
     </ClInclude>
     <ClInclude Include="..\src\gameElements\player.h">
-      <Filter>gameElements</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\gameElements\proyectiles.h">
       <Filter>gameElements</Filter>
     </ClInclude>
     <ClInclude Include="..\src\gameStates\gameover.h">

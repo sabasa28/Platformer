@@ -2,6 +2,12 @@
 
 #include "general/game.h"
 
+SoundBuffer footstepSFXBuffer;
+Sound footstepSFX;
+SoundBuffer jumpSFXBuffer;
+Sound jumpSFX;
+SoundBuffer coinsSFXBuffer;
+Sound coinsSFX;
 Gameplay::Gameplay()
 {
 	for (int y = 0; y < PLATFORM_GRID_HEIGHT; y++)
@@ -14,104 +20,103 @@ Gameplay::Gameplay()
 			{
 			case 2:
 				//if (x >= 1)
-				if (x == 1)
+				if (x == 11)
 				{
 					platformGrid[y][x] = new Platform(x, y);
 				}
 				break;
 			case 4:
-				if (x == 4)
+				if (x == 14)
 				{
 					platformGrid[y][x] = new Platform(x, y);
 				}
 				break;
 			case 5:
-				if (x == 8)
-				{
-					platformGrid[y][x] = new Platform(x, y);
-				}
-				break;
-			case 6:
-				if (x == 2)
-				{
-					platformGrid[y][x] = new Platform(x, y);
-				}
-				break;
-			case 8:
-				if (x == 4)
-				{
-					platformGrid[y][x] = new Platform(x, y);
-				}
-				break;
-			case 9:
-				if (x == 9)
-				{
-					platformGrid[y][x] = new Platform(x, y);
-				}
-				break;
-			case 11:
-				if (x == 9)
-				{
-					platformGrid[y][x] = new Platform(x, y);
-				}
-				break;
-			case 12:
-				if (x == 6)
-				{
-					platformGrid[y][x] = new Platform(x, y);
-				}
-				break;
-			case 14:
-				if (x == 2)
-				{
-					platformGrid[y][x] = new Platform(x, y);
-				}
-				if (x == 9)
-				{
-					platformGrid[y][x] = new Platform(x, y);
-				}
-				break;
-			case 15:
-				if (x == 15)
-				{
-					platformGrid[y][x] = new Platform(x, y);
-				}
-				if (x == 16)
-				{
-					platformGrid[y][x] = new Platform(x, y);
-				}
-				if (x == 17)
-				{
-					platformGrid[y][x] = new Platform(x, y);
-				}
-				break;
-			case 16:
-				if (x == 4)
-				{
-					platformGrid[y][x] = new Platform(x, y);
-				}
-				if (x == 14)
-				{
-					platformGrid[y][x] = new Platform(x, y);
-				}
 				if (x == 18)
 				{
 					platformGrid[y][x] = new Platform(x, y);
 				}
 				break;
+			case 6:
+				if (x == 11)
+				{
+					platformGrid[y][x] = new Platform(x, y);
+				}
+				break;
+			case 8:
+				if (x == 14)
+				{
+					platformGrid[y][x] = new Platform(x, y);
+				}
+				break;
+			case 9:
+				if (x == 19)
+				{
+					platformGrid[y][x] = new Platform(x, y);
+				}
+				break;
+			case 11:
+				if (x == 19)
+				{
+					platformGrid[y][x] = new Platform(x, y);
+				}
+				break;
+			case 13:
+				if (x == 16)
+				{
+					platformGrid[y][x] = new Platform(x, y);
+				}
+				break;
+			case 14:
+				if (x == 12)
+				{
+					platformGrid[y][x] = new Platform(x, y);
+				}
+				if (x == 19)
+				{
+					platformGrid[y][x] = new Platform(x, y);
+				}
+				break;
+			case 15:
+				if (x == 25)
+				{
+					platformGrid[y][x] = new Platform(x, y);
+				}
+				if (x == 26)
+				{
+					platformGrid[y][x] = new Platform(x, y);
+				}
+				if (x == 27)
+				{
+					platformGrid[y][x] = new Platform(x, y);
+				}
+				break;
+			case 16:
+				if (x == 14)
+				{
+					platformGrid[y][x] = new Platform(x, y);
+				}
+				if (x == 24)
+				{
+					platformGrid[y][x] = new Platform(x, y);
+				}
+				if (x == 28)
+				{
+					platformGrid[y][x] = new Platform(x, y);
+				}
+				break;
 			case 17:
-				if (x == 4)
+				if (x == 14)
 				{
 					platformGrid[y][x] = new Platform(x, y);
 				}
 				break;
 			case 19:
-				if (x == 15)
+				if (x == 25)
 				{
 					platformGrid[y][x] = new Platform(x, y);
 				}
-				if (x == 17)
-				if (x > 14 && x < 20)
+				if (x == 27)
 				{
 					platformGrid[y][x] = new Platform(x, y);
 				}
@@ -133,9 +138,9 @@ Gameplay::Gameplay()
 		meleeEnemy[i] = NULL;
 	}
 
-	meleeEnemy[0] = new MeleeEnemy({ 400.0f, -200.0f });
-	meleeEnemy[1] = new MeleeEnemy({ 400.0f, 100.0f });
-	meleeEnemy[2] = new MeleeEnemy({ 900.0f, -800.0f });
+	meleeEnemy[0] = new MeleeEnemy({ 1400.0f, -200.0f });
+	meleeEnemy[1] = new MeleeEnemy({ 1400.0f, 100.0f });
+	meleeEnemy[2] = new MeleeEnemy({ 1900.0f, -800.0f });
 
 	goal = new RectangleShape({ static_cast<float>(GOAL_SIZE), static_cast<float>(GOAL_SIZE) });
 	goal->setPosition({ 1600.0f + goal->getGlobalBounds().width/2 , -1000.0f });
@@ -147,8 +152,15 @@ Gameplay::Gameplay()
 	goalSprite.setPosition(goal->getPosition().x - (GOAL_SPRITE_SIZE - GOAL_SIZE) / 2, goal->getPosition().y);
 
 	camera = new View({ player->getCenterX(), player->getCenterY() - SCREEN_HEIGHT / 6.0f }, { static_cast<float>(SCREEN_WIDTH), static_cast<float>(SCREEN_HEIGHT) });
-	Game::window->setView(*camera);
 
+	footstepSFXBuffer.loadFromFile("sounds/footstep.ogg");
+	footstepSFX.setBuffer(footstepSFXBuffer);
+	jumpSFXBuffer.loadFromFile("sounds/jump.ogg");
+	jumpSFX.setBuffer(jumpSFXBuffer);
+	coinsSFXBuffer.loadFromFile("sounds/coins.ogg");
+	coinsSFX.setBuffer(coinsSFXBuffer);
+
+	Game::window->setView(*camera);
 	Game::gameplayMusic.play();
 }
 
@@ -302,7 +314,6 @@ float Gameplay::getCollisionMargin(float jumpingSpeed)
 
 void Gameplay::checkGameplayColls(Platform* plat[][PLATFORM_GRID_WIDTH])
 {
-
 	if (player)
 	{
 		for (int y = 0; y < PLATFORM_GRID_HEIGHT; y++)
@@ -346,7 +357,8 @@ void Gameplay::checkGameplayColls(Platform* plat[][PLATFORM_GRID_WIDTH])
 			{
 				if (player->colliding(meleeEnemy[i]->getRec()))
 				{
-					Game::currentGameState=gameOver_state;
+					Game::impactSFX.play();
+					Game::currentGameState = gameOver_state;
 				}
 			}
 		}
@@ -355,8 +367,14 @@ void Gameplay::checkGameplayColls(Platform* plat[][PLATFORM_GRID_WIDTH])
 		{
 			if (player->colliding(*goal))
 			{
-				Game::currentGameState=victory_state;
+				Gameplay::coinsSFX.play();
+				Game::currentGameState = victory_state;
 			}
+		}
+
+		if (player->getUpperSide() > SCREEN_HEIGHT + PLATFORM_SIZE * 3)
+		{
+			Game::currentGameState = gameOver_state;
 		}
 	}
 

@@ -32,7 +32,6 @@ public:
 	void setAwake(bool newAwake);
 	void setSpeed(Vector2f newSpeed);
 	void updatePos(RectangleShape target);
-	virtual void checkScreenLimits() = 0;
 	bool getOnGround();
 	void setOnGround(bool state);
 	virtual void updateAwakeState(RectangleShape target) = 0;
