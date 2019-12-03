@@ -172,7 +172,6 @@ void Player::checkKeyDownInput()
 
 	if (Keyboard::isKeyPressed(Keyboard::Space))
 	{
-		Gameplay::jumpSFX.play();
 		jump();
 		setCurrentAction(Action::jumping_action);
 	}
@@ -217,6 +216,7 @@ void Player::jump()
 {
 	if (jumpState == onGround)
 	{
+		Gameplay::jumpSFX.play();
 		jumpState = start;
 	}
 }

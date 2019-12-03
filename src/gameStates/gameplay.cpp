@@ -205,8 +205,8 @@ Gameplay::~Gameplay()
 	if (goal) delete goal;
 
 	if (camera) delete camera;
-	Game::window->setView(Game::window->getDefaultView());
 
+	Game::window->setView(Game::window->getDefaultView());
 	Game::gameplayMusic.stop();
 }
 
