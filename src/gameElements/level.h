@@ -5,6 +5,8 @@
 
 using namespace sf;
 
+namespace game
+{
 const int PLATFORM_GRID_WIDTH = 50;
 const int PLATFORM_GRID_HEIGHT = 50;
 const int PLATFORM_SIZE = 100;
@@ -32,21 +34,23 @@ class Platform
 	Texture texture;
 	IntRect* textureRect;
 	Sprite sprite;
+
 public:
 	Platform(int x, int y);
 	~Platform();
 	RectangleShape getRec();
-	NearestSide checkSideProximity(RectangleShape rec, float collisionMargin);
-	void setRelativePlayerJumpState(RelativePlayerJumpState jumpState);
-	RelativePlayerJumpState getRelativePlayerJumpState();
 	float getUpperSide();
 	float getBottomSide();
 	float getLeftSide();
 	float getRightSide();
 	float getCenterX();
 	float getCenterY();
+	NearestSide checkSideProximity(RectangleShape rec, float collisionMargin);
+	void setRelativePlayerJumpState(RelativePlayerJumpState jumpState);
+	RelativePlayerJumpState getRelativePlayerJumpState();
 	Sprite getSprite();
 };
+}
 
 #endif //LEVEL_H
 

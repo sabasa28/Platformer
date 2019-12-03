@@ -1,9 +1,9 @@
 #include "meleeEnemy.h"
 
-#include <cmath>
-
 #include "general/game.h"
 
+namespace game
+{
 MeleeEnemy::MeleeEnemy()
 {
 	charging = false;
@@ -28,14 +28,14 @@ MeleeEnemy::~MeleeEnemy()
 {
 }
 
-bool MeleeEnemy::getChargingState()
-{
-	return charging;
-}
-
 void MeleeEnemy::setChargingState(bool chargeState)
 {
 	charging = chargeState;
+}
+
+bool MeleeEnemy::getChargingState()
+{
+	return charging;
 }
 
 void MeleeEnemy::updateCharginState() 
@@ -112,4 +112,5 @@ void MeleeEnemy::updateSprite()
 Sprite MeleeEnemy::getSprite()
 {
 	return sprite;
+}
 }

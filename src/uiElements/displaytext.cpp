@@ -2,6 +2,8 @@
 
 #include "general/game.h"
 
+namespace game
+{
 DisplayText::DisplayText(String displayText, bool isTextCentered, float y, Color color, int fontSize)
 {
 	text.setString(displayText);
@@ -86,4 +88,5 @@ float DisplayText::getTextWidth()
 void DisplayText::draw()
 {
 	Game::window->draw(text);
+}
 }

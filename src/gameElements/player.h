@@ -1,12 +1,12 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include <SFML/Graphics.hpp>
-
 #include "level.h"
 
 using namespace sf;
 
+namespace game
+{
 const int PLAYER_WIDTH = 50;
 const int PLAYER_HEIGHT = 80;
 const int PLAYER_SPRITE_SIZE = 128;
@@ -56,45 +56,46 @@ class Player
 public:
 	Player();
 	~Player();
+	RectangleShape getRec();
 	void setRecPos(float x, float y);
 	void setRecPos(Vector2f pos);
 	void setRecX(float x);
-	void setRecY(float y);
 	void addToRecX(float x);
+	void setRecY(float y);
 	void addToRecY(float y);
-	void setSpeedX(float x);
-	void setSpeedY(float y);
-	float getSpeedX();
-	float getSpeedY();
-	RectangleShape getRec();
-	Sprite getSprite();
-	void setCurrentAction(Action action);
-	Action getCurrentAction();
-	void setLastFrameAction(Action action);
-	Action getLastFrameAction();
-	Vector2f getSpeed();
-	JumpState getJumpState();
-	float getJumpingSpeed();
-	void checkKeyPressedInput();
-	void checkKeyDownInput();
-	void checkKeyReleasedInput();
-	void setMoveRight(bool state);
-	void setMoveLeft(bool state);
-	void setFacingRight(bool state);
-	bool getFacingRight();
-	void jump();
-	void setJumpState(JumpState state);
-	void updateMovement();
-	void updatePosition();
-	bool colliding(RectangleShape rec);
-	bool fallingOffPlatform(Platform* platform);
 	float getUpperSide();
 	float getBottomSide();
 	float getLeftSide();
 	float getRightSide();
 	float getCenterX();
 	float getCenterY();
+	void setMoveRight(bool state);
+	void setMoveLeft(bool state);
+	Vector2f getSpeed();
+	void setSpeedX(float x);
+	float getSpeedX();
+	void setSpeedY(float y);
+	float getSpeedY();
+	void setFacingRight(bool state);
+	void jump();
+	void setJumpState(JumpState state);
+	JumpState getJumpState();
+	float getJumpingSpeed();
+	void setCurrentAction(Action action);
+	Action getCurrentAction();
+	void setLastFrameAction(Action action);
+	Action getLastFrameAction();
+	void checkKeyPressedInput();
+	void checkKeyDownInput();
+	void checkKeyReleasedInput();
+	bool getFacingRight();
+	void updateMovement();
+	void updatePosition();
+	bool colliding(RectangleShape rec);
+	bool fallingOffPlatform(Platform* platform);
 	void updateSprite();
+	Sprite getSprite();
 };
+}
 
 #endif //PLAYER_H

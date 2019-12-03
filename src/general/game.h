@@ -2,6 +2,7 @@
 #define GAME_H
 
 #include <iostream>
+
 #include <SFML/Audio.hpp>
 
 #include "gameStates/menu.h"
@@ -13,6 +14,8 @@
 using namespace std;
 using namespace sf;
 
+namespace game
+{
 const int SCREEN_WIDTH = 1000;
 const int SCREEN_HEIGHT = 600;
 const int PARAGRAPH_FONT_SIZE = 30;
@@ -31,12 +34,12 @@ enum GameState
 
 class Game
 {
+	static bool gameStateInputActive;
 	Menu* menu;
 	Credits* credits;
 	Gameplay* gameplay;
 	GameOver* gameover;
 	Victory* victory;
-	static bool gameStateInputActive;
 
 	void update();
 	void draw();
@@ -55,10 +58,11 @@ public:
 
 	Game();
 	~Game();
-	void execute();
 	static void setGameStateInputActive(bool state);
 	static bool getGameStateInputActive();
 	static void switchMusicState();
+	void execute();
 };
+}
 
 #endif //GAME_H

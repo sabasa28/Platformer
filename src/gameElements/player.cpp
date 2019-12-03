@@ -1,11 +1,9 @@
 #include "player.h"
 
-#include <SFML/Graphics.hpp>
-
 #include "general/game.h"
 
-#include <cmath>
-
+namespace game
+{
 float disToPlat1;
 float disToPlat2;
 
@@ -34,6 +32,11 @@ Player::~Player()
 {
 }
 
+RectangleShape Player::getRec()
+{
+	return rectangle;
+}
+
 void Player::setRecPos(float x, float y)
 {
 	rectangle.setPosition(x, y);
@@ -49,14 +52,14 @@ void Player::setRecX(float x)
 	rectangle.setPosition(x, rectangle.getPosition().y);
 }
 
-void Player::setRecY(float y)
-{
-	rectangle.setPosition(rectangle.getPosition().x, y);
-}
-
 void Player::addToRecX(float x)
 {
 	rectangle.setPosition(rectangle.getPosition().x + x, rectangle.getPosition().y);
+}
+
+void Player::setRecY(float y)
+{
+	rectangle.setPosition(rectangle.getPosition().x, y);
 }
 
 void Player::addToRecY(float y)
@@ -64,9 +67,49 @@ void Player::addToRecY(float y)
 	rectangle.setPosition(rectangle.getPosition().x, rectangle.getPosition().y + y);
 }
 
-void Player::setSpeedY(float y) 
+float Player::getUpperSide()
 {
-	speed.y = y;
+	return rectangle.getPosition().y;
+}
+
+float Player::getBottomSide()
+{
+	return getUpperSide() + rectangle.getSize().y;
+}
+
+float Player::getLeftSide()
+{
+	return rectangle.getPosition().x;
+}
+
+float Player::getRightSide()
+{
+	return getLeftSide() + rectangle.getSize().x;
+}
+
+float Player::getCenterX()
+{
+	return getLeftSide() + rectangle.getSize().x / 2;
+}
+
+float Player::getCenterY()
+{
+	return getUpperSide() + rectangle.getSize().y / 2;
+}
+
+void Player::setMoveRight(bool state)
+{
+	movement.right = state;
+}
+
+void Player::setMoveLeft(bool state)
+{
+	movement.left = state;
+}
+
+Vector2f Player::getSpeed()
+{
+	return speed;
 }
 
 void Player::setSpeedX(float x)
@@ -79,19 +122,43 @@ float Player::getSpeedX()
 	return speed.x;
 }
 
-Vector2f Player::getSpeed()
+void Player::setSpeedY(float y)
 {
-	return speed;
+	speed.y = y;
 }
 
-RectangleShape Player::getRec()
+float Player::getSpeedY()
 {
-	return rectangle;
+	return speed.y;
 }
 
-Sprite Player::getSprite()
+void Player::setFacingRight(bool state)
 {
-	return sprite;
+	facingRight = state;
+}
+
+void Player::jump()
+{
+	if (jumpState == onGround)
+	{
+		Gameplay::jumpSFX.play();
+		jumpState = start;
+	}
+}
+
+void Player::setJumpState(JumpState state)
+{
+	jumpState = state;
+}
+
+JumpState Player::getJumpState()
+{
+	return jumpState;
+}
+
+float Player::getJumpingSpeed()
+{
+	return jumpingSpeed;
 }
 
 void Player::setCurrentAction(Action action)
@@ -112,21 +179,6 @@ void Player::setLastFrameAction(Action action)
 Action Player::getLastFrameAction()
 {
 	return lastFrameAction;
-}
-
-float Player::getSpeedY()
-{
-	return speed.y;
-}
-
-JumpState Player::getJumpState()
-{
-	return jumpState;
-}
-
-float Player::getJumpingSpeed()
-{
-	return jumpingSpeed;
 }
 
 void Player::checkKeyPressedInput()
@@ -192,38 +244,9 @@ void Player::checkKeyReleasedInput()
 	}
 }
 
-void Player::setMoveRight(bool state)
-{
-	movement.right = state;
-}
-
-void Player::setMoveLeft(bool state)
-{
-	movement.left = state;
-}
-
-void Player::setFacingRight(bool state)
-{
-	facingRight = state;
-}
-
 bool Player::getFacingRight()
 {
 	return facingRight;
-}
-
-void Player::jump()
-{
-	if (jumpState == onGround)
-	{
-		Gameplay::jumpSFX.play();
-		jumpState = start;
-	}
-}
-
-void Player::setJumpState(JumpState state)
-{
-	jumpState = state;
 }
 
 void Player::updateMovement()
@@ -293,36 +316,6 @@ bool Player::fallingOffPlatform(Platform* platform)
 	{
 		return false;
 	}
-}
-
-float Player::getUpperSide()
-{
-	return rectangle.getPosition().y;
-}
-
-float Player::getBottomSide()
-{
-	return getUpperSide() + rectangle.getSize().y;
-}
-
-float Player::getLeftSide()
-{
-	return rectangle.getPosition().x;
-}
-
-float Player::getRightSide()
-{
-	return getLeftSide() + rectangle.getSize().x;
-}
-
-float Player::getCenterX()
-{
-	return getLeftSide() + rectangle.getSize().x / 2;
-}
-
-float Player::getCenterY()
-{
-	return getUpperSide() + rectangle.getSize().y / 2;
 }
 
 void Player::updateSprite()
@@ -427,4 +420,10 @@ void Player::updateSprite()
 	}
 
 	sprite.setPosition(rectangle.getPosition().x - (PLAYER_SPRITE_SIZE - PLAYER_WIDTH) / 2, rectangle.getPosition().y - PLAYER_SPRITE_Y_SETOFF);
+}
+
+Sprite Player::getSprite()
+{
+	return sprite;
+}
 }

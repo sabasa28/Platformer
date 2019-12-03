@@ -1,12 +1,12 @@
 #ifndef GAME_OVER_H
 #define GAME_OVER_H
 
-#include <SFML/Graphics.hpp>
-
 #include "uiElements/displaytext.h"
 
 using namespace sf;
 
+namespace game
+{
 const int GAME_OVER_TEXT_ROWS_AMOUNT = 2;
 const int GAME_OVER_TEXT_SPACING = 50;
 
@@ -21,5 +21,6 @@ public:
 	void update();
 	void draw();
 };
+}
 
 #endif //GAME_OVER_H

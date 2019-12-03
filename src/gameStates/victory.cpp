@@ -2,6 +2,8 @@
 
 #include "general/game.h"
 
+namespace game
+{
 Victory::Victory()
 {
 	for (int i = 0; i < VICTORY_TEXT_ROWS_AMOUNT; i++)
@@ -55,4 +57,5 @@ void Victory::draw()
 	{
 		if (textRows[i]) textRows[i]->draw();
 	}
+}
 }

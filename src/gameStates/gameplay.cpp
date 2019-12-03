@@ -2,6 +2,8 @@
 
 #include "general/game.h"
 
+namespace game
+{
 SoundBuffer Gameplay::footstepSFXBuffer;
 Sound Gameplay::footstepSFX;
 SoundBuffer Gameplay::jumpSFXBuffer;
@@ -9,9 +11,13 @@ Sound Gameplay::jumpSFX;
 SoundBuffer Gameplay::coinsSFXBuffer;
 Sound Gameplay::coinsSFX;
 
+static float getCollisionMargin(float jumpingSpeed)
+{
+	return jumpingSpeed / 3;
+}
+
 Gameplay::Gameplay()
 {
-	paused = false;
 	pauseButtonPressed = false;
 	muteButtonPressed = false;
 
@@ -143,7 +149,6 @@ Gameplay::Gameplay()
 	{
 		meleeEnemy[i] = NULL;
 	}
-
 	meleeEnemy[0] = new MeleeEnemy({ 1400.0f, -200.0f });
 	meleeEnemy[1] = new MeleeEnemy({ 1400.0f, 100.0f });
 	meleeEnemy[2] = new MeleeEnemy({ 1900.0f, -800.0f });
@@ -157,22 +162,20 @@ Gameplay::Gameplay()
 	goalSprite.setTextureRect(*goalTextureRect);
 	goalSprite.setPosition(goal->getPosition().x - (GOAL_SPRITE_SIZE - GOAL_SIZE) / 2, goal->getPosition().y);
 
-	camera = new View({ player->getCenterX(), player->getCenterY() - SCREEN_HEIGHT / 6.0f }, { static_cast<float>(SCREEN_WIDTH), static_cast<float>(SCREEN_HEIGHT) });
-
+	paused = false;
+	pauseRec.setSize(PAUSE_SIZE);
+	pauseRec.setPosition(PAUSE_POS);
+	pauseRec.setFillColor(Color::Black);
 	for (int i = 0; i < PAUSE_TEXT_AMMOUNT; i++)
 	{
 		pauseTexts[i] = NULL;
 	}
-
 	pauseTexts[0] = new DisplayText("PAUSED", true, PAUSE_TEXT_Y, Color::Yellow, PAUSE_FONT_SIZE);
 	pauseTexts[1] = new DisplayText("\"Enter\" to go back to menu", true, pauseTexts[0]->getBottomSide() + PAUSE_SPACE_BETWEEN_TEXT, Color::White, PAUSE_FONT_SIZE);
 	pauseTexts[2] = new DisplayText("\"M\" to mute/unmute", true, pauseTexts[1]->getBottomSide() + PAUSE_SPACE_BETWEEN_TEXT, Color::White, PAUSE_FONT_SIZE);
 	pauseTexts[3] = new DisplayText("\"Escape\" to unpause", true, pauseTexts[2]->getBottomSide() + PAUSE_SPACE_BETWEEN_TEXT, Color::White, PAUSE_FONT_SIZE);
 
-	pauseRec.setSize(PAUSE_SIZE);
-	pauseRec.setPosition(PAUSE_POS);
-	pauseRec.setFillColor(Color::Black);
-
+	camera = new View({ player->getCenterX(), player->getCenterY() - SCREEN_HEIGHT / 6.0f }, { static_cast<float>(SCREEN_WIDTH), static_cast<float>(SCREEN_HEIGHT) });
 
 	footstepSFXBuffer.loadFromFile("sounds/footstep.ogg");
 	footstepSFX.setBuffer(footstepSFXBuffer);
@@ -204,7 +207,15 @@ Gameplay::~Gameplay()
 
 	if (goal) delete goal;
 
+	for (int i = 0; i < PAUSE_TEXT_AMMOUNT; i++)
+	{
+		if (pauseTexts[i]) delete pauseTexts[i];
+	}
+
 	if (camera) delete camera;
+
+	if (backgroundTextureRect) delete backgroundTextureRect;
+	if (goalTextureRect) delete goalTextureRect;
 
 	Game::window->setView(Game::window->getDefaultView());
 	Game::gameplayMusic.stop();
@@ -257,6 +268,105 @@ void Gameplay::checkKeyDownInput()
 	}
 }
 
+void Gameplay::checkGameplayColls(Platform* plat[][PLATFORM_GRID_WIDTH])
+{
+	if (player)
+	{
+		for (int y = 0; y < PLATFORM_GRID_HEIGHT; y++)
+		{
+			for (int x = 0; x < PLATFORM_GRID_WIDTH; x++)
+			{
+				if (platformGrid[y][x])
+				{
+					platformGrid[y][x]->setRelativePlayerJumpState(falling_relative);
+
+					if (player->colliding(platformGrid[y][x]->getRec()))
+					{
+						switch (platformGrid[y][x]->checkSideProximity(player->getRec(), getCollisionMargin(player->getJumpingSpeed())))
+						{
+						case Top:
+							platformGrid[y][x]->setRelativePlayerJumpState(onGround_relative);
+							player->setJumpState(onGround);
+							player->setRecY(platformGrid[y][x]->getUpperSide() - player->getRec().getSize().y);
+							break;
+						case Bottom:
+							player->setSpeedY(0);
+							player->setRecY(platformGrid[y][x]->getBottomSide());
+							break;
+						case Right:
+							player->setSpeedX(0);
+							player->setRecX(platformGrid[y][x]->getRightSide());
+							break;
+						case Left:
+							player->setSpeedX(0);
+							player->setRecX(platformGrid[y][x]->getLeftSide() - player->getRec().getSize().x);
+							break;
+						}
+					}
+				}
+			}
+		}
+
+		for (int i = 0; i < ENEMY_AMMOUNT; i++)
+		{
+			if (meleeEnemy[i])
+			{
+				if (player->colliding(meleeEnemy[i]->getRec()))
+				{
+					Game::impactSFX.play();
+					Game::currentGameState = gameOver_state;
+				}
+			}
+		}
+
+		if (goal)
+		{
+			if (player->colliding(*goal))
+			{
+				Gameplay::coinsSFX.play();
+				Game::currentGameState = victory_state;
+			}
+		}
+
+		if (player->getUpperSide() > SCREEN_HEIGHT + PLATFORM_SIZE * 3)
+		{
+			Game::currentGameState = gameOver_state;
+		}
+	}
+
+	bool OnAnyPlatform = false;
+	for (int y = 0; y < PLATFORM_GRID_HEIGHT; y++)
+	{
+		for (int x = 0; x < PLATFORM_GRID_WIDTH; x++)
+		{
+			if (platformGrid[y][x])
+			{
+				if (platformGrid[y][x]->getRelativePlayerJumpState() == onGround)
+				{
+					OnAnyPlatform = true;
+				}
+			}
+		}
+	}
+
+	for (int y = 0; y < PLATFORM_GRID_HEIGHT; y++)
+	{
+		for (int x = 0; x < PLATFORM_GRID_WIDTH; x++)
+		{
+			if (platformGrid[y][x])
+			{
+				if (player)
+				{
+					if (player->fallingOffPlatform(plat[y][x]) && OnAnyPlatform == false && player->getJumpState() != start)
+					{
+						player->setJumpState(falling);
+					}
+				}
+			}
+		}
+	}
+}
+
 void Gameplay::setPause(bool state)
 {
 	paused = state;
@@ -265,6 +375,16 @@ void Gameplay::setPause(bool state)
 bool Gameplay::getPause()
 {
 	return paused;
+}
+
+void Gameplay::centerPause()
+{
+	if (pauseTexts[0]) pauseTexts[0]->setPosition({ camera->getCenter().x - pauseTexts[0]->getTextWidth() / 2.0f, camera->getCenter().y - PAUSE_TEXT_Y });
+	if (pauseTexts[1]) pauseTexts[1]->setPosition({ camera->getCenter().x - pauseTexts[1]->getTextWidth() / 2.0f, pauseTexts[0]->getBottomSide() + PAUSE_SPACE_BETWEEN_TEXT });
+	if (pauseTexts[2]) pauseTexts[2]->setPosition({ camera->getCenter().x - pauseTexts[2]->getTextWidth() / 2.0f, pauseTexts[1]->getBottomSide() + PAUSE_SPACE_BETWEEN_TEXT });
+	if (pauseTexts[3]) pauseTexts[3]->setPosition({ camera->getCenter().x - pauseTexts[3]->getTextWidth() / 2.0f, pauseTexts[2]->getBottomSide() + PAUSE_SPACE_BETWEEN_TEXT });
+
+	pauseRec.setPosition({ camera->getCenter().x - PAUSE_SIZE.x / 2.0f, camera->getCenter().y - PAUSE_SIZE.y / 2.0f });
 }
 
 void Gameplay::update()
@@ -373,6 +493,12 @@ void Gameplay::update()
 
 }
 
+void Gameplay::drawBackground(int x, int y)
+{
+	backgroundSprite.setPosition(static_cast<float>(PLATFORM_SIZE) * x, PLATFORM_MIN_Y_POS - static_cast<float>(PLATFORM_SIZE) * y);
+	Game::window->draw(backgroundSprite);
+}
+
 void Gameplay::draw()
 {
 	for (int y = 0; y < PLATFORM_GRID_HEIGHT; y++)
@@ -416,123 +542,4 @@ void Gameplay::draw()
 		}
 	}
 }
-
-void Gameplay::centerPause()
-{
-	if (pauseTexts[0]) pauseTexts[0]->setPosition({ camera->getCenter().x - pauseTexts[0]->getTextWidth() / 2.0f, camera->getCenter().y - PAUSE_TEXT_Y });
-	if (pauseTexts[1]) pauseTexts[1]->setPosition({ camera->getCenter().x - pauseTexts[1]->getTextWidth() / 2.0f, pauseTexts[0]->getBottomSide() + PAUSE_SPACE_BETWEEN_TEXT });
-	if (pauseTexts[2]) pauseTexts[2]->setPosition({ camera->getCenter().x - pauseTexts[2]->getTextWidth() / 2.0f, pauseTexts[1]->getBottomSide() + PAUSE_SPACE_BETWEEN_TEXT });
-	if (pauseTexts[3]) pauseTexts[3]->setPosition({ camera->getCenter().x - pauseTexts[3]->getTextWidth() / 2.0f, pauseTexts[2]->getBottomSide() + PAUSE_SPACE_BETWEEN_TEXT });
-
-	pauseRec.setPosition({ camera->getCenter().x - PAUSE_SIZE.x / 2.0f, camera->getCenter().y - PAUSE_SIZE.y / 2.0f });
-}
-
-float Gameplay::getCollisionMargin(float jumpingSpeed)
-{
-	return jumpingSpeed / 3;
-}
-
-void Gameplay::checkGameplayColls(Platform* plat[][PLATFORM_GRID_WIDTH])
-{
-	if (player)
-	{
-		for (int y = 0; y < PLATFORM_GRID_HEIGHT; y++)
-		{
-			for (int x = 0; x < PLATFORM_GRID_WIDTH; x++)
-			{
-				if (platformGrid[y][x])
-				{
-					platformGrid[y][x]->setRelativePlayerJumpState(falling_relative);
-
-					if (player->colliding(platformGrid[y][x]->getRec()))
-					{
-						switch (platformGrid[y][x]->checkSideProximity(player->getRec(), getCollisionMargin(player->getJumpingSpeed())))
-						{
-						case Top:
-							platformGrid[y][x]->setRelativePlayerJumpState(onGround_relative);
-							player->setJumpState(onGround);
-							player->setRecY(platformGrid[y][x]->getUpperSide() - player->getRec().getSize().y);
-							break;
-						case Bottom:
-							player->setSpeedY(0);
-							player->setRecY(platformGrid[y][x]->getBottomSide());
-							break;
-						case Right:
-							player->setSpeedX(0);
-							player->setRecX(platformGrid[y][x]->getRightSide());
-							break;
-						case Left:
-							player->setSpeedX(0);
-							player->setRecX(platformGrid[y][x]->getLeftSide() - player->getRec().getSize().x);
-							break;
-						}
-					}
-				}
-			}
-		}
-
-		for (int i = 0; i < ENEMY_AMMOUNT; i++)
-		{
-			if (meleeEnemy[i])
-			{
-				if (player->colliding(meleeEnemy[i]->getRec()))
-				{
-					Game::impactSFX.play();
-					Game::currentGameState = gameOver_state;
-				}
-			}
-		}
-
-		if (goal)
-		{
-			if (player->colliding(*goal))
-			{
-				Gameplay::coinsSFX.play();
-				Game::currentGameState = victory_state;
-			}
-		}
-
-		if (player->getUpperSide() > SCREEN_HEIGHT + PLATFORM_SIZE * 3)
-		{
-			Game::currentGameState = gameOver_state;
-		}
-	}
-
-	bool OnAnyPlatform = false;
-	for (int y = 0; y < PLATFORM_GRID_HEIGHT; y++)
-	{
-		for (int x = 0; x < PLATFORM_GRID_WIDTH; x++)
-		{
-			if (platformGrid[y][x])
-			{
-				if (platformGrid[y][x]->getRelativePlayerJumpState() == onGround)
-				{
-					OnAnyPlatform = true;
-				}
-			}
-		}
-	}
-
-	for (int y = 0; y < PLATFORM_GRID_HEIGHT; y++)
-	{
-		for (int x = 0; x < PLATFORM_GRID_WIDTH; x++)
-		{
-			if (platformGrid[y][x])
-			{
-				if (player)
-				{
-					if (player->fallingOffPlatform(plat[y][x]) && OnAnyPlatform == false && player->getJumpState() != start)
-					{
-						player->setJumpState(falling);
-					}
-				}
-			}
-		}
-	}
-}
-
-void Gameplay::drawBackground(int x, int y)
-{
-	backgroundSprite.setPosition(static_cast<float>(PLATFORM_SIZE) * x, PLATFORM_MIN_Y_POS - static_cast<float>(PLATFORM_SIZE) * y);
-	Game::window->draw(backgroundSprite);
 }

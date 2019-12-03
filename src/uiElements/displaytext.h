@@ -5,6 +5,8 @@
 
 using namespace sf;
 
+namespace game
+{
 const int TEXT_LEFT_POSITION = 50;
 
 class DisplayText
@@ -27,5 +29,6 @@ public:
 	float getTextWidth();
 	void draw();
 };
+}
 
 #endif //DISPLAY_TEXT_H

@@ -1,9 +1,9 @@
 #include "game.h"
 
-#include <SFML/Graphics.hpp>
-
 #include "gameElements/player.h"
 
+namespace game
+{
 Event Game::event;
 GameState Game::currentGameState = menu_state;
 bool Game::gameStateInputActive = false;
@@ -21,19 +21,19 @@ Game::Game()
 	window = new RenderWindow(VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "Platformer Game");
 	if (window) window->setFramerateLimit(60);
 
+	gameStateInputActive = false;
+
 	menu = NULL;
 	credits = NULL;
 	gameplay = NULL;
 	gameover = NULL;
 	victory = NULL;
-	gameStateInputActive = false;
 
 	generalFont.loadFromFile("fonts/aescrawl.ttf");
 
 	interfaceMusic.openFromFile("music/santi_song.ogg");
 	interfaceMusic.setVolume(INTERFACE_MUSIC_INIT_VOLUME);
 	interfaceMusic.setLoop(true);
-
 	gameplayMusic.openFromFile("music/Friendly_Fire.ogg");
 	gameplayMusic.setVolume(50);
 	gameplayMusic.setLoop(true);
@@ -165,15 +165,6 @@ void Game::draw()
 	window->display();
 }
 
-void Game::execute()
-{
-	while (window->isOpen())
-	{
-		update();
-		draw();
-	}
-}
-
 void Game::setGameStateInputActive(bool state)
 {
 	gameStateInputActive = state;
@@ -196,4 +187,14 @@ void Game::switchMusicState()
 		gameplayMusic.setVolume(0);
 		interfaceMusic.setVolume(0);
 	}
+}
+
+void Game::execute()
+{
+	while (window->isOpen())
+	{
+		update();
+		draw();
+	}
+}
 }

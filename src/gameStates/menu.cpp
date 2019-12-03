@@ -2,22 +2,23 @@
 
 #include "general/game.h"
 
+namespace game
+{
 Menu::Menu()
 {
+	muteButtonPressed = false;
+
 	for (int i = 0; i < MENU_TEXT_ROWS_AMOUNT; i++)
 	{
 		text[i] = NULL;
 	}
-
-	if (Game::interfaceMusic.getStatus()!= Music::Playing) Game::interfaceMusic.play();
-	
-	muteButtonPressed = false;
-
 	text[0] = new DisplayText("CAVE CLIMBER", true, SCREEN_HEIGHT / 6, Color::Yellow, TITLE_FONT_SIZE);
 	text[1] = new DisplayText("Press 'Enter' to play ('P' or 'Escape' to pause the game)", true, text[0]->getUpperSide() + MENU_TITLE_SPACING, Color::White, PARAGRAPH_FONT_SIZE);
 	text[2] = new DisplayText("Press 'C' to see the credits", true, text[1]->getUpperSide() + MENU_PARAGRAPH_SPACING, Color::White, PARAGRAPH_FONT_SIZE);
 	text[3] = new DisplayText("Press 'M' to mute/unmute music", true, text[2]->getUpperSide() + MENU_PARAGRAPH_SPACING, Color::White, PARAGRAPH_FONT_SIZE);
 	text[4] = new DisplayText("Press 'Escape' to exit", true, text[3]->getUpperSide() + MENU_PARAGRAPH_SPACING, Color::White, PARAGRAPH_FONT_SIZE);
+
+	if (Game::interfaceMusic.getStatus()!= Music::Playing) Game::interfaceMusic.play();
 }
 
 Menu::~Menu()
@@ -97,4 +98,5 @@ void Menu::draw()
 	{
 		if (text[i]) text[i]->draw();
 	}
+}
 }

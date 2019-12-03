@@ -1,12 +1,12 @@
 #ifndef VICTORY_H
 #define VICTORY_H
 
-#include <SFML/Graphics.hpp>
-
 #include "uiElements/displaytext.h"
 
 using namespace sf;
 
+namespace game
+{
 const int VICTORY_TEXT_ROWS_AMOUNT = 2;
 const int VICTORY_TEXT_SPACING = 50;
 
@@ -21,5 +21,6 @@ public:
 	void update();
 	void draw();
 };
+}
 
 #endif //VICTORY_H

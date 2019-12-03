@@ -2,6 +2,8 @@
 
 #include "general/game.h"
 
+namespace game
+{
 Enemy::Enemy()
 {
 	alive = true;
@@ -28,17 +30,7 @@ Enemy::~Enemy()
 {
 }
 
-bool Enemy::getAlive()
-{
-	return alive;
-}
-
-bool Enemy::getAwake()
-{
-	return awake;
-}
-
-RectangleShape Enemy::getRec() 
+RectangleShape Enemy::getRec()
 {
 	return rectangle;
 }
@@ -53,9 +45,24 @@ void Enemy::setRecY(float y)
 	rectangle.setPosition(rectangle.getPosition().x, y);
 }
 
-Vector2f Enemy::getSpeed()
+float Enemy::getUpperSide()
 {
-	return speed;
+	return rectangle.getPosition().y;
+}
+
+float Enemy::getBottomSide()
+{
+	return getUpperSide() + rectangle.getSize().y;
+}
+
+float Enemy::getLeftSide()
+{
+	return rectangle.getPosition().x;
+}
+
+float Enemy::getRightSide()
+{
+	return getLeftSide() + rectangle.getSize().x;
 }
 
 void Enemy::setAlive(bool newAlive)
@@ -63,14 +70,39 @@ void Enemy::setAlive(bool newAlive)
 	alive = newAlive;
 }
 
+bool Enemy::getAlive()
+{
+	return alive;
+}
+
 void Enemy::setAwake(bool newAwake)
 {
 	awake = newAwake;
 }
 
+bool Enemy::getAwake()
+{
+	return awake;
+}
+
+void Enemy::setOnGround(bool state)
+{
+	onGround = state;
+}
+
+bool Enemy::getOnGround()
+{
+	return onGround;
+}
+
 void Enemy::setSpeed(Vector2f newSpeed)
 {
 	speed = newSpeed;
+}
+
+Vector2f Enemy::getSpeed()
+{
+	return speed;
 }
 
 void Enemy::updatePos(RectangleShape target)
@@ -94,33 +126,4 @@ void Enemy::updatePos(RectangleShape target)
 		speed.y = MAXIMUM_SPEED;
 	}
 }
-
-bool Enemy::getOnGround()
-{
-	return onGround;
-}
-
-void Enemy::setOnGround(bool state)
-{
-	onGround= state;
-}
-
-float Enemy::getUpperSide()
-{
-	return rectangle.getPosition().y;
-}
-
-float Enemy::getBottomSide()
-{
-	return getUpperSide() + rectangle.getSize().y;
-}
-
-float Enemy::getLeftSide()
-{
-	return rectangle.getPosition().x;
-}
-
-float Enemy::getRightSide()
-{
-	return getLeftSide() + rectangle.getSize().x;
 }

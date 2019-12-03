@@ -2,6 +2,8 @@
 
 #include "general/game.h"
 
+namespace game
+{
 GameOver::GameOver()
 {
 	for (int i = 0; i < GAME_OVER_TEXT_ROWS_AMOUNT; i++)
@@ -60,4 +62,5 @@ void GameOver::draw()
 	{
 		if (textRows[i]) textRows[i]->draw();
 	}
+}
 }

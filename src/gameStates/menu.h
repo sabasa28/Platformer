@@ -7,14 +7,16 @@
 
 using namespace sf;
 
+namespace game
+{
 const int MENU_TEXT_ROWS_AMOUNT = 5;
 const int MENU_TITLE_SPACING = 200;
 const int MENU_PARAGRAPH_SPACING = 70;
 
 class Menu
 {
-	DisplayText* text[MENU_TEXT_ROWS_AMOUNT];
 	bool muteButtonPressed;
+	DisplayText* text[MENU_TEXT_ROWS_AMOUNT];
 
 public:
 	Menu();
@@ -23,5 +25,6 @@ public:
 	void update();
 	void draw();
 };
+}
 
 #endif //MENU_H

@@ -8,6 +8,8 @@
 #include "gameElements/meleeEnemy.h"
 #include "uiElements/displayText.h"
 
+namespace game
+{
 const int ENEMY_AMMOUNT = 3;
 
 const int BACKGROUND_SPRITE_SIZE = 100;
@@ -22,16 +24,17 @@ const int PAUSE_SPACE_BETWEEN_TEXT = 20;
 const Vector2f PAUSE_POS = { 250.0f, 100.0f };
 const Vector2f PAUSE_SIZE = { 400.0f, 200.0f };
 
-
 class Gameplay
 {
-	bool paused;
 	bool pauseButtonPressed;
 	bool muteButtonPressed;
 	Platform* platformGrid[PLATFORM_GRID_HEIGHT][PLATFORM_GRID_WIDTH];
 	Player* player;
 	MeleeEnemy* meleeEnemy[ENEMY_AMMOUNT];
 	RectangleShape* goal;
+	bool paused;
+	RectangleShape pauseRec;
+	DisplayText* pauseTexts[PAUSE_TEXT_AMMOUNT];
 	View* camera;
 	Texture backgroundTexture;
 	IntRect* backgroundTextureRect;
@@ -39,9 +42,6 @@ class Gameplay
 	Texture goalTexture;
 	IntRect* goalTextureRect;
 	Sprite goalSprite;
-
-	RectangleShape pauseRec;
-	DisplayText* pauseTexts[PAUSE_TEXT_AMMOUNT];
 
 public:
 	static SoundBuffer footstepSFXBuffer;
@@ -54,14 +54,14 @@ public:
 	Gameplay();
 	~Gameplay();
 	void checkKeyDownInput();
+	void checkGameplayColls(Platform* plat[][PLATFORM_GRID_WIDTH]);
 	void setPause(bool state);
 	bool getPause();
-	void update();
-	void draw();
 	void centerPause();
-	float getCollisionMargin(float jumpingSpeed);
-	void checkGameplayColls(Platform* plat[][PLATFORM_GRID_WIDTH]);
+	void update();
 	void drawBackground(int x, int y);
+	void draw();
 };
+}
 
 #endif //GAMEPLAY_H

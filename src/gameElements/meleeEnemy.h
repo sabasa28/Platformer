@@ -3,6 +3,8 @@
 
 #include "enemies.h"
 
+namespace game
+{
 const int ENEMY_SPRITE_SIZE = 64;
 
 enum TargetPos
@@ -14,19 +16,19 @@ enum TargetPos
 
 class MeleeEnemy: public Enemy
 {
-private:
 	bool charging;
 	const float chargingSpeed = 10.0f;
 	const float alertDistance = 200.0f;
 	Texture texture;
 	IntRect* textureRect;
 	Sprite sprite;
+
 public:
 	MeleeEnemy();
 	MeleeEnemy(Vector2f pos);
 	~MeleeEnemy();
-	bool getChargingState();
 	void setChargingState(bool chargeState);
+	bool getChargingState();
 	void updateCharginState();
 	TargetPos updateTargetPos(RectangleShape target);
 	void updateAwakeState(RectangleShape target);
@@ -34,5 +36,6 @@ public:
 	void updateSprite();
 	Sprite getSprite();
 };
+}
 
 #endif //MELEE_ENEMY
