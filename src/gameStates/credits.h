@@ -7,10 +7,10 @@ using namespace sf;
 
 namespace game
 {
-const int CREDITS_TEXT_ROWS_AMOUNT = 16;
+const int CREDITS_TEXT_ROWS_AMOUNT = 19;
 const int CREDITS_TEXT_SPACING = 50;
 const float TEXT_SCROLLING_SPEED = 1.5f;
-const float CREDITS_INTIAL_POS = 1550.0f;
+const float CREDITS_INTIAL_POS = 1700.0f;
 
 class Credits
 {

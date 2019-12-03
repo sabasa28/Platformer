@@ -10,8 +10,11 @@ Credits::Credits()
 	{
 		textRows[i] = NULL;
 	}
-	textRows[15] = new DisplayText("Press 'Enter' to return to menu", false, SCREEN_HEIGHT- CREDITS_TEXT_SPACING, Color::Yellow, PARAGRAPH_FONT_SIZE);
-	textRows[14] = new DisplayText("Audacity 2.3.3 (audacityteam.org)", true, CREDITS_INTIAL_POS, Color::White, PARAGRAPH_FONT_SIZE);
+	textRows[18] = new DisplayText("v1.0", false, 0.0f, Color::Red, PARAGRAPH_FONT_SIZE);
+	textRows[17] = new DisplayText("Press 'Enter' to return to menu", false, SCREEN_HEIGHT - CREDITS_TEXT_SPACING, Color::Yellow, PARAGRAPH_FONT_SIZE);
+	textRows[16] = new DisplayText("Microsoft Visual Studio 2017 (visualstudio.microsoft.com)", true, CREDITS_INTIAL_POS, Color::White, PARAGRAPH_FONT_SIZE);
+	textRows[15] = new DisplayText("IDE", true, textRows[16]->getUpperSide() - CREDITS_TEXT_SPACING, Color::White, PARAGRAPH_FONT_SIZE);
+	textRows[14] = new DisplayText("Audacity 2.3.3 (audacityteam.org)", true, textRows[15]->getUpperSide() - CREDITS_TEXT_SPACING *2, Color::White, PARAGRAPH_FONT_SIZE);
 	textRows[13] = new DisplayText("Audio Editing", true, textRows[14]->getUpperSide() - CREDITS_TEXT_SPACING, Color::White, PARAGRAPH_FONT_SIZE);
 	textRows[12] = new DisplayText("Adobe Photoshop CC 2019 (photoshop.com)", true, textRows[13]->getUpperSide() - CREDITS_TEXT_SPACING * 2, Color::White, PARAGRAPH_FONT_SIZE);
 	textRows[11] = new DisplayText("Image Editing", true, textRows[12]->getUpperSide() - CREDITS_TEXT_SPACING, Color::White, PARAGRAPH_FONT_SIZE);
@@ -26,6 +29,8 @@ Credits::Credits()
 	textRows[2] = new DisplayText("Lucio Ruixo & Iñaki Diez Galarza", true, textRows[3]->getUpperSide() - CREDITS_TEXT_SPACING * 2, Color::White, PARAGRAPH_FONT_SIZE);
 	textRows[1] = new DisplayText("Game Programing + Developing", true, textRows[2]->getUpperSide() - CREDITS_TEXT_SPACING, Color::White, PARAGRAPH_FONT_SIZE);
 	textRows[0] = new DisplayText("CREDITS", false, CREDITS_TEXT_SPACING/2, Color::Yellow, PARAGRAPH_FONT_SIZE);
+
+	textRows[18]->setPosition(VERSION_TEXT_POS);
 }
 
 Credits::~Credits()
@@ -76,7 +81,7 @@ void Credits::scroll()
 		{
 			if (textRows[i]->getCentered() == true)
 			{
-				if (textRows[CREDITS_TEXT_ROWS_AMOUNT-2]->getBottomSide()<0)
+				if (textRows[CREDITS_TEXT_ROWS_AMOUNT-3]->getBottomSide()<0)
 				{
 					setInitialPos();
 					break;

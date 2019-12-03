@@ -9,9 +9,10 @@ using namespace sf;
 
 namespace game
 {
-const int MENU_TEXT_ROWS_AMOUNT = 5;
+const int MENU_TEXT_ROWS_AMOUNT = 6;
 const int MENU_TITLE_SPACING = 200;
 const int MENU_PARAGRAPH_SPACING = 70;
+const Vector2f VERSION_TEXT_POS = { 925.0f,5.0f };
 
 class Menu
 {

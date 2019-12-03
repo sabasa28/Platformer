@@ -17,6 +17,9 @@ Menu::Menu()
 	text[2] = new DisplayText("Press 'C' to see the credits", true, text[1]->getUpperSide() + MENU_PARAGRAPH_SPACING, Color::White, PARAGRAPH_FONT_SIZE);
 	text[3] = new DisplayText("Press 'M' to mute/unmute music", true, text[2]->getUpperSide() + MENU_PARAGRAPH_SPACING, Color::White, PARAGRAPH_FONT_SIZE);
 	text[4] = new DisplayText("Press 'Escape' to exit", true, text[3]->getUpperSide() + MENU_PARAGRAPH_SPACING, Color::White, PARAGRAPH_FONT_SIZE);
+	text[5] = new DisplayText("v1.0", true, 0.0f, Color::Red, PARAGRAPH_FONT_SIZE);
+	
+	text[5]->setPosition(VERSION_TEXT_POS);
 
 	if (Game::interfaceMusic.getStatus()!= Music::Playing) Game::interfaceMusic.play();
 }
