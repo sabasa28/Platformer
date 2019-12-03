@@ -24,9 +24,6 @@
     <ClCompile Include="..\src\gameElements\player.cpp">
       <Filter>gameElements</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\gameStates\gameover.cpp">
-      <Filter>gameStates</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\gameStates\gameplay.cpp">
       <Filter>gameStates</Filter>
     </ClCompile>
@@ -37,17 +34,20 @@
     <ClCompile Include="..\src\general\game.cpp">
       <Filter>general</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\gameElements\meleeEnemy.cpp">
-      <Filter>gameElements</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\uiElements\displaytext.cpp">
-      <Filter>uiElements</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\gameStates\victory.cpp">
       <Filter>gameStates</Filter>
     </ClCompile>
     <ClCompile Include="..\src\gameStates\credits.cpp">
       <Filter>gameStates</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\gameElements\melee_enemy.cpp">
+      <Filter>gameElements</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\gameStates\game_over.cpp">
+      <Filter>gameStates</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uiElements\display_text.cpp">
+      <Filter>uiElements</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -60,9 +60,6 @@
     <ClInclude Include="..\src\gameElements\player.h">
       <Filter>gameElements</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\gameStates\gameover.h">
-      <Filter>gameStates</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\gameStates\gameplay.h">
       <Filter>gameStates</Filter>
     </ClInclude>
@@ -72,17 +69,20 @@
     <ClInclude Include="..\src\general\game.h">
       <Filter>general</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\gameElements\meleeEnemy.h">
-      <Filter>gameElements</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\uiElements\displaytext.h">
-      <Filter>uiElements</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\gameStates\victory.h">
       <Filter>gameStates</Filter>
     </ClInclude>
     <ClInclude Include="..\src\gameStates\credits.h">
       <Filter>gameStates</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\gameElements\melee_enemy.h">
+      <Filter>gameElements</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\gameStates\game_over.h">
+      <Filter>gameStates</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\uiElements\display_text.h">
+      <Filter>uiElements</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

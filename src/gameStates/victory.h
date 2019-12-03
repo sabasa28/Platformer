@@ -1,7 +1,7 @@
 #ifndef VICTORY_H
 #define VICTORY_H
 
-#include "uiElements/displaytext.h"
+#include "uiElements/display_text.h"
 
 using namespace sf;
 

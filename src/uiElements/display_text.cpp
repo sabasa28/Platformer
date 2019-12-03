@@ -1,4 +1,4 @@
-#include "displaytext.h"
+#include "display_text.h"
 
 #include "general/game.h"
 

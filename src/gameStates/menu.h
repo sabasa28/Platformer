@@ -3,7 +3,7 @@
 
 #include <SFML/Audio.hpp>
 
-#include "uiElements/displayText.h"
+#include "uiElements/display_text.h"
 
 using namespace sf;
 

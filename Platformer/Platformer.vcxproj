@@ -21,29 +21,29 @@
   <ItemGroup>
     <ClCompile Include="..\src\gameElements\enemies.cpp" />
     <ClCompile Include="..\src\gameElements\level.cpp" />
-    <ClCompile Include="..\src\gameElements\meleeEnemy.cpp" />
+    <ClCompile Include="..\src\gameElements\melee_enemy.cpp" />
     <ClCompile Include="..\src\gameElements\player.cpp" />
     <ClCompile Include="..\src\gameStates\credits.cpp" />
-    <ClCompile Include="..\src\gameStates\gameover.cpp" />
     <ClCompile Include="..\src\gameStates\gameplay.cpp" />
+    <ClCompile Include="..\src\gameStates\game_over.cpp" />
     <ClCompile Include="..\src\gameStates\menu.cpp" />
     <ClCompile Include="..\src\gameStates\victory.cpp" />
     <ClCompile Include="..\src\general\game.cpp" />
     <ClCompile Include="..\src\main.cpp" />
-    <ClCompile Include="..\src\uiElements\displaytext.cpp" />
+    <ClCompile Include="..\src\uiElements\display_text.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\gameElements\enemies.h" />
     <ClInclude Include="..\src\gameElements\level.h" />
-    <ClInclude Include="..\src\gameElements\meleeEnemy.h" />
+    <ClInclude Include="..\src\gameElements\melee_enemy.h" />
     <ClInclude Include="..\src\gameElements\player.h" />
     <ClInclude Include="..\src\gameStates\credits.h" />
-    <ClInclude Include="..\src\gameStates\gameover.h" />
     <ClInclude Include="..\src\gameStates\gameplay.h" />
+    <ClInclude Include="..\src\gameStates\game_over.h" />
     <ClInclude Include="..\src\gameStates\menu.h" />
     <ClInclude Include="..\src\gameStates\victory.h" />
     <ClInclude Include="..\src\general\game.h" />
-    <ClInclude Include="..\src\uiElements\displaytext.h" />
+    <ClInclude Include="..\src\uiElements\display_text.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

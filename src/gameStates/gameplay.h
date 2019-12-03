@@ -5,8 +5,8 @@
 
 #include "gameElements/level.h"
 #include "gameElements/player.h"
-#include "gameElements/meleeEnemy.h"
-#include "uiElements/displayText.h"
+#include "gameElements/melee_enemy.h"
+#include "uiElements/display_text.h"
 
 namespace game
 {

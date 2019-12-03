@@ -8,7 +8,7 @@
 #include "gameStates/menu.h"
 #include "gameStates/credits.h"
 #include "gameStates/gameplay.h"
-#include "gameStates/gameover.h"
+#include "gameStates/game_over.h"
 #include "gameStates/victory.h"
 
 using namespace std;

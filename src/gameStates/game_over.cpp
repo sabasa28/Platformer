@@ -1,4 +1,4 @@
-#include "gameover.h"
+#include "game_over.h"
 
 #include "general/game.h"
 
