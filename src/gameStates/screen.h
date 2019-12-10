@@ -2,7 +2,7 @@
 #define SCREENS_H
 
 #include <vector>
-#include "display_text.h"
+#include "gameElements/entities/display_text.h"
 
 using namespace std;
 

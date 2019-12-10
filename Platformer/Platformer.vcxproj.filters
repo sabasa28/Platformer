@@ -55,6 +55,9 @@
     <ClCompile Include="..\src\gameElements\entities\platform.cpp">
       <Filter>gameElements\entities</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\gameStates\screen.cpp">
+      <Filter>gameStates</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\gameStates\gameplay.h">
@@ -95,6 +98,9 @@
     </ClInclude>
     <ClInclude Include="..\src\gameElements\entities\platform.h">
       <Filter>gameElements\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\gameStates\screen.h">
+      <Filter>gameStates</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

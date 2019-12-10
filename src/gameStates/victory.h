@@ -1,7 +1,7 @@
 #ifndef VICTORY_H
 #define VICTORY_H
 
-#include "uiElements/screen.h"
+#include "screen.h"
 
 using namespace sf;
 

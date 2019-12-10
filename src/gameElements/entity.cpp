@@ -46,17 +46,17 @@ RectangleShape Entity::getRec()
 
 Vector2f Entity::getPosition()
 {
-	rectangle.getPosition();
+	return rectangle.getPosition();
 }
 
 float Entity::getPositionX()
 {
-	rectangle.getPosition().x;
+	return rectangle.getPosition().x;
 }
 
 float Entity::getPositionY()
 {
-	rectangle.getPosition().y;
+	return rectangle.getPosition().y;
 }
 
 float Entity::getUpperSide()

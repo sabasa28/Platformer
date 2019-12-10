@@ -3,10 +3,10 @@
 
 #include <SFML/Audio.hpp>
 
-#include "gameElements/level.h"
-#include "gameElements/player.h"
-#include "gameElements/melee_enemy.h"
-#include "uiElements/display_text.h"
+#include "gameElements/entities/platform.h"
+#include "gameElements/entities/player.h"
+#include "gameElements/entities/melee_enemy.h"
+#include "gameElements/entities/display_text.h"
 
 namespace game
 {
@@ -23,12 +23,14 @@ const int PAUSE_FONT_SIZE = 30;
 const int PAUSE_SPACE_BETWEEN_TEXT = 20;
 const Vector2f PAUSE_POS = { 250.0f, 100.0f };
 const Vector2f PAUSE_SIZE = { 400.0f, 200.0f };
+const int GRID_WIDTH = 50;
+const int GRID_HEIGHT = 50;
 
 class Gameplay
 {
 	bool pauseButtonPressed;
 	bool muteButtonPressed;
-	Platform* platformGrid[PLATFORM_GRID_HEIGHT][PLATFORM_GRID_WIDTH];
+	Platform* platformGrid[GRID_HEIGHT][GRID_WIDTH];
 	Player* player;
 	MeleeEnemy* meleeEnemy[ENEMY_AMMOUNT];
 	RectangleShape* goal;
@@ -54,7 +56,7 @@ public:
 	Gameplay();
 	~Gameplay();
 	void checkKeyDownInput();
-	void checkGameplayColls(Platform* plat[][PLATFORM_GRID_WIDTH]);
+	void checkGameplayColls(Platform* plat[][GRID_WIDTH]);
 	void setPause(bool state);
 	bool getPause();
 	void centerPause();

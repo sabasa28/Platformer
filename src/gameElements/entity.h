@@ -9,6 +9,7 @@ namespace game
 {
 class Entity
 {
+protected:
 	RectangleShape rectangle;
 	Texture texture;
 	IntRect* textureRect;

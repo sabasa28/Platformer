@@ -11,7 +11,7 @@ Player::Player()
 {
 	rectangle.setSize({ static_cast<float>(PLAYER_WIDTH), static_cast<float>(PLAYER_HEIGHT) });
 	rectangle.setFillColor(Color::Blue);
-	rectangle.setPosition(PLATFORM_SIZE * 11 + PLAYER_WIDTH/2, static_cast<float>(SCREEN_HEIGHT - PLATFORM_SIZE - rectangle.getSize().y));
+	rectangle.setPosition(1100 + PLAYER_WIDTH/2, static_cast<float>(SCREEN_HEIGHT - 100 - rectangle.getSize().y));
 	movement.right = false;
 	movement.left = false;
 	facingRight = true;

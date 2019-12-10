@@ -21,9 +21,9 @@ Gameplay::Gameplay()
 	pauseButtonPressed = false;
 	muteButtonPressed = false;
 
-	for (int y = 0; y < PLATFORM_GRID_HEIGHT; y++)
+	for (int y = 0; y < GRID_HEIGHT; y++)
 	{
-		for (int x = 0; x < PLATFORM_GRID_WIDTH; x++)
+		for (int x = 0; x < GRID_WIDTH; x++)
 		{
 			platformGrid[y][x] = NULL;
 
@@ -139,7 +139,7 @@ Gameplay::Gameplay()
 		}
 	}
 	backgroundTexture.loadFromFile("images/backgroundRock.png");
-	backgroundTextureRect = new IntRect(0, 0, PLATFORM_SPRITE_SIZE, PLATFORM_SPRITE_SIZE);
+	backgroundTextureRect = new IntRect(0, 0, 100, 100);
 	backgroundSprite.setTexture(backgroundTexture);
 	backgroundSprite.setTextureRect(*backgroundTextureRect);
 
@@ -190,9 +190,9 @@ Gameplay::Gameplay()
 
 Gameplay::~Gameplay()
 {
-	for (int y = 0; y < PLATFORM_GRID_HEIGHT; y++)
+	for (int y = 0; y < GRID_HEIGHT; y++)
 	{
-		for (int x = 0; x < PLATFORM_GRID_WIDTH; x++)
+		for (int x = 0; x < GRID_WIDTH; x++)
 		{
 			if (platformGrid[y][x]) delete platformGrid[y][x];
 		}
@@ -268,13 +268,13 @@ void Gameplay::checkKeyDownInput()
 	}
 }
 
-void Gameplay::checkGameplayColls(Platform* plat[][PLATFORM_GRID_WIDTH])
+void Gameplay::checkGameplayColls(Platform* plat[][GRID_WIDTH])
 {
 	if (player)
 	{
-		for (int y = 0; y < PLATFORM_GRID_HEIGHT; y++)
+		for (int y = 0; y < GRID_HEIGHT; y++)
 		{
-			for (int x = 0; x < PLATFORM_GRID_WIDTH; x++)
+			for (int x = 0; x < GRID_WIDTH; x++)
 			{
 				if (platformGrid[y][x])
 				{
@@ -328,16 +328,16 @@ void Gameplay::checkGameplayColls(Platform* plat[][PLATFORM_GRID_WIDTH])
 			}
 		}
 
-		if (player->getUpperSide() > SCREEN_HEIGHT + PLATFORM_SIZE * 3)
+		if (player->getUpperSide() > SCREEN_HEIGHT + player->getRec().getSize().y * 3)
 		{
 			Game::currentGameState = gameOver_state;
 		}
 	}
 
 	bool OnAnyPlatform = false;
-	for (int y = 0; y < PLATFORM_GRID_HEIGHT; y++)
+	for (int y = 0; y < GRID_HEIGHT; y++)
 	{
-		for (int x = 0; x < PLATFORM_GRID_WIDTH; x++)
+		for (int x = 0; x < GRID_WIDTH; x++)
 		{
 			if (platformGrid[y][x])
 			{
@@ -349,9 +349,9 @@ void Gameplay::checkGameplayColls(Platform* plat[][PLATFORM_GRID_WIDTH])
 		}
 	}
 
-	for (int y = 0; y < PLATFORM_GRID_HEIGHT; y++)
+	for (int y = 0; y < GRID_HEIGHT; y++)
 	{
-		for (int x = 0; x < PLATFORM_GRID_WIDTH; x++)
+		for (int x = 0; x < GRID_WIDTH; x++)
 		{
 			if (platformGrid[y][x])
 			{
@@ -415,9 +415,9 @@ void Gameplay::update()
 				meleeEnemy[i]->updateCharginState();
 
 				bool aux = false;
-				for (int y = 0; y < PLATFORM_GRID_HEIGHT; y++)
+				for (int y = 0; y < GRID_HEIGHT; y++)
 				{
-					for (int x = 0; x < PLATFORM_GRID_WIDTH; x++)
+					for (int x = 0; x < GRID_WIDTH; x++)
 					{
 						if (platformGrid[y][x])
 						{
@@ -495,23 +495,23 @@ void Gameplay::update()
 
 void Gameplay::drawBackground(int x, int y)
 {
-	backgroundSprite.setPosition(static_cast<float>(PLATFORM_SIZE) * x, PLATFORM_MIN_Y_POS - static_cast<float>(PLATFORM_SIZE) * y);
+	backgroundSprite.setPosition(100.0f * x, 700 - 100.0f * y);
 	Game::window->draw(backgroundSprite);
 }
 
 void Gameplay::draw()
 {
-	for (int y = 0; y < PLATFORM_GRID_HEIGHT; y++)
+	for (int y = 0; y < GRID_HEIGHT; y++)
 	{
-		for (int x = 0; x < PLATFORM_GRID_WIDTH; x++)
+		for (int x = 0; x < GRID_WIDTH; x++)
 		{
 			drawBackground(x, y);
 		}
 	}
 
-	for (int y = 0; y < PLATFORM_GRID_HEIGHT; y++)
+	for (int y = 0; y < GRID_HEIGHT; y++)
 	{
-		for (int x = 0; x < PLATFORM_GRID_WIDTH; x++)
+		for (int x = 0; x < GRID_WIDTH; x++)
 		{
 
 			if (platformGrid[y][x])

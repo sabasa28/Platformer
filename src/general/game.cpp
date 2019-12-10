@@ -1,7 +1,5 @@
 #include "game.h"
 
-#include "gameElements/player.h"
-
 namespace game
 {
 Event Game::event;

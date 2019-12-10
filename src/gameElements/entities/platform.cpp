@@ -27,11 +27,21 @@ Platform::~Platform()
 {
 }
 
-/*RectangleShape Platform::getRec()
+int Platform::getSize()
+{
+	return SIZE;
+}
+
+void Platform::draw()
+{
+
+}
+
+/*
+RectangleShape Platform::getRec()
 {
 	return rectangle;
 }
-
 float Platform::getUpperSide()
 {
 	return rectangle.getPosition().y;

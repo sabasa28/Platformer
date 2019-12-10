@@ -30,6 +30,7 @@
     <ClCompile Include="..\src\gameStates\gameplay.cpp" />
     <ClCompile Include="..\src\gameStates\game_over.cpp" />
     <ClCompile Include="..\src\gameStates\menu.cpp" />
+    <ClCompile Include="..\src\gameStates\screen.cpp" />
     <ClCompile Include="..\src\gameStates\victory.cpp" />
     <ClCompile Include="..\src\general\game.cpp" />
     <ClCompile Include="..\src\main.cpp" />
@@ -46,6 +47,7 @@
     <ClInclude Include="..\src\gameStates\gameplay.h" />
     <ClInclude Include="..\src\gameStates\game_over.h" />
     <ClInclude Include="..\src\gameStates\menu.h" />
+    <ClInclude Include="..\src\gameStates\screen.h" />
     <ClInclude Include="..\src\gameStates\victory.h" />
     <ClInclude Include="..\src\general\game.h" />
   </ItemGroup>

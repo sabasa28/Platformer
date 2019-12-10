@@ -1,7 +1,7 @@
 #ifndef CREDITS_H
 #define CREDITS_H
 
-#include "uiElements/screen.h"
+#include "screen.h"
 
 using namespace sf;
 using namespace std;
