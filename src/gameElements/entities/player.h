@@ -1,7 +1,7 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-//#include "level.h"
+#include "level.h"
 
 using namespace sf;
 

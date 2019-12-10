@@ -10,17 +10,11 @@
     <Filter Include="general">
       <UniqueIdentifier>{d88c1a6a-35b9-41fc-90ae-c72857ea6331}</UniqueIdentifier>
     </Filter>
-    <Filter Include="uiElements">
-      <UniqueIdentifier>{9887154c-dcf7-489c-8892-b037c95c34e1}</UniqueIdentifier>
+    <Filter Include="gameElements\entities">
+      <UniqueIdentifier>{b95c47a6-a504-4f52-a0be-54a245a304b8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\gameElements\level.cpp">
-      <Filter>gameElements</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\gameElements\player.cpp">
-      <Filter>gameElements</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\gameStates\gameplay.cpp">
       <Filter>gameStates</Filter>
     </ClCompile>
@@ -37,29 +31,32 @@
     <ClCompile Include="..\src\gameStates\credits.cpp">
       <Filter>gameStates</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\gameElements\melee_enemy.cpp">
-      <Filter>gameElements</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\gameStates\game_over.cpp">
       <Filter>gameStates</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\uiElements\display_text.cpp">
-      <Filter>uiElements</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\gameElements\enemy.cpp">
-      <Filter>gameElements</Filter>
     </ClCompile>
     <ClCompile Include="..\src\gameElements\entity.cpp">
       <Filter>gameElements</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\gameElements\entities\display_text.cpp">
+      <Filter>gameElements\entities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\gameElements\entities\enemy.cpp">
+      <Filter>gameElements\entities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\gameElements\entities\level.cpp">
+      <Filter>gameElements\entities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\gameElements\entities\melee_enemy.cpp">
+      <Filter>gameElements\entities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\gameElements\entities\player.cpp">
+      <Filter>gameElements\entities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\gameElements\entities\character.cpp">
+      <Filter>gameElements\entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\src\gameElements\level.h">
-      <Filter>gameElements</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\gameElements\player.h">
-      <Filter>gameElements</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\gameStates\gameplay.h">
       <Filter>gameStates</Filter>
     </ClInclude>
@@ -75,20 +72,29 @@
     <ClInclude Include="..\src\gameStates\credits.h">
       <Filter>gameStates</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\gameElements\melee_enemy.h">
-      <Filter>gameElements</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\gameStates\game_over.h">
       <Filter>gameStates</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\uiElements\display_text.h">
-      <Filter>uiElements</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\gameElements\enemy.h">
-      <Filter>gameElements</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\gameElements\entity.h">
       <Filter>gameElements</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\gameElements\entities\display_text.h">
+      <Filter>gameElements\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\gameElements\entities\enemy.h">
+      <Filter>gameElements\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\gameElements\entities\level.h">
+      <Filter>gameElements\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\gameElements\entities\melee_enemy.h">
+      <Filter>gameElements\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\gameElements\entities\player.h">
+      <Filter>gameElements\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\gameElements\entities\character.h">
+      <Filter>gameElements\entities</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

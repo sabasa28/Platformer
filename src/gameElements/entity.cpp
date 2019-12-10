@@ -2,6 +2,11 @@
 
 namespace game
 {
+Entity::Entity()
+{
+	textureRect = NULL;
+}
+
 Entity::Entity(RectangleShape rec, Texture tex, IntRect* texRec, Sprite spr)
 {
 	rectangle = rec;

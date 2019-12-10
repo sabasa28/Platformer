@@ -1,7 +1,7 @@
 #ifndef ENEMY_H
 #define ENEMY_H
 
-#include "gameElements/level.h"
+#include "level.h"
 
 using namespace sf;
 

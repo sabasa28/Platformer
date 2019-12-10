@@ -15,6 +15,7 @@ class Entity
 	Sprite sprite;
 
 public:
+	Entity();
 	Entity(RectangleShape rec, Texture tex, IntRect* texRec, Sprite spr);
 	~Entity();
 	void setRecPosition(float x, float y);
