@@ -1,7 +1,7 @@
 #ifndef MELEE_ENEMY
 #define MELEE_ENEMY
 
-#include "enemies.h"
+#include "enemy.h"
 
 namespace game
 {

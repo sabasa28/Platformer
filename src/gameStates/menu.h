@@ -1,8 +1,6 @@
 #ifndef MENU_H
 #define MENU_H
 
-#include <SFML/Audio.hpp>
-
 #include "uiElements/display_text.h"
 
 using namespace sf;

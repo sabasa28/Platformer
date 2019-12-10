@@ -1,5 +1,5 @@
-#ifndef ENEMIES_H
-#define ENEMIES_H
+#ifndef ENEMY_H
+#define ENEMY_H
 
 #include "gameElements/level.h"
 
@@ -44,4 +44,4 @@ public:
 };
 }
 
-#endif // !ENEMIES_H
+#endif // !ENEMY_H

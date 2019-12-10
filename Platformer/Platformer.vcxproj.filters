@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\gameElements\enemies.cpp">
-      <Filter>gameElements</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\gameElements\level.cpp">
       <Filter>gameElements</Filter>
     </ClCompile>
@@ -49,11 +46,14 @@
     <ClCompile Include="..\src\uiElements\display_text.cpp">
       <Filter>uiElements</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\gameElements\enemy.cpp">
+      <Filter>gameElements</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\gameElements\entity.cpp">
+      <Filter>gameElements</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\src\gameElements\enemies.h">
-      <Filter>gameElements</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\gameElements\level.h">
       <Filter>gameElements</Filter>
     </ClInclude>
@@ -83,6 +83,12 @@
     </ClInclude>
     <ClInclude Include="..\src\uiElements\display_text.h">
       <Filter>uiElements</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\gameElements\enemy.h">
+      <Filter>gameElements</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\gameElements\entity.h">
+      <Filter>gameElements</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
