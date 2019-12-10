@@ -19,11 +19,13 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\gameElements\enemy.cpp" />
+    <ClCompile Include="..\src\gameElements\entities\character.cpp" />
+    <ClCompile Include="..\src\gameElements\entities\display_text.cpp" />
+    <ClCompile Include="..\src\gameElements\entities\enemy.cpp" />
+    <ClCompile Include="..\src\gameElements\entities\platform.cpp" />
+    <ClCompile Include="..\src\gameElements\entities\melee_enemy.cpp" />
+    <ClCompile Include="..\src\gameElements\entities\player.cpp" />
     <ClCompile Include="..\src\gameElements\entity.cpp" />
-    <ClCompile Include="..\src\gameElements\level.cpp" />
-    <ClCompile Include="..\src\gameElements\melee_enemy.cpp" />
-    <ClCompile Include="..\src\gameElements\player.cpp" />
     <ClCompile Include="..\src\gameStates\credits.cpp" />
     <ClCompile Include="..\src\gameStates\gameplay.cpp" />
     <ClCompile Include="..\src\gameStates\game_over.cpp" />
@@ -31,21 +33,21 @@
     <ClCompile Include="..\src\gameStates\victory.cpp" />
     <ClCompile Include="..\src\general\game.cpp" />
     <ClCompile Include="..\src\main.cpp" />
-    <ClCompile Include="..\src\uiElements\display_text.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\src\gameElements\enemy.h" />
+    <ClInclude Include="..\src\gameElements\entities\character.h" />
+    <ClInclude Include="..\src\gameElements\entities\display_text.h" />
+    <ClInclude Include="..\src\gameElements\entities\enemy.h" />
+    <ClInclude Include="..\src\gameElements\entities\platform.h" />
+    <ClInclude Include="..\src\gameElements\entities\melee_enemy.h" />
+    <ClInclude Include="..\src\gameElements\entities\player.h" />
     <ClInclude Include="..\src\gameElements\entity.h" />
-    <ClInclude Include="..\src\gameElements\level.h" />
-    <ClInclude Include="..\src\gameElements\melee_enemy.h" />
-    <ClInclude Include="..\src\gameElements\player.h" />
     <ClInclude Include="..\src\gameStates\credits.h" />
     <ClInclude Include="..\src\gameStates\gameplay.h" />
     <ClInclude Include="..\src\gameStates\game_over.h" />
     <ClInclude Include="..\src\gameStates\menu.h" />
     <ClInclude Include="..\src\gameStates\victory.h" />
     <ClInclude Include="..\src\general\game.h" />
-    <ClInclude Include="..\src\uiElements\display_text.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

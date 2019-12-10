@@ -15,21 +15,29 @@ class Entity
 	Sprite sprite;
 
 public:
-	void setPosition(Vector2f pos);
-	void setPositionX(float x);
-	void setPositionY(float y);
-	int getPosition();
-	int getPositionX();
-	int getPositionY();
-	void addToPosition(Vector2 pos);
-	void addToPositionX(float x);
-	void addToPositionY(float y);
+	Entity();
+	Entity(RectangleShape rec, Texture tex, IntRect* texRec, Sprite spr);
+	~Entity();
+	void setRecPosition(float x, float y);
+	void setRecPosition(Vector2f pos);
+	void setRecPositionX(float x);
+	void setRecPositionY(float y);
+	RectangleShape getRec();
+	Vector2f getPosition();
+	float getPositionX();
+	float getPositionY();
 	float getUpperSide();
 	float getBottomSide();
 	float getLeftSide();
 	float getRightSide();
 	float getCenterX();
 	float getCenterY();
+	Sprite getSprite();
+	void addToPosition(float x, float y);
+	void addToPosition(Vector2f pos);
+	void addToPositionX(float x);
+	void addToPositionY(float y);
+	virtual void draw() = 0;
 };
 }
 

@@ -1,18 +1,14 @@
-#ifndef LEVEL_H
-#define LEVEL_H
+#ifndef PLATFORM_H
+#define PLATFORM_H
 
 #include <SFML/Graphics.hpp>
+
+#include "gameElements/entity.h"
 
 using namespace sf;
 
 namespace game
 {
-const int PLATFORM_GRID_WIDTH = 50;
-const int PLATFORM_GRID_HEIGHT = 50;
-const int PLATFORM_SIZE = 100;
-const int PLATFORM_MIN_Y_POS = 700;
-const int PLATFORM_SPRITE_SIZE = 100;
-
 enum NearestSide
 {
 	Top,
@@ -27,8 +23,14 @@ enum RelativePlayerJumpState
 	falling_relative
 };
 
-class Platform
+class Platform : public Entity
 {
+	const int GRID_WIDTH = 50;
+	const int GRID_HEIGHT = 50;
+	const int SIZE = 100;
+	const int MIN_Y_POS = 700;
+	const int SPRITE_SIZE = 100;
+
 	RectangleShape rectangle;
 	RelativePlayerJumpState relativePlayerJumpsState;
 	Texture texture;
@@ -38,13 +40,13 @@ class Platform
 public:
 	Platform(int x, int y);
 	~Platform();
-	RectangleShape getRec();
+	/*RectangleShape getRec();
 	float getUpperSide();
 	float getBottomSide();
 	float getLeftSide();
 	float getRightSide();
 	float getCenterX();
-	float getCenterY();
+	float getCenterY();*/
 	NearestSide checkSideProximity(RectangleShape rec, float collisionMargin);
 	void setRelativePlayerJumpState(RelativePlayerJumpState jumpState);
 	RelativePlayerJumpState getRelativePlayerJumpState();
@@ -52,5 +54,5 @@ public:
 };
 }
 
-#endif //LEVEL_H
+#endif //PLATFORM_H
 

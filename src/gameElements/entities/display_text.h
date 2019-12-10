@@ -19,8 +19,8 @@ public:
 	DisplayText(String text, bool isTextCentered, float y, Color color, int fontSize);
 	DisplayText(String text, float x, float y, Color color, int fontSize);
 	~DisplayText();
-	void setPositionY(float y);
 	void setPosition(Vector2f newPos);
+	void setPositionY(float y);
 	Vector2f getInitialPos();
 	bool getCentered();
 	Text getText();

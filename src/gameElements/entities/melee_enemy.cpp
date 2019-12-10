@@ -48,9 +48,9 @@ void MeleeEnemy::updateCharginState()
 
 TargetPos MeleeEnemy::updateTargetPos(RectangleShape target)
 {
-	if (abs(Enemy::getRec().getPosition().x - target.getPosition().x) < alertDistance && (Enemy::getCenter().y > target.getPosition().y && Enemy::getCenter().y < target.getPosition().y + target.getSize().y))
+	if (abs(getRec().getPosition().x - target.getPosition().x) < alertDistance && (getCenter().y > target.getPosition().y && getCenter().y < target.getPosition().y + target.getSize().y))
 	{
-		if (Enemy::getRec().getPosition().x < target.getPosition().x)
+		if (getRec().getPosition().x < target.getPosition().x)
 		{
 			return TargetPos::right;
 		}
@@ -69,7 +69,7 @@ void MeleeEnemy::updateAwakeState(RectangleShape target)
 {
 	if (updateTargetPos(target) != away)
 	{
-		Enemy::setAwake(true);
+		setAwake(true);
 	}
 }
 
@@ -80,11 +80,11 @@ void MeleeEnemy::attack(RectangleShape target)
 		switch (updateTargetPos(target))
 		{
 		case TargetPos::left:
-			Enemy::setSpeed({ -chargingSpeed,0 });
+			setSpeed({ -chargingSpeed,0 });
 			charging = true;
 			break;
 		case TargetPos::right:
-			Enemy::setSpeed({ chargingSpeed,0 });
+			setSpeed({ chargingSpeed,0 });
 			charging = true;
 			break;
 		case away:
