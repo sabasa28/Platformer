@@ -1,9 +1,7 @@
 #ifndef MENU_H
 #define MENU_H
 
-#include "uiElements/display_text.h"
-
-using namespace sf;
+#include "uiElements/screen.h"
 
 namespace game
 {
@@ -12,10 +10,9 @@ const int MENU_TITLE_SPACING = 200;
 const int MENU_PARAGRAPH_SPACING = 70;
 const Vector2f VERSION_TEXT_POS = { 925.0f,5.0f };
 
-class Menu
+class Menu:public Screen
 {
 	bool muteButtonPressed;
-	DisplayText* text[MENU_TEXT_ROWS_AMOUNT];
 
 public:
 	Menu();

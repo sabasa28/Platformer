@@ -1,7 +1,7 @@
 #ifndef VICTORY_H
 #define VICTORY_H
 
-#include "uiElements/display_text.h"
+#include "uiElements/screen.h"
 
 using namespace sf;
 
@@ -10,10 +10,8 @@ namespace game
 const int VICTORY_TEXT_ROWS_AMOUNT = 2;
 const int VICTORY_TEXT_SPACING = 50;
 
-class Victory
+class Victory:public Screen
 {
-	DisplayText* textRows[VICTORY_TEXT_ROWS_AMOUNT];
-
 public:
 	Victory();
 	~Victory();

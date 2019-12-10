@@ -6,13 +6,15 @@ namespace game
 {
 Victory::Victory()
 {
+	text.resize(VICTORY_TEXT_ROWS_AMOUNT);
+
 	for (int i = 0; i < VICTORY_TEXT_ROWS_AMOUNT; i++)
 	{
-		textRows[i] = NULL;
+		text[i] = NULL;
 	}
 
-	textRows[0] = new DisplayText("YOU WON!", true, SCREEN_HEIGHT / 2 - VICTORY_TEXT_SPACING / 2, Color::White, PARAGRAPH_FONT_SIZE);
-	textRows[1] = new DisplayText("Press 'Enter' to return to menu", true, textRows[0]->getUpperSide() + VICTORY_TEXT_SPACING, Color::White, PARAGRAPH_FONT_SIZE);
+	text[0] = new DisplayText("YOU WON!", true, SCREEN_HEIGHT / 2 - VICTORY_TEXT_SPACING / 2, Color::White, PARAGRAPH_FONT_SIZE);
+	text[1] = new DisplayText("Press 'Enter' to return to menu", true, text[0]->getUpperSide() + VICTORY_TEXT_SPACING, Color::White, PARAGRAPH_FONT_SIZE);
 	
 	Game::interfaceMusic.play();
 }
@@ -53,9 +55,6 @@ void Victory::update()
 
 void Victory::draw()
 {
-	for (int i = 0; i < GAME_OVER_TEXT_ROWS_AMOUNT; i++)
-	{
-		if (textRows[i]) textRows[i]->draw();
-	}
+	drawText();
 }
 }

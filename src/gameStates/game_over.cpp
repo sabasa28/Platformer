@@ -6,13 +6,15 @@ namespace game
 {
 GameOver::GameOver()
 {
+	text.resize(GAME_OVER_TEXT_ROWS_AMOUNT);
+
 	for (int i = 0; i < GAME_OVER_TEXT_ROWS_AMOUNT; i++)
 	{
-		textRows[i] = NULL;
+		text[i] = NULL;
 	}
 
-	textRows[0] = new DisplayText("GAME OVER", true, SCREEN_HEIGHT / 2 - GAME_OVER_TEXT_SPACING / 2, Color::White, PARAGRAPH_FONT_SIZE);
-	textRows[1] = new DisplayText("Press 'Enter' to return to menu", true, textRows[0]->getUpperSide() + GAME_OVER_TEXT_SPACING, Color::White, PARAGRAPH_FONT_SIZE);
+	text[0] = new DisplayText("GAME OVER", true, SCREEN_HEIGHT / 2 - GAME_OVER_TEXT_SPACING / 2, Color::White, PARAGRAPH_FONT_SIZE);
+	text[1] = new DisplayText("Press 'Enter' to return to menu", true, text[0]->getUpperSide() + GAME_OVER_TEXT_SPACING, Color::White, PARAGRAPH_FONT_SIZE);
 
 	Game::interfaceMusic.play();
 }
@@ -21,7 +23,7 @@ GameOver::~GameOver()
 {
 	for (int i = 0; i < GAME_OVER_TEXT_ROWS_AMOUNT; i++)
 	{
-		if (textRows[i]) delete textRows[i];
+		if (text[i]) delete text[i];
 	}
 
 	if(Game::currentGameState!=menu_state) Game::interfaceMusic.stop();
@@ -58,9 +60,7 @@ void GameOver::update()
 
 void GameOver::draw()
 {
-	for (int i = 0; i < GAME_OVER_TEXT_ROWS_AMOUNT; i++)
-	{
-		if (textRows[i]) textRows[i]->draw();
-	}
+	drawText();
 }
+
 }
