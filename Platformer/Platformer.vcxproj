@@ -22,7 +22,7 @@
     <ClCompile Include="..\src\gameElements\entities\character.cpp" />
     <ClCompile Include="..\src\gameElements\entities\display_text.cpp" />
     <ClCompile Include="..\src\gameElements\entities\enemy.cpp" />
-    <ClCompile Include="..\src\gameElements\entities\level.cpp" />
+    <ClCompile Include="..\src\gameElements\entities\platform.cpp" />
     <ClCompile Include="..\src\gameElements\entities\melee_enemy.cpp" />
     <ClCompile Include="..\src\gameElements\entities\player.cpp" />
     <ClCompile Include="..\src\gameElements\entity.cpp" />
@@ -38,7 +38,7 @@
     <ClInclude Include="..\src\gameElements\entities\character.h" />
     <ClInclude Include="..\src\gameElements\entities\display_text.h" />
     <ClInclude Include="..\src\gameElements\entities\enemy.h" />
-    <ClInclude Include="..\src\gameElements\entities\level.h" />
+    <ClInclude Include="..\src\gameElements\entities\platform.h" />
     <ClInclude Include="..\src\gameElements\entities\melee_enemy.h" />
     <ClInclude Include="..\src\gameElements\entities\player.h" />
     <ClInclude Include="..\src\gameElements\entity.h" />

@@ -39,6 +39,11 @@ void Entity::setRecPositionY(float y)
 	rectangle.setPosition(rectangle.getPosition().x, y);
 }
 
+RectangleShape Entity::getRec()
+{
+	return rectangle;
+}
+
 Vector2f Entity::getPosition()
 {
 	rectangle.getPosition();

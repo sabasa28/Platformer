@@ -1,4 +1,4 @@
-#include "level.h"
+#include "platform.h"
 
 namespace game
 {
@@ -12,12 +12,12 @@ float lowestDistance;
 
 Platform::Platform(int x, int y)
 {
-	rectangle.setSize({ static_cast<float>(PLATFORM_SIZE), static_cast<float>(PLATFORM_SIZE) });
-	rectangle.setPosition({ static_cast<float>(PLATFORM_SIZE) * x, PLATFORM_MIN_Y_POS - static_cast<float>(PLATFORM_SIZE) * y });
+	rectangle.setSize({ static_cast<float>(SIZE), static_cast<float>(SIZE) });
+	rectangle.setPosition({ static_cast<float>(SIZE) * x, MIN_Y_POS - static_cast<float>(SIZE) * y });
 	rectangle.setFillColor(Color::White);
 	relativePlayerJumpsState = falling_relative;
 	texture.loadFromFile("images/dirt.png");
-	textureRect = new IntRect(0, 0, PLATFORM_SPRITE_SIZE, PLATFORM_SPRITE_SIZE);
+	textureRect = new IntRect(0, 0, SPRITE_SIZE, SPRITE_SIZE);
 	sprite.setTexture(texture);
 	sprite.setTextureRect(*textureRect);
 	sprite.setPosition(getRec().getPosition().x, getRec().getPosition().y);
@@ -27,7 +27,7 @@ Platform::~Platform()
 {
 }
 
-RectangleShape Platform::getRec()
+/*RectangleShape Platform::getRec()
 {
 	return rectangle;
 }
@@ -60,7 +60,7 @@ float Platform::getCenterX()
 float Platform::getCenterY()
 {
 	return getUpperSide() + rectangle.getSize().y / 2;
-}
+}*/
 
 NearestSide Platform::checkSideProximity(RectangleShape rec, float collisionMargin)
 {

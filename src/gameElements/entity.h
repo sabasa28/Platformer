@@ -22,6 +22,7 @@ public:
 	void setRecPosition(Vector2f pos);
 	void setRecPositionX(float x);
 	void setRecPositionY(float y);
+	RectangleShape getRec();
 	Vector2f getPosition();
 	float getPositionX();
 	float getPositionY();
