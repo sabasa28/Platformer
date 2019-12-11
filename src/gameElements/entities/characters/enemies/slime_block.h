@@ -19,7 +19,7 @@ class SlimeBlock: public Enemy
 
 	bool charging;
 	const float chargingSpeed = 10.0f;
-	const float alertDistance = 200.0f;
+	const float alertDistance = 300.0f;
 
 public:
 	SlimeBlock();

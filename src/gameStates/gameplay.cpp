@@ -30,109 +30,91 @@ Gameplay::Gameplay()
 			switch (y)
 			{
 			case 2:
-				if (x == 11)
+				if (x > 10 && x<23)
+				{
+					platformGrid[y][x] = new Platform(x, y);
+				}
+				break;
+			case 3:
+				if (x == 16|| x==23 || x == 24 || x == 28)
 				{
 					platformGrid[y][x] = new Platform(x, y);
 				}
 				break;
 			case 4:
-				if (x == 14)
+				if (x == 14 || x == 16 || x == 17 || x == 19 || x==29 || x == 41
+					|| x == 42 || x== 43 || x == 46 || x== 50|| (x >= 54 && x<=60))
 				{
 					platformGrid[y][x] = new Platform(x, y);
 				}
 				break;
 			case 5:
-				if (x == 18)
+				if (x == 13 || x==16 || x == 19 || x == 38 || x== 60)
 				{
 					platformGrid[y][x] = new Platform(x, y);
 				}
 				break;
 			case 6:
-				if (x == 11)
+				if (x == 16 || x == 19|| x==29 || x == 36 || x == 56 || x== 58 ||x == 60)
+				{
+					platformGrid[y][x] = new Platform(x, y);
+				}
+				break;
+			case 7:
+				if (x == 16 || x == 19 || x == 34 || x == 56 || x == 60)
 				{
 					platformGrid[y][x] = new Platform(x, y);
 				}
 				break;
 			case 8:
-				if (x == 14)
+				if (x == 19 || x == 27 || x==32 || x == 56 || x== 60)
 				{
 					platformGrid[y][x] = new Platform(x, y);
 				}
 				break;
 			case 9:
+				if (x == 19 || x == 30 || x == 60)
+				{
+					platformGrid[y][x] = new Platform(x, y);
+				}
+				break;
+			case 10:
 				if (x == 19)
 				{
 					platformGrid[y][x] = new Platform(x, y);
 				}
 				break;
 			case 11:
-				if (x == 19)
+				if (x == 63)
 				{
 					platformGrid[y][x] = new Platform(x, y);
 				}
 				break;
 			case 13:
-				if (x == 16)
+				if (x == 66)
 				{
 					platformGrid[y][x] = new Platform(x, y);
 				}
 				break;
 			case 14:
-				if (x == 12)
-				{
-					platformGrid[y][x] = new Platform(x, y);
-				}
-				if (x == 19)
+				if ((x >69 && x<73))
 				{
 					platformGrid[y][x] = new Platform(x, y);
 				}
 				break;
 			case 15:
-				if (x == 25)
-				{
-					platformGrid[y][x] = new Platform(x, y);
-				}
-				if (x == 26)
-				{
-					platformGrid[y][x] = new Platform(x, y);
-				}
-				if (x == 27)
-				{
-					platformGrid[y][x] = new Platform(x, y);
-				}
-				break;
-			case 16:
-				if (x == 24)
-				{
-					platformGrid[y][x] = new Platform(x, y);
-				}
-				if (x == 28)
+				if (x == 69 || x == 73)
 				{
 					platformGrid[y][x] = new Platform(x, y);
 				}
 				break;
 			case 17:
-				if (x == 14)
+				if (x == 70 || x == 72)
 				{
 					platformGrid[y][x] = new Platform(x, y);
 				}
 				break;
-			case 18:
-				if (x == 14)
-				{
-					platformGrid[y][x] = new Platform(x, y);
-				}
-				break;
-			case 19:
-				if (x == 25)
-				{
-					platformGrid[y][x] = new Platform(x, y);
-				}
-				if (x == 27)
-				{
-					platformGrid[y][x] = new Platform(x, y);
-				}
-				break;
+			
 
 			default: break;
 			}
@@ -149,12 +131,13 @@ Gameplay::Gameplay()
 	{
 		slimeBlock[i] = NULL;
 	}
-	slimeBlock[0] = new SlimeBlock({ 1400.0f, -200.0f });
-	slimeBlock[1] = new SlimeBlock({ 1400.0f, 100.0f });
-	slimeBlock[2] = new SlimeBlock({ 1900.0f, -800.0f });
+	slimeBlock[0] = new SlimeBlock({ 2725.0f, -200.0f });
+	slimeBlock[1] = new SlimeBlock({ 1800.0f, 300.0f });
+	slimeBlock[2] = new SlimeBlock({ 5825.0f, 100.0f });
+	slimeBlock[3] = new SlimeBlock({ 6600.0f, -800.0f });
 
 	goal = new RectangleShape({ static_cast<float>(GOAL_SIZE), static_cast<float>(GOAL_SIZE) });
-	goal->setPosition({ 2600.0f + goal->getGlobalBounds().width/2 , -1000.0f });
+	goal->setPosition({ 7100.0f + goal->getGlobalBounds().width/2 , -850.0f });
 	goal->setFillColor(Color::Yellow);
 	goalTexture.loadFromFile("images/coin.png");
 	goalTextureRect = new IntRect(0, 0, GOAL_SPRITE_SIZE, GOAL_SPRITE_SIZE);

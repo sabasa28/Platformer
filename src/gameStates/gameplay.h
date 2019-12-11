@@ -10,7 +10,7 @@
 
 namespace game
 {
-const int ENEMY_AMMOUNT = 3;
+const int ENEMY_AMMOUNT = 4;
 
 const int BACKGROUND_SPRITE_SIZE = 100;
 
@@ -23,7 +23,7 @@ const int PAUSE_FONT_SIZE = 30;
 const int PAUSE_SPACE_BETWEEN_TEXT = 20;
 const Vector2f PAUSE_POS = { 250.0f, 100.0f };
 const Vector2f PAUSE_SIZE = { 400.0f, 200.0f };
-const int GRID_WIDTH = 50;
+const int GRID_WIDTH = 100;
 const int GRID_HEIGHT = 50;
 
 class Gameplay
