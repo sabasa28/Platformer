@@ -9,9 +9,9 @@ float disToPlat2;
 
 Player::Player()
 {
-	rectangle.setSize({ static_cast<float>(PLAYER_WIDTH), static_cast<float>(PLAYER_HEIGHT) });
+	rectangle.setSize({ static_cast<float>(WIDTH), static_cast<float>(HEIGHT) });
 	rectangle.setFillColor(Color::Blue);
-	rectangle.setPosition(1100 + PLAYER_WIDTH/2, static_cast<float>(SCREEN_HEIGHT - 100 - rectangle.getSize().y));
+	rectangle.setPosition(static_cast<float>(INITIAL_POSITION + WIDTH / 2), static_cast<float>(SCREEN_HEIGHT - 100 - rectangle.getSize().y));
 	movement.right = false;
 	movement.left = false;
 	facingRight = true;
@@ -19,10 +19,10 @@ Player::Player()
 	jumping = false;
 	jumpState = falling;
 	texture.loadFromFile("images/adventurer_spritesheet.png");
-	textureRect = new IntRect(0, 0, PLAYER_SPRITE_SIZE, PLAYER_SPRITE_SIZE);
+	textureRect = new IntRect(0, 0, SPRITE_SIZE, SPRITE_SIZE);
 	sprite.setTexture(texture);
 	sprite.setTextureRect(*textureRect);
-	sprite.setPosition(rectangle.getPosition().x - (PLAYER_SPRITE_SIZE - PLAYER_WIDTH) / 2, rectangle.getPosition().y - PLAYER_SPRITE_Y_SETOFF);
+	sprite.setPosition(rectangle.getPosition().x - (SPRITE_SIZE - WIDTH) / 2, rectangle.getPosition().y - SPRITE_Y_SETOFF);
 	timer = timer.Zero;
 	currentAction = standing_action;
 	lastFrameAction = standing_action;
@@ -31,71 +31,6 @@ Player::Player()
 Player::~Player()
 {
 }
-
-/*RectangleShape Player::getRec()
-{
-	return rectangle;
-}
-
-void Player::setRecPos(float x, float y)
-{
-	rectangle.setPosition(x, y);
-}
-
-void Player::setRecPos(Vector2f pos) 
-{
-	rectangle.setPosition(pos);
-}
-
-void Player::setRecX(float x)
-{
-	rectangle.setPosition(x, rectangle.getPosition().y);
-}
-
-void Player::addToRecX(float x)
-{
-	rectangle.setPosition(rectangle.getPosition().x + x, rectangle.getPosition().y);
-}
-
-void Player::setRecY(float y)
-{
-	rectangle.setPosition(rectangle.getPosition().x, y);
-}
-
-void Player::addToRecY(float y)
-{
-	rectangle.setPosition(rectangle.getPosition().x, rectangle.getPosition().y + y);
-}
-
-float Player::getUpperSide()
-{
-	return rectangle.getPosition().y;
-}
-
-float Player::getBottomSide()
-{
-	return getUpperSide() + rectangle.getSize().y;
-}
-
-float Player::getLeftSide()
-{
-	return rectangle.getPosition().x;
-}
-
-float Player::getRightSide()
-{
-	return getLeftSide() + rectangle.getSize().x;
-}
-
-float Player::getCenterX()
-{
-	return getLeftSide() + rectangle.getSize().x / 2;
-}
-
-float Player::getCenterY()
-{
-	return getUpperSide() + rectangle.getSize().y / 2;
-}*/
 
 void Player::setMoveRight(bool state)
 {
@@ -106,31 +41,6 @@ void Player::setMoveLeft(bool state)
 {
 	movement.left = state;
 }
-
-/*Vector2f Player::getSpeed()
-{
-	return speed;
-}
-
-void Player::setSpeedX(float x)
-{
-	speed.x = x;
-}
-
-float Player::getSpeedX()
-{
-	return speed.x;
-}
-
-void Player::setSpeedY(float y)
-{
-	speed.y = y;
-}
-
-float Player::getSpeedY()
-{
-	return speed.y;
-}*/
 
 void Player::setFacingRight(bool state)
 {
@@ -331,12 +241,12 @@ void Player::updateSprite()
 		{
 			if (facingRight)
 			{
-				textureRect = new IntRect(0, 0, PLAYER_SPRITE_SIZE, PLAYER_SPRITE_SIZE);
+				textureRect = new IntRect(0, 0, SPRITE_SIZE, SPRITE_SIZE);
 				sprite.setTextureRect(*textureRect);
 			}
 			else
 			{
-				textureRect = new IntRect(PLAYER_SPRITE_SIZE, 0, PLAYER_SPRITE_SIZE, PLAYER_SPRITE_SIZE);
+				textureRect = new IntRect(SPRITE_SIZE, 0, SPRITE_SIZE, SPRITE_SIZE);
 				sprite.setTextureRect(*textureRect);
 			}
 		}
@@ -347,12 +257,12 @@ void Player::updateSprite()
 	{
 			if (facingRight)
 			{
-				textureRect = new IntRect(PLAYER_SPRITE_SIZE * 2, 0, PLAYER_SPRITE_SIZE, PLAYER_SPRITE_SIZE);
+				textureRect = new IntRect(SPRITE_SIZE * 2, 0, SPRITE_SIZE, SPRITE_SIZE);
 				sprite.setTextureRect(*textureRect);
 			}
 			else
 			{
-				textureRect = new IntRect(PLAYER_SPRITE_SIZE * 3, 0, PLAYER_SPRITE_SIZE, PLAYER_SPRITE_SIZE);
+				textureRect = new IntRect(SPRITE_SIZE * 3, 0, SPRITE_SIZE, SPRITE_SIZE);
 				sprite.setTextureRect(*textureRect);
 			}
 
@@ -366,7 +276,7 @@ void Player::updateSprite()
 			{
 				clock.restart().Zero;
 
-				textureRect = new IntRect(0, PLAYER_SPRITE_SIZE, PLAYER_SPRITE_SIZE, PLAYER_SPRITE_SIZE);
+				textureRect = new IntRect(0, SPRITE_SIZE, SPRITE_SIZE, SPRITE_SIZE);
 				sprite.setTextureRect(*textureRect);
 			}
 
@@ -376,13 +286,13 @@ void Player::updateSprite()
 			{
 				if (textureRect->left == 0)
 				{
-					textureRect = new IntRect(PLAYER_SPRITE_SIZE, PLAYER_SPRITE_SIZE, PLAYER_SPRITE_SIZE, PLAYER_SPRITE_SIZE);
+					textureRect = new IntRect(SPRITE_SIZE, SPRITE_SIZE, SPRITE_SIZE, SPRITE_SIZE);
 					sprite.setTextureRect(*textureRect);
 					clock.restart().Zero;
 				}
 				else
 				{
-					textureRect = new IntRect(0, PLAYER_SPRITE_SIZE, PLAYER_SPRITE_SIZE, PLAYER_SPRITE_SIZE);
+					textureRect = new IntRect(0, SPRITE_SIZE, SPRITE_SIZE, SPRITE_SIZE);
 					sprite.setTextureRect(*textureRect);
 					clock.restart().Zero;
 				}
@@ -394,7 +304,7 @@ void Player::updateSprite()
 			{
 				clock.restart().Zero;
 
-				textureRect = new IntRect(PLAYER_SPRITE_SIZE * 2, PLAYER_SPRITE_SIZE, PLAYER_SPRITE_SIZE, PLAYER_SPRITE_SIZE);
+				textureRect = new IntRect(SPRITE_SIZE * 2, SPRITE_SIZE, SPRITE_SIZE, SPRITE_SIZE);
 				sprite.setTextureRect(*textureRect);
 			}
 
@@ -402,15 +312,15 @@ void Player::updateSprite()
 
 			if (timer >= milliseconds(125))
 			{
-				if (textureRect->left == PLAYER_SPRITE_SIZE * 2)
+				if (textureRect->left == SPRITE_SIZE * 2)
 				{
-					textureRect = new IntRect(PLAYER_SPRITE_SIZE * 3, PLAYER_SPRITE_SIZE, PLAYER_SPRITE_SIZE, PLAYER_SPRITE_SIZE);
+					textureRect = new IntRect(SPRITE_SIZE * 3, SPRITE_SIZE, SPRITE_SIZE, SPRITE_SIZE);
 					sprite.setTextureRect(*textureRect);
 					clock.restart().Zero;
 				}
 				else
 				{
-					textureRect = new IntRect(PLAYER_SPRITE_SIZE * 2, PLAYER_SPRITE_SIZE, PLAYER_SPRITE_SIZE, PLAYER_SPRITE_SIZE);
+					textureRect = new IntRect(SPRITE_SIZE * 2, SPRITE_SIZE, SPRITE_SIZE, SPRITE_SIZE);
 					sprite.setTextureRect(*textureRect);
 					clock.restart().Zero;
 				}
@@ -420,11 +330,6 @@ void Player::updateSprite()
 	}
 	}
 
-	sprite.setPosition(rectangle.getPosition().x - (PLAYER_SPRITE_SIZE - PLAYER_WIDTH) / 2, rectangle.getPosition().y - PLAYER_SPRITE_Y_SETOFF);
+	sprite.setPosition(rectangle.getPosition().x - (SPRITE_SIZE - WIDTH) / 2, rectangle.getPosition().y - SPRITE_Y_SETOFF);
 }
-
-/*Sprite Player::getSprite()
-{
-	return sprite;
-}*/
 }

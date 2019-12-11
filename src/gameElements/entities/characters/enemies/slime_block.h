@@ -1,11 +1,10 @@
-#ifndef MELEE_ENEMY
-#define MELEE_ENEMY
+#ifndef SLIME_BLOCK_H
+#define SLIME_BLOCK_H
 
-#include "enemy.h"
+#include "gameElements/entities/characters/enemy.h"
 
 namespace game
 {
-const int ENEMY_SPRITE_SIZE = 64;
 
 enum TargetPos
 {
@@ -14,19 +13,18 @@ enum TargetPos
 	away
 };
 
-class MeleeEnemy: public Enemy
+class SlimeBlock: public Enemy
 {
+	const int SPRITE_SIZE = 64;
+
 	bool charging;
 	const float chargingSpeed = 10.0f;
 	const float alertDistance = 200.0f;
-	/*Texture texture;
-	IntRect* textureRect;
-	Sprite sprite;*/
 
 public:
-	MeleeEnemy();
-	MeleeEnemy(Vector2f pos);
-	~MeleeEnemy();
+	SlimeBlock();
+	SlimeBlock(Vector2f pos);
+	~SlimeBlock();
 	void setChargingState(bool chargeState);
 	bool getChargingState();
 	void updateCharginState();
@@ -34,7 +32,6 @@ public:
 	void updateAwakeState(RectangleShape target);
 	void attack(RectangleShape target);
 	void updateSprite();
-	//Sprite getSprite();
 };
 }
 

@@ -37,41 +37,6 @@ void Platform::draw()
 
 }
 
-/*
-RectangleShape Platform::getRec()
-{
-	return rectangle;
-}
-float Platform::getUpperSide()
-{
-	return rectangle.getPosition().y;
-}
-
-float Platform::getBottomSide()
-{
-	return getUpperSide() + rectangle.getSize().y;
-}
-
-float Platform::getLeftSide()
-{
-	return rectangle.getPosition().x;
-}
-
-float Platform::getRightSide()
-{
-	return getLeftSide() + rectangle.getSize().x;
-}
-
-float Platform::getCenterX()
-{
-	return getLeftSide() + rectangle.getSize().x / 2;
-}
-
-float Platform::getCenterY()
-{
-	return getUpperSide() + rectangle.getSize().y / 2;
-}*/
-
 NearestSide Platform::checkSideProximity(RectangleShape rec, float collisionMargin)
 {
 	disToTop = abs((rec.getPosition().y + rec.getSize().y) - rectangle.getPosition().y);

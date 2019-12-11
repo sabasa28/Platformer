@@ -1,44 +1,44 @@
-#include "melee_enemy.h"
+#include "slime_block.h"
 
 #include "general/game.h"
 
 namespace game
 {
-MeleeEnemy::MeleeEnemy()
+SlimeBlock::SlimeBlock()
 {
 	charging = false;
 	texture.loadFromFile("images/slimeBlock_spritesheet.png");
-	textureRect = new IntRect(0, 0, ENEMY_SPRITE_SIZE, ENEMY_SPRITE_SIZE);
+	textureRect = new IntRect(0, 0, SPRITE_SIZE, SPRITE_SIZE);
 	sprite.setTexture(texture);
 	sprite.setTextureRect(*textureRect);
-	sprite.setPosition(getRec().getPosition().x - (ENEMY_SPRITE_SIZE - ENEMY_SIZE) / 2, getRec().getPosition().y - (ENEMY_SPRITE_SIZE - ENEMY_SIZE) / 2);
+	sprite.setPosition(getRec().getPosition().x - (SPRITE_SIZE - SIZE) / 2, getRec().getPosition().y - (SPRITE_SIZE - SIZE) / 2);
 }
 
-MeleeEnemy::MeleeEnemy(Vector2f pos):Enemy(pos)
+SlimeBlock::SlimeBlock(Vector2f pos):Enemy(pos)
 {
 	charging = false;
 	texture.loadFromFile("images/slimeBlock_spritesheet.png");
-	textureRect = new IntRect(0, 0, ENEMY_SPRITE_SIZE, ENEMY_SPRITE_SIZE);
+	textureRect = new IntRect(0, 0, SPRITE_SIZE, SPRITE_SIZE);
 	sprite.setTexture(texture);
 	sprite.setTextureRect(*textureRect);
-	sprite.setPosition(getRec().getPosition().x - (ENEMY_SPRITE_SIZE - ENEMY_SIZE) / 2, getRec().getPosition().y - 60);
+	sprite.setPosition(getRec().getPosition().x - (SPRITE_SIZE - SIZE) / 2, getRec().getPosition().y - 60);
 }
 
-MeleeEnemy::~MeleeEnemy()
+SlimeBlock::~SlimeBlock()
 {
 }
 
-void MeleeEnemy::setChargingState(bool chargeState)
+void SlimeBlock::setChargingState(bool chargeState)
 {
 	charging = chargeState;
 }
 
-bool MeleeEnemy::getChargingState()
+bool SlimeBlock::getChargingState()
 {
 	return charging;
 }
 
-void MeleeEnemy::updateCharginState() 
+void SlimeBlock::updateCharginState() 
 {
 	if (Enemy::getSpeed().x == 0.0f && Enemy::getSpeed().y == 0.0f)
 	{
@@ -46,7 +46,7 @@ void MeleeEnemy::updateCharginState()
 	}
 }
 
-TargetPos MeleeEnemy::updateTargetPos(RectangleShape target)
+TargetPos SlimeBlock::updateTargetPos(RectangleShape target)
 {
 	if (abs(getRec().getPosition().x - target.getPosition().x) < alertDistance && (getCenter().y > target.getPosition().y && getCenter().y < target.getPosition().y + target.getSize().y))
 	{
@@ -65,7 +65,7 @@ TargetPos MeleeEnemy::updateTargetPos(RectangleShape target)
 	}
 }
 
-void MeleeEnemy::updateAwakeState(RectangleShape target)
+void SlimeBlock::updateAwakeState(RectangleShape target)
 {
 	if (updateTargetPos(target) != away)
 	{
@@ -73,7 +73,7 @@ void MeleeEnemy::updateAwakeState(RectangleShape target)
 	}
 }
 
-void MeleeEnemy::attack(RectangleShape target)
+void SlimeBlock::attack(RectangleShape target)
 {
 	if (charging == false && Enemy::getAwake() == true)
 	{
@@ -93,24 +93,19 @@ void MeleeEnemy::attack(RectangleShape target)
 	}
 }
 
-void MeleeEnemy::updateSprite()
+void SlimeBlock::updateSprite()
 {
 	if (!charging)
 	{
-		textureRect = new IntRect(0, 0, ENEMY_SPRITE_SIZE, ENEMY_SPRITE_SIZE);
+		textureRect = new IntRect(0, 0, SPRITE_SIZE, SPRITE_SIZE);
 		sprite.setTextureRect(*textureRect);
 	}
 	else
 	{
-		textureRect = new IntRect(ENEMY_SPRITE_SIZE, 0, ENEMY_SPRITE_SIZE, ENEMY_SPRITE_SIZE);
+		textureRect = new IntRect(SPRITE_SIZE, 0, SPRITE_SIZE, SPRITE_SIZE);
 		sprite.setTextureRect(*textureRect);
 	}
 
-	sprite.setPosition(getRec().getPosition().x - (ENEMY_SPRITE_SIZE - ENEMY_SIZE) / 2, getRec().getPosition().y - (ENEMY_SPRITE_SIZE - ENEMY_SIZE) / 2);
+	sprite.setPosition(getRec().getPosition().x - (SPRITE_SIZE - SIZE) / 2, getRec().getPosition().y - (SPRITE_SIZE - SIZE) / 2);
 }
-
-/*Sprite MeleeEnemy::getSprite()
-{
-	return sprite;
-}*/
 }

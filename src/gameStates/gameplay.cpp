@@ -147,11 +147,11 @@ Gameplay::Gameplay()
 
 	for (int i = 0; i < ENEMY_AMMOUNT; i++)
 	{
-		meleeEnemy[i] = NULL;
+		slimeBlock[i] = NULL;
 	}
-	meleeEnemy[0] = new MeleeEnemy({ 1400.0f, -200.0f });
-	meleeEnemy[1] = new MeleeEnemy({ 1400.0f, 100.0f });
-	meleeEnemy[2] = new MeleeEnemy({ 1900.0f, -800.0f });
+	slimeBlock[0] = new SlimeBlock({ 1400.0f, -200.0f });
+	slimeBlock[1] = new SlimeBlock({ 1400.0f, 100.0f });
+	slimeBlock[2] = new SlimeBlock({ 1900.0f, -800.0f });
 
 	goal = new RectangleShape({ static_cast<float>(GOAL_SIZE), static_cast<float>(GOAL_SIZE) });
 	goal->setPosition({ 2600.0f + goal->getGlobalBounds().width/2 , -1000.0f });
@@ -202,7 +202,7 @@ Gameplay::~Gameplay()
 
 	for (int i = 0; i < ENEMY_AMMOUNT; i++)
 	{
-		if (meleeEnemy[i]) delete meleeEnemy[i];
+		if (slimeBlock[i]) delete slimeBlock[i];
 	}
 
 	if (goal) delete goal;
@@ -309,9 +309,9 @@ void Gameplay::checkGameplayColls(Platform* plat[][GRID_WIDTH])
 
 		for (int i = 0; i < ENEMY_AMMOUNT; i++)
 		{
-			if (meleeEnemy[i])
+			if (slimeBlock[i])
 			{
-				if (player->colliding(meleeEnemy[i]->getRec()))
+				if (player->colliding(slimeBlock[i]->getRec()))
 				{
 					Game::impactSFX.play();
 					Game::currentGameState = gameOver_state;
@@ -409,10 +409,10 @@ void Gameplay::update()
 
 		for (int i = 0; i < ENEMY_AMMOUNT; i++)
 		{
-			if (meleeEnemy[i])
+			if (slimeBlock[i])
 			{
-				meleeEnemy[i]->updatePos(player->getRec());
-				meleeEnemy[i]->updateCharginState();
+				slimeBlock[i]->updatePos(player->getRec());
+				slimeBlock[i]->updateCharginState();
 
 				bool aux = false;
 				for (int y = 0; y < GRID_HEIGHT; y++)
@@ -421,25 +421,25 @@ void Gameplay::update()
 					{
 						if (platformGrid[y][x])
 						{
-							if (meleeEnemy[i]->getRec().getGlobalBounds().intersects(platformGrid[y][x]->getRec().getGlobalBounds()))
+							if (slimeBlock[i]->getRec().getGlobalBounds().intersects(platformGrid[y][x]->getRec().getGlobalBounds()))
 							{
-								switch (platformGrid[y][x]->checkSideProximity(meleeEnemy[i]->getRec(), 5))
+								switch (platformGrid[y][x]->checkSideProximity(slimeBlock[i]->getRec(), 5))
 								{
 								case Top:
 									aux = true;
-									meleeEnemy[i]->setRecPosY(platformGrid[y][x]->getUpperSide() - meleeEnemy[i]->getRec().getSize().y);
+									slimeBlock[i]->setRecPosY(platformGrid[y][x]->getUpperSide() - slimeBlock[i]->getRec().getSize().y);
 									break;
 								case Right:
-									meleeEnemy[i]->setSpeed({ 0.0f, meleeEnemy[i]->getSpeed().y });
-									meleeEnemy[i]->setRecPosX(platformGrid[y][x]->getRightSide());
+									slimeBlock[i]->setSpeed({ 0.0f, slimeBlock[i]->getSpeed().y });
+									slimeBlock[i]->setRecPosX(platformGrid[y][x]->getRightSide());
 									break;
 								case Left:
-									meleeEnemy[i]->setSpeed({ 0.0f, meleeEnemy[i]->getSpeed().y });
-									meleeEnemy[i]->setRecPosX(platformGrid[y][x]->getLeftSide() - meleeEnemy[i]->getRec().getSize().x);
+									slimeBlock[i]->setSpeed({ 0.0f, slimeBlock[i]->getSpeed().y });
+									slimeBlock[i]->setRecPosX(platformGrid[y][x]->getLeftSide() - slimeBlock[i]->getRec().getSize().x);
 									break;
 								case Bottom:
-									meleeEnemy[i]->setSpeed({ meleeEnemy[i]->getSpeed().x, 0.0f });
-									meleeEnemy[i]->setRecPosY(platformGrid[y][x]->getBottomSide());
+									slimeBlock[i]->setSpeed({ slimeBlock[i]->getSpeed().x, 0.0f });
+									slimeBlock[i]->setRecPosY(platformGrid[y][x]->getBottomSide());
 								default:
 									break;
 								}
@@ -448,17 +448,17 @@ void Gameplay::update()
 					}
 				}
 
-				meleeEnemy[i]->setOnGround(aux);
+				slimeBlock[i]->setOnGround(aux);
 
-				if (meleeEnemy[i]->getUpperSide() > SCREEN_HEIGHT)
+				if (slimeBlock[i]->getUpperSide() > SCREEN_HEIGHT)
 				{
-					delete meleeEnemy[i];
-					meleeEnemy[i] = NULL;
+					delete slimeBlock[i];
+					slimeBlock[i] = NULL;
 				}
 
-				if (meleeEnemy[i])
+				if (slimeBlock[i])
 				{
-					meleeEnemy[i]->updateSprite();
+					slimeBlock[i]->updateSprite();
 				}
 			}
 		}
@@ -528,7 +528,7 @@ void Gameplay::draw()
 
 	for (int i = 0; i < ENEMY_AMMOUNT; i++)
 	{
-		if (meleeEnemy[i]) Game::window->draw(meleeEnemy[i]->getSprite());
+		if (slimeBlock[i]) Game::window->draw(slimeBlock[i]->getSprite());
 	}
 
 	if (goal) Game::window->draw(goalSprite);

@@ -4,8 +4,8 @@
 #include <SFML/Audio.hpp>
 
 #include "gameElements/entities/platform.h"
-#include "gameElements/entities/player.h"
-#include "gameElements/entities/melee_enemy.h"
+#include "gameElements/entities/characters/player.h"
+#include "gameElements/entities/characters/enemies/slime_block.h"
 #include "gameElements/entities/display_text.h"
 
 namespace game
@@ -32,7 +32,7 @@ class Gameplay
 	bool muteButtonPressed;
 	Platform* platformGrid[GRID_HEIGHT][GRID_WIDTH];
 	Player* player;
-	MeleeEnemy* meleeEnemy[ENEMY_AMMOUNT];
+	SlimeBlock* slimeBlock[ENEMY_AMMOUNT];
 	RectangleShape* goal;
 	bool paused;
 	RectangleShape pauseRec;

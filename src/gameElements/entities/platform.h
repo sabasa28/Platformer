@@ -25,7 +25,6 @@ enum RelativePlayerJumpState
 
 class Platform : public Entity
 {
-
 	const int SIZE = 100;
 	const int MIN_Y_POS = 700;
 	const int SPRITE_SIZE = 100;
@@ -39,13 +38,6 @@ public:
 	Platform(int x, int y);
 	~Platform();
 	int getSize();
-	/*RectangleShape getRec();
-	float getUpperSide();
-	float getBottomSide();
-	float getLeftSide();
-	float getRightSide();
-	float getCenterX();
-	float getCenterY();*/
 	void draw();
 	NearestSide checkSideProximity(RectangleShape rec, float collisionMargin);
 	void setRelativePlayerJumpState(RelativePlayerJumpState jumpState);

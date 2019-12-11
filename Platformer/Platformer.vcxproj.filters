@@ -16,6 +16,9 @@
     <Filter Include="gameElements\entities\characters">
       <UniqueIdentifier>{84874937-8d75-4034-b164-a4e6102b3b1f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="gameElements\entities\characters\enemies">
+      <UniqueIdentifier>{0ef8dcd4-bd22-455a-93e1-8f76d05f8f2a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\gameStates\gameplay.cpp">
@@ -52,14 +55,14 @@
     <ClCompile Include="..\src\gameStates\screen.cpp">
       <Filter>gameStates</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\gameElements\entities\player.cpp">
+    <ClCompile Include="..\src\gameElements\entities\characters\enemy.cpp">
       <Filter>gameElements\entities\characters</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\gameElements\entities\melee_enemy.cpp">
+    <ClCompile Include="..\src\gameElements\entities\characters\player.cpp">
       <Filter>gameElements\entities\characters</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\gameElements\entities\enemy.cpp">
-      <Filter>gameElements\entities\characters</Filter>
+    <ClCompile Include="..\src\gameElements\entities\characters\enemies\slime_block.cpp">
+      <Filter>gameElements\entities\characters\enemies</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -96,14 +99,14 @@
     <ClInclude Include="..\src\gameStates\screen.h">
       <Filter>gameStates</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\gameElements\entities\player.h">
+    <ClInclude Include="..\src\gameElements\entities\characters\enemy.h">
       <Filter>gameElements\entities\characters</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\gameElements\entities\melee_enemy.h">
+    <ClInclude Include="..\src\gameElements\entities\characters\player.h">
       <Filter>gameElements\entities\characters</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\gameElements\entities\enemy.h">
-      <Filter>gameElements\entities\characters</Filter>
+    <ClInclude Include="..\src\gameElements\entities\characters\enemies\slime_block.h">
+      <Filter>gameElements\entities\characters\enemies</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
