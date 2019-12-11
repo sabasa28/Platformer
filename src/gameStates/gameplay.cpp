@@ -287,19 +287,19 @@ void Gameplay::checkGameplayColls(Platform* plat[][GRID_WIDTH])
 						case Top:
 							platformGrid[y][x]->setRelativePlayerJumpState(onGround_relative);
 							player->setJumpState(onGround);
-							player->setRecY(platformGrid[y][x]->getUpperSide() - player->getRec().getSize().y);
+							player->setRecPosY(platformGrid[y][x]->getUpperSide() - player->getRec().getSize().y);
 							break;
 						case Bottom:
 							player->setSpeedY(0);
-							player->setRecY(platformGrid[y][x]->getBottomSide());
+							player->setRecPosY(platformGrid[y][x]->getBottomSide());
 							break;
 						case Right:
 							player->setSpeedX(0);
-							player->setRecX(platformGrid[y][x]->getRightSide());
+							player->setRecPosX(platformGrid[y][x]->getRightSide());
 							break;
 						case Left:
 							player->setSpeedX(0);
-							player->setRecX(platformGrid[y][x]->getLeftSide() - player->getRec().getSize().x);
+							player->setRecPosX(platformGrid[y][x]->getLeftSide() - player->getRec().getSize().x);
 							break;
 						}
 					}
@@ -427,19 +427,19 @@ void Gameplay::update()
 								{
 								case Top:
 									aux = true;
-									meleeEnemy[i]->setRecY(platformGrid[y][x]->getUpperSide() - meleeEnemy[i]->getRec().getSize().y);
+									meleeEnemy[i]->setRecPosY(platformGrid[y][x]->getUpperSide() - meleeEnemy[i]->getRec().getSize().y);
 									break;
 								case Right:
 									meleeEnemy[i]->setSpeed({ 0.0f, meleeEnemy[i]->getSpeed().y });
-									meleeEnemy[i]->setRecX(platformGrid[y][x]->getRightSide());
+									meleeEnemy[i]->setRecPosX(platformGrid[y][x]->getRightSide());
 									break;
 								case Left:
 									meleeEnemy[i]->setSpeed({ 0.0f, meleeEnemy[i]->getSpeed().y });
-									meleeEnemy[i]->setRecX(platformGrid[y][x]->getLeftSide() - meleeEnemy[i]->getRec().getSize().x);
+									meleeEnemy[i]->setRecPosX(platformGrid[y][x]->getLeftSide() - meleeEnemy[i]->getRec().getSize().x);
 									break;
 								case Bottom:
 									meleeEnemy[i]->setSpeed({ meleeEnemy[i]->getSpeed().x, 0.0f });
-									meleeEnemy[i]->setRecY(platformGrid[y][x]->getBottomSide());
+									meleeEnemy[i]->setRecPosY(platformGrid[y][x]->getBottomSide());
 								default:
 									break;
 								}

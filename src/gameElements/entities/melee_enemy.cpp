@@ -109,8 +109,8 @@ void MeleeEnemy::updateSprite()
 	sprite.setPosition(getRec().getPosition().x - (ENEMY_SPRITE_SIZE - ENEMY_SIZE) / 2, getRec().getPosition().y - (ENEMY_SPRITE_SIZE - ENEMY_SIZE) / 2);
 }
 
-Sprite MeleeEnemy::getSprite()
+/*Sprite MeleeEnemy::getSprite()
 {
 	return sprite;
-}
+}*/
 }

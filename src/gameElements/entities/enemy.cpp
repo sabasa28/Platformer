@@ -30,7 +30,7 @@ Enemy::~Enemy()
 {
 }
 
-RectangleShape Enemy::getRec()
+/*RectangleShape Enemy::getRec()
 {
 	return rectangle;
 }
@@ -68,7 +68,7 @@ float Enemy::getRightSide()
 Vector2f Enemy::getCenter()
 {
 	return { getLeftSide() + rectangle.getSize().x / 2, getUpperSide() + rectangle.getSize().y / 2};
-}
+}*/
 
 void Enemy::setAlive(bool newAlive)
 {
@@ -100,7 +100,7 @@ bool Enemy::getOnGround()
 	return onGround;
 }
 
-void Enemy::setSpeed(Vector2f newSpeed)
+/*void Enemy::setSpeed(Vector2f newSpeed)
 {
 	speed = newSpeed;
 }
@@ -108,7 +108,7 @@ void Enemy::setSpeed(Vector2f newSpeed)
 Vector2f Enemy::getSpeed()
 {
 	return speed;
-}
+}*/
 
 void Enemy::updatePos(RectangleShape target)
 {
@@ -119,7 +119,7 @@ void Enemy::updatePos(RectangleShape target)
 
 	if (onGround == false)
 	{
-		speed.y += gravity;
+		speed.y += GRAVITY;
 	}
 	else
 	{

@@ -32,7 +32,7 @@ Player::~Player()
 {
 }
 
-RectangleShape Player::getRec()
+/*RectangleShape Player::getRec()
 {
 	return rectangle;
 }
@@ -95,7 +95,7 @@ float Player::getCenterX()
 float Player::getCenterY()
 {
 	return getUpperSide() + rectangle.getSize().y / 2;
-}
+}*/
 
 void Player::setMoveRight(bool state)
 {
@@ -107,7 +107,7 @@ void Player::setMoveLeft(bool state)
 	movement.left = state;
 }
 
-Vector2f Player::getSpeed()
+/*Vector2f Player::getSpeed()
 {
 	return speed;
 }
@@ -130,7 +130,7 @@ void Player::setSpeedY(float y)
 float Player::getSpeedY()
 {
 	return speed.y;
-}
+}*/
 
 void Player::setFacingRight(bool state)
 {
@@ -279,7 +279,7 @@ void Player::updateMovement()
 			jumpState = falling;
 		}
 	case falling:
-		speed.y += gravity;
+		speed.y += GRAVITY;
 		break;
 	}
 
@@ -423,8 +423,8 @@ void Player::updateSprite()
 	sprite.setPosition(rectangle.getPosition().x - (PLAYER_SPRITE_SIZE - PLAYER_WIDTH) / 2, rectangle.getPosition().y - PLAYER_SPRITE_Y_SETOFF);
 }
 
-Sprite Player::getSprite()
+/*Sprite Player::getSprite()
 {
 	return sprite;
-}
+}*/
 }

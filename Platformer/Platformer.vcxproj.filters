@@ -13,6 +13,9 @@
     <Filter Include="gameElements\entities">
       <UniqueIdentifier>{b95c47a6-a504-4f52-a0be-54a245a304b8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="gameElements\entities\characters">
+      <UniqueIdentifier>{84874937-8d75-4034-b164-a4e6102b3b1f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\gameStates\gameplay.cpp">
@@ -40,15 +43,6 @@
     <ClCompile Include="..\src\gameElements\entities\display_text.cpp">
       <Filter>gameElements\entities</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\gameElements\entities\enemy.cpp">
-      <Filter>gameElements\entities</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\gameElements\entities\melee_enemy.cpp">
-      <Filter>gameElements\entities</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\gameElements\entities\player.cpp">
-      <Filter>gameElements\entities</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\gameElements\entities\character.cpp">
       <Filter>gameElements\entities</Filter>
     </ClCompile>
@@ -57,6 +51,15 @@
     </ClCompile>
     <ClCompile Include="..\src\gameStates\screen.cpp">
       <Filter>gameStates</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\gameElements\entities\player.cpp">
+      <Filter>gameElements\entities\characters</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\gameElements\entities\melee_enemy.cpp">
+      <Filter>gameElements\entities\characters</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\gameElements\entities\enemy.cpp">
+      <Filter>gameElements\entities\characters</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -84,15 +87,6 @@
     <ClInclude Include="..\src\gameElements\entities\display_text.h">
       <Filter>gameElements\entities</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\gameElements\entities\enemy.h">
-      <Filter>gameElements\entities</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\gameElements\entities\melee_enemy.h">
-      <Filter>gameElements\entities</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\gameElements\entities\player.h">
-      <Filter>gameElements\entities</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\gameElements\entities\character.h">
       <Filter>gameElements\entities</Filter>
     </ClInclude>
@@ -101,6 +95,15 @@
     </ClInclude>
     <ClInclude Include="..\src\gameStates\screen.h">
       <Filter>gameStates</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\gameElements\entities\player.h">
+      <Filter>gameElements\entities\characters</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\gameElements\entities\melee_enemy.h">
+      <Filter>gameElements\entities\characters</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\gameElements\entities\enemy.h">
+      <Filter>gameElements\entities\characters</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

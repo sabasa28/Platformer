@@ -19,9 +19,9 @@ class MeleeEnemy: public Enemy
 	bool charging;
 	const float chargingSpeed = 10.0f;
 	const float alertDistance = 200.0f;
-	Texture texture;
+	/*Texture texture;
 	IntRect* textureRect;
-	Sprite sprite;
+	Sprite sprite;*/
 
 public:
 	MeleeEnemy();
@@ -34,7 +34,7 @@ public:
 	void updateAwakeState(RectangleShape target);
 	void attack(RectangleShape target);
 	void updateSprite();
-	Sprite getSprite();
+	//Sprite getSprite();
 };
 }
 

@@ -19,18 +19,19 @@ public:
 	Entity();
 	Entity(RectangleShape rec, Texture tex, IntRect* texRec, Sprite spr);
 	~Entity();
-	void setRecPosition(float x, float y);
-	void setRecPosition(Vector2f pos);
-	void setRecPositionX(float x);
-	void setRecPositionY(float y);
+	void setRecPos(float x, float y);
+	void setRecPos(Vector2f pos);
+	void setRecPosX(float x);
+	void setRecPosY(float y);
 	RectangleShape getRec();
-	Vector2f getPosition();
-	float getPositionX();
-	float getPositionY();
+	Vector2f getRecPos();
+	float getRecPosX();
+	float getRecPosY();
 	float getUpperSide();
 	float getBottomSide();
 	float getLeftSide();
 	float getRightSide();
+	Vector2f getCenter();
 	float getCenterX();
 	float getCenterY();
 	Sprite getSprite();
@@ -38,7 +39,6 @@ public:
 	void addToPosition(Vector2f pos);
 	void addToPositionX(float x);
 	void addToPositionY(float y);
-	virtual void draw() = 0;
 };
 }
 

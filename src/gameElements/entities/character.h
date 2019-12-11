@@ -7,6 +7,7 @@ namespace game
 {
 class Character : public Entity
 {
+protected:
 	const float GRAVITY = 0.75f;
 
 	Vector2f speed;

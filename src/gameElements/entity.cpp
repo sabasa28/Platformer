@@ -19,22 +19,22 @@ Entity::~Entity()
 {
 }
 
-void Entity::setRecPosition(float x, float y)
+void Entity::setRecPos(float x, float y)
 {
 	rectangle.setPosition(x, y);
 }
 
-void Entity::setRecPosition(Vector2f pos)
+void Entity::setRecPos(Vector2f pos)
 {
 	rectangle.setPosition(pos.x, pos.y);
 }
 
-void Entity::setRecPositionX(float x)
+void Entity::setRecPosX(float x)
 {
 	rectangle.setPosition(x, rectangle.getPosition().y);
 }
 
-void Entity::setRecPositionY(float y)
+void Entity::setRecPosY(float y)
 {
 	rectangle.setPosition(rectangle.getPosition().x, y);
 }
@@ -44,17 +44,17 @@ RectangleShape Entity::getRec()
 	return rectangle;
 }
 
-Vector2f Entity::getPosition()
+Vector2f Entity::getRecPos()
 {
 	return rectangle.getPosition();
 }
 
-float Entity::getPositionX()
+float Entity::getRecPosX()
 {
 	return rectangle.getPosition().x;
 }
 
-float Entity::getPositionY()
+float Entity::getRecPosY()
 {
 	return rectangle.getPosition().y;
 }
@@ -77,6 +77,11 @@ float Entity::getLeftSide()
 float Entity::getRightSide()
 {
 	return getLeftSide() + rectangle.getSize().x;
+}
+
+Vector2f Entity::getCenter()
+{
+	return { getLeftSide() + rectangle.getSize().x / 2, getUpperSide() + rectangle.getSize().y / 2 };
 }
 
 float Entity::getCenterX()
