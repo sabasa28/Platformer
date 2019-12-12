@@ -46,6 +46,11 @@ void SlimeBlock::updateCharginState()
 	}
 }
 
+float SlimeBlock::getCollisionMargin()
+{
+	return collisionMargin;
+}
+
 TargetPos SlimeBlock::updateTargetPos(RectangleShape target)
 {
 	if (abs(getRec().getPosition().x - target.getPosition().x) < alertDistance && (getCenter().y > target.getPosition().y && getCenter().y < target.getPosition().y + target.getSize().y))

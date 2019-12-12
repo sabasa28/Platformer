@@ -39,7 +39,7 @@ public:
 	~Platform();
 	static int getSize();
 	void draw();
-	NearestSide checkSideProximity(RectangleShape rec, float collisionMargin);
+	NearestSide checkSideProximity(RectangleShape rec, float collisionMargin, bool verticalPriorization);
 	void setRelativePlayerJumpState(RelativePlayerJumpState jumpState);
 	RelativePlayerJumpState getRelativePlayerJumpState();
 	Sprite getSprite();

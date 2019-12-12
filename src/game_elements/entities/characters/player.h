@@ -36,14 +36,15 @@ class Player : public Character
 	const int INITIAL_POSITION = Platform::getSize() * 21;
 	const int SPRITE_SIZE = 128;
 	const int SPRITE_Y_SETOFF = 30;
-	const float MAXIMUM_SPEED = 20.0f;
+	const float MAXIMUM_SPEED = 1200.0f;//20.0f;
 
 	Movement movement;
 	bool facingRight;
-	float movingSpeed = 10.0f;
+	float movingSpeed = 600.0f;
 	bool jumping;
 	JumpState jumpState;
-	float jumpingSpeed = 20.0f;
+	float jumpingSpeed = 1200.0f;
+	const float collisionMargin = 7.0f;
 	Clock clock;
 	Time timer;
 	Action currentAction;
@@ -63,6 +64,7 @@ public:
 	Action getCurrentAction();
 	void setLastFrameAction(Action action);
 	Action getLastFrameAction();
+	float getCollisionMargin();
 	void checkKeyPressedInput();
 	void checkKeyDownInput();
 	void checkKeyReleasedInput();

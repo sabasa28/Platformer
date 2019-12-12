@@ -18,8 +18,9 @@ class SlimeBlock: public Enemy
 	const int SPRITE_SIZE = 64;
 
 	bool charging;
-	const float chargingSpeed = 10.0f;
+	const float chargingSpeed = 600.0f;
 	const float alertDistance = 300.0f;
+	const float collisionMargin = 5.0f;
 
 public:
 	SlimeBlock();
@@ -28,10 +29,12 @@ public:
 	void setChargingState(bool chargeState);
 	bool getChargingState();
 	void updateCharginState();
+	float getCollisionMargin();
 	TargetPos updateTargetPos(RectangleShape target);
 	void updateAwakeState(RectangleShape target);
 	void attack(RectangleShape target);
 	void updateSprite();
+	 
 };
 }
 

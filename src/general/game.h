@@ -23,6 +23,7 @@ const int TITLE_FONT_SIZE = 100;
 const int INTERFACE_MUSIC_INIT_VOLUME = 100;
 const int GAMEPLAY_MUSIC_INIT_VOLUME = 50;
 
+
 enum GameState
 {
 	menu_state,
@@ -35,6 +36,9 @@ enum GameState
 class Game
 {
 	static bool gameStateInputActive;
+	Clock clock;
+	Time time;
+	
 	Menu* menu;
 	Credits* credits;
 	Gameplay* gameplay;
@@ -45,6 +49,7 @@ class Game
 	void draw();
 
 public:
+	static float deltaTime;
 	static Event event;
 	static GameState currentGameState;
 	static RenderWindow* window;

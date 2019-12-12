@@ -13,13 +13,15 @@ SoundBuffer Game::buttonSFXBuffer;
 Sound Game::buttonSFX;
 SoundBuffer Game::impactSFXBuffer;
 Sound Game::impactSFX;
+float Game::deltaTime=0.0f;
 
 Game::Game()
 {
 	window = new RenderWindow(VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "Cave Climber");
-	if (window) window->setFramerateLimit(60);
 
 	gameStateInputActive = false;
+	clock.restart();
+	deltaTime = 0.0f;
 
 	menu = NULL;
 	credits = NULL;
@@ -55,6 +57,9 @@ Game::~Game()
 
 void Game::update()
 {
+	time = clock.restart();
+	deltaTime = time.asSeconds();
+
 	while (window->pollEvent(event))
 	{
 		if (event.type == Event::Closed)

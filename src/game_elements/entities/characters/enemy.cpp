@@ -57,7 +57,7 @@ bool Enemy::getAwake()
 
 void Enemy::setOnGround(bool state)
 {
-	onGround = state;
+	onGround = state; 
 }
 
 bool Enemy::getOnGround()
@@ -67,7 +67,7 @@ bool Enemy::getOnGround()
 
 void Enemy::updatePos(RectangleShape target)
 {
-	rectangle.setPosition(rectangle.getPosition() + speed);
+	rectangle.setPosition(rectangle.getPosition() + speed* Game::deltaTime);
 	updateAwakeState(target);
 	attack(target);
 

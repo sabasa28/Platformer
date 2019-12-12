@@ -89,6 +89,11 @@ Action Player::getLastFrameAction()
 	return lastFrameAction;
 }
 
+float Player::getCollisionMargin()
+{
+	return collisionMargin;
+}
+
 void Player::checkKeyPressedInput()
 {
 	if (Keyboard::isKeyPressed(Keyboard::Right))
@@ -201,7 +206,7 @@ void Player::updateMovement()
 
 void Player::updatePosition() 
 {
-	rectangle.setPosition(rectangle.getPosition() + speed);
+	rectangle.setPosition(rectangle.getPosition() + speed * Game::deltaTime);
 }
 
 bool Player::colliding(RectangleShape rec)

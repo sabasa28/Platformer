@@ -11,11 +11,6 @@ Sound Gameplay::jumpSFX;
 SoundBuffer Gameplay::coinsSFXBuffer;
 Sound Gameplay::coinsSFX;
 
-static float getCollisionMargin(float jumpingSpeed)
-{
-	return jumpingSpeed / 3;
-}
-
 Gameplay::Gameplay()
 {
 	pauseButtonPressed = false;
@@ -256,7 +251,7 @@ void Gameplay::checkGameplayColls(Platform* plat[][GRID_WIDTH])
 
 					if (player->colliding(platformGrid[y][x]->getRec()))
 					{
-						switch (platformGrid[y][x]->checkSideProximity(player->getRec(), getCollisionMargin(player->getJumpingSpeed())))
+						switch (platformGrid[y][x]->checkSideProximity(player->getRec(), player->getCollisionMargin(),false))
 						{
 						case Top:
 							platformGrid[y][x]->setRelativePlayerJumpState(onGround_relative);
@@ -397,7 +392,7 @@ void Gameplay::update()
 						{
 							if (slimeBlock[i]->getRec().getGlobalBounds().intersects(platformGrid[y][x]->getRec().getGlobalBounds()))
 							{
-								switch (platformGrid[y][x]->checkSideProximity(slimeBlock[i]->getRec(), 5))
+								switch (platformGrid[y][x]->checkSideProximity(slimeBlock[i]->getRec(), slimeBlock[i]->getCollisionMargin(), true))
 								{
 								case Top:
 									aux = true;
