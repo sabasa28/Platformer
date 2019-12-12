@@ -19,36 +19,38 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\gameElements\entities\character.cpp" />
-    <ClCompile Include="..\src\gameElements\entities\characters\enemies\slime_block.cpp" />
-    <ClCompile Include="..\src\gameElements\entities\characters\enemy.cpp" />
-    <ClCompile Include="..\src\gameElements\entities\characters\player.cpp" />
-    <ClCompile Include="..\src\gameElements\entities\display_text.cpp" />
-    <ClCompile Include="..\src\gameElements\entities\platform.cpp" />
-    <ClCompile Include="..\src\gameElements\entity.cpp" />
-    <ClCompile Include="..\src\gameStates\credits.cpp" />
-    <ClCompile Include="..\src\gameStates\gameplay.cpp" />
-    <ClCompile Include="..\src\gameStates\game_over.cpp" />
-    <ClCompile Include="..\src\gameStates\menu.cpp" />
-    <ClCompile Include="..\src\gameStates\screen.cpp" />
-    <ClCompile Include="..\src\gameStates\victory.cpp" />
+    <ClCompile Include="..\src\game_elements\entities\character.cpp" />
+    <ClCompile Include="..\src\game_elements\entities\characters\enemies\slime_block.cpp" />
+    <ClCompile Include="..\src\game_elements\entities\characters\enemy.cpp" />
+    <ClCompile Include="..\src\game_elements\entities\characters\player.cpp" />
+    <ClCompile Include="..\src\game_elements\entities\display_text.cpp" />
+    <ClCompile Include="..\src\game_elements\entities\gold_coin.cpp" />
+    <ClCompile Include="..\src\game_elements\entities\platform.cpp" />
+    <ClCompile Include="..\src\game_elements\entity.cpp" />
+    <ClCompile Include="..\src\game_states\gameplay.cpp" />
+    <ClCompile Include="..\src\game_states\screen.cpp" />
+    <ClCompile Include="..\src\game_states\screens\credits.cpp" />
+    <ClCompile Include="..\src\game_states\screens\game_over.cpp" />
+    <ClCompile Include="..\src\game_states\screens\menu.cpp" />
+    <ClCompile Include="..\src\game_states\screens\victory.cpp" />
     <ClCompile Include="..\src\general\game.cpp" />
     <ClCompile Include="..\src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\src\gameElements\entities\character.h" />
-    <ClInclude Include="..\src\gameElements\entities\characters\enemies\slime_block.h" />
-    <ClInclude Include="..\src\gameElements\entities\characters\enemy.h" />
-    <ClInclude Include="..\src\gameElements\entities\characters\player.h" />
-    <ClInclude Include="..\src\gameElements\entities\display_text.h" />
-    <ClInclude Include="..\src\gameElements\entities\platform.h" />
-    <ClInclude Include="..\src\gameElements\entity.h" />
-    <ClInclude Include="..\src\gameStates\credits.h" />
-    <ClInclude Include="..\src\gameStates\gameplay.h" />
-    <ClInclude Include="..\src\gameStates\game_over.h" />
-    <ClInclude Include="..\src\gameStates\menu.h" />
-    <ClInclude Include="..\src\gameStates\screen.h" />
-    <ClInclude Include="..\src\gameStates\victory.h" />
+    <ClInclude Include="..\src\game_elements\entities\character.h" />
+    <ClInclude Include="..\src\game_elements\entities\characters\enemies\slime_block.h" />
+    <ClInclude Include="..\src\game_elements\entities\characters\enemy.h" />
+    <ClInclude Include="..\src\game_elements\entities\characters\player.h" />
+    <ClInclude Include="..\src\game_elements\entities\display_text.h" />
+    <ClInclude Include="..\src\game_elements\entities\gold_coin.h" />
+    <ClInclude Include="..\src\game_elements\entities\platform.h" />
+    <ClInclude Include="..\src\game_elements\entity.h" />
+    <ClInclude Include="..\src\game_states\gameplay.h" />
+    <ClInclude Include="..\src\game_states\screen.h" />
+    <ClInclude Include="..\src\game_states\screens\credits.h" />
+    <ClInclude Include="..\src\game_states\screens\game_over.h" />
+    <ClInclude Include="..\src\game_states\screens\menu.h" />
+    <ClInclude Include="..\src\game_states\screens\victory.h" />
     <ClInclude Include="..\src\general\game.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

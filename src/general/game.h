@@ -5,11 +5,11 @@
 
 #include <SFML/Audio.hpp>
 
-#include "gameStates/menu.h"
-#include "gameStates/credits.h"
-#include "gameStates/gameplay.h"
-#include "gameStates/game_over.h"
-#include "gameStates/victory.h"
+#include "game_states/gameplay.h"
+#include "game_states/screens/menu.h"
+#include "game_states/screens/credits.h"
+#include "game_states/screens/game_over.h"
+#include "game_states/screens/victory.h"
 
 using namespace std;
 using namespace sf;

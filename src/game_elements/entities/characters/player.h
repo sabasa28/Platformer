@@ -1,8 +1,8 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include "gameElements/entities/character.h"
-#include "gameElements/entities/platform.h"
+#include "game_elements/entities/character.h"
+#include "game_elements/entities/platform.h"
 
 using namespace sf;
 
@@ -33,7 +33,7 @@ class Player : public Character
 {
 	const int WIDTH = 50;
 	const int HEIGHT = 80;
-	const int INITIAL_POSITION = 1100;
+	const int INITIAL_POSITION = Platform::getSize() * 21;
 	const int SPRITE_SIZE = 128;
 	const int SPRITE_Y_SETOFF = 30;
 	const float MAXIMUM_SPEED = 20.0f;

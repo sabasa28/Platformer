@@ -1,7 +1,7 @@
 #ifndef CREDITS_H
 #define CREDITS_H
 
-#include "screen.h"
+#include "game_states/screen.h"
 
 using namespace sf;
 using namespace std;
@@ -13,7 +13,7 @@ const int CREDITS_TEXT_SPACING = 50;
 const float TEXT_SCROLLING_SPEED = 1.5f;
 const float CREDITS_INTIAL_POS = 1700.0f;
 
-class Credits:public Screen
+class Credits : public Screen
 {
 
 public:

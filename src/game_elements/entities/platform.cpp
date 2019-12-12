@@ -14,7 +14,6 @@ Platform::Platform(int x, int y)
 {
 	rectangle.setSize({ static_cast<float>(SIZE), static_cast<float>(SIZE) });
 	rectangle.setPosition({ static_cast<float>(SIZE) * x, MIN_Y_POS - static_cast<float>(SIZE) * y });
-	rectangle.setFillColor(Color::White);
 	relativePlayerJumpsState = falling_relative;
 	texture.loadFromFile("images/dirt.png");
 	textureRect = new IntRect(0, 0, SPRITE_SIZE, SPRITE_SIZE);

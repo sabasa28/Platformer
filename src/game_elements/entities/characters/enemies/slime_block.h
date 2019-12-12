@@ -1,7 +1,7 @@
 #ifndef SLIME_BLOCK_H
 #define SLIME_BLOCK_H
 
-#include "gameElements/entities/characters/enemy.h"
+#include "game_elements/entities/characters/enemy.h"
 
 namespace game
 {

@@ -3,7 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "gameElements/entity.h"
+#include "game_elements/entity.h"
 
 using namespace sf;
 
@@ -25,7 +25,7 @@ enum RelativePlayerJumpState
 
 class Platform : public Entity
 {
-	const int SIZE = 100;
+	static const int SIZE = 100;
 	const int MIN_Y_POS = 700;
 	const int SPRITE_SIZE = 100;
 
@@ -37,7 +37,7 @@ class Platform : public Entity
 public:
 	Platform(int x, int y);
 	~Platform();
-	int getSize();
+	static int getSize();
 	void draw();
 	NearestSide checkSideProximity(RectangleShape rec, float collisionMargin);
 	void setRelativePlayerJumpState(RelativePlayerJumpState jumpState);

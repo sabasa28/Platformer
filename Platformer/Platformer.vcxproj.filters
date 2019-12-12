@@ -1,112 +1,121 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="gameElements">
-      <UniqueIdentifier>{7f6e0c07-58f4-4239-ba1e-221b7f18f0dc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="gameStates">
-      <UniqueIdentifier>{9a2971d8-d84a-4940-8233-0dadc9c6f417}</UniqueIdentifier>
-    </Filter>
     <Filter Include="general">
       <UniqueIdentifier>{d88c1a6a-35b9-41fc-90ae-c72857ea6331}</UniqueIdentifier>
     </Filter>
-    <Filter Include="gameElements\entities">
+    <Filter Include="game_elements">
+      <UniqueIdentifier>{7f6e0c07-58f4-4239-ba1e-221b7f18f0dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="game_elements\entities">
       <UniqueIdentifier>{b95c47a6-a504-4f52-a0be-54a245a304b8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="gameElements\entities\characters">
+    <Filter Include="game_elements\entities\characters">
       <UniqueIdentifier>{84874937-8d75-4034-b164-a4e6102b3b1f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="gameElements\entities\characters\enemies">
+    <Filter Include="game_elements\entities\characters\enemies">
       <UniqueIdentifier>{0ef8dcd4-bd22-455a-93e1-8f76d05f8f2a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="game_states">
+      <UniqueIdentifier>{9a2971d8-d84a-4940-8233-0dadc9c6f417}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="game_states\screens">
+      <UniqueIdentifier>{6808f356-bac8-4959-8e6a-3dd436b632bf}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\gameStates\gameplay.cpp">
-      <Filter>gameStates</Filter>
+    <ClCompile Include="..\src\game_elements\entities\characters\enemies\slime_block.cpp">
+      <Filter>game_elements\entities\characters\enemies</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\gameStates\menu.cpp">
-      <Filter>gameStates</Filter>
+    <ClCompile Include="..\src\game_elements\entities\characters\enemy.cpp">
+      <Filter>game_elements\entities\characters</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\main.cpp" />
+    <ClCompile Include="..\src\game_elements\entities\characters\player.cpp">
+      <Filter>game_elements\entities\characters</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\game_elements\entities\character.cpp">
+      <Filter>game_elements\entities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\game_elements\entities\display_text.cpp">
+      <Filter>game_elements\entities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\game_elements\entities\gold_coin.cpp">
+      <Filter>game_elements\entities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\game_elements\entities\platform.cpp">
+      <Filter>game_elements\entities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\game_elements\entity.cpp">
+      <Filter>game_elements</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\game_states\gameplay.cpp">
+      <Filter>game_states</Filter>
+    </ClCompile>
     <ClCompile Include="..\src\general\game.cpp">
       <Filter>general</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\gameStates\victory.cpp">
-      <Filter>gameStates</Filter>
+    <ClCompile Include="..\src\game_states\screen.cpp">
+      <Filter>game_states</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\gameStates\credits.cpp">
-      <Filter>gameStates</Filter>
+    <ClCompile Include="..\src\main.cpp" />
+    <ClCompile Include="..\src\game_states\screens\credits.cpp">
+      <Filter>game_states\screens</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\gameStates\game_over.cpp">
-      <Filter>gameStates</Filter>
+    <ClCompile Include="..\src\game_states\screens\game_over.cpp">
+      <Filter>game_states\screens</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\gameElements\entity.cpp">
-      <Filter>gameElements</Filter>
+    <ClCompile Include="..\src\game_states\screens\menu.cpp">
+      <Filter>game_states\screens</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\gameElements\entities\display_text.cpp">
-      <Filter>gameElements\entities</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\gameElements\entities\character.cpp">
-      <Filter>gameElements\entities</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\gameElements\entities\platform.cpp">
-      <Filter>gameElements\entities</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\gameStates\screen.cpp">
-      <Filter>gameStates</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\gameElements\entities\characters\enemy.cpp">
-      <Filter>gameElements\entities\characters</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\gameElements\entities\characters\player.cpp">
-      <Filter>gameElements\entities\characters</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\gameElements\entities\characters\enemies\slime_block.cpp">
-      <Filter>gameElements\entities\characters\enemies</Filter>
+    <ClCompile Include="..\src\game_states\screens\victory.cpp">
+      <Filter>game_states\screens</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\src\gameStates\gameplay.h">
-      <Filter>gameStates</Filter>
+    <ClInclude Include="..\src\game_elements\entities\characters\enemies\slime_block.h">
+      <Filter>game_elements\entities\characters\enemies</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\gameStates\menu.h">
-      <Filter>gameStates</Filter>
+    <ClInclude Include="..\src\game_elements\entities\characters\player.h">
+      <Filter>game_elements\entities\characters</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\game_elements\entities\characters\enemy.h">
+      <Filter>game_elements\entities\characters</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\game_elements\entities\character.h">
+      <Filter>game_elements\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\game_elements\entities\display_text.h">
+      <Filter>game_elements\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\game_elements\entities\gold_coin.h">
+      <Filter>game_elements\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\game_elements\entities\platform.h">
+      <Filter>game_elements\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\game_elements\entity.h">
+      <Filter>game_elements</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\game_states\gameplay.h">
+      <Filter>game_states</Filter>
     </ClInclude>
     <ClInclude Include="..\src\general\game.h">
       <Filter>general</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\gameStates\victory.h">
-      <Filter>gameStates</Filter>
+    <ClInclude Include="..\src\game_states\screen.h">
+      <Filter>game_states</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\gameStates\credits.h">
-      <Filter>gameStates</Filter>
+    <ClInclude Include="..\src\game_states\screens\credits.h">
+      <Filter>game_states\screens</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\gameStates\game_over.h">
-      <Filter>gameStates</Filter>
+    <ClInclude Include="..\src\game_states\screens\game_over.h">
+      <Filter>game_states\screens</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\gameElements\entity.h">
-      <Filter>gameElements</Filter>
+    <ClInclude Include="..\src\game_states\screens\menu.h">
+      <Filter>game_states\screens</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\gameElements\entities\display_text.h">
-      <Filter>gameElements\entities</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\gameElements\entities\character.h">
-      <Filter>gameElements\entities</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\gameElements\entities\platform.h">
-      <Filter>gameElements\entities</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\gameStates\screen.h">
-      <Filter>gameStates</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\gameElements\entities\characters\enemy.h">
-      <Filter>gameElements\entities\characters</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\gameElements\entities\characters\player.h">
-      <Filter>gameElements\entities\characters</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\gameElements\entities\characters\enemies\slime_block.h">
-      <Filter>gameElements\entities\characters\enemies</Filter>
+    <ClInclude Include="..\src\game_states\screens\victory.h">
+      <Filter>game_states\screens</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
