@@ -23,7 +23,6 @@ const int TITLE_FONT_SIZE = 100;
 const int INTERFACE_MUSIC_INIT_VOLUME = 100;
 const int GAMEPLAY_MUSIC_INIT_VOLUME = 50;
 
-
 enum GameState
 {
 	menu_state,
@@ -36,6 +35,7 @@ enum GameState
 class Game
 {
 	static bool gameStateInputActive;
+	static bool audioMuted;
 	Clock clock;
 	Time time;
 	
@@ -45,6 +45,7 @@ class Game
 	GameOver* gameover;
 	Victory* victory;
 
+	void updateMusic();
 	void update();
 	void draw();
 
@@ -65,7 +66,8 @@ public:
 	~Game();
 	static void setGameStateInputActive(bool state);
 	static bool getGameStateInputActive();
-	static void switchMusicState();
+	static void setAudioMuted(bool state);
+	static bool getAudioMuted();
 	void execute();
 };
 }

@@ -5,6 +5,7 @@ namespace game
 Event Game::event;
 GameState Game::currentGameState = menu_state;
 bool Game::gameStateInputActive = false;
+bool Game::audioMuted = false;
 RenderWindow* Game::window = NULL;
 Font Game::generalFont;
 Music Game::interfaceMusic;
@@ -53,6 +54,34 @@ Game::~Game()
 	if (gameplay) delete gameplay;
 	if (gameover) delete gameover;
 	if (victory) delete victory;
+}
+
+void Game::updateMusic()
+{
+	if (!audioMuted)
+	{
+		if (gameplayMusic.getVolume() == 0)
+		{
+			gameplayMusic.setVolume(GAMEPLAY_MUSIC_INIT_VOLUME);
+		}
+			
+		if (interfaceMusic.getVolume() == 0)
+		{
+			interfaceMusic.setVolume(INTERFACE_MUSIC_INIT_VOLUME);
+		}
+	}
+	else
+	{
+		if (gameplayMusic.getVolume() != 0)
+		{
+			gameplayMusic.setVolume(0);
+		}
+
+		if (interfaceMusic.getVolume() != 0)
+		{
+			interfaceMusic.setVolume(0);
+		}
+	}
 }
 
 void Game::update()
@@ -138,6 +167,8 @@ void Game::update()
 	default:
 		break;
 	}
+
+	updateMusic();
 }
 
 void Game::draw()
@@ -178,18 +209,13 @@ bool Game::getGameStateInputActive()
 	return gameStateInputActive;
 }
 
-void Game::switchMusicState()
+void Game::setAudioMuted(bool state)
 {
-	if (gameplayMusic.getVolume()==0 && interfaceMusic.getVolume()==0)
-	{
-		gameplayMusic.setVolume(GAMEPLAY_MUSIC_INIT_VOLUME);
-		interfaceMusic.setVolume(INTERFACE_MUSIC_INIT_VOLUME);
-	}
-	else
-	{
-		gameplayMusic.setVolume(0);
-		interfaceMusic.setVolume(0);
-	}
+	audioMuted = state;
+}
+bool Game::getAudioMuted()
+{
+	return audioMuted;
 }
 
 void Game::execute()

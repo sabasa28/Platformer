@@ -32,7 +32,10 @@ void Victory::checkKeyDownInput()
 	{
 		if (!Game::getGameStateInputActive())
 		{
-			Game::buttonSFX.play();
+			if (!Game::getAudioMuted())
+			{
+				Game::buttonSFX.play();
+			}
 			Game::setGameStateInputActive(true);
 			Game::currentGameState=menu_state;
 		}

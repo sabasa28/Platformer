@@ -222,7 +222,10 @@ void Gameplay::checkKeyDownInput()
 		{
 			if (!Game::getGameStateInputActive())
 			{
-				Game::buttonSFX.play();
+				if (!Game::getAudioMuted())
+				{
+					Game::buttonSFX.play();
+				}
 				Game::setGameStateInputActive(true);
 				Game::currentGameState = menu_state;
 			}
@@ -282,7 +285,10 @@ void Gameplay::checkGameplayColls(Platform* plat[][GRID_WIDTH])
 			{
 				if (player->colliding(slimeBlock[i]->getRec()))
 				{
-					Game::impactSFX.play();
+					if (!Game::getAudioMuted())
+					{
+						Game::impactSFX.play();
+					}
 					Game::currentGameState = gameOver_state;
 				}
 			}
@@ -292,7 +298,10 @@ void Gameplay::checkGameplayColls(Platform* plat[][GRID_WIDTH])
 		{
 			if (player->colliding(goldCoin->getRec()))
 			{
-				Gameplay::coinsSFX.play();
+				if (!Game::getAudioMuted())
+				{
+					Gameplay::coinsSFX.play();
+				}
 				Game::currentGameState = victory_state;
 			}
 		}
@@ -448,7 +457,7 @@ void Gameplay::update()
 		if (Keyboard::isKeyPressed(Keyboard::M))
 		{
 			Game::buttonSFX.play();
-			Game::switchMusicState();
+			Game::setAudioMuted(!Game::getAudioMuted());
 			muteButtonPressed = true;
 		}
 	}

@@ -47,7 +47,10 @@ void Menu::checkKeyDownInput()
 	{
 		if (!Game::getGameStateInputActive())
 		{
-			Game::buttonSFX.play();
+			if (!Game::getAudioMuted())
+			{
+				Game::buttonSFX.play();
+			}
 			Game::setGameStateInputActive(true);
 			Game::currentGameState=gameplay_state;
 		}
@@ -62,13 +65,19 @@ void Menu::checkKeyDownInput()
 
 	if (Keyboard::isKeyPressed(Keyboard::C))
 	{
-		Game::buttonSFX.play();
+		if (!Game::getAudioMuted())
+		{
+			Game::buttonSFX.play();
+		}
 		Game::currentGameState=credits_state;
 	}
 
 	if (Keyboard::isKeyPressed(Keyboard::Escape))
 	{
-		Game::buttonSFX.play();
+		if (!Game::getAudioMuted())
+		{
+			Game::buttonSFX.play();
+		}
 		Game::window->close();
 	}
 
@@ -77,7 +86,7 @@ void Menu::checkKeyDownInput()
 		if (Keyboard::isKeyPressed(Keyboard::M))
 		{
 			Game::buttonSFX.play();
-			Game::switchMusicState();
+			Game::setAudioMuted(!Game::getAudioMuted());
 			muteButtonPressed = true;
 		}
 	}

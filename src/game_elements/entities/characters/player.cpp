@@ -137,7 +137,7 @@ void Player::checkKeyDownInput()
 
 	if (Keyboard::isKeyPressed(Keyboard::Space))
 	{
-		if (jumpState == onGround)
+		if (jumpState == onGround && !Game::getAudioMuted())
 		{
 			Gameplay::jumpSFX.play();
 		}
