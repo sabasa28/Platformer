@@ -37,10 +37,6 @@ Credits::Credits()
 
 Credits::~Credits()
 {
-	for (int i = 0; i < CREDITS_TEXT_ROWS_AMOUNT; i++)
-	{
-		if (text[i]) delete text[i];
-	}
 }
 
 void Credits::checkKeyDownInput()

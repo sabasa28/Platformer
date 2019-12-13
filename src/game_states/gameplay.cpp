@@ -15,6 +15,8 @@ Gameplay::Gameplay()
 {
 	pauseButtonPressed = false;
 	muteButtonPressed = false;
+	controlsButtonPressed = false;
+
 
 	for (int y = 0; y < GRID_HEIGHT; y++)
 	{
@@ -133,19 +135,13 @@ Gameplay::Gameplay()
 	goldCoin = new GoldCoin();
 
 	paused = false;
-	pauseRec.setSize(PAUSE_SIZE);
-	pauseRec.setPosition(PAUSE_POS);
-	pauseRec.setFillColor(Color::Black);
-	for (int i = 0; i < PAUSE_TEXT_AMMOUNT; i++)
-	{
-		pauseTexts[i] = NULL;
-	}
-	pauseTexts[0] = new DisplayText("PAUSED", true, PAUSE_TEXT_Y, Color::Yellow, PAUSE_FONT_SIZE);
-	pauseTexts[1] = new DisplayText("\"Enter\" to go back to menu", true, pauseTexts[0]->getBottomSide() + PAUSE_SPACE_BETWEEN_TEXT, Color::White, PAUSE_FONT_SIZE);
-	pauseTexts[2] = new DisplayText("\"M\" to mute/unmute", true, pauseTexts[1]->getBottomSide() + PAUSE_SPACE_BETWEEN_TEXT, Color::White, PAUSE_FONT_SIZE);
-	pauseTexts[3] = new DisplayText("\"Escape\" to unpause", true, pauseTexts[2]->getBottomSide() + PAUSE_SPACE_BETWEEN_TEXT, Color::White, PAUSE_FONT_SIZE);
-
+	showControls = true;
+	
 	camera = new View({ player->getCenterX(), player->getCenterY() - SCREEN_HEIGHT / 6.0f }, { static_cast<float>(SCREEN_WIDTH), static_cast<float>(SCREEN_HEIGHT) });
+
+	pause = new Pause();
+
+	controls = new Controls();
 
 	footstepSFXBuffer.loadFromFile("sounds/footstep.ogg");
 	footstepSFX.setBuffer(footstepSFXBuffer);
@@ -177,12 +173,11 @@ Gameplay::~Gameplay()
 
 	if (goldCoin) delete goldCoin;
 
-	for (int i = 0; i < PAUSE_TEXT_AMMOUNT; i++)
-	{
-		if (pauseTexts[i]) delete pauseTexts[i];
-	}
-
 	if (camera) delete camera;
+
+	if (pause) delete pause;
+
+	if (controls) delete controls;
 
 	if (backgroundTextureRect) delete backgroundTextureRect;
 
@@ -192,9 +187,26 @@ Gameplay::~Gameplay()
 
 void Gameplay::checkKeyDownInput()
 {
+	if (!controlsButtonPressed)
+	{
+		if (Keyboard::isKeyPressed(Keyboard::O) && !paused)
+		{
+			showControls = !showControls;
+
+			controlsButtonPressed = true;
+		}
+	}
+	else
+	{
+		if (!Keyboard::isKeyPressed(Keyboard::O))
+		{
+			controlsButtonPressed = false;
+		}
+	}
+
 	if (!pauseButtonPressed)
 	{
-		if (Keyboard::isKeyPressed(Keyboard::P) || Keyboard::isKeyPressed(Keyboard::Escape))
+		if ((Keyboard::isKeyPressed(Keyboard::P) || Keyboard::isKeyPressed(Keyboard::Escape))&& !showControls)
 		{
 			if (!paused)
 			{
@@ -355,21 +367,11 @@ bool Gameplay::getPause()
 	return paused;
 }
 
-void Gameplay::centerPause()
-{
-	if (pauseTexts[0]) pauseTexts[0]->setPosition({ camera->getCenter().x - pauseTexts[0]->getTextWidth() / 2.0f, camera->getCenter().y - PAUSE_TEXT_Y });
-	if (pauseTexts[1]) pauseTexts[1]->setPosition({ camera->getCenter().x - pauseTexts[1]->getTextWidth() / 2.0f, pauseTexts[0]->getBottomSide() + PAUSE_SPACE_BETWEEN_TEXT });
-	if (pauseTexts[2]) pauseTexts[2]->setPosition({ camera->getCenter().x - pauseTexts[2]->getTextWidth() / 2.0f, pauseTexts[1]->getBottomSide() + PAUSE_SPACE_BETWEEN_TEXT });
-	if (pauseTexts[3]) pauseTexts[3]->setPosition({ camera->getCenter().x - pauseTexts[3]->getTextWidth() / 2.0f, pauseTexts[2]->getBottomSide() + PAUSE_SPACE_BETWEEN_TEXT });
-
-	pauseRec.setPosition({ camera->getCenter().x - PAUSE_SIZE.x / 2.0f, camera->getCenter().y - PAUSE_SIZE.y / 2.0f });
-}
-
 void Gameplay::update()
 {
 	checkKeyDownInput();
 
-	if (!paused)
+	if (!paused && !showControls)
 	{
 		if (player)
 		{
@@ -449,7 +451,8 @@ void Gameplay::update()
 	}
 	else
 	{
-		centerPause();
+		if (pause) pause->center(camera);
+		if (controls) controls->center(camera);
 	}
 
 	if (!muteButtonPressed)
@@ -513,11 +516,12 @@ void Gameplay::draw()
 
 	if (paused)
 	{
-		Game::window->draw(pauseRec);
-		for (int i = 0; i < PAUSE_TEXT_AMMOUNT; i++)
-		{
-			if (pauseTexts[i]) pauseTexts[i]->draw();
-		}
+		if(pause)pause->draw();
+	}
+
+	if (showControls)
+	{
+		if (controls)controls->draw();
 	}
 }
 }

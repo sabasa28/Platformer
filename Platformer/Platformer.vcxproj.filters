@@ -36,9 +36,6 @@
     <ClCompile Include="..\src\game_elements\entities\character.cpp">
       <Filter>game_elements\entities</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\game_elements\entities\display_text.cpp">
-      <Filter>game_elements\entities</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\game_elements\entities\gold_coin.cpp">
       <Filter>game_elements\entities</Filter>
     </ClCompile>
@@ -70,6 +67,18 @@
     <ClCompile Include="..\src\game_states\screens\victory.cpp">
       <Filter>game_states\screens</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\game_elements\display_text.cpp">
+      <Filter>game_elements</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\game_elements\entities\popup.cpp">
+      <Filter>game_elements\entities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\game_elements\entities\controls.cpp">
+      <Filter>game_elements\entities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\game_elements\entities\pause.cpp">
+      <Filter>game_elements\entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\game_elements\entities\characters\enemies\slime_block.h">
@@ -82,9 +91,6 @@
       <Filter>game_elements\entities\characters</Filter>
     </ClInclude>
     <ClInclude Include="..\src\game_elements\entities\character.h">
-      <Filter>game_elements\entities</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\game_elements\entities\display_text.h">
       <Filter>game_elements\entities</Filter>
     </ClInclude>
     <ClInclude Include="..\src\game_elements\entities\gold_coin.h">
@@ -116,6 +122,18 @@
     </ClInclude>
     <ClInclude Include="..\src\game_states\screens\victory.h">
       <Filter>game_states\screens</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\game_elements\display_text.h">
+      <Filter>game_elements</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\game_elements\entities\popup.h">
+      <Filter>game_elements\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\game_elements\entities\controls.h">
+      <Filter>game_elements\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\game_elements\entities\pause.h">
+      <Filter>game_elements\entities</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

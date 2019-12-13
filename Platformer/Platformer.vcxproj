@@ -19,13 +19,16 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\src\game_elements\display_text.cpp" />
     <ClCompile Include="..\src\game_elements\entities\character.cpp" />
     <ClCompile Include="..\src\game_elements\entities\characters\enemies\slime_block.cpp" />
     <ClCompile Include="..\src\game_elements\entities\characters\enemy.cpp" />
     <ClCompile Include="..\src\game_elements\entities\characters\player.cpp" />
-    <ClCompile Include="..\src\game_elements\entities\display_text.cpp" />
+    <ClCompile Include="..\src\game_elements\entities\controls.cpp" />
     <ClCompile Include="..\src\game_elements\entities\gold_coin.cpp" />
+    <ClCompile Include="..\src\game_elements\entities\pause.cpp" />
     <ClCompile Include="..\src\game_elements\entities\platform.cpp" />
+    <ClCompile Include="..\src\game_elements\entities\popup.cpp" />
     <ClCompile Include="..\src\game_elements\entity.cpp" />
     <ClCompile Include="..\src\game_states\gameplay.cpp" />
     <ClCompile Include="..\src\game_states\screen.cpp" />
@@ -37,13 +40,16 @@
     <ClCompile Include="..\src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\src\game_elements\display_text.h" />
     <ClInclude Include="..\src\game_elements\entities\character.h" />
     <ClInclude Include="..\src\game_elements\entities\characters\enemies\slime_block.h" />
     <ClInclude Include="..\src\game_elements\entities\characters\enemy.h" />
     <ClInclude Include="..\src\game_elements\entities\characters\player.h" />
-    <ClInclude Include="..\src\game_elements\entities\display_text.h" />
+    <ClInclude Include="..\src\game_elements\entities\controls.h" />
     <ClInclude Include="..\src\game_elements\entities\gold_coin.h" />
+    <ClInclude Include="..\src\game_elements\entities\pause.h" />
     <ClInclude Include="..\src\game_elements\entities\platform.h" />
+    <ClInclude Include="..\src\game_elements\entities\popup.h" />
     <ClInclude Include="..\src\game_elements\entity.h" />
     <ClInclude Include="..\src\game_states\gameplay.h" />
     <ClInclude Include="..\src\game_states\screen.h" />

@@ -21,10 +21,6 @@ GameOver::GameOver()
 
 GameOver::~GameOver()
 {
-	for (int i = 0; i < GAME_OVER_TEXT_ROWS_AMOUNT; i++)
-	{
-		if (text[i]) delete text[i];
-	}
 
 	if(Game::currentGameState!=menu_state) Game::interfaceMusic.stop();
 }

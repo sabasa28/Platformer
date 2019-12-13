@@ -30,13 +30,6 @@ Menu::Menu()
 Menu::~Menu()
 {
 	if (Game::currentGameState==gameplay_state) Game::interfaceMusic.stop();
-	for (int i = 0; i < MENU_TEXT_ROWS_AMOUNT; i++)
-	{
-		if (text[i])
-		{
-			delete text[i];
-		}
-	}
 }
 
 void Menu::checkKeyDownInput()

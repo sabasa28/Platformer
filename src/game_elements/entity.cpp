@@ -17,6 +17,7 @@ Entity::Entity(RectangleShape rec, Texture tex, IntRect* texRec, Sprite spr)
 
 Entity::~Entity()
 {
+	if (textureRect) delete textureRect;
 }
 
 void Entity::setRecPos(float x, float y)

@@ -3,7 +3,7 @@
 
 #include <vector>
 
-#include "game_elements/entities/display_text.h"
+#include "game_elements/display_text.h"
 
 using namespace std;
 
@@ -14,8 +14,9 @@ class Screen
 {
 protected:
 	vector <DisplayText*> text;
-
+	
 public:
+	~Screen();
 	void drawText();
 };
 }

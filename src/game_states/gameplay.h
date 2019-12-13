@@ -7,7 +7,8 @@
 #include "game_elements/entities/gold_coin.h"
 #include "game_elements/entities/characters/player.h"
 #include "game_elements/entities/characters/enemies/slime_block.h"
-#include "game_elements/entities/display_text.h"
+#include "game_elements/entities/pause.h"
+#include "game_elements/entities/controls.h"
 
 namespace game
 {
@@ -19,26 +20,22 @@ const int GOAL_SIZE = 50;
 const int GOAL_SPRITE_SIZE = GOAL_SIZE;
 const int GRID_HEIGHT = 50;
 const int GRID_WIDTH = 130;
-const int PAUSE_TEXT_AMMOUNT = 4;
-const int PAUSE_TEXT_Y = 100;
-const int PAUSE_FONT_SIZE = 30;
-const int PAUSE_SPACE_BETWEEN_TEXT = 20;
-const Vector2f PAUSE_POS = { 250.0f, 100.0f };
-const Vector2f PAUSE_SIZE = { 400.0f, 200.0f };
 const float FALL_LIMIT = -1000.0f;
 
 class Gameplay
 {
 	bool pauseButtonPressed;
 	bool muteButtonPressed;
+	bool controlsButtonPressed;
+	bool showControls;
 	Platform* platformGrid[GRID_HEIGHT][GRID_WIDTH];
 	Player* player;
 	SlimeBlock* slimeBlock[ENEMY_AMMOUNT];
 	GoldCoin* goldCoin;
 	bool paused;
-	RectangleShape pauseRec;
-	DisplayText* pauseTexts[PAUSE_TEXT_AMMOUNT];
 	View* camera;
+	Pause* pause;
+	Controls* controls;
 	Texture backgroundTexture;
 	IntRect* backgroundTextureRect;
 	Sprite backgroundSprite;
@@ -57,7 +54,6 @@ public:
 	void checkGameplayColls(Platform* plat[][GRID_WIDTH]);
 	void setPause(bool state);
 	bool getPause();
-	void centerPause();
 	void update();
 	void drawBackground(int x, int y);
 	void draw();
