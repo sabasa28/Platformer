@@ -15,7 +15,7 @@ Menu::Menu()
 		text[i] = NULL;
 	}
 
-	text[0] = new DisplayText("Press 'Enter' to play ('P' or 'Escape' to pause the game)", true, LOGO_POSITION_Y + MENU_LOGO_SPACING, Color::White, PARAGRAPH_FONT_SIZE);
+	text[0] = new DisplayText("Press 'Enter' to play", true, LOGO_POSITION_Y + MENU_LOGO_SPACING, Color::White, PARAGRAPH_FONT_SIZE);
 	text[1] = new DisplayText("Press 'C' to see the credits", true, text[0]->getUpperSide() + MENU_PARAGRAPH_SPACING, Color::White, PARAGRAPH_FONT_SIZE);
 	text[2] = new DisplayText("Press 'M' to mute/unmute music", true, text[1]->getUpperSide() + MENU_PARAGRAPH_SPACING, Color::White, PARAGRAPH_FONT_SIZE);
 	text[3] = new DisplayText("Press 'Escape' to exit", true, text[2]->getUpperSide() + MENU_PARAGRAPH_SPACING, Color::White, PARAGRAPH_FONT_SIZE);
