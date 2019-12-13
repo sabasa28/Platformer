@@ -33,7 +33,7 @@ Game::Game()
 	gameover = NULL;
 	victory = NULL;
 
-	generalFont.loadFromFile("fonts/aescrawl.ttf");
+	generalFont.loadFromFile("fonts/londrina.otf");
 
 	interfaceMusic.openFromFile("music/santi_song.ogg");
 	interfaceMusic.setVolume(INTERFACE_MUSIC_INIT_VOLUME);
