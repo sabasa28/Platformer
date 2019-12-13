@@ -64,7 +64,7 @@ JumpState Player::getJumpState()
 
 float Player::getJumpingSpeed()
 {
-	return jumpingSpeed;
+	return JUMPING_SPEED;
 }
 
 void Player::setCurrentAction(Action action)
@@ -183,7 +183,7 @@ void Player::updateMovement()
 		speed.y = 0;
 		break;
 	case start:
-		speed.y -= jumpingSpeed;
+		speed.y -= JUMPING_SPEED;
 		jumpState = ascending;
 	case ascending:
 		if (speed.y > 0)
@@ -204,7 +204,7 @@ void Player::updateMovement()
 
 void Player::updatePosition() 
 {
-	rectangle.setPosition(rectangle.getPosition() + speed * Game::deltaTime);
+	rectangle.setPosition(rectangle.getPosition() + speed /** Game::deltaTime*/);
 }
 
 bool Player::colliding(RectangleShape rec)

@@ -67,7 +67,7 @@ bool Enemy::getOnGround()
 
 void Enemy::updatePos(RectangleShape target)
 {
-	rectangle.setPosition(rectangle.getPosition() + speed* Game::deltaTime);
+	rectangle.setPosition(rectangle.getPosition() + speed/** Game::deltaTime*/);
 	updateAwakeState(target);
 	attack(target);
 

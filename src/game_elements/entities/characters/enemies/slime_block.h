@@ -18,7 +18,7 @@ class SlimeBlock: public Enemy
 	const int SPRITE_SIZE = 64;
 
 	bool charging;
-	const float chargingSpeed = 600.0f;
+	const float chargingSpeed = 10.0f;// 600.0f;
 	const float alertDistance = 300.0f;
 	const float collisionMargin = 5.0f;
 

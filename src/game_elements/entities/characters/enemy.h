@@ -12,7 +12,7 @@ class Enemy : public Character
 {
 protected:
 	const int SIZE = 50;
-	const float MAXIMUM_SPEED = 1200.0f;
+	const float MAXIMUM_SPEED = 20.0f;//= 1200.0f;
 
 	bool alive;
 	bool awake;

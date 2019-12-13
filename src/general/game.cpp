@@ -24,6 +24,8 @@ Game::Game()
 
 	firstExecution = true;
 
+	window->setFramerateLimit(60);
+
 	clock.restart();
 	deltaTime = 0.0f;
 

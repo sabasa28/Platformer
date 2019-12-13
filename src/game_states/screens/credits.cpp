@@ -87,7 +87,7 @@ void Credits::scroll()
 					setInitialPos();
 					break;
 				}
-				text[i]->setPositionY(text[i]->getUpperSide()-TEXT_SCROLLING_SPEED*Game::deltaTime);
+				text[i]->setPositionY(text[i]->getUpperSide()-TEXT_SCROLLING_SPEED/**Game::deltaTime*/);
 			}
 		}
 	}

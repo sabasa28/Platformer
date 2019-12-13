@@ -38,7 +38,8 @@ class Game
 	bool firstExecution;
 	Clock clock;
 	Time time;
-	
+
+
 	Menu* menu;
 	Credits* credits;
 	Gameplay* gameplay;
