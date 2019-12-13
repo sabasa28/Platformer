@@ -10,7 +10,7 @@ float disToPlat2;
 Player::Player()
 {
 	rectangle.setSize({ static_cast<float>(WIDTH), static_cast<float>(HEIGHT) });
-	rectangle.setPosition(static_cast<float>(INITIAL_POSITION + WIDTH / 2), static_cast<float>(SCREEN_HEIGHT - 100 - rectangle.getSize().y));
+	rectangle.setPosition(static_cast<float>(INITIAL_POSITION.x + WIDTH / 2), static_cast<float>(INITIAL_POSITION.y - rectangle.getSize().y));
 	movement.right = false;
 	movement.left = false;
 	facingRight = true;

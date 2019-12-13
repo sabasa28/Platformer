@@ -33,7 +33,7 @@ class Player : public Character
 {
 	const int WIDTH = 50;
 	const int HEIGHT = 80;
-	const int INITIAL_POSITION = Platform::getSize() * 21;
+	Vector2i INITIAL_POSITION = { 3100, -1500 };
 	const int SPRITE_SIZE = 128;
 	const int SPRITE_Y_SETOFF = 30;
 	const float MAXIMUM_SPEED = 1200.0f;//20.0f;

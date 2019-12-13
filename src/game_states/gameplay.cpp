@@ -24,87 +24,87 @@ Gameplay::Gameplay()
 
 			switch (y)
 			{
-			case 2:
-				if (x > 20 && x < 33)
+			case 22:
+				if (x > 30 && x < 43)
 				{
 					platformGrid[y][x] = new Platform(x, y);
 				}
 				break;
-			case 3:
-				if (x == 26|| x == 33 || x == 34 || x == 38)
+			case 23:
+				if (x == 36|| x == 43 || x == 44 || x == 48)
 				{
 					platformGrid[y][x] = new Platform(x, y);
 				}
 				break;
-			case 4:
-				if (x == 24 || x == 26 || x == 27 || x == 29 || x==39 || x == 51
-					|| x == 52 || x == 53 || x == 56 || x == 60|| (x >= 64 && x <= 70))
+			case 24:
+				if (x == 34 || x == 36 || x == 37 || x == 39 || x==49 || x == 61
+					|| x == 62 || x == 63 || x == 66 || x == 70|| (x >= 74 && x <= 80))
 				{
 					platformGrid[y][x] = new Platform(x, y);
 				}
 				break;
-			case 5:
-				if (x == 23 || x == 26 || x == 29 || x == 48 || x == 70)
+			case 25:
+				if (x == 33 || x == 36 || x == 39 || x == 58 || x == 80)
 				{
 					platformGrid[y][x] = new Platform(x, y);
 				}
 				break;
-			case 6:
-				if (x == 26 || x == 29|| x == 39 || x == 46 || x == 66 || x == 68 || x == 70)
+			case 26:
+				if (x == 36 || x == 39|| x == 49 || x == 56 || x == 76 || x == 78 || x == 80)
 				{
 					platformGrid[y][x] = new Platform(x, y);
 				}
 				break;
-			case 7:
-				if (x == 26 || x == 29 || x == 44 || x == 66 || x == 70)
+			case 27:
+				if (x == 36 || x == 39 || x == 54 || x == 76 || x == 80)
 				{
 					platformGrid[y][x] = new Platform(x, y);
 				}
 				break;
-			case 8:
-				if (x == 29 || x == 37 || x == 42 || x == 66 || x == 70)
+			case 28:
+				if (x == 39 || x == 47 || x == 52 || x == 76 || x == 80)
 				{
 					platformGrid[y][x] = new Platform(x, y);
 				}
 				break;
-			case 9:
-				if (x == 29 || x == 40 || x == 70)
+			case 29:
+				if (x == 39 || x == 50 || x == 80)
 				{
 					platformGrid[y][x] = new Platform(x, y);
 				}
 				break;
-			case 10:
-				if (x == 29)
+			case 30:
+				if (x == 39)
 				{
 					platformGrid[y][x] = new Platform(x, y);
 				}
 				break;
-			case 11:
-				if (x == 73)
+			case 31:
+				if (x == 83)
 				{
 					platformGrid[y][x] = new Platform(x, y);
 				}
 				break;
-			case 13:
-				if (x == 76)
+			case 33:
+				if (x == 86)
 				{
 					platformGrid[y][x] = new Platform(x, y);
 				}
 				break;
-			case 14:
-				if ((x > 79 && x < 83))
+			case 34:
+				if ((x > 89 && x < 93))
 				{
 					platformGrid[y][x] = new Platform(x, y);
 				}
 				break;
-			case 15:
-				if (x == 79 || x == 83)
+			case 35:
+				if (x == 89 || x == 93)
 				{
 					platformGrid[y][x] = new Platform(x, y);
 				}
 				break;
-			case 17:
-				if (x == 80 || x == 82)
+			case 37:
+				if (x == 90 || x == 92)
 				{
 					platformGrid[y][x] = new Platform(x, y);
 				}
@@ -125,10 +125,10 @@ Gameplay::Gameplay()
 	{
 		slimeBlock[i] = NULL;
 	}
-	slimeBlock[0] = new SlimeBlock({ 3725.0f, -200.0f });
-	slimeBlock[1] = new SlimeBlock({ 2800.0f, 300.0f });
-	slimeBlock[2] = new SlimeBlock({ 6825.0f, 100.0f });
-	slimeBlock[3] = new SlimeBlock({ 7600.0f, -800.0f });
+	slimeBlock[0] = new SlimeBlock({ 4725.0f, -2200.0f });
+	slimeBlock[1] = new SlimeBlock({ 3800.0f, -1700.0f });
+	slimeBlock[2] = new SlimeBlock({ 7825.0f, -1900.0f });
+	slimeBlock[3] = new SlimeBlock({ 8600.0f, -2800.0f });
 
 	goldCoin = new GoldCoin();
 
@@ -306,7 +306,7 @@ void Gameplay::checkGameplayColls(Platform* plat[][GRID_WIDTH])
 			}
 		}
 
-		if (player->getUpperSide() > SCREEN_HEIGHT + player->getRec().getSize().y * 3)
+		if (player->getUpperSide() > FALL_LIMIT)
 		{
 			Game::currentGameState = gameOver_state;
 		}
