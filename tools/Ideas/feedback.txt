@@ -1,0 +1,18 @@
+
+Código:
+
+- Tal vez crear clase menu, popupmenu o similar como padre de pause y controls, hija de entity
+
+- No olvidarse reglas de requisitos y consistencia (por ejemplo en cuanto a espaciado de headers y demás)
+
+- Revisar algunos números hardcodeados que podrían ser constantes
+
+- Tratar de mejorar o agregar funciones que sean más explicativas de las condiciones o de ciertas instrucciones
+
+
+En cuanto a  usabilidad:
+
+- Tal vez que del menú de controles se pueda salir con ESC también
+
+
+- Tener en cuenta mejoras a presentación en itch.io para futuro
