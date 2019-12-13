@@ -3,35 +3,26 @@
 
 namespace game 
 {
-	Controls::Controls()
-	{
-		text.resize(TEXT_ROWS);
-		for (int i = 0; i < TEXT_ROWS; i++)
-		{
-			text[i] = NULL;
-		}
-
-		text[0] = new DisplayText("CONTROLS", true, TEXT_Y, Color::Yellow, FONT_SIZE);
-
-	textureRect = NULL;
-	rectangle.setFillColor(Color::Black);
-	rectangle.setSize(REC_SIZE);
-	rectangle.setPosition(REC_POS);
+Controls::Controls(View* camera)
+{
+	texture.loadFromFile("images/menu_controls.png");
+	textureRect = new IntRect(0, 0, SIZE.x, SIZE.y);
+	sprite.setTexture(texture);
+	sprite.setTextureRect(*textureRect);
+	sprite.setPosition({ camera->getCenter().x - SIZE.x / 2.0f, camera->getCenter().y - SIZE.y / 2.0f });
 }
 
-void Controls::draw() 
+Controls::~Controls()
 {
-	Game::window->draw(rectangle);
-	for (int i = 0; i < TEXT_ROWS; i++)
-	{
-		if (text[i]) text[i]->draw();
-	}
 }
 
 void Controls::center(View* camera)
 {
-	if (text[0]) text[0]->setPosition({ camera->getCenter().x - text[0]->getTextWidth() / 2.0f, camera->getCenter().y - TEXT_Y });
-	rectangle.setPosition({ camera->getCenter().x - REC_SIZE.x / 2.0f, camera->getCenter().y - REC_SIZE.y / 2.0f });
+	sprite.setPosition({ camera->getCenter().x - SIZE.x / 2.0f, camera->getCenter().y - SIZE.y / 2.0f });
 }
 
+void Controls::draw() 
+{
+	Game::window->draw(sprite);
+}
 }

@@ -139,9 +139,9 @@ Gameplay::Gameplay(bool firstexecution)
 	
 	camera = new View({ player->getCenterX(), player->getCenterY() - SCREEN_HEIGHT / 8.0f }, { static_cast<float>(SCREEN_WIDTH), static_cast<float>(SCREEN_HEIGHT) });
 
-	pause = new Pause();
+	pause = new Pause(camera);
 
-	controls = new Controls();
+	controls = new Controls(camera);
 
 	footstepSFXBuffer.loadFromFile("sounds/footstep.ogg");
 	footstepSFX.setBuffer(footstepSFXBuffer);
@@ -516,12 +516,12 @@ void Gameplay::draw()
 
 	if (paused)
 	{
-		if(pause)pause->draw();
+		if(pause) pause->draw();
 	}
 
 	if (showControls)
 	{
-		if (controls)controls->draw();
+		if (controls) controls->draw();
 	}
 }
 }
