@@ -11,7 +11,7 @@ Sound Gameplay::jumpSFX;
 SoundBuffer Gameplay::coinsSFXBuffer;
 Sound Gameplay::coinsSFX;
 
-Gameplay::Gameplay()
+Gameplay::Gameplay(bool firstexecution)
 {
 	pauseButtonPressed = false;
 	muteButtonPressed = false;
@@ -135,9 +135,9 @@ Gameplay::Gameplay()
 	goldCoin = new GoldCoin();
 
 	paused = false;
-	showControls = true;
+	showControls = firstexecution;
 	
-	camera = new View({ player->getCenterX(), player->getCenterY() - SCREEN_HEIGHT / 6.0f }, { static_cast<float>(SCREEN_WIDTH), static_cast<float>(SCREEN_HEIGHT) });
+	camera = new View({ player->getCenterX(), player->getCenterY() - SCREEN_HEIGHT / 8.0f }, { static_cast<float>(SCREEN_WIDTH), static_cast<float>(SCREEN_HEIGHT) });
 
 	pause = new Pause();
 
@@ -476,7 +476,7 @@ void Gameplay::update()
 
 void Gameplay::drawBackground(int x, int y)
 {
-	backgroundSprite.setPosition(100.0f * x, 700 - 100.0f * y);
+	backgroundSprite.setPosition(BACKGROUND_TILE_SIZE * x, BACKGROUND_MIN_POS - BACKGROUND_TILE_SIZE * y);
 	Game::window->draw(backgroundSprite);
 }
 

@@ -8,7 +8,6 @@
 namespace game
 {
 class Pause : public Entity, public Screen{
-private:
 	const int TEXT_ROWS = 4;
 	const float TEXT_Y = 100;
 	const int FONT_SIZE = 30;

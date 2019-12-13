@@ -7,11 +7,11 @@ using namespace sf;
 
 namespace game
 {
-const int VICTORY_TEXT_ROWS_AMOUNT = 2;
-const int VICTORY_TEXT_SPACING = 50;
 
 class Victory : public Screen
 {
+const int VICTORY_TEXT_ROWS_AMOUNT = 2;
+const float VICTORY_TEXT_SPACING = 50.0f;
 public:
 	Victory();
 	~Victory();

@@ -7,10 +7,10 @@ using namespace sf;
 
 namespace game
 {
-const int TEXT_LEFT_POSITION = 50;
 
 class DisplayText
 {
+	const float TEXT_LEFT_POSITION = 50.0f;
 	Text text;
 	bool centered;
 	Vector2f initialPos;

@@ -10,7 +10,6 @@ class Character : public Entity
 protected:
 	const float GRAVITY = 20.0f;
 	Vector2f speed;
-
 public:
 	Character();
 	Character(float x, float y, RectangleShape rec, Texture tex, IntRect* texRec, Sprite spr);

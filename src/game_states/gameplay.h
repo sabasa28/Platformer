@@ -12,18 +12,19 @@
 
 namespace game
 {
-const int ENEMY_AMMOUNT = 4;
 
-const int BACKGROUND_SPRITE_SIZE = 100;
-
-const int GOAL_SIZE = 50;
-const int GOAL_SPRITE_SIZE = GOAL_SIZE;
 const int GRID_HEIGHT = 50;
 const int GRID_WIDTH = 130;
-const float FALL_LIMIT = -1000.0f;
+const int ENEMY_AMMOUNT = 4;
 
 class Gameplay
 {
+	const int BACKGROUND_SPRITE_SIZE = 100;
+	const int GOAL_SIZE = 50;
+	const int GOAL_SPRITE_SIZE = GOAL_SIZE;
+	const float FALL_LIMIT = -1000.0f;
+	const float BACKGROUND_TILE_SIZE = 100.0f;
+	const float BACKGROUND_MIN_POS = 700.0f;
 	bool pauseButtonPressed;
 	bool muteButtonPressed;
 	bool controlsButtonPressed;
@@ -48,7 +49,7 @@ public:
 	static SoundBuffer coinsSFXBuffer;
 	static Sound coinsSFX;
 
-	Gameplay();
+	Gameplay(bool firstExecution);
 	~Gameplay();
 	void checkKeyDownInput();
 	void checkGameplayColls(Platform* plat[][GRID_WIDTH]);

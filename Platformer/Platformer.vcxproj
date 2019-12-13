@@ -28,7 +28,6 @@
     <ClCompile Include="..\src\game_elements\entities\gold_coin.cpp" />
     <ClCompile Include="..\src\game_elements\entities\pause.cpp" />
     <ClCompile Include="..\src\game_elements\entities\platform.cpp" />
-    <ClCompile Include="..\src\game_elements\entities\popup.cpp" />
     <ClCompile Include="..\src\game_elements\entity.cpp" />
     <ClCompile Include="..\src\game_states\gameplay.cpp" />
     <ClCompile Include="..\src\game_states\screen.cpp" />
@@ -49,7 +48,6 @@
     <ClInclude Include="..\src\game_elements\entities\gold_coin.h" />
     <ClInclude Include="..\src\game_elements\entities\pause.h" />
     <ClInclude Include="..\src\game_elements\entities\platform.h" />
-    <ClInclude Include="..\src\game_elements\entities\popup.h" />
     <ClInclude Include="..\src\game_elements\entity.h" />
     <ClInclude Include="..\src\game_states\gameplay.h" />
     <ClInclude Include="..\src\game_states\screen.h" />

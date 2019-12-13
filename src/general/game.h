@@ -36,6 +36,7 @@ class Game
 {
 	static bool gameStateInputActive;
 	static bool audioMuted;
+	bool firstExecution;
 	Clock clock;
 	Time time;
 	

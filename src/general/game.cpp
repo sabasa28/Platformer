@@ -21,6 +21,9 @@ Game::Game()
 	window = new RenderWindow(VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "Cave Climber");
 
 	gameStateInputActive = false;
+
+	firstExecution = true;
+
 	clock.restart();
 	deltaTime = 0.0f;
 
@@ -141,8 +144,9 @@ void Game::update()
 			menu = NULL;
 		}
 
-		if (!gameplay) gameplay = new Gameplay();
+		if (!gameplay) gameplay = new Gameplay(firstExecution);
 		if (gameplay) gameplay->update();
+		firstExecution = false;
 		break;
 	case gameOver_state:
 		if (gameplay)

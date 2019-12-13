@@ -4,13 +4,11 @@
 
 namespace game
 {
-float disToPlat1;
-float disToPlat2;
 
 Player::Player()
 {
-	rectangle.setSize({ static_cast<float>(WIDTH), static_cast<float>(HEIGHT) });
-	rectangle.setPosition(static_cast<float>(INITIAL_POSITION.x + WIDTH / 2), static_cast<float>(INITIAL_POSITION.y - rectangle.getSize().y));
+	rectangle.setSize({ WIDTH, HEIGHT });
+	rectangle.setPosition(INITIAL_POS.x + WIDTH / 2, INITIAL_POS.y - rectangle.getSize().y);
 	movement.right = false;
 	movement.left = false;
 	facingRight = true;
@@ -91,7 +89,7 @@ Action Player::getLastFrameAction()
 
 float Player::getCollisionMargin()
 {
-	return collisionMargin;
+	return COLLISION_MARGIN;
 }
 
 void Player::checkKeyPressedInput()
@@ -172,11 +170,11 @@ void Player::updateMovement()
 	
 	if (movement.right)
 	{
-		speed.x += movingSpeed;
+		speed.x += MOVING_SPEED;
 	}
 	if (movement.left)
 	{
-		speed.x -= movingSpeed;
+		speed.x -= MOVING_SPEED;
 	}
 
 	switch (jumpState)
