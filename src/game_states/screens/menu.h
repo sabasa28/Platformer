@@ -5,14 +5,19 @@
 
 namespace game
 {
-const int MENU_TEXT_ROWS_AMOUNT = 6;
-const int MENU_TITLE_SPACING = 200;
+const int MENU_TEXT_ROWS_AMOUNT = 5;
+const int MENU_LOGO_SPACING = 225;
 const int MENU_PARAGRAPH_SPACING = 70;
 const Vector2f VERSION_TEXT_POS = { 925.0f,5.0f };
 
 class Menu : public Screen
 {
+	const float LOGO_POSITION_Y = 75.0f;
+
 	bool muteButtonPressed;
+	Texture logoTexture;
+	IntRect* logoTextureRect;
+	Sprite logoSprite;
 
 public:
 	Menu();

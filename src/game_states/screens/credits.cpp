@@ -12,7 +12,7 @@ Credits::Credits()
 		text[i] = NULL;
 	}
 
-	text[18] = new DisplayText("v1.0", false, 0.0f, Color::Red, PARAGRAPH_FONT_SIZE);
+	text[18] = new DisplayText("v1.1", false, 0.0f, Color::Red, PARAGRAPH_FONT_SIZE);
 	text[17] = new DisplayText("Press 'Enter' to return to menu", false, SCREEN_HEIGHT - CREDITS_TEXT_SPACING, Color::Yellow, PARAGRAPH_FONT_SIZE);
 	text[16] = new DisplayText("Microsoft Visual Studio 2017 (visualstudio.microsoft.com)", true, CREDITS_INTIAL_POS, Color::White, PARAGRAPH_FONT_SIZE);
 	text[15] = new DisplayText("IDE", true, text[16]->getUpperSide() - CREDITS_TEXT_SPACING, Color::White, PARAGRAPH_FONT_SIZE);

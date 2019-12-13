@@ -15,14 +15,19 @@ Menu::Menu()
 		text[i] = NULL;
 	}
 
-	text[0] = new DisplayText("CAVE CLIMBER", true, SCREEN_HEIGHT / 6, Color::Yellow, TITLE_FONT_SIZE);
-	text[1] = new DisplayText("Press 'Enter' to play ('P' or 'Escape' to pause the game)", true, text[0]->getUpperSide() + MENU_TITLE_SPACING, Color::White, PARAGRAPH_FONT_SIZE);
-	text[2] = new DisplayText("Press 'C' to see the credits", true, text[1]->getUpperSide() + MENU_PARAGRAPH_SPACING, Color::White, PARAGRAPH_FONT_SIZE);
-	text[3] = new DisplayText("Press 'M' to mute/unmute music", true, text[2]->getUpperSide() + MENU_PARAGRAPH_SPACING, Color::White, PARAGRAPH_FONT_SIZE);
-	text[4] = new DisplayText("Press 'Escape' to exit", true, text[3]->getUpperSide() + MENU_PARAGRAPH_SPACING, Color::White, PARAGRAPH_FONT_SIZE);
-	text[5] = new DisplayText("v1.0", true, 0.0f, Color::Red, PARAGRAPH_FONT_SIZE);
+	text[0] = new DisplayText("Press 'Enter' to play ('P' or 'Escape' to pause the game)", true, LOGO_POSITION_Y + MENU_LOGO_SPACING, Color::White, PARAGRAPH_FONT_SIZE);
+	text[1] = new DisplayText("Press 'C' to see the credits", true, text[0]->getUpperSide() + MENU_PARAGRAPH_SPACING, Color::White, PARAGRAPH_FONT_SIZE);
+	text[2] = new DisplayText("Press 'M' to mute/unmute music", true, text[1]->getUpperSide() + MENU_PARAGRAPH_SPACING, Color::White, PARAGRAPH_FONT_SIZE);
+	text[3] = new DisplayText("Press 'Escape' to exit", true, text[2]->getUpperSide() + MENU_PARAGRAPH_SPACING, Color::White, PARAGRAPH_FONT_SIZE);
+	text[4] = new DisplayText("v1.1", true, 0.0f, Color::Red, PARAGRAPH_FONT_SIZE);
 	
-	text[5]->setPosition(VERSION_TEXT_POS);
+	text[4]->setPosition(VERSION_TEXT_POS);
+
+	logoTexture.loadFromFile("images/logo.png");
+	logoTextureRect = new IntRect(0, 0, logoTexture.getSize().x, logoTexture.getSize().y);
+	logoSprite.setTexture(logoTexture);
+	logoSprite.setTextureRect(*logoTextureRect);
+	logoSprite.setPosition((SCREEN_WIDTH - logoTextureRect->width) / 2.0f, LOGO_POSITION_Y);
 
 	if (Game::interfaceMusic.getStatus()!= Music::Playing) Game::interfaceMusic.play();
 }
@@ -102,6 +107,7 @@ void Menu::update()
 
 void Menu::draw()
 {
+	Game::window->draw(logoSprite);
 	drawText();
 }
 }
